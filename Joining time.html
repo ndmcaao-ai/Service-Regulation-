@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CCS (Joining Time) Rules, 1979 - Interactive Quiz</title>
+    <style>
+        :root {
+            --bg-color: #f4f6f9;
+            --card-bg: #ffffff;
+            --primary: #2c3e50;
+            --accent: #3498db;
+            --correct: #27ae60;
+            --wrong: #e74c3c;
+            --text: #333333;
+            --border: #dcdcdc;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .quiz-container {
+            background: var(--card-bg);
+            width: 100%;
+            max-width: 800px;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 1.3rem;
+            color: var(--primary);
+            margin: 0;
+        }
+
+        .timer-box {
+            font-size: 1.1rem;
+            font-weight: bold;
+            background: #fff3cd;
+            color: #856404;
+            padding: 8px 14px;
+            border-radius: 6px;
+            border: 1px solid #ffeeba;
+        }
+
+        /* Question Navigation Grid */
+        .grid-toggle {
+            background: none;
+            border: none;
+            color: var(--accent);
+            cursor: pointer;
+            font-weight: bold;
+            padding: 0;
+            margin-bottom: 15px;
+        }
+
+        .q-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 20px;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 6px;
+            border: 1px solid var(--border);
+        }
+
+        .grid-btn {
+            width: 32px;
+            height: 32px;
+            border: 1px solid var(--border);
+            background: #ffffff;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .grid-btn.active {
+            border-color: var(--accent);
+            background: var(--accent);
+            color: white;
+            font-weight: bold;
+        }
+
+        .grid-btn.answered {
+            background: #e3f2fd;
+            border-color: #90caf9;
+        }
+
+        .grid-btn.correct-ans {
+            background: #d4edda !important;
+            border-color: var(--correct) !important;
+        }
+
+        .grid-btn.wrong-ans {
+            background: #f8d7da !important;
+            border-color: var(--wrong) !important;
+        }
+
+        /* Card styling */
+        .question-card {
+            padding: 20px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background: #fafafa;
+            min-height: 250px;
+        }
+
+        .question-text {
+            font-weight: 600;
+            font-size: 1.05rem;
+            margin-bottom: 15px;
+            color: #1a252f;
+        }
+
+        .options-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .option-btn {
+            text-align: left;
+            padding: 12px 15px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            background: #ffffff;
+            cursor: pointer;
+            font-size: 0.95rem;
+            transition: all 0.15s ease-in-out;
+            color: var(--text);
+        }
+
+        .option-btn:hover:not(.disabled) {
+            background-color: #ebf5fb;
+            border-color: var(--accent);
+        }
+
+        .option-btn.selected {
+            border-color: var(--accent);
+            background-color: #d4e6f1;
+            font-weight: 600;
+        }
+
+        .option-btn.correct {
+            background-color: #d4edda !important;
+            border-color: var(--correct) !important;
+            color: #155724 !important;
+            font-weight: bold;
+        }
+
+        .option-btn.wrong {
+            background-color: #f8d7da !important;
+            border-color: var(--wrong) !important;
+            color: #721c24 !important;
+        }
+
+        .explanation {
+            display: none;
+            margin-top: 15px;
+            padding: 12px 14px;
+            background-color: #e8f4f8;
+            border-left: 4px solid var(--accent);
+            font-size: 0.92rem;
+            border-radius: 4px;
+            color: #2c3e50;
+        }
+
+        /* Navigation controls */
+        .nav-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 0.95rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn:hover:not(:disabled) {
+            background: #1a252f;
+        }
+
+        .btn:disabled {
+            background: #cccccc;
+            cursor: not-allowed;
+        }
+
+        .btn-submit {
+            background: #27ae60;
+        }
+
+        .btn-submit:hover {
+            background: #219150;
+        }
+
+        .results-panel {
+            display: none;
+            text-align: center;
+            padding: 20px;
+            background: #e9ecef;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .disabled {
+            cursor: default;
+        }
+    </style>
+</head>
+<body>
+
+<div class="quiz-container">
+    <div class="header">
+        <h1>CCS (Joining Time) Rules Quiz</h1>
+        <div class="timer-box" id="timer">30:00</div>
+    </div>
+
+    <div class="results-panel" id="results-panel">
+        <h2 style="margin: 0 0 10px 0;">Quiz Completed!</h2>
+        <p id="score-text" style="font-size: 1.2rem; margin: 5px 0;"></p>
+        <p id="percentage-text" style="font-size: 1.1rem; font-weight: bold; color: var(--primary); margin: 5px 0;"></p>
+    </div>
+
+    <button type="button" class="grid-toggle" onclick="toggleGrid()">☰ Toggle Question Palette</button>
+    <div class="q-grid" id="q-grid"></div>
+
+    <div id="question-card-container"></div>
+
+    <div class="nav-controls">
+        <button class="btn" id="prev-btn" onclick="navigate(-1)">← Previous</button>
+        <span id="question-indicator" style="font-weight: 600; font-size: 0.95rem;">Question 1 / 50</span>
+        <button class="btn" id="next-btn" onclick="navigate(1)">Next →</button>
+        <button class="btn btn-submit" id="submit-btn" onclick="submitQuiz()">Submit</button>
+    </div>
+</div>
+
+<script>
+const quizData = [
+    {
+        q: "1. CCS (Joining Time) Rules, 1979 came into force on which date?",
+        options: ["1st January 1979", "8th May 1979", "1st April 1979", "31st December 1979"],
+        answer: 1,
+        exp: "CCS (Joining Time) Rules, 1979 came into force on 8th May 1979."
+    },
+    {
+        q: "2. CCS (Joining Time) Rules, 1979 apply to which of the following categories of employees?",
+        options: ["Work-charged staff", "Government servants appointed on contract", "Civilian Government servants appointed to Civil Services/Posts under Central Government", "Employees paid from contingencies"],
+        answer: 2,
+        exp: "These rules apply to all Central Civil Government servants, but exclude work-charged staff, contract employees, and contingent staff unless specified."
+    },
+    {
+        q: "3. Joining time is granted to a Government servant in order to enable him to:",
+        options: ["Take a short holiday during transfer", "Join a new post at a new station or upon transfer", "Prepare for department exams", "Avail remaining casual leave"],
+        answer: 1,
+        exp: "Joining time is granted to enable a Government servant to join a new post, including posts on transfer."
+    },
+    {
+        q: "4. What joining time is admissible for transfer within the same station or where no change of residence is involved?",
+        options: ["10 days", "1 day", "Actual transit time only", "Nil"],
+        answer: 1,
+        exp: "For transfers within the same station or where no change of residence is involved, 1 day joining time is admissible."
+    },
+    {
+        q: "5. What is the maximum joining time admissible for transfer between stations where distance is 1000 km or less?",
+        options: ["10 days", "12 days", "15 days", "7 days"],
+        answer: 0,
+        exp: "For distance <= 1000 km, joining time admissible is 10 days."
+    },
+    {
+        q: "6. What is the maximum joining time admissible for distance > 1000 km and up to 2000 km?",
+        options: ["10 days", "12 days", "15 days", "20 days"],
+        answer: 1,
+        exp: "For distance > 1000 km and up to 2000 km, joining time admissible is 12 days."
+    },
+    {
+        q: "7. What is the maximum joining time admissible for distance > 2000 km (except air travel)?",
+        options: ["12 days", "15 days", "18 days", "30 days"],
+        answer: 1,
+        exp: "For distance > 2000 km, joining time admissible is 15 days."
+    },
+    {
+        q: "8. In case of travel by air for distance exceeding 2000 km, what is the admissible joining time?",
+        options: ["15 days", "12 days", "10 days", "7 days"],
+        answer: 1,
+        exp: "If travel is performed by air for distances exceeding 2000 km, the joining time admissible is 12 days."
+    },
+    {
+        q: "9. Distance for calculating joining time is calculated based on:",
+        options: ["Air distance only", "Shortest route by rail or road", "Actual route taken by employee", "As per Google Maps"],
+        answer: 1,
+        exp: "Distance is calculated based on the shortest route by which the journey can ordinarily be performed."
+    },
+    {
+        q: "10. How is joining time calculated if the transfer does not involve a change of residence?",
+        options: ["1 day", "2 days", "5 days", "Nil"],
+        answer: 0,
+        exp: "Where transfer does not involve a change of residence from one station to another, 1 day joining time is allowed."
+    },
+    {
+        q: "11. Public holidays immediately following joining time are:",
+        options: ["Excluded from joining time (can be suffixed)", "Included as part of joining time", "Treated as leave", "Not allowed"],
+        answer: 0,
+        exp: "Public holidays can be suffixed to joining time and do not count as part of joining time."
+    },
+    {
+        q: "12. Can joining time be combined with Earned Leave?",
+        options: ["No", "Yes", "Only with special permission of the President", "Only Half Pay Leave can be combined"],
+        answer: 1,
+        exp: "Joining time can be combined with any regular leave of any kind (including Earned Leave) except Casual Leave."
+    },
+    {
+        q: "13. Can Casual Leave be combined with Joining Time?",
+        options: ["Yes", "No", "Yes, up to 2 days", "At discretion of Head of Office"],
+        answer: 1,
+        exp: "Casual Leave cannot be combined with joining time."
+    },
+    {
+        q: "14. If a Government servant does not avail full joining time, unavailed joining time can be credited to:",
+        options: ["Half Pay Leave account", "Earned Leave account", "Casual Leave account", "It lapses automatically"],
+        answer: 1,
+        exp: "Unavailed joining time can be credited to the Earned Leave account, subject to maximum accumulation limits."
+    },
+    {
+        q: "15. What is the maximum ceiling of Earned Leave accumulation including unavailed joining time credited?",
+        options: ["240 days", "300 days", "180 days", "365 days"],
+        answer: 1,
+        exp: "The maximum limit of Earned Leave that can be accumulated is 300 days."
+    },
+    {
+        q: "16. Unavailed joining time is credited as Earned Leave subject to the condition that:",
+        options: ["Full unavailed period is credited", "Minimum 5 days must be unavailed", "Maximum 5 days can be credited", "Only 50% is credited"],
+        answer: 0,
+        exp: "The full unavailed period of joining time can be credited to the EL account."
+    },
+    {
+        q: "17. During Joining Time, a Government servant is treated as:",
+        options: ["On Leave", "On Duty", "On Suspension", "On Foreign Service"],
+        answer: 1,
+        exp: "A Government servant on joining time is treated as on duty."
+    },
+    {
+        q: "18. Pay admissible during joining time is equal to:",
+        options: ["50% of basic pay", "Pay drawn in the old post before relinquishment", "Pay of the new post only", "No pay is admissible"],
+        answer: 1,
+        exp: "Joining time pay is equal to the pay drawn in the old post before relinquishment of charge."
+    },
+    {
+        q: "19. Dearness Allowance (DA) during joining time is calculated based on:",
+        options: ["Joining time pay", "Zero DA", "Fixed rate of 10%", "New post pay only"],
+        answer: 0,
+        exp: "DA is calculated on the joining time pay."
+    },
+    {
+        q: "20. House Rent Allowance (HRA) during joining time is paid at the rate of:",
+        options: ["Old station", "New station", "Old or new station, whichever is applicable under rules", "Not admissible"],
+        answer: 2,
+        exp: "HRA is admissible at the rate applicable to the old station or new station as per rules."
+    },
+    {
+        q: "21. Who has the power to relax CCS (Joining Time) Rules in individual cases?",
+        options: ["Head of Office", "Head of Department", "Administrative Ministry/Department of Central Govt", "Comptroller and Auditor General"],
+        answer: 2,
+        exp: "Powers to relax rules lie with the Administrative Ministry/Department of the Government of India."
+    },
+    {
+        q: "22. Can joining time be granted to an employee transferred at his/her own request?",
+        options: ["No joining time is admissible", "Yes, full joining time", "10 days automatically", "Yes, up to 5 days"],
+        answer: 0,
+        exp: "Transfer at own request does not carry joining time."
+    },
+    {
+        q: "23. When a transfer is made at own request, how is the journey period treated?",
+        options: ["Duty with full joining time", "Covered by regular leave applied by the employee", "On duty without joining time pay", "Suspension"],
+        answer: 1,
+        exp: "For own request transfer, no joining time is admissible. Travel period is covered by regular leave."
+    },
+    {
+        q: "24. Is joining time admissible to surplus staff transferred from one department to another?",
+        options: ["No", "Yes", "Only 50%", "At discretion of Minister"],
+        answer: 1,
+        exp: "Surplus staff redeployed to another office/department are eligible for regular joining time."
+    },
+    {
+        q: "25. Joining time count starts from:",
+        options: ["The date of transfer order", "The date of relinquishing charge if FN, or next day if AN", "The date of joining new post", "The 1st of the following month"],
+        answer: 1,
+        exp: "If charge is relinquished in FN, JT starts same day; if in AN, JT starts from the next day."
+    },
+    {
+        q: "26. If charge of old post is handed over in the Forenoon, joining time commences on:",
+        options: ["The same day", "Next day", "After 2 days", "Date of order"],
+        answer: 0,
+        exp: "If charge is handed over in the forenoon, joining time commences on that same day."
+    },
+    {
+        q: "27. If charge of old post is handed over in the Afternoon, joining time commences on:",
+        options: ["The same day", "The following day", "After 3 days", "Next Monday"],
+        answer: 1,
+        exp: "If handed over in the afternoon, joining time starts on the following day."
+    },
+    {
+        q: "28. Head of Department can extend joining time up to a maximum of:",
+        options: ["10 days", "30 days", "15 days", "60 days"],
+        answer: 1,
+        exp: "Head of Department can extend joining time up to 30 days in special circumstances."
+    },
+    {
+        q: "29. Extension of joining time beyond 30 days can be granted by:",
+        options: ["Head of Department", "Administrative Ministry / Department", "UPSC", "Cabinet Secretariat"],
+        answer: 1,
+        exp: "Beyond 30 days, extension requires approval of the Administrative Ministry/Department."
+    },
+    {
+        q: "30. What happens if a Government servant overstays joining time?",
+        options: ["Automatically dismissed", "Period of overstay treated as unauthorized absence unless regularized", "Fined Rs 1000", "Given double pay"],
+        answer: 1,
+        exp: "Overstayal of joining time is treated as unauthorized absence unless regularized by grant of leave by competent authority."
+    },
+    {
+        q: "31. Unauthorized overstay of joining time results in:",
+        options: ["Break in service", "Loss of pay for the period", "Disciplinary action", "All of the above"],
+        answer: 3,
+        exp: "Overstayal without approval leads to loss of pay, break in service, and potential disciplinary proceedings."
+    },
+    {
+        q: "32. Joining time for a Central Govt employee on deputation to State Govt is governed by:",
+        options: ["State Govt rules", "Central Govt (CCS Joining Time) Rules", "Foreign Service Rules", "Mutual agreement"],
+        answer: 1,
+        exp: "Central Government employees continue to be governed by CCS (Joining Time) Rules, 1979 unless specifically exempted."
+    },
+    {
+        q: "33. In case of transfer while on leave, joining time is calculated from:",
+        options: ["Date of transfer order", "Expirery of leave", "Old station to new station or place of leave to new station, whichever is less", "Station where leave was spent only"],
+        answer: 2,
+        exp: "If transferred while on leave, joining time is calculated from old station or place where leave was spent to new station, whichever is shorter."
+    },
+    {
+        q: "34. Can a Government servant avail joining time while under suspension?",
+        options: ["Yes", "No", "Only 5 days", "If requested"],
+        answer: 1,
+        exp: "A Government servant under suspension is not entitled to joining time until suspension is revoked."
+    },
+    {
+        q: "35. When suspension is revoked and employee is transferred, joining time is allowed from:",
+        options: ["Date of suspension", "Date of revocation order / relinquishment of charge", "Date of original post", "Not allowed"],
+        answer: 1,
+        exp: "Joining time is calculated from the date of handover/revocation of suspension order."
+    },
+    {
+        q: "36. Conveyance Allowance during joining time is:",
+        options: ["Admissible in full", "Not admissible", "50% admissible", "Admissible if requested"],
+        answer: 1,
+        exp: "Conveyance allowance granted for specific duties of a post is not admissible during joining time."
+    },
+    {
+        q: "37. Where applicable, City Compensatory Allowance (CCA) during joining time was paid at:",
+        options: ["Old station rate", "New station rate", "Lower of the rates between old and new station", "Higher rate"],
+        answer: 2,
+        exp: "Where CCA was applicable, it was allowed at the lower of the rates between old and new stations."
+    },
+    {
+        q: "38. Is joining time admissible for temporary Government servants?",
+        options: ["No", "Yes, if in continuous service", "Only 1 day", "Only for permanent staff"],
+        answer: 1,
+        exp: "Temporary employees in continuous service are eligible for joining time on transfer."
+    },
+    {
+        q: "39. Which rule of CCS (Joining Time) Rules covers calculation of Joining Time?",
+        options: ["Rule 4", "Rule 5", "Rule 6", "Rule 7"],
+        answer: 1,
+        exp: "Rule 5 of CCS (Joining Time) Rules, 1979 specifies the calculation of joining time."
+    },
+    {
+        q: "40. Joining time pay is regulated under which Rule of CCS (Joining Time) Rules?",
+        options: ["Rule 7", "Rule 6", "Rule 4", "Rule 8"],
+        answer: 0,
+        exp: "Rule 7 regulates Joining Time Pay."
+    },
+    {
+        q: "41. What is the maximum joining time allowable when distance is 1500 km by rail?",
+        options: ["10 days", "12 days", "15 days", "8 days"],
+        answer: 1,
+        exp: "For distances >1000 km and <=2000 km, maximum JT is 12 days."
+    },
+    {
+        q: "42. What is the maximum joining time allowable when distance is 800 km?",
+        options: ["10 days", "12 days", "15 days", "7 days"],
+        answer: 0,
+        exp: "For distance <= 1000 km, maximum JT is 10 days."
+    },
+    {
+        q: "43. What is the maximum joining time for distance of 2500 km by train?",
+        options: ["12 days", "15 days", "20 days", "10 days"],
+        answer: 1,
+        exp: "For distance > 2000 km (non-air), maximum JT is 15 days."
+    },
+    {
+        q: "44. Unavailed joining time for credit to EL is calculated by:",
+        options: ["Admissible JT minus Availed JT", "Total days of journey", "Fixed 10 days", "Total leave balance"],
+        answer: 0,
+        exp: "Unavailed JT = Admissible Joining Time minus Actual Joining Time availed."
+    },
+    {
+        q: "45. Are Sundays falling during joining time counted as part of joining time?",
+        options: ["No, excluded", "Yes, included", "Option of employee", "Converted to CL"],
+        answer: 1,
+        exp: "Sunday/Holidays falling within the joining time period are included as part of joining time."
+    },
+    {
+        q: "46. If holidays fall at the END of joining time, how are they treated?",
+        options: ["Included in JT", "Can be suffixed to JT", "Lapsed", "Converted to HPL"],
+        answer: 1,
+        exp: "Holidays immediately following/at the end of joining time can be suffixed."
+    },
+    {
+        q: "47. Which authority can permit combination of Joining Time with Extraordinary Leave (EXOL)?",
+        options: ["Head of Office", "Competent Leave Sanctioning Authority", "Finance Ministry", "No authority"],
+        answer: 1,
+        exp: "Joining time can be combined with any leave (including EXOL) by the competent leave sanctioning authority."
+    },
+    {
+        q: "48. Joining time rules do NOT apply to:",
+        options: ["Railway servants", "Armed Forces personnel", "Employees paid from contingencies", "All of the above"],
+        answer: 3,
+        exp: "CCS (JT) Rules 1979 do not apply to Railways, Armed Forces, contingent staff, work-charged staff, etc."
+    },
+    {
+        q: "49. If a Government servant is transferred while on duty at a station other than headquarters, JT is calculated from:",
+        options: ["Headquarters", "Place of temporary duty or HQ, whichever distance is less", "Place of temporary duty", "Capital city"],
+        answer: 1,
+        exp: "JT is calculated from HQ or temporary duty station, whichever calculation yields shorter distance/time."
+    },
+    {
+        q: "50. Unavailed joining time is credited to the EL account by:",
+        options: ["Administrative process upon joining new post", "Writing to Ministry after 1 year", "Automatic carryover to next service", "Lapsing if not claimed in 30 days"],
+        answer: 0,
+        exp: "Credit of unavailed joining time to the Earned Leave account is done administratively upon joining the new post."
+    }
+];
+
+let currentIndex = 0;
+let selectedAnswers = new Array(quizData.length).fill(null);
+let isSubmitted = false;
+let timerInterval = null;
+let timeLeft = 1800; // 30 minutes
+
+function initQuiz() {
+    currentIndex = 0;
+    selectedAnswers.fill(null);
+    isSubmitted = false;
+    
+    document.getElementById('results-panel').style.display = 'none';
+    document.getElementById('submit-btn').disabled = false;
+    
+    buildGrid();
+    renderQuestion();
+    startTimer();
+}
+
+function buildGrid() {
+    const grid = document.getElementById('q-grid');
+    grid.innerHTML = '';
+    
+    quizData.forEach((_, idx) => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'grid-btn';
+        btn.id = `grid-btn-${idx}`;
+        btn.textContent = idx + 1;
+        btn.onclick = () => jumpToQuestion(idx);
+        grid.appendChild(btn);
+    });
+}
+
+function updateGridStyles() {
+    quizData.forEach((item, idx) => {
+        const btn = document.getElementById(`grid-btn-${idx}`);
+        btn.className = 'grid-btn';
+
+        if (idx === currentIndex) {
+            btn.classList.add('active');
+        }
+
+        if (isSubmitted) {
+            if (selectedAnswers[idx] === item.answer) {
+                btn.classList.add('correct-ans');
+            } else if (selectedAnswers[idx] !== null) {
+                btn.classList.add('wrong-ans');
+            }
+        } else {
+            if (selectedAnswers[idx] !== null) {
+                btn.classList.add('answered');
+            }
+        }
+    });
+}
+
+function renderQuestion() {
+    const container = document.getElementById('question-card-container');
+    const item = quizData[currentIndex];
+
+    let html = `
+        <div class="question-card">
+            <div class="question-text">${item.q}</div>
+            <div class="options-container">
+    `;
+
+    item.options.forEach((optText, oIndex) => {
+        let classes = "option-btn";
+        const isSelected = selectedAnswers[currentIndex] === oIndex;
+
+        if (isSubmitted) {
+            classes += " disabled";
+            if (oIndex === item.answer) {
+                classes += " correct";
+            }
+            if (isSelected && oIndex !== item.answer) {
+                classes += " wrong";
+            }
+        } else if (isSelected) {
+            classes += " selected";
+        }
+
+        html += `<button type="button" class="${classes}" onclick="selectOption(${oIndex})">${optText}</button>`;
+    });
+
+    html += `
+            </div>
+            <div class="explanation" id="exp-box" style="display: ${isSubmitted ? 'block' : 'none'}">
+                <strong>Explanation:</strong> ${item.exp}
+            </div>
+        </div>
+    `;
+
+    container.innerHTML = html;
+
+    // Update Controls
+    document.getElementById('question-indicator').textContent = `Question ${currentIndex + 1} / ${quizData.length}`;
+    document.getElementById('prev-btn').disabled = currentIndex === 0;
+    document.getElementById('next-btn').disabled = currentIndex === quizData.length - 1;
+
+    updateGridStyles();
+}
+
+function selectOption(oIndex) {
+    if (isSubmitted) return;
+    selectedAnswers[currentIndex] = oIndex;
+    renderQuestion();
+}
+
+function navigate(direction) {
+    const newIdx = currentIndex + direction;
+    if (newIdx >= 0 && newIdx < quizData.length) {
+        currentIndex = newIdx;
+        renderQuestion();
+    }
+}
+
+function jumpToQuestion(idx) {
+    currentIndex = idx;
+    renderQuestion();
+}
+
+function toggleGrid() {
+    const grid = document.getElementById('q-grid');
+    grid.style.display = grid.style.display === 'none' ? 'flex' : 'none';
+}
+
+function startTimer() {
+    clearInterval(timerInterval);
+    timeLeft = 1800;
+    updateTimerDisplay();
+
+    timerInterval = setInterval(() => {
+        timeLeft--;
+        updateTimerDisplay();
+        if (timeLeft <= 0) {
+            clearInterval(timerInterval);
+            submitQuiz();
+        }
+    }, 1000);
+}
+
+function updateTimerDisplay() {
+    const minutes = Math.floor(timeLeft / 60);
+    const seconds = timeLeft % 60;
+    document.getElementById('timer').textContent = 
+        `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+}
+
+function submitQuiz() {
+    if (isSubmitted) return;
+
+    clearInterval(timerInterval);
+    isSubmitted = true;
+
+    let score = 0;
+    quizData.forEach((item, idx) => {
+        if (selectedAnswers[idx] === item.answer) {
+            score++;
+        }
+    });
+
+    const total = quizData.length;
+    const percentage = ((score / total) * 100).toFixed(2);
+
+    document.getElementById('score-text').textContent = `Score: ${score} / ${total}`;
+    document.getElementById('percentage-text').textContent = `Percentage: ${percentage}%`;
+    document.getElementById('results-panel').style.display = 'block';
+
+    document.getElementById('submit-btn').disabled = true;
+
+    renderQuestion();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+window.onload = initQuiz;
+</script>
+
+</body>
+</html>
