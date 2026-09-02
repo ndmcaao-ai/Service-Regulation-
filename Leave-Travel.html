@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CCS (LTC) Rules, 1988 - Interactive Quiz</title>
+    <style>
+        :root {
+            --bg-color: #f4f6f9;
+            --card-bg: #ffffff;
+            --primary: #2c3e50;
+            --accent: #3498db;
+            --correct: #27ae60;
+            --wrong: #e74c3c;
+            --text: #333333;
+            --border: #dcdcdc;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .quiz-container {
+            background: var(--card-bg);
+            width: 100%;
+            max-width: 800px;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 1.3rem;
+            color: var(--primary);
+            margin: 0;
+        }
+
+        .timer-box {
+            font-size: 1.1rem;
+            font-weight: bold;
+            background: #fff3cd;
+            color: #856404;
+            padding: 8px 14px;
+            border-radius: 6px;
+            border: 1px solid #ffeeba;
+        }
+
+        /* Question Navigation Grid */
+        .grid-toggle {
+            background: none;
+            border: none;
+            color: var(--accent);
+            cursor: pointer;
+            font-weight: bold;
+            padding: 0;
+            margin-bottom: 15px;
+        }
+
+        .q-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 20px;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 6px;
+            border: 1px solid var(--border);
+        }
+
+        .grid-btn {
+            width: 32px;
+            height: 32px;
+            border: 1px solid var(--border);
+            background: #ffffff;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .grid-btn.active {
+            border-color: var(--accent);
+            background: var(--accent);
+            color: white;
+            font-weight: bold;
+        }
+
+        .grid-btn.answered {
+            background: #e3f2fd;
+            border-color: #90caf9;
+        }
+
+        .grid-btn.correct-ans {
+            background: #d4edda !important;
+            border-color: var(--correct) !important;
+            color: #155724;
+        }
+
+        .grid-btn.wrong-ans {
+            background: #f8d7da !important;
+            border-color: var(--wrong) !important;
+            color: #721c24;
+        }
+
+        /* Card styling */
+        .question-card {
+            padding: 20px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background: #fafafa;
+            min-height: 250px;
+        }
+
+        .question-text {
+            font-weight: 600;
+            font-size: 1.05rem;
+            margin-bottom: 15px;
+            color: #1a252f;
+        }
+
+        .options-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .option-btn {
+            text-align: left;
+            padding: 12px 15px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            background: #ffffff;
+            cursor: pointer;
+            font-size: 0.95rem;
+            transition: all 0.15s ease-in-out;
+            color: var(--text);
+        }
+
+        .option-btn:hover:not(.disabled) {
+            background-color: #ebf5fb;
+            border-color: var(--accent);
+        }
+
+        .option-btn.selected {
+            border-color: var(--accent);
+            background-color: #d4e6f1;
+            font-weight: 600;
+        }
+
+        .option-btn.correct {
+            background-color: #d4edda !important;
+            border-color: var(--correct) !important;
+            color: #155724 !important;
+            font-weight: bold;
+        }
+
+        .option-btn.wrong {
+            background-color: #f8d7da !important;
+            border-color: var(--wrong) !important;
+            color: #721c24 !important;
+        }
+
+        .explanation {
+            display: none;
+            margin-top: 15px;
+            padding: 12px 14px;
+            background-color: #e8f4f8;
+            border-left: 4px solid var(--accent);
+            font-size: 0.92rem;
+            border-radius: 4px;
+            color: #2c3e50;
+        }
+
+        /* Navigation controls */
+        .nav-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 0.95rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn:hover:not(:disabled) {
+            background: #1a252f;
+        }
+
+        .btn:disabled {
+            background: #cccccc;
+            cursor: not-allowed;
+        }
+
+        .btn-submit {
+            background: #27ae60;
+        }
+
+        .btn-submit:hover {
+            background: #219150;
+        }
+
+        .results-panel {
+            display: none;
+            text-align: center;
+            padding: 20px;
+            background: #e9ecef;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .disabled {
+            cursor: default;
+        }
+    </style>
+</head>
+<body>
+
+<div class="quiz-container">
+    <div class="header">
+        <h1>CCS (LTC) Rules, 1988 Quiz</h1>
+        <div class="timer-box" id="timer">30:00</div>
+    </div>
+
+    <div class="results-panel" id="results-panel">
+        <h2 style="margin: 0 0 10px 0;">Quiz Completed!</h2>
+        <p id="score-text" style="font-size: 1.2rem; margin: 5px 0;"></p>
+        <p id="percentage-text" style="font-size: 1.1rem; font-weight: bold; color: var(--primary); margin: 5px 0;"></p>
+    </div>
+
+    <!-- Question Palette Grid -->
+    <button type="button" class="grid-toggle" onclick="toggleGrid()">☰ Toggle Question Palette</button>
+    <div class="q-grid" id="q-grid"></div>
+
+    <!-- Active Question Container -->
+    <div id="question-card-container"></div>
+
+    <!-- Navigation Buttons -->
+    <div class="nav-controls">
+        <button class="btn" id="prev-btn" onclick="navigate(-1)">← Previous</button>
+        <span id="question-indicator" style="font-weight: 600; font-size: 0.95rem;">Question 1 / 50</span>
+        <button class="btn" id="next-btn" onclick="navigate(1)">Next →</button>
+        <button class="btn btn-submit" id="submit-btn" onclick="submitQuiz()">Submit</button>
+    </div>
+</div>
+
+<script>
+const quizData = [
+    {
+        q: "1. CCS (LTC) Rules, 1988 came into force on which date?",
+        options: ["1st January 1988", "1st May 1988", "1st July 1988", "1st October 1988"],
+        answer: 1,
+        exp: "CCS (LTC) Rules, 1988 came into force on 1st May 1988."
+    },
+    {
+        q: "2. Minimum continuous service required for a Govt servant to be eligible for LTC is:",
+        options: ["6 months", "1 year", "2 years", "3 years"],
+        answer: 1,
+        exp: "As per Rule 7, a Government servant must have completed continuous service of not less than 1 year on the date of journey."
+    },
+    {
+        q: "3. A block of how many calendar years is fixed for Home Town LTC?",
+        options: ["2 years", "4 years", "3 years", "5 years"],
+        answer: 0,
+        exp: "Home Town LTC is granted once in a block of 2 calendar years (e.g., 2022-2023, 2024-2025)."
+    },
+    {
+        q: "4. A block of how many calendar years is fixed for Any Place in India (Anywhere in India) LTC?",
+        options: ["2 years", "3 years", "4 years", "5 years"],
+        answer: 2,
+        exp: "LTC to Any Place in India is admissible once in a block of 4 calendar years (e.g., 2022-2025)."
+    },
+    {
+        q: "5. Can a Government servant surrender one Home Town LTC to avail 'Any Place in India' LTC?",
+        options: ["No, it is strictly separate", "Yes, once in a 4-year block", "Yes, in every 2-year block", "Only with President's approval"],
+        answer: 1,
+        exp: "Under Rule 8, an employee can substitute one Home Town LTC in a 4-year block to travel to Any Place in India."
+    },
+    {
+        q: "6. What is the grace period allowed for availing an unavailed LTC block beyond its expiry?",
+        options: ["3 months", "6 months", "1 year (Carryover year)", "No grace period is allowed"],
+        answer: 2,
+        exp: "An unavailed LTC block can be carried forward and availed during the first year of the next block (Grace year / Carryover year)."
+    },
+    {
+        q: "7. Fresh recruits are allowed LTC facility every year for how many years after joining service?",
+        options: ["First 2 years", "First 4 years", "First 8 years", "First 10 years"],
+        answer: 2,
+        exp: "Fresh recruits joining Central Govt service are allowed LTC facility every year for the first 8 years of service."
+    },
+    {
+        q: "8. For a fresh recruit, out of 8 LTCs in the first 8 years, how many are for Home Town and how many for Any Place in India?",
+        options: ["4 Home Town & 4 Anywhere in India", "7 Home Town & 1 Anywhere in India (8th year)", "6 Home Town & 2 Anywhere in India", "All 8 for Home Town only"],
+        answer: 1,
+        exp: "Fresh recruits get 7 Home Town LTCs and 1 Anywhere in India LTC (which can be taken in the 4th or 8th year as per rules)."
+    },
+    {
+        q: "9. To be considered dependent on a Govt servant for LTC, a family member's income from all sources should not exceed:",
+        options: ["Rs 3,500 + DA p.m.", "Rs 9,000 + DA p.m.", "Rs 15,000 + DA p.m.", "Rs 2,500 p.m."],
+        answer: 1,
+        exp: "A family member is considered dependent if their monthly income from all sources does not exceed the minimum pension rate i.e. Rs 9,000 + DA per month."
+    },
+    {
+        q: "10. Dependent parents are eligible for LTC under which of the following conditions?",
+        options: ["They reside with the Govt servant", "They are wholly dependent on the Govt servant", "Their income does not exceed Rs 9,000 + DA p.m.", "All of the above"],
+        answer: 3,
+        exp: "Parents must be wholly dependent (income <= Rs 9,000 + DA) and normally reside with the Government servant."
+    },
+    {
+        q: "11. Are step-children included in the definition of 'family' for LTC purposes?",
+        options: ["No", "Yes", "Only if adopted legally", "Only with HOD permission"],
+        answer: 1,
+        exp: "Family for LTC includes step-children residing with and wholly dependent on the Government servant."
+    },
+    {
+        q: "12. What is the limit on the number of surviving children for LTC eligibility born on or after 20.10.1998?",
+        options: ["1 child", "2 children", "3 children", "No limit"],
+        answer: 1,
+        exp: "LTC is restricted to up to 2 surviving children born on or after 20th October 1998 (except multiple births in 2nd pregnancy)."
+    },
+    {
+        q: "13. Married daughters who are divorced or abandoned and dependent on the employee are:",
+        options: ["Excluded from family", "Included in family for LTC", "Eligible only for Home Town", "Eligible with 50% fare"],
+        answer: 1,
+        exp: "Unmarried, divorced, abandoned, or widowed daughters dependent on and residing with the Govt servant are included in family."
+    },
+    {
+        q: "14. If both husband and wife are Central Government servants, how can LTC be claimed?",
+        options: ["Both can claim independently for the same family members simultaneously", "They can claim as separate individuals or as family members of one, but not both for the same journey", "Only the husband can claim", "Only the wife can claim"],
+        answer: 1,
+        exp: "They can declare separate Home Towns and claim LTC individually, but double claim for the same family members/journey is forbidden."
+    },
+    {
+        q: "15. What is the maximum number of days of Earned Leave (EL) that can be encashed during LTC in the entire service career?",
+        options: ["30 days", "60 days", "100 days", "300 days"],
+        answer: 2,
+        exp: "A Govt servant can encash up to 10 days EL at a time on LTC, subject to a total maximum of 60 days in entire service."
+    },
+    {
+        q: "16. To encash Earned Leave on LTC, what minimum EL balance must remain in the leave account after encashment?",
+        options: ["15 days", "30 days", "60 days", "100 days"],
+        answer: 1,
+        exp: "A minimum balance of 30 days Earned Leave must remain at credit after encashment during LTC."
+    },
+    {
+        q: "17. Is leave encashment on LTC deducted from the 300 days maximum EL limit allowed at retirement?",
+        options: ["Yes", "No", "50% is deducted", "Only if requested"],
+        answer: 1,
+        exp: "Leave encashed during LTC is NOT deducted from the 300 days EL limit available for encashment at retirement/superannuation."
+    },
+    {
+        q: "18. What mode of travel booking is mandatory for LTC air tickets as per current DoPT guidelines?",
+        options: ["Any online travel aggregator (MakeMyTrip, Yatra)", "Directly from airlines or through authorized travel agents (Balmer Lawrie, IRCTC, Ashok Travels)", "Through local travel agents", "Any mode as long as fare is lowest"],
+        answer: 1,
+        exp: "Air tickets for LTC must be booked directly from airlines or authorized agents: Balmer Lawrie & Co., IRCTC, and M/s Ashok Travels & Tours."
+    },
+    {
+        q: "19. Air travel LTC for non-entitled employees under special relaxation (to NER, J&K, Ladakh, A&N) requires booking air tickets at which category?",
+        options: ["Business Class", "Economy Class at LTC-80 or cheapest fare available", "First Class", "Any fare class"],
+        answer: 1,
+        exp: "Non-entitled employees allowed air travel under special relaxation schemes must travel in Economy Class at lowest available fare/LTC-80."
+    },
+    {
+        q: "20. How much advance of estimated LTC fare can be granted to a Government servant?",
+        options: ["75%", "80%", "90%", "100%"],
+        answer: 3,
+        exp: "Up to 100% of the estimated LTC fare can be granted as advance to the Government servant."
+    },
+    {
+        q: "21. When LTC advance is drawn, within what period must the outward journey be commenced?",
+        options: ["15 days", "30 days (1 month)", "45 days", "60 days"],
+        answer: 1,
+        exp: "The outward journey must commence within 30 days from the date of drawing the LTC advance."
+    },
+    {
+        q: "22. If LTC advance is drawn for train travel, tickets must be booked within how many days of drawing advance?",
+        options: ["7 days", "10 days", "125 days (or booking window opening)", "30 days"],
+        answer: 3,
+        exp: "Advance can be drawn up to 125 days before proposed journey, but journey must commence within 30 days of drawal or tickets submitted within prescribed timeframe."
+    },
+    {
+        q: "23. Where NO LTC advance is taken, within what time limit must the LTC final claim be submitted after journey completion?",
+        options: ["1 month", "3 months", "6 months", "1 year"],
+        answer: 1,
+        exp: "If no advance is drawn, the LTC claim must be submitted within 3 months of completion of the return journey."
+    },
+    {
+        q: "24. Where LTC advance IS taken, within what time limit must the final claim be submitted after journey completion?",
+        options: ["15 days", "1 month", "3 months", "6 months"],
+        answer: 1,
+        exp: "If advance is drawn, the LTC claim must be submitted within 1 month of completion of the return journey."
+    },
+    {
+        q: "25. What is the penalty if LTC advance is drawn but not utilized for the journey and not refunded in time?",
+        options: ["Interest charged at penal rates (PGP/GPF rate + 2%)", "Entire advance recovered in one lump sum", "Disciplinary action may be initiated", "All of the above"],
+        answer: 3,
+        exp: "Failure to refund unutilized LTC advance leads to lump sum recovery, penal interest, and potential disciplinary action."
+    },
+    {
+        q: "26. Is LTC admissible to a Government servant during Casual Leave?",
+        options: ["No", "Yes", "Only for Home Town", "Only with Ministry approval"],
+        answer: 1,
+        exp: "LTC can be availed during regular leave of any kind, including Casual Leave (CL) and Special Casual Leave."
+    },
+    {
+        q: "27. Can a Government servant avail LTC during Extraordinary Leave (EOL)?",
+        options: ["No", "Yes", "Only if EOL is on medical grounds", "Only for Home Town"],
+        answer: 0,
+        exp: "LTC is not admissible during Extraordinary Leave (EOL) without pay, unless specifically relaxed."
+    },
+    {
+        q: "28. Can LTC be availed during the period of suspension?",
+        options: ["Yes, for both employee and family", "No for employee, but family members can avail LTC", "No for both employee and family", "Yes, with 50% fare reimbursement"],
+        answer: 1,
+        exp: "A suspended employee cannot avail LTC, but family members can avail LTC during the suspension period."
+    },
+    {
+        q: "29. Is LTC admissible to a Government servant on child care leave (CCL)?",
+        options: ["No", "Yes", "Only once in service", "Only Home Town"],
+        answer: 1,
+        exp: "LTC can be combined with Child Care Leave (CCL)."
+    },
+    {
+        q: "30. A Government servant travelling by a non-entitled mode of transport (e.g., private car between connected rail places) gets reimbursement limited to:",
+        options: ["Actual cost incurred", "Nil fare", "Fare of entitled class by rail/bus by shortest route", "50% of taxi fare"],
+        answer: 2,
+        exp: "If travel is performed by non-entitled mode between places connected by rail/bus, reimbursement is limited to entitled class rail/bus fare by shortest route."
+    },
+    {
+        q: "31. Under LTC rules, 'Home Town' declared by a Govt servant can be changed how many times during entire service?",
+        options: ["Never", "Once", "Twice", "Every 5 years"],
+        answer: 1,
+        exp: "Home Town declaration can be changed once in the entire service career under exceptional circumstances with approval of competent authority."
+    },
+    {
+        q: "32. Who is the competent authority to accept/approve change of Home Town declaration?",
+        options: ["Head of Office", "Head of Department / Ministry", "Immediate Supervisor", "Pay & Accounts Officer"],
+        answer: 1,
+        exp: "Change of Home Town declaration requires the approval of the Head of Department."
+    },
+    {
+        q: "33. If family members travel separately from the Govt servant, their LTC journey must be completed within what period?",
+        options: ["Within 6 months from the date the Govt servant starts LTC", "Within the same LTC block / grace year", "Within 30 days", "Must travel on the same day only"],
+        answer: 1,
+        exp: "Family members can travel independently, provided the journey falls within the valid block year / grace year."
+    },
+    {
+        q: "34. Can LTC be claimed for journey performed in a private vessel or cruise ship?",
+        options: ["Yes, full fare", "No, unless operated by Govt/Public Sector Undertakings or specifically authorized", "Yes, up to AC 1st class fare", "Only for foreign travel"],
+        answer: 1,
+        exp: "Travel by private charter/vessels is not admissible unless operated by Govt/PSU or explicitly allowed by Govt orders."
+    },
+    {
+        q: "35. Catering charges included in train tickets (e.g., Rajdhani / Shatabdi / Vande Bharat) during LTC are:",
+        options: ["Reimbursable as part of mandatory ticket fare", "Strictly non-reimbursable", "Reimbursable up to Rs 500", "Deducted from TA"],
+        answer: 0,
+        exp: "Where catering charges are built into the mandatory ticket fare (e.g., Rajdhani/Shatabdi/Vande Bharat), they are reimbursable."
+    },
+    {
+        q: "36. Dynamic pricing/Flexi-fare paid for entitled rail travel on LTC is:",
+        options: ["Not reimbursable", "Reimbursable", "50% reimbursable", "Allowed only for officers in Pay Level 14+"],
+        answer: 1,
+        exp: "Dynamic pricing / flexi-fare on Rajdhani/Shatabdi/Duronto trains is reimbursable for LTC journeys."
+    },
+    {
+        q: "37. Premium / Tatkal train ticket charges for LTC journey are:",
+        options: ["Reimbursable", "Not reimbursable", "Reimbursable only for Home Town LTC", "Reimbursable only with Ministry approval"],
+        answer: 0,
+        exp: "Tatkal and Premium Tatkal charges are reimbursable for LTC travel if journey is undertaken in entitled class."
+    },
+    {
+        q: "38. Is local sightseeing tours/taxis reimbursable under CCS (LTC) Rules?",
+        options: ["Yes, up to Rs 5000", "No, local sightseeing expenses are not covered under LTC", "Yes, if booked through IRCTC", "50% reimbursable"],
+        answer: 1,
+        exp: "LTC only covers travel expense from Headquarters/starting point to the declared destination and back; local sightseeing is not reimbursable."
+    },
+    {
+        q: "39. If an employee fraudulently claims LTC, what penalty can be imposed regarding LTC facility?",
+        options: ["Forfeiture of LTC for that block only", "Withholding of LTC facility for 2 years / 1 block in addition to disciplinary action", "LTC withheld for 5 years", "No penalty"],
+        answer: 1,
+        exp: "For fraudulent LTC claims, the claim is disallowed, advanced recovered with penal interest, and LTC facility is withheld for next 2 years/block."
+    },
+    {
+        q: "40. What is the distance limit for declaring a place as 'Any Place in India' for LTC destination?",
+        options: ["Minimum 500 km", "Minimum 1000 km", "No minimum distance limit specified in rules", "Minimum 1500 km"],
+        answer: 2,
+        exp: "There is no minimum distance limit specified for visiting 'Any Place in India' under LTC rules."
+    },
+    {
+        q: "41. Can a Government servant visit different places on the onward and return journeys during 'Any Place in India' LTC?",
+        options: ["No, destination must be fixed", "Yes, provided the declared destination is reached and route is direct/admissible", "Only via Home Town", "Only if traveling by air"],
+        answer: 1,
+        exp: "An employee can take different routes for onward and return journeys, but reimbursement is calculated based on shortest route to declared destination."
+    },
+    {
+        q: "42. Are daily allowances (DA) paid during LTC journey?",
+        options: ["Yes, full DA", "Yes, 50% DA", "No Daily Allowance is paid during LTC", "Paid only for travel days"],
+        answer: 2,
+        exp: "Daily Allowance (DA) is not admissible for journeys undertaken on LTC."
+    },
+    {
+        q: "43. If a Government servant loses the original air ticket/boarding pass, how can the claim be processed?",
+        options: ["Claim is straightaway rejected", "By submitting a certificate from airline confirming travel along with indemnity bond/undertaking", "By submitting photo of destination", "By paying 10% penalty"],
+        answer: 1,
+        exp: "In case of lost boarding pass, confirmation/certificate from airline proving travel along with self-undertaking is accepted."
+    },
+    {
+        q: "44. Are Central Government employees permitted to travel abroad on LTC?",
+        options: ["Yes, once in 4 years", "No, LTC is restricted within the territory of India", "Yes, to SAARC countries only", "Yes, with Minister's permission"],
+        answer: 1,
+        exp: "LTC is strictly restricted to travel within the territory of India."
+    },
+    {
+        q: "45. For employees stationed in remote areas (e.g. Andaman & Nicobar, Lakshadweep), additional LTC facility includes:",
+        options: ["Free international trip", "Emergency LTC to mainland India every year", "Double leave encashment", "None"],
+        answer: 1,
+        exp: "Employees posted in island territories / specified remote areas get Additional/Emergency LTC to mainland."
+    },
+    {
+        q: "46. Can a Government servant combine LTC with study leave?",
+        options: ["Yes", "No", "Only for Home Town", "Only if duration is under 6 months"],
+        answer: 0,
+        exp: "LTC can be availed during Study Leave."
+    },
+    {
+        q: "47. Which rule of CCS (LTC) Rules, 1988 defines the 'Family'?",
+        options: ["Rule 2", "Rule 4", "Rule 7", "Rule 12"],
+        answer: 1,
+        exp: "Rule 4 of CCS (LTC) Rules, 1988 contains definitions including the definition of 'Family'."
+    },
+    {
+        q: "48. Is an unmarried brother eligible for LTC under 'Family' if dependent on the Govt servant?",
+        options: ["Yes, always", "Yes, if minor (under 18) and wholly dependent & residing with employee", "No, brothers are never included", "Only if employee is unmarried"],
+        answer: 1,
+        exp: "Unmarried minor brothers residing with and wholly dependent on the employee are included in family definition."
+    },
+    {
+        q: "49. Reimbursement of LTC fare for travel by road in public transport is based on:",
+        options: ["Actual bus fare of entitled class by shortest route", "Auto rickshaw rate", "Private taxi rate always", "Fixed rate of Rs 5 per km"],
+        answer: 0,
+        exp: "For road travel in public buses, actual fare of entitled bus class by shortest route is reimbursed."
+    },
+    {
+        q: "50. Special relaxation scheme allowing air travel to North Eastern Region (NER), Jammu & Kashmir, Ladakh, and Andaman & Nicobar Islands is extended by DoPT:",
+        options: ["Permanently by law", "Periodically through DoPT Office Memorandums (OMs)", "Only for Group A officers", "Not applicable anymore"],
+        answer: 1,
+        exp: "Special relaxation for LTC to NER, J&K, Ladakh, and A&N is extended periodically by DoPT through Office Memorandums."
+    }
+];
+
+let currentIndex = 0;
+let selectedAnswers = new Array(quizData.length).fill(null);
+let isSubmitted = false;
+let timerInterval = null;
+let timeLeft = 1800; // 30 minutes in seconds
+
+function initQuiz() {
+    currentIndex = 0;
+    selectedAnswers.fill(null);
+    isSubmitted = false;
+    
+    document.getElementById('results-panel').style.display = 'none';
+    document.getElementById('submit-btn').disabled = false;
+    
+    buildGrid();
+    renderQuestion();
+    startTimer();
+}
+
+function buildGrid() {
+    const grid = document.getElementById('q-grid');
+    grid.innerHTML = '';
+    
+    quizData.forEach((_, idx) => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'grid-btn';
+        btn.id = `grid-btn-${idx}`;
+        btn.textContent = idx + 1;
+        btn.onclick = () => jumpToQuestion(idx);
+        grid.appendChild(btn);
+    });
+}
+
+function updateGridStyles() {
+    quizData.forEach((item, idx) => {
+        const btn = document.getElementById(`grid-btn-${idx}`);
+        btn.className = 'grid-btn';
+
+        if (idx === currentIndex) {
+            btn.classList.add('active');
+        }
+
+        if (isSubmitted) {
+            if (selectedAnswers[idx] === item.answer) {
+                btn.classList.add('correct-ans');
+            } else if (selectedAnswers[idx] !== null) {
+                btn.classList.add('wrong-ans');
+            }
+        } else {
+            if (selectedAnswers[idx] !== null) {
+                btn.classList.add('answered');
+            }
+        }
+    });
+}
+
+function renderQuestion() {
+    const container = document.getElementById('question-card-container');
+    const item = quizData[currentIndex];
+
+    let html = `
+        <div class="question-card">
+            <div class="question-text">${item.q}</div>
+            <div class="options-container">
+    `;
+
+    item.options.forEach((optText, oIndex) => {
+        let classes = "option-btn";
+        const isSelected = selectedAnswers[currentIndex] === oIndex;
+
+        if (isSubmitted) {
+            classes += " disabled";
+            if (oIndex === item.answer) {
+                classes += " correct";
+            }
+            if (isSelected && oIndex !== item.answer) {
+                classes += " wrong";
+            }
+        } else if (isSelected) {
+            classes += " selected";
+        }
+
+        html += `<button type="button" class="${classes}" onclick="selectOption(${oIndex})">${optText}</button>`;
+    });
+
+    html += `
+            </div>
+            <div class="explanation" id="exp-box" style="display: ${isSubmitted ? 'block' : 'none'}">
+                <strong>Explanation:</strong> ${item.exp}
+            </div>
+        </div>
+    `;
+
+    container.innerHTML = html;
+
+    // Update Controls
+    document.getElementById('question-indicator').textContent = `Question ${currentIndex + 1} / ${quizData.length}`;
+    document.getElementById('prev-btn').disabled = currentIndex === 0;
+    document.getElementById('next-btn').disabled = currentIndex === quizData.length - 1;
+
+    updateGridStyles();
+}
+
+function selectOption(oIndex) {
+    if (isSubmitted) return;
+    selectedAnswers[currentIndex] = oIndex;
+    renderQuestion();
+}
+
+function navigate(direction) {
+    const newIdx = currentIndex + direction;
+    if (newIdx >= 0 && newIdx < quizData.length) {
+        currentIndex = newIdx;
+        renderQuestion();
+    }
+}
+
+function jumpToQuestion(idx) {
+    currentIndex = idx;
+    renderQuestion();
+}
+
+function toggleGrid() {
+    const grid = document.getElementById('q-grid');
+    grid.style.display = grid.style.display === 'none' ? 'flex' : 'none';
+}
+
+function startTimer() {
+    clearInterval(timerInterval);
+    timeLeft = 1800;
+    updateTimerDisplay();
+
+    timerInterval = setInterval(() => {
+        timeLeft--;
+        updateTimerDisplay();
+        if (timeLeft <= 0) {
+            clearInterval(timerInterval);
+            submitQuiz();
+        }
+    }, 1000);
+}
+
+function updateTimerDisplay() {
+    const minutes = Math.floor(timeLeft / 60);
+    const seconds = timeLeft % 60;
+    document.getElementById('timer').textContent = 
+        `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+}
+
+function submitQuiz() {
+    if (isSubmitted) return;
+
+    clearInterval(timerInterval);
+    isSubmitted = true;
+
+    let score = 0;
+    quizData.forEach((item, idx) => {
+        if (selectedAnswers[idx] === item.answer) {
+            score++;
+        }
+    });
+
+    const total = quizData.length;
+    const percentage = ((score / total) * 100).toFixed(2);
+
+    document.getElementById('score-text').textContent = `Score: ${score} / ${total}`;
+    document.getElementById('percentage-text').textContent = `Percentage: ${percentage}%`;
+    document.getElementById('results-panel').style.display = 'block';
+
+    document.getElementById('submit-btn').disabled = true;
+
+    renderQuestion();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+window.onload = initQuiz;
+</script>
+
+</body>
+</html>
