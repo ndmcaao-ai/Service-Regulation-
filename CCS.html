@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CCS (Implementation of NPS) Rules, 2021 - Quiz</title>
+    <style>
+        :root {
+            --bg-color: #f4f6f9;
+            --card-bg: #ffffff;
+            --primary: #2c3e50;
+            --accent: #3498db;
+            --correct: #27ae60;
+            --wrong: #e74c3c;
+            --text: #333333;
+            --border: #dcdcdc;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .quiz-container {
+            background: var(--card-bg);
+            width: 100%;
+            max-width: 800px;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 1.25rem;
+            color: var(--primary);
+            margin: 0;
+        }
+
+        .timer-box {
+            font-size: 1.1rem;
+            font-weight: bold;
+            background: #fff3cd;
+            color: #856404;
+            padding: 8px 14px;
+            border-radius: 6px;
+            border: 1px solid #ffeeba;
+        }
+
+        .grid-toggle {
+            background: none;
+            border: none;
+            color: var(--accent);
+            cursor: pointer;
+            font-weight: bold;
+            padding: 0;
+            margin-bottom: 15px;
+        }
+
+        .q-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 20px;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 6px;
+            border: 1px solid var(--border);
+        }
+
+        .grid-btn {
+            width: 32px;
+            height: 32px;
+            border: 1px solid var(--border);
+            background: #ffffff;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .grid-btn.active {
+            border-color: var(--accent);
+            background: var(--accent);
+            color: white;
+            font-weight: bold;
+        }
+
+        .grid-btn.answered {
+            background: #e3f2fd;
+            border-color: #90caf9;
+        }
+
+        .grid-btn.correct-ans {
+            background: #d4edda !important;
+            border-color: var(--correct) !important;
+            color: #155724;
+        }
+
+        .grid-btn.wrong-ans {
+            background: #f8d7da !important;
+            border-color: var(--wrong) !important;
+            color: #721c24;
+        }
+
+        .question-card {
+            padding: 20px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background: #fafafa;
+            min-height: 250px;
+        }
+
+        .question-text {
+            font-weight: 600;
+            font-size: 1.05rem;
+            margin-bottom: 15px;
+            color: #1a252f;
+        }
+
+        .options-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .option-btn {
+            text-align: left;
+            padding: 12px 15px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            background: #ffffff;
+            cursor: pointer;
+            font-size: 0.95rem;
+            transition: all 0.15s ease-in-out;
+            color: var(--text);
+        }
+
+        .option-btn:hover:not(.disabled) {
+            background-color: #ebf5fb;
+            border-color: var(--accent);
+        }
+
+        .option-btn.selected {
+            border-color: var(--accent);
+            background-color: #d4e6f1;
+            font-weight: 600;
+        }
+
+        .option-btn.correct {
+            background-color: #d4edda !important;
+            border-color: var(--correct) !important;
+            color: #155724 !important;
+            font-weight: bold;
+        }
+
+        .option-btn.wrong {
+            background-color: #f8d7da !important;
+            border-color: var(--wrong) !important;
+            color: #721c24 !important;
+        }
+
+        .explanation {
+            display: none;
+            margin-top: 15px;
+            padding: 12px 14px;
+            background-color: #e8f4f8;
+            border-left: 4px solid var(--accent);
+            font-size: 0.92rem;
+            border-radius: 4px;
+            color: #2c3e50;
+        }
+
+        .nav-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 0.95rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn:hover:not(:disabled) {
+            background: #1a252f;
+        }
+
+        .btn:disabled {
+            background: #cccccc;
+            cursor: not-allowed;
+        }
+
+        .btn-submit {
+            background: #27ae60;
+        }
+
+        .btn-submit:hover {
+            background: #219150;
+        }
+
+        .results-panel {
+            display: none;
+            text-align: center;
+            padding: 20px;
+            background: #e9ecef;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .disabled {
+            cursor: default;
+        }
+    </style>
+</head>
+<body>
+
+<div class="quiz-container">
+    <div class="header">
+        <h1>CCS (Implementation of NPS) Rules, 2021 Quiz</h1>
+        <div class="timer-box" id="timer">30:00</div>
+    </div>
+
+    <div class="results-panel" id="results-panel">
+        <h2 style="margin: 0 0 10px 0;">Quiz Completed!</h2>
+        <p id="score-text" style="font-size: 1.2rem; margin: 5px 0;"></p>
+        <p id="percentage-text" style="font-size: 1.1rem; font-weight: bold; color: var(--primary); margin: 5px 0;"></p>
+    </div>
+
+    <button type="button" class="grid-toggle" onclick="toggleGrid()">☰ Toggle Question Palette</button>
+    <div class="q-grid" id="q-grid"></div>
+
+    <div id="question-card-container"></div>
+
+    <div class="nav-controls">
+        <button class="btn" id="prev-btn" onclick="navigate(-1)">← Previous</button>
+        <span id="question-indicator" style="font-weight: 600; font-size: 0.95rem;">Question 1 / 50</span>
+        <button class="btn" id="next-btn" onclick="navigate(1)">Next →</button>
+        <button class="btn btn-submit" id="submit-btn" onclick="submitQuiz()">Submit</button>
+    </div>
+</div>
+
+<script>
+const quizData = [
+    {
+        q: "1. The CCS (Implementation of National Pension System) Rules, 2021 came into force on which date?",
+        options: ["1st January 2004", "31st March 2021", "23rd September 2021", "1st April 2022"],
+        answer: 2,
+        exp: "The CCS (Implementation of NPS) Rules, 2021 were officially notified on 23rd September 2021."
+    },
+    {
+        q: "2. The CCS (Implementation of NPS) Rules, 2021 apply to Central Government servants appointed on or after:",
+        options: ["1st January 2004", "1st April 2004", "1st January 2019", "23rd September 2021"],
+        answer: 0,
+        exp: "These rules apply to Government servants appointed on or after 1st January 2004 covered under the National Pension System."
+    },
+    {
+        q: "3. What is the mandatory monthly contribution rate of the employee's basic pay plus DA under NPS?",
+        options: ["8%", "10%", "12%", "14%"],
+        answer: 1,
+        exp: "Under Rule 5, the Government servant makes a monthly contribution of 10% of Basic Pay + Dearness Allowance."
+    },
+    {
+        q: "4. What is the Central Government's monthly contribution rate towards an employee's NPS Tier-I account (effective from 01.04.2019)?",
+        options: ["10%", "12%", "14%", "18%"],
+        answer: 2,
+        exp: "The Government's monthly contribution was enhanced from 10% to 14% of Basic Pay + DA w.e.f. 1st April 2019."
+    },
+    {
+        q: "5. When a subscriber is under suspension, what is the rule regarding NPS contributions?",
+        options: ["No contribution is made by subscriber or Govt", "Subscriber contributes based on subsistence allowance, Govt contributes fully", "Subscriber does not contribute, but Govt contributes 14%", "Subscriber may option to contribute from subsistence allowance; Govt pays matching contribution based on subsistence allowance"],
+        answer: 3,
+        exp: "Under Rule 5(4), a subscriber under suspension may opt to contribute based on subsistence allowance; the Govt pays matching contribution corresponding to the subsistence allowance."
+    },
+    {
+        q: "6. Is any employee contribution deducted during a period of Extraordinary Leave (EOL) without pay?",
+        options: ["Yes, based on last drawn pay", "No contribution is deducted during EOL without pay", "Govt pays full 24% contribution", "Deducted at a flat rate of Rs. 1000"],
+        answer: 1,
+        exp: "No employee contribution is deducted for any period of leave without pay / Extraordinary Leave (EOL), and consequently, no Govt matching contribution is made."
+    },
+    {
+        q: "7. Under Rule 10, option form (Form 1) is submitted by every Government servant covered under NPS to choose between:",
+        options: ["Tier-I and Tier-II account options", "Default scheme and High Risk Growth Fund", "Benefits under CCS (Extraordinary Pension) / CCS (Pension) Rules OR NPS benefits on death/invalidation", "Investment in equities or Govt securities"],
+        answer: 2,
+        exp: "Form 1 under Rule 10 allows the Govt servant to exercise an option for benefits under CCS (Pension) Rules/CCS (Extraordinary Pension) Rules OR NPS benefits in case of death/invalidation/disability during service."
+    },
+    {
+        q: "8. If a newly appointed subscriber fails to exercise an option under Rule 10, what is the default option for the first 15 years of service?",
+        options: ["NPS benefits automatically apply", "Benefits under CCS (Pension) Rules / CCS (Extraordinary Pension) Rules", "50% NPS and 50% Defined Benefit Pension", "Lump sum gratuity only"],
+        answer: 1,
+        exp: "As per Rule 10, if no option is exercised, the default for the first 15 years of service is coverage under CCS (Pension) Rules / CCS (EOP) Rules in the event of death or invalidation."
+    },
+    {
+        q: "9. After how many years of service does the default option shift to NPS benefits if no explicit option in Form 1 has been submitted?",
+        options: ["5 years", "10 years", "15 years", "20 years"],
+        answer: 2,
+        exp: "After 15 years of service, if no option has been exercised, the default automatically shifts to NPS benefits."
+    },
+    {
+        q: "10. At what intervals can a subscriber revise their option exercised under Rule 10 (Form 1)?",
+        options: ["Once every year", "Any number of times without restriction", "Once every 5 years", "Only twice in entire service"],
+        answer: 1,
+        exp: "A subscriber can revise the option as many times as desired during service by submitting a fresh Form 1 to the Head of Office."
+    },
+    {
+        q: "11. If a subscriber disappears/is missing, after what period can the family claim family pension/NPS benefits?",
+        options: ["1 month", "6 months", "1 year", "7 years"],
+        answer: 1,
+        exp: "As per rules applicable to missing employees under NPS, after lodging an FIR and completion of 6 months, family pension/benefits can be sanctioned."
+    },
+    {
+        q: "12. What is the maximum percentage of accumulated pension corpus a subscriber can withdraw as a lump sum upon superannuation under NPS?",
+        options: ["40%", "50%", "60%", "100%"],
+        answer: 2,
+        exp: "Upon superannuation, up to 60% of the accumulated pension corpus can be withdrawn as a tax-free lump sum."
+    },
+    {
+        q: "13. What minimum percentage of accumulated pension corpus must be mandatorily utilized for purchasing an annuity upon normal superannuation?",
+        options: ["20%", "40%", "50%", "60%"],
+        answer: 1,
+        exp: "At least 40% of the accumulated pension corpus must be mandatorily utilized for purchasing an annuity upon normal superannuation."
+    },
+    {
+        q: "14. If the total accumulated pension corpus upon superannuation is less than or equal to Rs. 5 Lakhs, what is the withdrawal rule?",
+        options: ["Mandatory 40% annuity", "100% lump sum withdrawal is permitted without annuity purchase", "50% lump sum and 50% annuity", "Entire corpus is forfeited"],
+        answer: 1,
+        exp: "If the total accumulated pension corpus is up to Rs. 5 Lakhs, the subscriber has the option to withdraw 100% as a lump sum without purchasing an annuity."
+    },
+    {
+        q: "15. What is the minimum annuity requirement if a subscriber takes Voluntary Retirement (premature exit) before superannuation under NPS?",
+        options: ["40%", "50%", "60%", "80%"],
+        answer: 3,
+        exp: "Upon premature exit / voluntary retirement, at least 80% of the accumulated pension corpus must be utilized for purchasing an annuity, while up to 20% can be taken as lump sum."
+    },
+    {
+        q: "16. If total corpus on premature exit / voluntary retirement is up to what amount can 100% lump sum be withdrawn?",
+        options: ["Rs. 1 Lakh", "Rs. 2.5 Lakhs", "Rs. 5 Lakhs", "Rs. 10 Lakhs"],
+        answer: 1,
+        exp: "For premature exit, if the accumulated corpus is less than or equal to Rs. 2.5 Lakhs, 100% lump sum withdrawal is permitted."
+    },
+    {
+        q: "17. Are Central Govt NPS subscribers eligible for Retirement Gratuity and Death Gratuity?",
+        options: ["No, gratuity applies only to old pension scheme", "Yes, extended to NPS employees via DoPT/DoPW orders", "Only Death Gratuity, not Retirement Gratuity", "Only if service exceeds 20 years"],
+        answer: 1,
+        exp: "Retirement Gratuity and Death Gratuity benefits were extended to Central Govt employees covered under NPS on par with OPS employees."
+    },
+    {
+        q: "18. What is the maximum limit of Retirement / Death Gratuity payable to a Govt servant under existing rules?",
+        options: ["Rs. 10 Lakhs", "Rs. 15 Lakhs", "Rs. 20 Lakhs", "Rs. 25 Lakhs"],
+        answer: 2,
+        exp: "The upper ceiling for Retirement / Death Gratuity is Rs. 20 Lakhs (subject to revision with DA increases as per 7th CPC guidelines)."
+    },
+    {
+        q: "19. What is the interest rate charged on delayed credit of NPS contributions by the DDO/PAO into the subscriber's PRAN?",
+        options: ["Bank Savings Rate", "GPF Interest Rate (compounded annually)", "Simple interest at 6%", "Penal interest of 12%"],
+        answer: 1,
+        exp: "For delayed credit of NPS contribution, interest is paid to the subscriber's account calculated at the prevailing GPF interest rate for the delay period."
+    },
+    {
+        q: "20. How many partial withdrawals are allowed from the NPS Tier-I account during the entire service career?",
+        options: ["Maximum 2 times", "Maximum 3 times", "Maximum 5 times", "Unlimited"],
+        answer: 1,
+        exp: "Under PFRDA regulations incorporated into NPS rules, a subscriber can make a maximum of 3 partial withdrawals during their entire service."
+    },
+    {
+        q: "21. What is the maximum percentage of the subscriber's OWN contribution that can be withdrawn as partial withdrawal?",
+        options: ["25%", "50%", "75%", "100%"],
+        answer: 0,
+        exp: "Partial withdrawal is permitted up to a maximum of 25% of the subscriber's OWN contribution (excluding Govt contribution and interest)."
+    },
+    {
+        q: "22. Minimum lock-in period of service required before a subscriber can make the FIRST partial withdrawal from NPS is:",
+        options: ["1 year", "3 years", "5 years", "10 years"],
+        answer: 1,
+        exp: "A subscriber must have been in NPS for at least 3 years to be eligible for the first partial withdrawal."
+    },
+    {
+        q: "23. Which of the following is an ELIGIBLE purpose for partial withdrawal from NPS Tier-I account?",
+        options: ["Higher education of children", "Marriage of children", "Purchase or construction of a residential house/flat", "All of the above"],
+        answer: 3,
+        exp: "Partial withdrawal is allowed for children's higher education, marriage, purchase/construction of house, treatment of specified illness, disability, skill development, etc."
+    },
+    {
+        q: "24. What gap is required between two successive partial withdrawals except in emergency medical cases?",
+        options: ["1 year", "2 years", "5 years", "No gap required"],
+        answer: 2,
+        exp: "Normally, a minimum gap of 5 years is required between two partial withdrawals, except for medical treatment emergencies."
+    },
+    {
+        q: "25. What unique 12-digit number is allocated to every subscriber upon registering under NPS?",
+        options: ["PPF Account Number", "PRAN (Permanent Retirement Account Number)", "UAN (Universal Account Number)", "PPO (Pension Payment Order)"],
+        answer: 1,
+        exp: "PRAN (Permanent Retirement Account Number) is a unique 12-digit identification number issued to every NPS subscriber."
+    },
+    {
+        q: "26. Which regulatory authority governs and regulates the National Pension System in India?",
+        options: ["RBI", "SEBI", "IRDAI", "PFRDA"],
+        answer: 3,
+        exp: "PFRDA (Pension Fund Regulatory and Development Authority) is the statutory regulatory body for NPS in India."
+    },
+    {
+        q: "27. Under Rule 6, by which day of the month must the DDO deduct the NPS contribution from the salary bill?",
+        options: ["15th of the month", "Last working day of the month (except March)", "1st of the following month", "10th of the following month"],
+        answer: 1,
+        exp: "The DDO deducts the employee contribution from the monthly salary bill drawn on the last working day of the month (for March, drawn on first working day of April)."
+    },
+    {
+        q: "28. Under Rule 6, the DDO and PAO must ensure NPS contributions are credited to Trustee Bank by which date?",
+        options: ["Last day of the same month", "7th day of the following month", "15th day of the following month", "End of the following month"],
+        answer: 0,
+        exp: "The PAO/DDO must ensure the contribution is remitted to the Trustee Bank on or before the last working day of the month in which salary is due."
+    },
+    {
+        q: "29. If a subscriber opts for CCS (Pension) Rules on invalidation/disability, what happens to the accumulated NPS Tier-I corpus?",
+        options: ["Subscriber gets 100% NPS corpus + pension", "NPS accumulated corpus (Govt contribution + returns) is transferred to Govt; subscriber gets pension under CCS (Pension) Rules", "NPS corpus is forfeited completely without any pension", "Subscriber gets 50% corpus only"],
+        answer: 1,
+        exp: "If family/subscriber opts for Defined Benefit Pension under CCS (Pension) Rules upon invalidation/death, the Government contribution along with returns is credited back to the Government, and pension is paid under CCS (Pension) Rules."
+    },
+    {
+        q: "30. What happens to the subscriber's OWN contribution + returns when CCS (Pension) benefit is chosen on death/invalidation?",
+        options: ["Transferred to Govt", "Paid to subscriber / legal heir / nominee as a lump sum", "Converted to annuity mandatory", "Forfeited"],
+        answer: 1,
+        exp: "The subscriber's own contribution along with accumulated returns is paid to the subscriber or the nominee/legal heir in a lump sum."
+    },
+    {
+        q: "31. If a subscriber dies while in service without exercising an option under Rule 10, and default period (<15 years) applies, what benefit is paid to the family?",
+        options: ["Only NPS corpus payout", "Family Pension under CCS (Pension) Rules / CCS (EOP) Rules by default", "No benefit", "Lump sum 10 Lakhs only"],
+        answer: 1,
+        exp: "If no option was exercised, the default for the first 15 years gives the family pension benefit under CCS (Pension) Rules / CCS (EOP) Rules."
+    },
+    {
+        q: "32. NPS Tier-II account is best described as a:",
+        options: ["Mandatory retirement account with lock-in", "Voluntary savings account with no lock-in and unrestricted withdrawals", "Tax-free pension account", "Insurance product"],
+        answer: 1,
+        exp: "NPS Tier-II is a voluntary, withdrawable-at-will savings account that can be activated by any PRAN holder without lock-in."
+    },
+    {
+        q: "33. Can a Central Government employee claim Section 80C tax deduction for contributions to NPS Tier-II account?",
+        options: ["No, Tier-II has no tax benefit", "Yes, if they opt for Tier-II Tax Saver scheme with 3-year lock-in (for Central Govt employees)", "Yes, up to Rs 2 Lakhs without lock-in", "Only with 10-year lock-in"],
+        answer: 1,
+        exp: "Central Govt employees can claim Sec 80C deduction on Tier-II contributions if invested under Tier-II (Tax Saver) with a 3-year lock-in period."
+    },
+    {
+        q: "34. Under NPS rules, who acts as the Central Recordkeeping Agency (CRA)?",
+        options: ["RBI", "Entities like NSDL (Protean), KFintech, CAMS appointed by PFRDA", "State Bank of India only", "LIC of India"],
+        answer: 1,
+        exp: "PFRDA has appointed Central Recordkeeping Agencies (CRAs) such as Protean (formerly NSDL), KFintech, and CAMS to maintain subscriber records."
+    },
+    {
+        q: "35. If a subscriber is dismissed or removed from service, what is the treatment of their NPS Tier-I accumulated corpus?",
+        options: ["Entire corpus is forfeited to Govt", "Subscriber gets their own contribution + returns; Govt contribution + returns is refunded to Govt", "Subscriber gets 100% corpus", "No payout is allowed"],
+        answer: 1,
+        exp: "Upon dismissal/removal, the subscriber receives their own contribution plus interest/returns, while the Govt contribution and returns are refunded back to the Govt."
+    },
+    {
+        q: "36. Under Rule 14, when a subscriber resigns from service, it is treated as:",
+        options: ["Superannuation", "Premature Exit / Voluntary Exit under NPS", "Invalidation", "Dismissal"],
+        answer: 1,
+        exp: "Resignation from service (not technical resignation) is treated as premature exit from NPS, requiring at least 80% annuity purchase unless corpus is up to Rs. 2.5 Lakhs."
+    },
+    {
+        q: "37. In case of 'Technical Resignation' to join another Central Govt post covered under NPS, what happens to PRAN?",
+        options: ["PRAN is closed and new PRAN issued", "PRAN remains same and is mapped to the new DDO/PAO", "Corpus must be withdrawn", "Annuity must be purchased"],
+        answer: 1,
+        exp: "In Technical Resignation, PRAN is portable and is simply transferred/mapped to the new office/DDO."
+    },
+    {
+        q: "38. What is the maximum age up to which an individual can continue contributing to NPS Tier-I account voluntarily?",
+        options: ["60 years", "65 years", "70 years", "75 years"],
+        answer: 3,
+        exp: "As per PFRDA guidelines, subscribers can defer annuity/withdrawal and continue contributing voluntarily up to 75 years of age."
+    },
+    {
+        q: "39. Under CCS (Implementation of NPS) Rules, 2021, Head of Office must inform the subscriber about option under Rule 10 within what period of joining?",
+        options: ["On the day of joining", "Within 30 days of joining", "Within 90 days of joining", "Within 1 year"],
+        answer: 0,
+        exp: "Head of Office is required to obtain the option in Form 1 from the Government servant at the time of joining service."
+    },
+    {
+        q: "40. Which form is prescribed under CCS (Implementation of NPS) Rules, 2021 for exercising the option under Rule 10?",
+        options: ["Form 1", "Form 3", "Form 5", "Form 10"],
+        answer: 0,
+        exp: "Form 1 is the prescribed form under Rule 10 for opting for benefits under CCS (Pension) Rules/CCS (EOP) Rules or NPS benefits."
+    },
+    {
+        q: "41. Where is the Option Form 1 submitted by the employee kept?",
+        options: ["With the Subscriber in personal custody", "In the Service Book of the employee after Head of Office countersigns", "Sent to PFRDA head office", "Sent to Ministry of Finance"],
+        answer: 1,
+        exp: "Form 1 option is accepted by the Head of Office, paste/recorded in the Service Book, and acknowledged to the employee."
+    },
+    {
+        q: "42. If a Government servant dies while in service and had opted for NPS benefits under Rule 10, what is paid to the nominee?",
+        options: ["Only 100% NPS corpus as per PFRDA exit regulations", "Monthly OPS pension only", "50% NPS corpus + 50% pension", "No benefit"],
+        answer: 0,
+        exp: "If NPS benefits were opted, the accumulated pension corpus in PRAN is paid to the nominee/legal heirs as per PFRDA exit regulations."
+    },
+    {
+        q: "43. Is an NPS subscriber entitled to Leave Encashment upon retirement under CCS (Leave) Rules?",
+        options: ["No, Leave Encashment applies only to OPS", "Yes, NPS employees are entitled to Leave Encashment on retirement up to 300 days EL on par with OPS employees", "Only up to 150 days", "Only up to 100 days"],
+        answer: 1,
+        exp: "Leave Encashment rules (up to 300 days EL) apply equally to Central Government employees covered under NPS."
+    },
+    {
+        q: "44. During deputation to another Department/State Govt, who is responsible for deducting and remitting NPS contributions?",
+        options: ["Employee self-remits", "Borrowing organization / DDO of borrowing office", "Parent office DDO", "PAO Main office only"],
+        answer: 1,
+        exp: "The borrowing department/organization DDO is responsible for deducting employee contribution and remitting it along with Govt matching contribution."
+    },
+    {
+        q: "45. Is an employee contribution deducted during period of suspension if no subsistence allowance is paid?",
+        options: ["Yes, recovered later", "No contribution is deducted when no subsistence allowance is paid", "Govt pays full share", "Deducted from basic pay retroactively"],
+        answer: 1,
+        exp: "If no subsistence allowance is paid for a period under suspension, no NPS contribution can be recovered."
+    },
+    {
+        q: "46. What additional tax deduction is available exclusively for NPS contributions under Section 80CCD(1B) over and above Section 80C?",
+        options: ["Rs. 25,000", "Rs. 50,000", "Rs. 1,000,000", "Rs. 1,500,000"],
+        answer: 1,
+        exp: "An exclusive additional deduction up to Rs. 50,000 is available under Section 80CCD(1B) for NPS Tier-I contributions."
+    },
+    {
+        q: "47. Employer contribution to NPS under Section 80CCD(2) for Central Govt employees is tax-exempt up to what limit of Salary (Basic+DA)?",
+        options: ["10%", "12%", "14%", "20%"],
+        answer: 2,
+        exp: "Central Govt employer contribution up to 14% of Salary (Basic + DA) is eligible for tax exemption under Section 80CCD(2)."
+    },
+    {
+        q: "48. Can a Government servant choose Investment Pattern and Pension Fund Managers (PFMs) in Tier-I NPS account?",
+        options: ["No, fixed by Govt mandatory", "Yes, Govt employees can choose PFMs and asset allocation patterns as per PFRDA guidelines", "Only after 20 years of service", "Only after age 50"],
+        answer: 1,
+        exp: "Central Govt employees have been given freedom to select PFM and investment choices (Default, Active, or Auto Choice) in Tier-I."
+    },
+    {
+        q: "49. When a subscriber is invalidated out of service due to bodily/mental infirmity and opts for NPS benefits, exit is treated as:",
+        options: ["Resignation", "Superannuation exit (permitting up to 60% lump sum withdrawal and min 40% annuity)", "Dismissal", "Voluntary retirement"],
+        answer: 1,
+        exp: "Exit due to invalidation/disability under NPS benefits is treated at par with superannuation exit for withdrawal norms."
+    },
+    {
+        q: "50. Which government department issued the CCS (Implementation of National Pension System) Rules, 2021?",
+        options: ["Department of Financial Services (DFS)", "Department of Pension and Pensioners' Welfare (DoPPW)", "Department of Personnel and Training (DoPT)", "Department of Expenditure"],
+        answer: 1,
+        exp: "The CCS (Implementation of NPS) Rules, 2021 were framed and notified by the Department of Pension and Pensioners' Welfare (DoPPW), Ministry of Personnel, Public Grievances and Pensions."
+    }
+];
+
+let currentIndex = 0;
+let selectedAnswers = new Array(quizData.length).fill(null);
+let isSubmitted = false;
+let timerInterval = null;
+let timeLeft = 1800; // 30 minutes in seconds
+
+function initQuiz() {
+    currentIndex = 0;
+    selectedAnswers.fill(null);
+    isSubmitted = false;
+    
+    document.getElementById('results-panel').style.display = 'none';
+    document.getElementById('submit-btn').disabled = false;
+    
+    buildGrid();
+    renderQuestion();
+    startTimer();
+}
+
+function buildGrid() {
+    const grid = document.getElementById('q-grid');
+    grid.innerHTML = '';
+    
+    quizData.forEach((_, idx) => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'grid-btn';
+        btn.id = `grid-btn-${idx}`;
+        btn.textContent = idx + 1;
+        btn.onclick = () => jumpToQuestion(idx);
+        grid.appendChild(btn);
+    });
+}
+
+function updateGridStyles() {
+    quizData.forEach((item, idx) => {
+        const btn = document.getElementById(`grid-btn-${idx}`);
+        btn.className = 'grid-btn';
+
+        if (idx === currentIndex) {
+            btn.classList.add('active');
+        }
+
+        if (isSubmitted) {
+            if (selectedAnswers[idx] === item.answer) {
+                btn.classList.add('correct-ans');
+            } else if (selectedAnswers[idx] !== null) {
+                btn.classList.add('wrong-ans');
+            }
+        } else {
+            if (selectedAnswers[idx] !== null) {
+                btn.classList.add('answered');
+            }
+        }
+    });
+}
+
+function renderQuestion() {
+    const container = document.getElementById('question-card-container');
+    const item = quizData[currentIndex];
+
+    let html = `
+        <div class="question-card">
+            <div class="question-text">${item.q}</div>
+            <div class="options-container">
+    `;
+
+    item.options.forEach((optText, oIndex) => {
+        let classes = "option-btn";
+        const isSelected = selectedAnswers[currentIndex] === oIndex;
+
+        if (isSubmitted) {
+            classes += " disabled";
+            if (oIndex === item.answer) {
+                classes += " correct";
+            }
+            if (isSelected && oIndex !== item.answer) {
+                classes += " wrong";
+            }
+        } else if (isSelected) {
+            classes += " selected";
+        }
+
+        html += `<button type="button" class="${classes}" onclick="selectOption(${oIndex})">${optText}</button>`;
+    });
+
+    html += `
+            </div>
+            <div class="explanation" id="exp-box" style="display: ${isSubmitted ? 'block' : 'none'}">
+                <strong>Explanation:</strong> ${item.exp}
+            </div>
+        </div>
+    `;
+
+    container.innerHTML = html;
+
+    document.getElementById('question-indicator').textContent = `Question ${currentIndex + 1} / ${quizData.length}`;
+    document.getElementById('prev-btn').disabled = currentIndex === 0;
+    document.getElementById('next-btn').disabled = currentIndex === quizData.length - 1;
+
+    updateGridStyles();
+}
+
+function selectOption(oIndex) {
+    if (isSubmitted) return;
+    selectedAnswers[currentIndex] = oIndex;
+    renderQuestion();
+}
+
+function navigate(direction) {
+    const newIdx = currentIndex + direction;
+    if (newIdx >= 0 && newIdx < quizData.length) {
+        currentIndex = newIdx;
+        renderQuestion();
+    }
+}
+
+function jumpToQuestion(idx) {
+    currentIndex = idx;
+    renderQuestion();
+}
+
+function toggleGrid() {
+    const grid = document.getElementById('q-grid');
+    grid.style.display = grid.style.display === 'none' ? 'flex' : 'none';
+}
+
+function startTimer() {
+    clearInterval(timerInterval);
+    timeLeft = 1800;
+    updateTimerDisplay();
+
+    timerInterval = setInterval(() => {
+        timeLeft--;
+        updateTimerDisplay();
+        if (timeLeft <= 0) {
+            clearInterval(timerInterval);
+            submitQuiz();
+        }
+    }, 1000);
+}
+
+function updateTimerDisplay() {
+    const minutes = Math.floor(timeLeft / 60);
+    const seconds = timeLeft % 60;
+    document.getElementById('timer').textContent = 
+        `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+}
+
+function submitQuiz() {
+    if (isSubmitted) return;
+
+    clearInterval(timerInterval);
+    isSubmitted = true;
+
+    let score = 0;
+    quizData.forEach((item, idx) => {
+        if (selectedAnswers[idx] === item.answer) {
+            score++;
+        }
+    });
+
+    const total = quizData.length;
+    const percentage = ((score / total) * 100).toFixed(2);
+
+    document.getElementById('score-text').textContent = `Score: ${score} / ${total}`;
+    document.getElementById('percentage-text').textContent = `Percentage: ${percentage}%`;
+    document.getElementById('results-panel').style.display = 'block';
+
+    document.getElementById('submit-btn').disabled = true;
+
+    renderQuestion();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+window.onload = initQuiz;
+</script>
+
+</body>
+</html>
