@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CCS (Medical Attendance) Rules Quiz</title>
+    <style>
+        :root {
+            --primary: #065f46;
+            --primary-light: #059669;
+            --secondary: #334155;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text: #0f172a;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --correct: #16a34a;
+            --correct-bg: #f0fdf4;
+            --incorrect: #dc2626;
+            --incorrect-bg: #fef2f2;
+            --selected: #d1fae5;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.5;
+            padding-bottom: 40px;
+        }
+
+        header {
+            background-color: var(--primary);
+            color: white;
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .header-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        .timer-box {
+            background-color: rgba(255, 255, 255, 0.15);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            font-family: monospace;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 1.5rem auto;
+            padding: 0 1rem;
+        }
+
+        .palette-card {
+            background: var(--card-bg);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid var(--border);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .palette-title {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            margin-bottom: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .palette-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(36px, 1fr));
+            gap: 6px;
+        }
+
+        .palette-btn {
+            aspect-ratio: 1;
+            border: 1px solid var(--border);
+            background: white;
+            color: var(--text);
+            font-weight: 600;
+            font-size: 0.85rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .palette-btn:hover {
+            border-color: var(--primary-light);
+        }
+
+        .palette-btn.active {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px var(--primary-light);
+        }
+
+        .palette-btn.answered {
+            background-color: #2563eb;
+            color: white;
+            border-color: #2563eb;
+        }
+
+        .palette-btn.correct {
+            background-color: var(--correct);
+            color: white;
+            border-color: var(--correct);
+        }
+
+        .palette-btn.incorrect {
+            background-color: var(--incorrect);
+            color: white;
+            border-color: var(--incorrect);
+        }
+
+        .question-card {
+            background: var(--card-bg);
+            border-radius: 8px;
+            padding: 1.5rem;
+            border: 1px solid var(--border);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            margin-bottom: 1.5rem;
+        }
+
+        .question-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .question-text {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 1.25rem;
+            color: var(--primary);
+        }
+
+        .options-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .option-item {
+            display: flex;
+            align-items: flex-start;
+            padding: 0.85rem 1rem;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+            background: white;
+        }
+
+        .option-item:hover:not(.disabled) {
+            background-color: var(--selected);
+            border-color: var(--primary-light);
+        }
+
+        .option-item.selected {
+            background-color: var(--selected);
+            border-color: var(--primary-light);
+            border-width: 2px;
+        }
+
+        .option-item.correct-answer {
+            background-color: var(--correct-bg);
+            border-color: var(--correct);
+            color: var(--correct);
+            font-weight: 600;
+        }
+
+        .option-item.wrong-answer {
+            background-color: var(--incorrect-bg);
+            border-color: var(--incorrect);
+            color: var(--incorrect);
+        }
+
+        .option-prefix {
+            font-weight: 600;
+            margin-right: 0.75rem;
+            min-width: 20px;
+        }
+
+        .explanation-box {
+            margin-top: 1.25rem;
+            padding: 1rem;
+            background-color: #f8fafc;
+            border-left: 4px solid var(--primary-light);
+            border-radius: 0 6px 6px 0;
+            font-size: 0.95rem;
+            display: none;
+        }
+
+        .explanation-title {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+            color: var(--secondary);
+        }
+
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.65rem 1.25rem;
+            border-radius: 6px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: background 0.2s;
+            font-size: 0.95rem;
+        }
+
+        .btn-secondary {
+            background-color: #e2e8f0;
+            color: var(--secondary);
+        }
+
+        .btn-secondary:hover:not(:disabled) {
+            background-color: #cbd5e0;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-light);
+            color: white;
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            background-color: var(--primary);
+        }
+
+        .btn-submit {
+            background-color: var(--correct);
+            color: white;
+        }
+
+        .btn-submit:hover {
+            background-color: #15803d;
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .results-card {
+            background: var(--card-bg);
+            border-radius: 8px;
+            padding: 2rem;
+            border: 1px solid var(--border);
+            text-align: center;
+            margin-bottom: 1.5rem;
+            display: none;
+        }
+
+        .score-display {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 1rem 0;
+        }
+
+        .percentage-display {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+
+        .hide {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-title">CCS (Medical Attendance) Rules Quiz</div>
+        <div class="timer-box" id="timer">Time Remaining: 30:00</div>
+    </header>
+
+    <div class="container">
+        <div class="palette-card">
+            <div class="palette-title">Question Navigator</div>
+            <div class="palette-grid" id="palette"></div>
+        </div>
+
+        <div id="results" class="results-card">
+            <h2>Quiz Results</h2>
+            <div class="score-display" id="score-text">0 / 50</div>
+            <div class="percentage-display" id="percentage-text">0%</div>
+            <p>Review your answers below.</p>
+        </div>
+
+        <div class="question-card" id="quiz-card">
+            <div class="question-header">
+                <span id="q-number">Question 1 of 50</span>
+                <span>1 Mark</span>
+            </div>
+            <div class="question-text" id="q-text">Loading...</div>
+            <div class="options-list" id="options-container"></div>
+            <div class="explanation-box" id="explanation">
+                <div class="explanation-title">Rule Reference & Explanation:</div>
+                <div id="exp-text"></div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <button class="btn btn-secondary" id="prev-btn" onclick="navigate(-1)">Previous</button>
+            <button class="btn btn-primary" id="next-btn" onclick="navigate(1)">Next</button>
+            <button class="btn btn-submit" id="submit-btn" onclick="confirmSubmit()">Submit Quiz</button>
+        </div>
+    </div>
+
+    <script>
+        const rawQuestions = [
+            {
+                q: "The Central Civil Services (Medical Attendance) Rules were framed in which year?",
+                options: ["1944", "1954", "1965", "1972"],
+                ans: 0,
+                exp: "The Central Civil Services (Medical Attendance) Rules were promulgated in the year 1944."
+            },
+            {
+                q: "CCS (Medical Attendance) Rules, 1944 apply to which of the following categories of individuals?",
+                options: ["Central Government pensioners residing in CGHS areas", "Serving Central Government employees residing in non-CGHS covered areas", "All Armed Forces personnel", "State Government employees"],
+                ans: 1,
+                exp: "CCS (MA) Rules generally apply to serving Central Government employees stationed/residing in areas not covered by the Central Government Health Scheme (CGHS)."
+            },
+            {
+                q: "What does the abbreviation 'AMA' stand for under the CCS (MA) Rules?",
+                options: ["Authorized Medical Assistant", "Assistant Medical Officer", "Authorized Medical Officer", "Assistant Medical Adviser"],
+                ans: 0,
+                exp: "As defined under Rule 2(a), AMA stands for Authorized Medical Assistant."
+            },
+            {
+                q: "For a Group 'A' Central Government officer, who generally acts as the Authorized Medical Assistant (AMA)?",
+                options: ["Medical Officer in charge of a Government Dispensary", "Civil Surgeon / Principal Medical Officer / Medical Superintendent", "Assistant Surgeon", "Private Registered Medical Practitioner"],
+                ans: 1,
+                exp: "For Group A officers, the AMA is typically a Civil Surgeon, Principal Medical Officer (PMO), or Medical Superintendent of a Government Hospital."
+            },
+            {
+                q: "For Group 'C' and 'D' (Level 1 to 5) Government servants, who is normally designated as the AMA?",
+                options: ["Civil Surgeon only", "Assistant Surgeon / Medical Officer of a Government Hospital or Dispensary", "Specialist Doctor", "Director of Health Services"],
+                ans: 1,
+                exp: "For lower pay levels (Group C and D employees), an Assistant Surgeon or Medical Officer in charge of a Government dispensary/hospital serves as the AMA."
+            },
+            {
+                q: "Which of the following family members is NOT eligible for medical attendance benefits under CCS (MA) Rules?",
+                options: ["Spouse", "Parents wholly dependent on the employee", "Married daughter residing separately", "Unmarried son up to 25 years of age"],
+                ans: 2,
+                exp: "Married daughters are generally not treated as dependent family members for medical attendance benefits once married, unless specific dependency conditions apply."
+            },
+            {
+                q: "What is the monthly income limit from all sources for a family member (e.g., parent/child) to be considered 'wholly dependent' on the government servant (excluding DA)?",
+                options: ["₹3,500 + DA", "₹9,000 + DA", "₹12,000 + DA", "₹15,000 + DA"],
+                ans: 1,
+                exp: "A family member is deemed wholly dependent if their total monthly income from all sources does not exceed ₹9,000 plus applicable Dearness Relief."
+            },
+            {
+                q: "What is the maximum period of OPD consultation per spell allowed under AMA treatment at a stretch under standard rules?",
+                options: ["10 days", "20 days (with max 4 consultations)", "30 days", "60 days"],
+                ans: 1,
+                exp: "Treatment at doctor's consulting room/dispensary is limited to 20 days per spell of illness with a maximum of 4 consultations."
+            },
+            {
+                q: "When treatment extends beyond 20 days or requires specialized hospital care, the AMA must refer the patient to a:",
+                options: ["Private Clinic", "Government / Recognized Hospital or Specialist", "Nursing Home", "Foreign Hospital"],
+                ans: 1,
+                exp: "If treatment extends beyond 20 days or needs specialized care, the AMA refers the patient to a Government or empaneled/recognized hospital or specialist."
+            },
+            {
+                q: "Which application form is used by a Central Government employee to claim medical reimbursement for OPD / IPD treatment under CCS (MA) Rules?",
+                options: ["Form Med 9", "Form Med 97 (Medical 2004 / Form A or B)", "Form 5", "Form 14"],
+                ans: 1,
+                exp: "Reimbursement claims are submitted using Form Med 97 (Form A for non-hospitalization and Form B for hospitalization treatment)."
+            },
+            {
+                q: "Within what time limit from the date of completion of treatment must a medical reimbursement claim be submitted to avoid time-bar (without medical advance)?",
+                options: ["1 month", "3 months", "6 months", "1 year"],
+                ans: 2,
+                exp: "The standard time limit for submitting medical reimbursement claims without advance is 6 months from the date of completion of treatment."
+            },
+            {
+                q: "If a medical advance was drawn by an employee, within what period from the date of discharge/completion of treatment must the final claim be settled?",
+                options: ["1 month", "3 months", "6 months", "1 year"],
+                ans: 0,
+                exp: "When a medical advance has been drawn, the final medical bill/reimbursement claim must be submitted within 1 month of discharge/completion of treatment."
+            },
+            {
+                q: "Medical attendance includes consultation at which of the following places under Rule 2(e)?",
+                options: ["AMA's consulting room or hospital", "Employee's residence in case of severe illness preventing mobility", "Both A and B", "Any private spa"],
+                ans: 2,
+                exp: "Medical attendance includes consultation at the AMA's consulting room/hospital or at the residence of the patient if unfit to travel."
+            },
+            {
+                q: "Are Ayurvedic, Siddha, Unani, and Homeopathic (AYUSH) treatments recognized under CCS (MA) Rules?",
+                options: ["No, only Allopathy is allowed", "Yes, provided treatment is taken in recognized Government / AYUSH hospitals", "Only Homeopathy is recognized", "Only if approved by Parliament"],
+                ans: 1,
+                exp: "AYUSH systems of medicine are recognized under CCS (MA) Rules when received in Government AYUSH hospitals or recognized AYUSH centers."
+            },
+            {
+                q: "Reimbursement for emergency treatment taken at an un-empaneled / private hospital is permitted up to:",
+                options: ["Full actual cost charged by private hospital", "CGHS / CS(MA) approved rates", "50% of total cost", "Maximum ₹10,000"],
+                ans: 1,
+                exp: "In emergency cases treated in private non-recognized hospitals, reimbursement is restricted to CGHS/CS(MA) package rates or actuals, whichever is lower."
+            },
+            {
+                q: "Who is competent to condone delays in submission of medical reimbursement claims beyond the prescribed time limit up to 1 year?",
+                options: ["Pay and Accounts Officer (PAO)", "Head of Department (HoD)", "Ministry of Health", "Cabinet Secretariat"],
+                ans: 1,
+                exp: "Heads of Department (HoDs) are empowered to condone delay in submission of medical claims up to 1 year."
+            },
+            {
+                q: "Who has the power to condone delay in submission of medical claims beyond 1 year?",
+                options: ["Head of Office", "Head of Department (HoD)", "Administrative Ministry / Department in consultation with Internal Finance Unit", "Prime Minister Office"],
+                ans: 2,
+                exp: "Delays beyond 1 year require condonation by the Administrative Ministry/Department concerned."
+            },
+            {
+                q: "Is dietary charge reimbursed to a Government servant during hospitalization?",
+                options: ["Always reimbursed in full", "Reimbursed to employees in lower pay levels (e.g., Level 1 to 5) or specific diseases like TB", "Never reimbursed", "Reimbursed only for Group A officers"],
+                ans: 1,
+                exp: "Diet charges during hospitalization are generally free or reimbursable for Group D/lower pay level employees and patients suffering from specified diseases like TB/Mental illness."
+            },
+            {
+                q: "Can a government servant claim reimbursement for tonic, food supplements, and cosmetics prescribed by a doctor?",
+                options: ["Yes, fully reimbursable", "No, special foods, tonics, and toilet preparations are non-reimbursable items", "Yes, up to 50%", "Only if prescribed by Civil Surgeon"],
+                ans: 1,
+                exp: "Food supplements, general tonics, cosmetics, and toilet items fall under the list of non-reimbursable items."
+            },
+            {
+                q: "Under CCS (MA) Rules, what is the maximum percentage of estimated cost that can be granted as a Medical Advance for inpatient treatment?",
+                options: ["50%", "75%", "90%", "100%"],
+                ans: 2,
+                exp: "Medical advance can be granted up to 90% of the estimated cost of treatment/hospitalization."
+            },
+            {
+                q: "Can a medical advance be paid directly to the recognized hospital on behalf of the employee?",
+                options: ["No, it must go through employee's bank account", "Yes, direct payment to hospital is permissible on request", "Only in case of officer's death", "Only for foreign treatment"],
+                ans: 1,
+                exp: "Government guidelines permit direct payment/transfer of medical advance to the empanelled/recognized hospital concerned."
+            },
+            {
+                q: "What certificate must be signed by the attending doctor / AMA for reimbursement of medicines purchased from market?",
+                options: ["Certificate A (for OPD) / Certificate B (for IPD)", "Form 16", "Fitness Certificate", "Form 7"],
+                ans: 0,
+                exp: "Certificate A (for non-hospitalized cases) or Certificate B (for hospitalized cases) must be executed by the medical officer/AMA."
+            },
+            {
+                q: "Are artificial limbs and orthopedic appliances reimbursable under CCS (MA) Rules?",
+                options: ["No", "Yes, subject to ceiling limits and recommendation of authorized specialist", "Only 25% cost", "Only for war veterans"],
+                ans: 1,
+                exp: "Cost of artificial limbs, hearing aids, pacemakers, and orthopedic appliances are reimbursable subject to ceiling limits and specialist advice."
+            },
+            {
+                q: "In case both husband and wife are Central Government employees, who can claim medical benefits for the dependent family members?",
+                options: ["Both can claim 50% each", "Either husband or wife, by submitting a joint declaration", "Only the husband", "Only the wife"],
+                ans: 1,
+                exp: "When both spouses are Central Government servants, one of them must submit a joint declaration choosing who will claim medical benefits for the family."
+            },
+            {
+                q: "Travelling Allowance (TA) for medical treatment journey is admissible to an employee when referred by AMA to another station because:",
+                options: ["Employee wants a holiday", "Required medical facilities/specialist are not available at the headquarters", "AMA is on leave", "Hospital is crowded"],
+                ans: 1,
+                exp: "TA for journey to outstation is admissible if the AMA certifies that requisite treatment/specialist facility is unavailable at headquarters."
+            },
+            {
+                q: "Is an attendant accompanying a severely ill patient to an outstation hospital eligible for TA under CCS (MA) Rules?",
+                options: ["No", "Yes, if recommended by the AMA / specialist certifying that patient cannot travel alone", "Only 50% fare", "Only for child patients"],
+                ans: 1,
+                exp: "TA for an attendant is admissible if the AMA/Specialist certifies that it is unsafe for the patient to travel unattended."
+            },
+            {
+                q: "What is the rule regarding consultation fee charged by private doctor when an employee visits in an emergency?",
+                options: ["Reimbursed fully as billed", "Reimbursed as per prescribed CS (MA) / CGHS rate ceiling", "Not reimbursable at all", "Double rate is paid"],
+                ans: 1,
+                exp: "Even in emergency consultations, reimbursement of fees is capped at prescribed CS(MA) / CGHS ceiling rates."
+            },
+            {
+                q: "Can treatment taken abroad be reimbursed under CCS (MA) Rules?",
+                options: ["Never allowed under any circumstances", "Allowed in exceptional cases with approval of Standing Committee / Ministry of Health", "Allowed freely for all officers", "Allowed only for dental treatment"],
+                ans: 1,
+                exp: "Medical treatment abroad is governed by strict rules and requires prior approval of the competent authority / Medical Board and Ministry of Health."
+            },
+            {
+                q: "What is the valid duration of empanelment for private hospitals under CGHS / CS (MA) Rules unless extended or terminated?",
+                options: ["1 year", "2 years", "5 years", "10 years"],
+                ans: 1,
+                exp: "Empanelment of private health care organizations under CGHS/CS(MA) is usually done for a period of 2 years at a time."
+            },
+            {
+                q: "Which authority issues notifications revising rates for medical procedures and tests under CS (MA) Rules?",
+                options: ["Ministry of Finance", "Department of Health and Family Welfare (MoHFW)", "DoPT", "CAG"],
+                ans: 1,
+                exp: "Ministry of Health & Family Welfare (MoHFW) issues periodic ceiling rates for medical procedures, tests, and hospital care."
+            },
+            {
+                q: "Is dental treatment (e.g., extraction, filling) reimbursable under CCS (MA) Rules?",
+                options: ["No, dental care is completely excluded", "Yes, if obtained in Government hospitals or recognized dental centers", "Only cosmetic dentistry is allowed", "Only root canal is allowed"],
+                ans: 1,
+                exp: "Dental treatment is reimbursable if received in Government hospitals or empanelled hospitals/dental centers for non-cosmetic procedures."
+            },
+            {
+                q: "Are test-tube baby / IVF procedures reimbursable under CS (MA) Rules?",
+                options: ["No, strictly prohibited", "Yes, subject to specified conditions and ceiling rates for maximum 3 attempts", "Unlimited attempts allowed", "Only for adoption cases"],
+                ans: 1,
+                exp: "IVF treatment is permissible under CS (MA) / CGHS rules for female employees / wives of employees up to a maximum of 3 fresh cycles subject to conditions."
+            },
+            {
+                q: "If an employee receives medical treatment while on leave at an outstation station, can they consult a local Government Doctor / AMA?",
+                options: ["No, must return to headquarters", "Yes, the local Government Doctor at the place of leave acts as AMA", "Only with President's permission", "Only in emergency"],
+                ans: 1,
+                exp: "While on leave at another station, the local Government Medical Officer of that area functions as the employee's AMA."
+            },
+            {
+                q: "Reimbursement of cost of Heart Valve Replacement, Stents, and Pacemakers is:",
+                options: ["Not allowed", "Capped at ceiling rates fixed by Government / NPPA from time to time", "100% of any private hospital quote", "Allowed only up to ₹50,000"],
+                ans: 1,
+                exp: "Implants such as cardiac stents, valves, and pacemakers are reimbursable subject to maximum ceiling limits fixed by government/NPPA."
+            },
+            {
+                q: "Which of the following is NOT a condition for claiming medical advance?",
+                options: ["Patient must be receiving inpatient treatment or major outpatient treatment like chemo/dialysis", "Estimate of cost from hospital must be produced", "Employee must complete 10 years of service", "Treatment must be in recognized/Government hospital"],
+                ans: 2,
+                exp: "There is no minimum service length (like 10 years) required to be eligible for a medical advance."
+            },
+            {
+                q: "In case of death of a Government servant while undergoing medical treatment, who can claim reimbursement of medical bills?",
+                options: ["No one, claim lapses", "Legal heir / surviving spouse / nominee", "Hospital directly", "Department head personally"],
+                ans: 1,
+                exp: "If a Government servant dies during treatment, the claim can be preferred by the surviving spouse or legal heir."
+            },
+            {
+                q: "Under CCS (MA) Rules, who is responsible for verifying and countersign medical reimbursement bills exceeding specified limits?",
+                options: ["AMA / Controlling Officer", "Head of Office", "Civil Surgeon / Medical Superintendent", "Both A and C as per rule threshold"],
+                ans: 3,
+                exp: "Bills are certified by the AMA and countersigned by Controlling Officer/Medical Authorities as per financial thresholds."
+            },
+            {
+                q: "Can blood transfusions and cost of blood bags be claimed under medical reimbursement?",
+                options: ["No", "Yes, reimbursable in full if obtained from licensed blood banks", "Only 50% cost", "Only during surgeries"],
+                ans: 1,
+                exp: "Cost of blood and blood components purchased from recognized/licensed blood banks is fully reimbursable."
+            },
+            {
+                q: "Are health check-ups (Annual Health Check-up) allowed for Central Government employees of specified age?",
+                options: ["No annual checkup allowed", "Yes, for Group A officers aged 40 years and above (and extended to other groups as per orders)", "Only at age 59", "Only for foreign post officers"],
+                ans: 1,
+                exp: "Annual Health Check-up scheme is provided for officers aged 40 years and above in government service."
+            },
+            {
+                q: "What action can be taken against an employee who submits a false or fraudulent medical claim?",
+                options: ["Recovery of amount only", "Disciplinary action under CCS (CCA) Rules in addition to recovery", "Simple warning", "Deduction of 1 day leave"],
+                ans: 1,
+                exp: "Submission of fraudulent claims constitutes grave misconduct, attracting criminal prosecution and major disciplinary action under CCS (CCA) Rules."
+            },
+            {
+                q: "What is the ward entitlement for inpatient treatment in empanelled hospitals for an employee in Pay Level 6 to 11 (7th CPC)?",
+                options: ["General Ward", "Semi-Private Ward", "Private Ward", "Suite"],
+                ans: 1,
+                exp: "Under 7th CPC revised ward entitlement rules, Pay Levels 6 to 11 are entitled to Semi-Private Ward."
+            },
+            {
+                q: "Employees in Pay Level 12 and above are entitled to which category of hospital room/ward?",
+                options: ["General Ward", "Semi-Private Ward", "Private Ward", "Deluxe Suite"],
+                ans: 2,
+                exp: "Employees in Pay Level 12 and above are entitled to Private Ward in empanelled hospitals."
+            },
+            {
+                q: "Employees drawing pay up to Level 5 in Pay Matrix are entitled to:",
+                options: ["General Ward", "Semi-Private Ward", "Private Ward", "ICU only"],
+                ans: 0,
+                exp: "Pay Levels 1 to 5 are entitled to General Ward accommodation in empanelled hospitals."
+            },
+            {
+                q: "If an employee opts for a higher ward entitlement than eligible in a private empanelled hospital, how are extra charges handled?",
+                options: ["Government pays all", "Difference in room charges and associated higher charges must be borne by employee", "Hospital waives charges", "Allowed free once per year"],
+                ans: 1,
+                exp: "If an employee chooses a higher room category than entitled, the excess expenditure for room rent and differential costs must be borne by the employee."
+            },
+            {
+                q: "In non-CGHS areas where no Government hospital or AMA is available within what radius can a private doctor be appointed as AMA?",
+                options: ["2 km", "5 km", "10 km", "15 km"],
+                ans: 1,
+                exp: "Where government medical facilities are not available within a radius of 5 km, private practitioners can be appointed as AMAs."
+            },
+            {
+                q: "Is medical attendance provided to a Government servant during suspension?",
+                options: ["No, suspension forfeits medical rights", "Yes, suspended employees and their families remain eligible for medical attendance", "Only for employee, not family", "Only with court permission"],
+                ans: 1,
+                exp: "Suspension does not deprive a Government servant or their family of medical attendance benefits under CCS (MA) Rules."
+            },
+            {
+                q: "Are retired Central Government employees residing in non-CGHS areas covered under CCS (MA) Rules, 1944?",
+                options: ["Yes, automatically", "No, CCS (MA) Rules apply only to serving employees (Pensioners receive FMA or CGHS OPD benefits)", "Yes, if they pay extra fee", "Only if retired after 2020"],
+                ans: 1,
+                exp: "CCS (MA) Rules, 1944 do not cover pensioners; pensioners in non-CGHS areas get Fixed Medical Allowance (FMA) or CGHS indoor/outpatient options."
+            },
+            {
+                q: "What does FMA stand for in relation to medical benefits for pensioners in non-CGHS areas?",
+                options: ["Free Medical Assistance", "Fixed Medical Allowance", "Federal Medical Authority", "Financial Medical Assistance"],
+                ans: 1,
+                exp: "FMA stands for Fixed Medical Allowance, paid monthly to eligible pensioners residing in non-CGHS areas."
+            },
+            {
+                q: "What is the current rate of Fixed Medical Allowance (FMA) per month for eligible pensioners?",
+                options: ["₹300", "₹500", "₹1,000", "₹2,000"],
+                ans: 2,
+                exp: "Fixed Medical Allowance (FMA) was revised to ₹1,000 per month post 7th Pay Commission."
+            },
+            {
+                q: "Is ambulance charge reimbursable when transporting a critically ill patient to hospital?",
+                options: ["No", "Yes, if certified by AMA/attending doctor that ambulance carriage was essential", "Only for distance over 100 km", "Only for air ambulance"],
+                ans: 1,
+                exp: "Ambulance charges are reimbursable if the doctor certifies that transport by ambulance was medically essential due to patient's condition."
+            }
+        ];
+
+        let currentQ = 0;
+        let userAnswers = new Array(50).fill(null);
+        let submitted = false;
+        let timerSeconds = 1800;
+        let timerInterval = null;
+
+        function init() {
+            renderPalette();
+            loadQuestion(0);
+            startTimer();
+        }
+
+        function startTimer() {
+            timerInterval = setInterval(() => {
+                if (timerSeconds <= 0) {
+                    clearInterval(timerInterval);
+                    autoSubmit();
+                    return;
+                }
+                timerSeconds--;
+                const m = Math.floor(timerSeconds / 60).toString().padStart(2, '0');
+                const s = (timerSeconds % 60).toString().padStart(2, '0');
+                document.getElementById('timer').textContent = `Time Remaining: ${m}:${s}`;
+            }, 1000);
+        }
+
+        function renderPalette() {
+            const palette = document.getElementById('palette');
+            palette.innerHTML = '';
+            for (let i = 0; i < 50; i++) {
+                const btn = document.createElement('button');
+                btn.className = 'palette-btn';
+                btn.id = `palette-btn-${i}`;
+                btn.textContent = i + 1;
+                btn.onclick = () => jumpToQuestion(i);
+                palette.appendChild(btn);
+            }
+        }
+
+        function updatePaletteUI() {
+            for (let i = 0; i < 50; i++) {
+                const btn = document.getElementById(`palette-btn-${i}`);
+                btn.className = 'palette-btn';
+                if (i === currentQ) btn.classList.add('active');
+
+                if (submitted) {
+                    if (userAnswers[i] === rawQuestions[i].ans) {
+                        btn.classList.add('correct');
+                    } else {
+                        btn.classList.add('incorrect');
+                    }
+                } else {
+                    if (userAnswers[i] !== null) {
+                        btn.classList.add('answered');
+                    }
+                }
+            }
+        }
+
+        function loadQuestion(index) {
+            currentQ = index;
+            const q = rawQuestions[index];
+            document.getElementById('q-number').textContent = `Question ${index + 1} of 50`;
+            document.getElementById('q-text').textContent = q.q;
+
+            const optsContainer = document.getElementById('options-container');
+            optsContainer.innerHTML = '';
+
+            const prefixes = ['A', 'B', 'C', 'D'];
+            q.options.forEach((optText, optIdx) => {
+                const item = document.createElement('div');
+                item.className = 'option-item';
+                
+                if (userAnswers[index] === optIdx) {
+                    item.classList.add('selected');
+                }
+
+                if (submitted) {
+                    item.classList.add('disabled');
+                    if (optIdx === q.ans) {
+                        item.classList.add('correct-answer');
+                    }
+                    if (userAnswers[index] === optIdx && optIdx !== q.ans) {
+                        item.classList.add('wrong-answer');
+                    }
+                } else {
+                    item.onclick = () => selectOption(optIdx);
+                }
+
+                item.innerHTML = `<span class="option-prefix">${prefixes[optIdx]}.</span><span>${optText}</span>`;
+                optsContainer.appendChild(item);
+            });
+
+            const expBox = document.getElementById('explanation');
+            if (submitted) {
+                document.getElementById('exp-text').textContent = q.exp;
+                expBox.style.display = 'block';
+            } else {
+                expBox.style.display = 'none';
+            }
+
+            document.getElementById('prev-btn').disabled = (index === 0);
+            document.getElementById('next-btn').disabled = (index === 49);
+
+            updatePaletteUI();
+        }
+
+        function selectOption(optIdx) {
+            if (submitted) return;
+            userAnswers[currentQ] = optIdx;
+            loadQuestion(currentQ);
+        }
+
+        function jumpToQuestion(index) {
+            loadQuestion(index);
+        }
+
+        function navigate(direction) {
+            const target = currentQ + direction;
+            if (target >= 0 && target < 50) {
+                loadQuestion(target);
+            }
+        }
+
+        function confirmSubmit() {
+            const unanswered = userAnswers.filter(a => a === null).length;
+            let msg = "Are you sure you want to submit your quiz?";
+            if (unanswered > 0) {
+                msg = `You have ${unanswered} unanswered question(s). Are you sure you want to submit?`;
+            }
+            if (confirm(msg)) {
+                submitQuiz();
+            }
+        }
+
+        function autoSubmit() {
+            alert("Time is up! Your quiz will be submitted automatically.");
+            submitQuiz();
+        }
+
+        function submitQuiz() {
+            submitted = true;
+            clearInterval(timerInterval);
+
+            let score = 0;
+            for (let i = 0; i < 50; i++) {
+                if (userAnswers[i] === rawQuestions[i].ans) {
+                    score++;
+                }
+            }
+
+            document.getElementById('timer').textContent = "Quiz Completed";
+            document.getElementById('submit-btn').classList.add('hide');
+            
+            const resultsCard = document.getElementById('results');
+            document.getElementById('score-text').textContent = `${score} / 50`;
+            document.getElementById('percentage-text').textContent = `Percentage: ${((score / 50) * 100).toFixed(1)}%`;
+            resultsCard.style.display = 'block';
+
+            loadQuestion(currentQ);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        window.onload = init;
+    </script>
+</body>
+</html>
+
+```
