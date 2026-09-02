@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fundamental Rules (FR) Quiz</title>
+    <style>
+        :root {
+            --primary: #0f766e;
+            --primary-light: #0d9488;
+            --secondary: #334155;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text: #0f172a;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --correct: #16a34a;
+            --correct-bg: #f0fdf4;
+            --incorrect: #dc2626;
+            --incorrect-bg: #fef2f2;
+            --selected: #ccfbf1;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.5;
+            padding-bottom: 40px;
+        }
+
+        header {
+            background-color: var(--primary);
+            color: white;
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .header-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        .timer-box {
+            background-color: rgba(255, 255, 255, 0.15);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            font-family: monospace;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 1.5rem auto;
+            padding: 0 1rem;
+        }
+
+        .palette-card {
+            background: var(--card-bg);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid var(--border);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .palette-title {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            margin-bottom: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .palette-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(36px, 1fr));
+            gap: 6px;
+        }
+
+        .palette-btn {
+            aspect-ratio: 1;
+            border: 1px solid var(--border);
+            background: white;
+            color: var(--text);
+            font-weight: 600;
+            font-size: 0.85rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .palette-btn:hover {
+            border-color: var(--primary-light);
+        }
+
+        .palette-btn.active {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px var(--primary-light);
+        }
+
+        .palette-btn.answered {
+            background-color: #2563eb;
+            color: white;
+            border-color: #2563eb;
+        }
+
+        .palette-btn.correct {
+            background-color: var(--correct);
+            color: white;
+            border-color: var(--correct);
+        }
+
+        .palette-btn.incorrect {
+            background-color: var(--incorrect);
+            color: white;
+            border-color: var(--incorrect);
+        }
+
+        .question-card {
+            background: var(--card-bg);
+            border-radius: 8px;
+            padding: 1.5rem;
+            border: 1px solid var(--border);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            margin-bottom: 1.5rem;
+        }
+
+        .question-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .question-text {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 1.25rem;
+            color: var(--primary);
+        }
+
+        .options-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .option-item {
+            display: flex;
+            align-items: flex-start;
+            padding: 0.85rem 1rem;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+            background: white;
+        }
+
+        .option-item:hover:not(.disabled) {
+            background-color: var(--selected);
+            border-color: var(--primary-light);
+        }
+
+        .option-item.selected {
+            background-color: var(--selected);
+            border-color: var(--primary-light);
+            border-width: 2px;
+        }
+
+        .option-item.correct-answer {
+            background-color: var(--correct-bg);
+            border-color: var(--correct);
+            color: var(--correct);
+            font-weight: 600;
+        }
+
+        .option-item.wrong-answer {
+            background-color: var(--incorrect-bg);
+            border-color: var(--incorrect);
+            color: var(--incorrect);
+        }
+
+        .option-prefix {
+            font-weight: 600;
+            margin-right: 0.75rem;
+            min-width: 20px;
+        }
+
+        .explanation-box {
+            margin-top: 1.25rem;
+            padding: 1rem;
+            background-color: #f8fafc;
+            border-left: 4px solid var(--primary-light);
+            border-radius: 0 6px 6px 0;
+            font-size: 0.95rem;
+            display: none;
+        }
+
+        .explanation-title {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+            color: var(--secondary);
+        }
+
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.65rem 1.25rem;
+            border-radius: 6px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: background 0.2s;
+            font-size: 0.95rem;
+        }
+
+        .btn-secondary {
+            background-color: #e2e8f0;
+            color: var(--secondary);
+        }
+
+        .btn-secondary:hover:not(:disabled) {
+            background-color: #cbd5e0;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-light);
+            color: white;
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            background-color: var(--primary);
+        }
+
+        .btn-submit {
+            background-color: var(--correct);
+            color: white;
+        }
+
+        .btn-submit:hover {
+            background-color: #15803d;
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .results-card {
+            background: var(--card-bg);
+            border-radius: 8px;
+            padding: 2rem;
+            border: 1px solid var(--border);
+            text-align: center;
+            margin-bottom: 1.5rem;
+            display: none;
+        }
+
+        .score-display {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 1rem 0;
+        }
+
+        .percentage-display {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+
+        .hide {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-title">Fundamental Rules (FR) Quiz</div>
+        <div class="timer-box" id="timer">Time Remaining: 30:00</div>
+    </header>
+
+    <div class="container">
+        <div class="palette-card">
+            <div class="palette-title">Question Navigator</div>
+            <div class="palette-grid" id="palette"></div>
+        </div>
+
+        <div id="results" class="results-card">
+            <h2>Quiz Results</h2>
+            <div class="score-display" id="score-text">0 / 50</div>
+            <div class="percentage-display" id="percentage-text">0%</div>
+            <p>Review your answers below.</p>
+        </div>
+
+        <div class="question-card" id="quiz-card">
+            <div class="question-header">
+                <span id="q-number">Question 1 of 50</span>
+                <span>1 Mark</span>
+            </div>
+            <div class="question-text" id="q-text">Loading...</div>
+            <div class="options-list" id="options-container"></div>
+            <div class="explanation-box" id="explanation">
+                <div class="explanation-title">Rule Reference & Explanation:</div>
+                <div id="exp-text"></div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <button class="btn btn-secondary" id="prev-btn" onclick="navigate(-1)">Previous</button>
+            <button class="btn btn-primary" id="next-btn" onclick="navigate(1)">Next</button>
+            <button class="btn btn-submit" id="submit-btn" onclick="confirmSubmit()">Submit Quiz</button>
+        </div>
+    </div>
+
+    <script>
+        const rawQuestions = [
+            {
+                q: "Which Fundamental Rule states that a government servant's whole time is at the disposal of the Government?",
+                options: ["FR 9", "FR 11", "FR 15", "FR 22"],
+                ans: 1,
+                exp: "FR 11 explicitly lays down that the whole time of a Government servant is at the disposal of the Government which pays him."
+            },
+            {
+                q: "Which Fundamental Rule defines the terms used in Fundamental Rules (such as Cadre, Duty, Fee, Honorarium, Pay, etc.)?",
+                options: ["FR 5", "FR 9", "FR 10", "FR 17"],
+                ans: 1,
+                exp: "FR 9 contains the definitions of various terms used across the Fundamental Rules."
+            },
+            {
+                q: "As per FR 10, no person may be appointed in India to a post in Government service without producing a:",
+                options: ["Character Certificate", "Medical Certificate of Fitness", "Caste Certificate", "Domicile Certificate"],
+                ans: 1,
+                exp: "FR 10 mandates that no person may be appointed to a post in Government service without producing a medical certificate of health fitness."
+            },
+            {
+                q: "Lien of a government servant to a permanent post is defined and governed under which Fundamental Rule?",
+                options: ["FR 9(13)", "FR 12", "FR 13", "FR 14"],
+                ans: 2,
+                exp: "FR 13 specifies the conditions under which a government servant retains a lien on a post."
+            },
+            {
+                q: "Under FR 14-A, can a Government servant's lien on a post be terminated in any circumstance without their written consent?",
+                options: ["Yes, upon permanent absorption in another service/department", "No, never", "Only by court order", "Only upon suspension"],
+                ans: 0,
+                exp: "Under FR 14-A, a government servant's lien on a post stands terminated on acquiring a lien on a permanent post outside the cadre/absorption."
+            },
+            {
+                q: "Which Fundamental Rule governs the transfer of a Government servant from one post to another?",
+                options: ["FR 11", "FR 15", "FR 22", "FR 56"],
+                ans: 1,
+                exp: "FR 15 authorizes the President / competent authority to transfer a Government servant from one post to another."
+            },
+            {
+                q: "As per FR 17(1), an officer begins to draw the pay and allowances attached to a post from which date?",
+                options: ["Date of selection", "Date of issue of appointment order", "Date he assumes charge of the post", "First day of the following month"],
+                ans: 2,
+                exp: "FR 17(1) states that an officer shall draw pay and allowances from the date he assumes charge of the post until he relinquishes charge."
+            },
+            {
+                q: "If a government servant remains absent from duty without authorized leave, such period under FR 17-A is treated as:",
+                options: ["Casual Leave", "Earned Leave", "Dies-Non (Break in Service)", "Extraordinary Leave"],
+                ans: 2,
+                exp: "Under FR 17-A, unauthorized absence results in a break in service (dies-non) unless condoned by the competent authority."
+            },
+            {
+                q: "Fixation of pay on initial appointment or promotion is broadly governed by which key Fundamental Rule?",
+                options: ["FR 9", "FR 17", "FR 22", "FR 31"],
+                ans: 2,
+                exp: "FR 22 deals with the rules and options for pay fixation on initial appointment, promotion, or transfer."
+            },
+            {
+                q: "Under FR 22(I)(a)(1), an employee promoted to a higher post is entitled to an option to fix pay from:",
+                options: ["Date of joining only", "Date of next increment in lower post", "First day of the financial year", "Date of order only"],
+                ans: 1,
+                exp: "FR 22(I)(a)(1) provides an option to get pay fixed either from the date of promotion or from the date of next increment in the lower post."
+            },
+            {
+                q: "Which Fundamental Rule specifies the conditions for increment in a time-scale of pay?",
+                options: ["FR 24", "FR 26", "FR 29", "FR 31-A"],
+                ans: 1,
+                exp: "FR 26 details the service that counts for increments in a time-scale."
+            },
+            {
+                q: "Under FR 26, which of the following periods does NOT count for increments in a time-scale?",
+                options: ["Duty", "Service in another post", "Period of EOL granted without medical certificate (not for higher study)", "Foreign service"],
+                ans: 2,
+                exp: "Extraordinary Leave (EOL) taken without medical certificate (and not for technical/higher studies) does not count for increment under FR 26."
+            },
+            {
+                q: "Withholding of an increment as a penalty is governed by which rule read with CCS (CCA) Rules?",
+                options: ["FR 24", "FR 22", "FR 15", "FR 11"],
+                ans: 0,
+                exp: "FR 24 states that an increment shall be drawn as a matter of course unless it is withheld as a disciplinary measure."
+            },
+            {
+                q: "Reduction to a lower stage in a time-scale of pay as a penalty is covered under:",
+                options: ["FR 27", "FR 28", "FR 29", "FR 31"],
+                ans: 2,
+                exp: "FR 29 regulates the reduction of pay to a lower stage in a time-scale as a penalty."
+            },
+            {
+                q: "Which rule deals with the grant of premature increments by the competent authority?",
+                options: ["FR 22", "FR 26", "FR 27", "FR 30"],
+                ans: 2,
+                exp: "FR 27 grants the power to sanction premature increments to a government servant in special circumstances."
+            },
+            {
+                q: "Combination of appointments (holding dual charge of two posts) is regulated under which rule?",
+                options: ["FR 35", "FR 49", "FR 53", "FR 56"],
+                ans: 1,
+                exp: "FR 49 provides guidelines for pay and allowances when a Government servant is appointed to hold combination of posts / additional charge."
+            },
+            {
+                q: "Under FR 49, additional pay for holding dual charge of another independent post is generally allowed if the period exceeds:",
+                options: ["7 days", "14 days", "30 days / 45 days (as per instructions)", "6 months"],
+                ans: 2,
+                exp: "Additional pay under FR 49 is admissible when the combination of appointments exceeds 30/45 days as per prescribed guidelines."
+            },
+            {
+                q: "Honorarium is defined under which sub-rule of FR 9?",
+                options: ["FR 9(9)", "FR 9(21)", "FR 9(25)", "FR 9(4)"],
+                ans: 0,
+                exp: "FR 9(9) defines 'Honorarium' as a recurring or non-recurring payment granted from consolidated fund for special work of an occasional nature."
+            },
+            {
+                q: "Fee is defined as a recurring or non-recurring payment to a government servant from:",
+                options: ["Consolidated Fund of India", "A source other than the Consolidated Fund of India/State", "Foreign Government only", "Discretionary Fund"],
+                ans: 1,
+                exp: "Under FR 9(7), 'Fee' means a payment made from a source other than the Consolidated Fund of India or a State."
+            },
+            {
+                q: "A government servant requires prior sanction to accept a fee or honorarium under which Fundamental Rule?",
+                options: ["FR 46", "FR 48", "FR 51", "FR 56"],
+                ans: 0,
+                exp: "FR 46 governs the rules for acceptance of Fees and Honoraria by a government servant."
+            },
+            {
+                q: "Under FR 48, a government servant is permitted to retain patent rights for an invention if it is:",
+                options: ["Obtained using Government laboratory facilities", "Unrelated to public employment duties", "Approved by Cabinet", "Patented in foreign countries"],
+                ans: 1,
+                exp: "FR 48 allows retention of royalties/patents subject to government permissions and rules regarding work outside official scope."
+            },
+            {
+                q: "Subsistence Allowance granted to a government servant under suspension is governed by:",
+                options: ["FR 49", "FR 53", "FR 54", "FR 56"],
+                ans: 1,
+                exp: "FR 53 prescribes the rates and conditions for grant of Subsistence Allowance during suspension."
+            },
+            {
+                q: "Initially, the rate of Subsistence Allowance under FR 53 is equal to:",
+                options: ["Full basic pay", "75% of leave salary on half pay", "50% of leave salary on half pay plus applicable DA", "25% of basic pay"],
+                ans: 2,
+                exp: "FR 53(1)(i) states subsistence allowance is equal to leave salary which the employee would have drawn if on leave on half pay (50% of half pay salary) + DA."
+            },
+            {
+                q: "After review, if the period of suspension is prolonged for reasons not directly attributable to the employee, subsistence allowance may be increased by up to:",
+                options: ["25%", "50%", "75%", "100%"],
+                ans: 1,
+                exp: "Under FR 53, subsistence allowance may be increased by up to 50% of the amount allowed during initial 3 months if delay is not directly attributable to the employee."
+            },
+            {
+                q: "If suspension is prolonged for reasons directly attributable to the government servant, subsistence allowance may be reduced by up to:",
+                options: ["10%", "25%", "50%", "75%"],
+                ans: 2,
+                exp: "Under FR 53(1)(i)(a), the subsistence allowance may be reduced by up to 50% if the extension of suspension is attributable to the employee."
+            },
+            {
+                q: "Which rule regulates the pay and allowances upon reinstatement of a government servant who was dismissed, removed, or compulsorily retired?",
+                options: ["FR 53", "FR 54", "FR 54-A", "FR 55"],
+                ans: 1,
+                exp: "FR 54 governs the treatment of period of absence and pay/allowances when a dismissed/removed/compulsorily retired employee is reinstated."
+            },
+            {
+                q: "FR 54-B regulates the pay and allowances of a government servant upon reinstatement after:",
+                options: ["Deputation", "Suspension", "Foreign Service", "Study Leave"],
+                ans: 1,
+                exp: "FR 54-B specifically covers pay, allowances, and treatment of the period of suspension upon reinstatement."
+            },
+            {
+                q: "When a suspended employee is fully exonerated on reinstatement, the period of suspension is treated as:",
+                options: ["Dies-Non", "Extraordinary Leave", "Period spent on duty for all purposes", "Half Pay Leave"],
+                ans: 2,
+                exp: "Under FR 54-B(3), if fully exonerated, the period of suspension is treated as a period spent on duty for all purposes."
+            },
+            {
+                q: "Which Fundamental Rule specifies the compulsory age of retirement (superannuation) for Central Government servants?",
+                options: ["FR 45", "FR 49", "FR 56", "FR 60"],
+                ans: 2,
+                exp: "FR 56 is the landmark rule that lays down the age of superannuation (currently 60 years) and provisions for premature retirement."
+            },
+            {
+                q: "Under FR 56(a), a government servant retires from service on the afternoon of the last day of the month in which he attains the age of 60 years. What if his birthday is on the 1st of a month?",
+                options: ["Retires on last day of that month", "Retires on last day of the preceding month", "Retires on 1st of that month", "Retires 15 days later"],
+                ans: 1,
+                exp: "Under FR 56(a), a government servant whose date of birth is the 1st of a month shall retire on the afternoon of the last day of the preceding month."
+            },
+            {
+                q: "Under FR 56(j), the Appropriate Authority has the absolute right to retire a government servant in public interest by giving notice of not less than:",
+                options: ["1 month or pay in lieu", "3 months or 3 months' pay and allowances in lieu", "6 months", "15 days"],
+                ans: 1,
+                exp: "FR 56(j) permits compulsory retirement in public interest by giving 3 months' notice in writing or 3 months' pay and allowances in lieu."
+            },
+            {
+                q: "FR 56(j) review can be undertaken for Group A and B officers who entered service before age 35 when they attain the age of:",
+                options: ["45 years", "50 years", "55 years", "58 years"],
+                ans: 1,
+                exp: "Group A & B officers who entered service before 35 years of age can be reviewed under FR 56(j) upon reaching 50 years of age."
+            },
+            {
+                q: "Under FR 56(k), a Government servant can seek voluntary retirement by giving 3 months' notice after attaining the age of:",
+                options: ["45 years", "50 years (if entered service before 35) or 55 years", "58 years", "60 years"],
+                ans: 1,
+                exp: "FR 56(k) allows voluntary retirement upon attaining age 50 (if entered before 35) or 55 in other cases by giving 3 months' notice."
+            },
+            {
+                q: "Which rule deals with transfer of a government servant to 'Foreign Service'?",
+                options: ["FR 11", "FR 56", "FR 110", "FR 120"],
+                ans: 2,
+                exp: "FR 110 states that no Government servant may be transferred to foreign service against his will (except in specific cases)."
+            },
+            {
+                q: "During Foreign Service, who pays the Pension and Leave Salary Contributions to the Consolidated Fund of India?",
+                options: ["Government servant himself", "Foreign Employer (or employee as agreed)", "Parent Ministry", "Finance Ministry"],
+                ans: 1,
+                exp: "Under FR 115, pension and leave salary contributions are payable by the foreign employer (or by employee if agreed)."
+            },
+            {
+                q: "Which Fundamental Rule provides for the allotment of Government Residential Accommodation?",
+                options: ["FR 22", "FR 45-A & FR 45-B", "FR 56", "FR 110"],
+                ans: 1,
+                exp: "FR 45-A and FR 45-B regulate the assessment of license fee and allotment of government quarters."
+            },
+            {
+                q: "What is the term used in FR 9(21)(a) for the amount drawn monthly by a government servant as pay?",
+                options: ["Special Pay", "Basic Pay", "Personal Pay", "Substantive Pay"],
+                ans: 1,
+                exp: "FR 9(21)(a)(i) defines Pay (Basic Pay) as the amount drawn monthly by a government servant in the scale of pay attached to the post."
+            },
+            {
+                q: "Special Pay under FR 9(25) is granted in consideration of:",
+                options: ["High cost of living", "Specially arduous nature of duties or specific addition to work", "Good conduct", "Overtime work"],
+                ans: 1,
+                exp: "FR 9(25) defines Special Pay as an addition to pay granted for specially arduous duties or addition to work/responsibility."
+            },
+            {
+                q: "Personal Pay under FR 9(23) is granted to a government servant to:",
+                options: ["Reward exemplary service", "Save him from a loss of substantive pay due to revision/re-fixation", "Cover travel expenses", "Compensate night shift"],
+                ans: 1,
+                exp: "Personal Pay is granted to protect an officer from loss of substantive pay due to pay revision or small adjustments."
+            },
+            {
+                q: "Presumptive Pay of a post under FR 9(24) means:",
+                options: ["Future pay expected", "Pay to which an officer would be entitled if he held the post substantively", "Pension amount", "Average pay of 10 months"],
+                ans: 1,
+                exp: "Presumptive pay of a post means the pay to which a government servant would be entitled if he held the post substantively."
+            },
+            {
+                q: "Officiating capacity under FR 9(19) means a government servant performs duties of a post when:",
+                options: ["Another person holds a lien or when appointed to officiate in a vacant post", "Under suspension", "On leave", "On deputation abroad"],
+                ans: 0,
+                exp: "A government servant officiates in a post when he performs duties of a post on which another person holds a lien, or when appointed to a vacant post."
+            },
+            {
+                q: "Substantive Pay under FR 9(28) means pay drawn in a post on which the employee holds a:",
+                options: ["Temporary charge", "Lien", "Ad-hoc appointment", "Contract"],
+                ans: 1,
+                exp: "Substantive pay means the pay drawn in a post on which the employee holds a lien or would hold a lien had it not been suspended."
+            },
+            {
+                q: "Can a government servant be granted leave of any kind for a continuous period exceeding 5 years (unless President relaxes)?",
+                options: ["Yes, up to 7 years", "No, max continuous period is 5 years under FR 18", "Yes, up to 10 years", "No limit for EOL"],
+                ans: 1,
+                exp: "FR 18 provides that no government servant shall be granted leave of any kind for a continuous period exceeding five years."
+            },
+            {
+                q: "When a government servant is reverted from a higher officiating post to a lower post as a penalty, his pay in lower post is fixed under:",
+                options: ["FR 22", "FR 28", "FR 29", "FR 35"],
+                ans: 2,
+                exp: "FR 29 deals with reduction to lower service, grade, or post and fixation of pay on such reduction."
+            },
+            {
+                q: "Rule governing restriction of officiating pay by competent authority is:",
+                options: ["FR 22", "FR 33", "FR 35", "FR 49"],
+                ans: 2,
+                exp: "FR 35 empowers the competent authority to fix the pay of an officiating government servant at an amount less than that admissible under FR 22."
+            },
+            {
+                q: "Which rule permits local short-term arrangements without fixing officiating pay (charge allowance)?",
+                options: ["FR 35", "FR 49", "FR 17", "FR 26"],
+                ans: 1,
+                exp: "FR 49 governs additional charge / combination of appointments and payment of charge allowance."
+            },
+            {
+                q: "If a government servant in foreign service receives a gratuity or annuity directly from foreign employer without government sanction, it is:",
+                options: ["Permissible", "Credited to Government account", "Prohibited under FR 114", "Adjusted in pension"],
+                ans: 2,
+                exp: "FR 114 prohibits foreign service employees from receiving any pension/gratuity directly from foreign employer without sanction."
+            },
+            {
+                q: "Overstayal of leave without sanction under FR 17 results in:",
+                options: ["Automatic dismissal", "No pay and allowances for the period of overstayal", "Conversion to Earned Leave", "Double pay deduction"],
+                ans: 1,
+                exp: "Under FR 17(1), an officer who remains absent after end of leave is not entitled to any pay and allowances for period of overstayal."
+            },
+            {
+                q: "The power to relax the operation of any Fundamental Rule is vested in:",
+                options: ["Head of Department", "President of India", "Comptroller & Auditor General", "Pay and Accounts Officer"],
+                ans: 1,
+                exp: "Powers to relax Fundamental Rules reside with the President (delegated in specific cases to Ministry of Finance/DoPT)."
+            },
+            {
+                q: "Fundamental Rules apply to all government servants whose pay is debitable to:",
+                options: ["State Revenues", "Consolidated Fund of India", "Railway Funds only", "Public Account"],
+                ans: 1,
+                exp: "FR 2 states that Fundamental Rules apply to all civil servants paid from the Consolidated Fund of India."
+            }
+        ];
+
+        let currentQ = 0;
+        let userAnswers = new Array(50).fill(null);
+        let submitted = false;
+        let timerSeconds = 1800;
+        let timerInterval = null;
+
+        function init() {
+            renderPalette();
+            loadQuestion(0);
+            startTimer();
+        }
+
+        function startTimer() {
+            timerInterval = setInterval(() => {
+                if (timerSeconds <= 0) {
+                    clearInterval(timerInterval);
+                    autoSubmit();
+                    return;
+                }
+                timerSeconds--;
+                const m = Math.floor(timerSeconds / 60).toString().padStart(2, '0');
+                const s = (timerSeconds % 60).toString().padStart(2, '0');
+                document.getElementById('timer').textContent = `Time Remaining: ${m}:${s}`;
+            }, 1000);
+        }
+
+        function renderPalette() {
+            const palette = document.getElementById('palette');
+            palette.innerHTML = '';
+            for (let i = 0; i < 50; i++) {
+                const btn = document.createElement('button');
+                btn.className = 'palette-btn';
+                btn.id = `palette-btn-${i}`;
+                btn.textContent = i + 1;
+                btn.onclick = () => jumpToQuestion(i);
+                palette.appendChild(btn);
+            }
+        }
+
+        function updatePaletteUI() {
+            for (let i = 0; i < 50; i++) {
+                const btn = document.getElementById(`palette-btn-${i}`);
+                btn.className = 'palette-btn';
+                if (i === currentQ) btn.classList.add('active');
+
+                if (submitted) {
+                    if (userAnswers[i] === rawQuestions[i].ans) {
+                        btn.classList.add('correct');
+                    } else {
+                        btn.classList.add('incorrect');
+                    }
+                } else {
+                    if (userAnswers[i] !== null) {
+                        btn.classList.add('answered');
+                    }
+                }
+            }
+        }
+
+        function loadQuestion(index) {
+            currentQ = index;
+            const q = rawQuestions[index];
+            document.getElementById('q-number').textContent = `Question ${index + 1} of 50`;
+            document.getElementById('q-text').textContent = q.q;
+
+            const optsContainer = document.getElementById('options-container');
+            optsContainer.innerHTML = '';
+
+            const prefixes = ['A', 'B', 'C', 'D'];
+            q.options.forEach((optText, optIdx) => {
+                const item = document.createElement('div');
+                item.className = 'option-item';
+                
+                if (userAnswers[index] === optIdx) {
+                    item.classList.add('selected');
+                }
+
+                if (submitted) {
+                    item.classList.add('disabled');
+                    if (optIdx === q.ans) {
+                        item.classList.add('correct-answer');
+                    }
+                    if (userAnswers[index] === optIdx && optIdx !== q.ans) {
+                        item.classList.add('wrong-answer');
+                    }
+                } else {
+                    item.onclick = () => selectOption(optIdx);
+                }
+
+                item.innerHTML = `<span class="option-prefix">${prefixes[optIdx]}.</span><span>${optText}</span>`;
+                optsContainer.appendChild(item);
+            });
+
+            const expBox = document.getElementById('explanation');
+            if (submitted) {
+                document.getElementById('exp-text').textContent = q.exp;
+                expBox.style.display = 'block';
+            } else {
+                expBox.style.display = 'none';
+            }
+
+            document.getElementById('prev-btn').disabled = (index === 0);
+            document.getElementById('next-btn').disabled = (index === 49);
+
+            updatePaletteUI();
+        }
+
+        function selectOption(optIdx) {
+            if (submitted) return;
+            userAnswers[currentQ] = optIdx;
+            loadQuestion(currentQ);
+        }
+
+        function jumpToQuestion(index) {
+            loadQuestion(index);
+        }
+
+        function navigate(direction) {
+            const target = currentQ + direction;
+            if (target >= 0 && target < 50) {
+                loadQuestion(target);
+            }
+        }
+
+        function confirmSubmit() {
+            const unanswered = userAnswers.filter(a => a === null).length;
+            let msg = "Are you sure you want to submit your quiz?";
+            if (unanswered > 0) {
+                msg = `You have ${unanswered} unanswered question(s). Are you sure you want to submit?`;
+            }
+            if (confirm(msg)) {
+                submitQuiz();
+            }
+        }
+
+        function autoSubmit() {
+            alert("Time is up! Your quiz will be submitted automatically.");
+            submitQuiz();
+        }
+
+        function submitQuiz() {
+            submitted = true;
+            clearInterval(timerInterval);
+
+            let score = 0;
+            for (let i = 0; i < 50; i++) {
+                if (userAnswers[i] === rawQuestions[i].ans) {
+                    score++;
+                }
+            }
+
+            document.getElementById('timer').textContent = "Quiz Completed";
+            document.getElementById('submit-btn').classList.add('hide');
+            
+            const resultsCard = document.getElementById('results');
+            document.getElementById('score-text').textContent = `${score} / 50`;
+            document.getElementById('percentage-text').textContent = `Percentage: ${((score / 50) * 100).toFixed(1)}%`;
+            resultsCard.style.display = 'block';
+
+            loadQuestion(currentQ);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        window.onload = init;
+    </script>
+</body>
+</html>
