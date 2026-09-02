@@ -1,234 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CCS (LTC) 50-MCQ Interactive Test</title>
-<style>
-* { box-sizing: border-box; }
-body {
-  margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
-  background: #eef2f7;
-  color: #172033;
-}
-.container {
-  max-width: 900px;
-  margin: 30px auto;
-  padding: 15px;
-}
-.card {
-  background: #ffffff;
-  border: 1px solid #d5dce5;
-  border-radius: 14px;
-  padding: 28px;
-  box-shadow: 0 5px 20px rgba(0,0,0,.08);
-}
-h1 { font-size: 29px; margin: 0 0 8px; color: #102a43; }
-.subtitle { color: #52606d; margin: 0 0 22px; font-size: 16px; }
-#counter {
-  font-weight: bold;
-  font-size: 17px;
-  margin-bottom: 9px;
-}
-.progress {
-  height: 12px;
-  background: #d9e2ec;
-  border-radius: 10px;
-  overflow: hidden;
-  margin-bottom: 24px;
-}
-.bar {
-  height: 100%;
-  width: 0%;
-  background: #1565c0;
-  transition: width .2s;
-}
-#question {
-  font-size: 21px;
-  line-height: 1.45;
-  margin: 0 0 18px;
-}
-.option {
-  display: block;
-  width: 100%;
-  margin: 12px 0;
-  padding: 16px 18px;
-  text-align: left;
-  font-size: 17px;
-  line-height: 1.4;
-  color: #172033;
-  background: #ffffff;
-  border: 2px solid #9aa9b8;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: .15s;
-}
-.option:hover:not(:disabled) {
-  background: #f0f6ff;
-  border-color: #1565c0;
-}
-.option:disabled { cursor: default; }
-.option.correct {
-  background: #e8f5e9;
-  border-color: #2e7d32;
-}
-.option.wrong {
-  background: #ffebee;
-  border-color: #c62828;
-}
-.feedback {
-  display: none;
-  margin-top: 18px;
-  padding: 15px;
-  border-radius: 10px;
-  background: #f4f7fa;
-  border-left: 5px solid #1565c0;
-  font-size: 16px;
-  line-height: 1.45;
-}
-#next {
-  margin-top: 20px;
-  padding: 13px 24px;
-  border: 0;
-  border-radius: 9px;
-  background: #1565c0;
-  color: white;
-  font-size: 17px;
-  cursor: pointer;
-}
-#next:disabled { background: #9fb7d1; cursor: not-allowed; }
-.result { text-align: center; }
-.score { font-size: 52px; font-weight: bold; color: #1565c0; }
-.result button {
-  padding: 13px 24px;
-  border: 0;
-  border-radius: 9px;
-  background: #1565c0;
-  color: white;
-  font-size: 17px;
-  cursor: pointer;
-}
-@media (max-width: 600px) {
-  .card { padding: 20px; }
-  h1 { font-size: 24px; }
-  #question { font-size: 19px; }
-  .option { font-size: 16px; }
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NDMC AAO Preparation Quizzes</title>
+    <style>
+        :root {
+            --primary-blue: #0056b3;
+            --hover-blue: #003d82;
+            --bg-color: #f4f7f9;
+            --card-bg: #ffffff;
+            --text-color: #0c2340;
+            --border-color: #e1e8ed;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .quiz-container {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 30px;
+            max-width: 900px;
+            width: 100%;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--border-color);
+        }
+
+        .quiz-title {
+            color: var(--text-color);
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-top: 0;
+            margin-bottom: 24px;
+        }
+
+        /* Horizontal Layout using Flexbox */
+        .quiz-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .quiz-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background-color: var(--primary-blue);
+            color: white;
+            text-decoration: none;
+            padding: 10px 16px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: background-color 0.2s ease, transform 0.1s ease;
+        }
+
+        .quiz-btn:hover {
+            background-color: var(--hover-blue);
+            transform: translateY(-1px);
+        }
+
+        .quiz-btn:active {
+            transform: translateY(0);
+        }
+    </style>
 </head>
 <body>
-<div class="container">
-  <div class="card">
-    <h1>NDMC AAO  Preparation Quizzes</h1>
-    <p class="subtitle"></p>
-    <div style="margin-bottom:24px;">
-  <a href="Leave-Travel.html"
-     style="display:inline-block;padding:12px 18px;
-            background:#1565c0;color:white;
-            text-decoration:none;border-radius:9px;
-            font-weight:bold;">
-    📝 Quiz 1 – CCS Leave-Travel Concession
-  </a>
-</div>
-    
-    <div style="margin-bottom:24px;">
-  <a href="Joining-time.html"
-     style="display:inline-block;padding:12px 18px;
-            background:#1565c0;color:white;
-            text-decoration:none;border-radius:9px;
-            font-weight:bold;">
-    📝 Quiz 2 – CCS Joining Time
-  </a>
-</div>
-    <div style="margin-bottom:24px;">
-  <a href="CCS.html"
-     style="display:inline-block;padding:12px 18px;
-            background:#1565c0;color:white;
-            text-decoration:none;border-radius:9px;
-            font-weight:bold;">
-    📝 Quiz 3 – CCS NPS
-  </a>
-</div>
-    <div style="margin-bottom:24px;">
-  <a href="CommutationofPension.html"
-     style="display:inline-block;padding:12px 18px;
-            background:#1565c0;color:white;
-            text-decoration:none;border-radius:9px;
-            font-weight:bold;">
-    📝 Quiz 4 – CCS Commutation of Pension
-  </a>
-</div>
-    <div style="margin-bottom:24px;">
-  <a href="Pension.html"
-     style="display:inline-block;padding:12px 18px;
-            background:#1565c0;color:white;
-            text-decoration:none;border-radius:9px;
-            font-weight:bold;">
-    📝 Quiz 5 – CCS Pension
-  </a>
-</div>
-    <div style="margin-bottom:24px;">
-  <a href="FR.html"
-     style="display:inline-block;padding:12px 18px;
-            background:#1565c0;color:white;
-            text-decoration:none;border-radius:9px;
-            font-weight:bold;">
-    📝 Quiz 6 – CCS FR Rules
-  </a>
-</div>
 
-    <div style="margin-bottom:24px;">
-  <a href="MedicalAttendance.html"
-     style="display:inline-block;padding:12px 18px;
-            background:#1565c0;color:white;
-            text-decoration:none;border-radius:9px;
-            font-weight:bold;">
-    📝 Quiz 7 – CCS Medical Attendance
-  </a>
-</div>
-   <div style="margin-bottom:24px;">
-  <a href="CCA.html"
-     style="display:inline-block;padding:12px 18px;
-            background:#1565c0;color:white;
-            text-decoration:none;border-radius:9px;
-            font-weight:bold;">
-    📝 Quiz 8 – CCS Classificaton Control and Appeal
-  </a>
-</div>
-<div style="margin-bottom:24px;">
-  <a href="GPF.html"
-     style="display:inline-block;padding:12px 18px;
-            background:#1565c0;color:white;
-            text-decoration:none;border-radius:9px;
-            font-weight:bold;">
-    📝 Quiz 9 – CCS GPF Rules
-  </a>
-</div>
-    <div style="margin-bottom:24px;">
-  <a href="TA(SR).html"
-     style="display:inline-block;padding:12px 18px;
-            background:#1565c0;color:white;
-            text-decoration:none;border-radius:9px;
-            font-weight:bold;">
-    📝 Quiz 10 – CCS TA (Supplementary Rules )
-  </a>
-</div>
+    <div class="quiz-container">
+        <h1 class="quiz-title">NDMC AAO Preparation Quizzes</h1>
+        
+        <div class="quiz-grid">
+            <a href="Leave-travel.html" class="quiz-btn">📝 Quiz 1 – CCS Leave-Travel Concession</a>
+            <a href="Joining-time.html" class="quiz-btn">📝 Quiz 2 – CCS Joining Time</a>
+            <a href="CCS.html" class="quiz-btn">📝 Quiz 3 – CCS NPS</a>
+            <a href="CommutationofPension.html" class="quiz-btn">📝 Quiz 4 – CCS Commutation of Pension</a>
+            <a href="Pension.html" class="quiz-btn">📝 Quiz 5 – CCS Pension</a>
+            <a href="FR.html" class="quiz-btn">📝 Quiz 6 – CCS FR Rules</a>
+            <a href="MedicalAttendance.html" class="quiz-btn">📝 Quiz 7 – CCS Medical Attendance</a>
+            <a href="CCA.html" class="quiz-btn">📝 Quiz 8 – CCS Classification Control and Appeal</a>
+            <a href="GPF.html" class="quiz-btn">📝 Quiz 9 – CCS GPF Rules</a>
+            <a href="TA(SR).html" class="quiz-btn">📝 Quiz 10 – CCS TA (Supplementary Rules)</a>
+            <a href="Leave.html" class="quiz-btn">📝 Quiz 11 – CCS Leave Rules</a>
+        </div>
+    </div>
 
-    <div style="margin-bottom:24px;">
-  <a href="Leave.html"
-     style="display:inline-block;padding:12px 18px;
-            background:#1565c0;color:white;
-            text-decoration:none;border-radius:9px;
-            font-weight:bold;">
-    📝 Quiz 11 – CCS Leave Rules
-  </a>
-</div>
-
-
-    
-</div>
-  
-</script>
 </body>
 </html>
