@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CCS (CCA) Rules Quiz</title>
+    <style>
+        :root {
+            --primary: #581c87;
+            --primary-light: #7e22ce;
+            --secondary: #334155;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text: #0f172a;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --correct: #16a34a;
+            --correct-bg: #f0fdf4;
+            --incorrect: #dc2626;
+            --incorrect-bg: #fef2f2;
+            --selected: #f3e8ff;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.5;
+            padding-bottom: 40px;
+        }
+
+        header {
+            background-color: var(--primary);
+            color: white;
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .header-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        .timer-box {
+            background-color: rgba(255, 255, 255, 0.15);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            font-family: monospace;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 1.5rem auto;
+            padding: 0 1rem;
+        }
+
+        .palette-card {
+            background: var(--card-bg);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid var(--border);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .palette-title {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            margin-bottom: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .palette-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(36px, 1fr));
+            gap: 6px;
+        }
+
+        .palette-btn {
+            aspect-ratio: 1;
+            border: 1px solid var(--border);
+            background: white;
+            color: var(--text);
+            font-weight: 600;
+            font-size: 0.85rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .palette-btn:hover {
+            border-color: var(--primary-light);
+        }
+
+        .palette-btn.active {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px var(--primary-light);
+        }
+
+        .palette-btn.answered {
+            background-color: #2563eb;
+            color: white;
+            border-color: #2563eb;
+        }
+
+        .palette-btn.correct {
+            background-color: var(--correct);
+            color: white;
+            border-color: var(--correct);
+        }
+
+        .palette-btn.incorrect {
+            background-color: var(--incorrect);
+            color: white;
+            border-color: var(--incorrect);
+        }
+
+        .question-card {
+            background: var(--card-bg);
+            border-radius: 8px;
+            padding: 1.5rem;
+            border: 1px solid var(--border);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            margin-bottom: 1.5rem;
+        }
+
+        .question-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .question-text {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 1.25rem;
+            color: var(--primary);
+        }
+
+        .options-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .option-item {
+            display: flex;
+            align-items: flex-start;
+            padding: 0.85rem 1rem;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+            background: white;
+        }
+
+        .option-item:hover:not(.disabled) {
+            background-color: var(--selected);
+            border-color: var(--primary-light);
+        }
+
+        .option-item.selected {
+            background-color: var(--selected);
+            border-color: var(--primary-light);
+            border-width: 2px;
+        }
+
+        .option-item.correct-answer {
+            background-color: var(--correct-bg);
+            border-color: var(--correct);
+            color: var(--correct);
+            font-weight: 600;
+        }
+
+        .option-item.wrong-answer {
+            background-color: var(--incorrect-bg);
+            border-color: var(--incorrect);
+            color: var(--incorrect);
+        }
+
+        .option-prefix {
+            font-weight: 600;
+            margin-right: 0.75rem;
+            min-width: 20px;
+        }
+
+        .explanation-box {
+            margin-top: 1.25rem;
+            padding: 1rem;
+            background-color: #f8fafc;
+            border-left: 4px solid var(--primary-light);
+            border-radius: 0 6px 6px 0;
+            font-size: 0.95rem;
+            display: none;
+        }
+
+        .explanation-title {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+            color: var(--secondary);
+        }
+
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.65rem 1.25rem;
+            border-radius: 6px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: background 0.2s;
+            font-size: 0.95rem;
+        }
+
+        .btn-secondary {
+            background-color: #e2e8f0;
+            color: var(--secondary);
+        }
+
+        .btn-secondary:hover:not(:disabled) {
+            background-color: #cbd5e0;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-light);
+            color: white;
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            background-color: var(--primary);
+        }
+
+        .btn-submit {
+            background-color: var(--correct);
+            color: white;
+        }
+
+        .btn-submit:hover {
+            background-color: #15803d;
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .results-card {
+            background: var(--card-bg);
+            border-radius: 8px;
+            padding: 2rem;
+            border: 1px solid var(--border);
+            text-align: center;
+            margin-bottom: 1.5rem;
+            display: none;
+        }
+
+        .score-display {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 1rem 0;
+        }
+
+        .percentage-display {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+
+        .hide {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-title">CCS (CCA) Rules Quiz</div>
+        <div class="timer-box" id="timer">Time Remaining: 30:00</div>
+    </header>
+
+    <div class="container">
+        <div class="palette-card">
+            <div class="palette-title">Question Navigator</div>
+            <div class="palette-grid" id="palette"></div>
+        </div>
+
+        <div id="results" class="results-card">
+            <h2>Quiz Results</h2>
+            <div class="score-display" id="score-text">0 / 50</div>
+            <div class="percentage-display" id="percentage-text">0%</div>
+            <p>Review your answers below.</p>
+        </div>
+
+        <div class="question-card" id="quiz-card">
+            <div class="question-header">
+                <span id="q-number">Question 1 of 50</span>
+                <span>1 Mark</span>
+            </div>
+            <div class="question-text" id="q-text">Loading...</div>
+            <div class="options-list" id="options-container"></div>
+            <div class="explanation-box" id="explanation">
+                <div class="explanation-title">Rule Reference & Explanation:</div>
+                <div id="exp-text"></div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <button class="btn btn-secondary" id="prev-btn" onclick="navigate(-1)">Previous</button>
+            <button class="btn btn-primary" id="next-btn" onclick="navigate(1)">Next</button>
+            <button class="btn btn-submit" id="submit-btn" onclick="confirmSubmit()">Submit Quiz</button>
+        </div>
+    </div>
+
+    <script>
+        const rawQuestions = [
+            {
+                q: "In which year were the Central Civil Services (Classification, Control and Appeal) Rules promulgated?",
+                options: ["1955", "1965", "1972", "1981"],
+                ans: 1,
+                exp: "The CCS (CCA) Rules were established in the year 1965."
+            },
+            {
+                q: "Central Civil Services are classified into how many groups under Rule 4 of CCS (CCA) Rules?",
+                options: ["Three (Group A, B, C)", "Four (Group A, B, C, D)", "Five", "Two"],
+                ans: 1,
+                exp: "Under Rule 4, the Civil Services of the Union are classified into Group A, Group B, Group C, and Group D."
+            },
+            {
+                q: "Suspension of a Government servant is placed under which rule of CCS (CCA) Rules, 1965?",
+                options: ["Rule 8", "Rule 10", "Rule 11", "Rule 14"],
+                ans: 1,
+                exp: "Rule 10 of CCS (CCA) Rules, 1965 governs the order of suspension."
+            },
+            {
+                q: "A Government servant detained in custody for a period exceeding how many hours is deemed to have been suspended?",
+                options: ["12 hours", "24 hours", "48 hours", "72 hours"],
+                ans: 2,
+                exp: "Under Rule 10(2), a Government servant detained in custody for a period exceeding 48 hours shall be deemed to have been suspended."
+            },
+            {
+                q: "An order of suspension made or deemed to have been made under Rule 10 must be reviewed before expiry of how many days from effective date?",
+                options: ["30 days", "60 days", "90 days", "180 days"],
+                ans: 2,
+                exp: "Under Rule 10(6), suspension must be reviewed before the expiry of 90 days from the effective date of suspension."
+            },
+            {
+                q: "If an order of suspension is extended after review under Rule 10(7), such extension shall not be for a period exceeding how many 180-day blocks at one time?",
+                options: ["30 days", "90 days", "180 days", "365 days"],
+                ans: 2,
+                exp: "Extension of suspension after review cannot exceed 180 days at any one time under Rule 10(7)."
+            },
+            {
+                q: "Penalties specified under Rule 11 of CCS (CCA) Rules are categorized into:",
+                options: ["Minor and Major penalties", "Ordinary and Extraordinary penalties", "Primary and Secondary penalties", "Cognizable and Non-cognizable penalties"],
+                ans: 0,
+                exp: "Rule 11 categorizes penalties into Minor Penalties (clauses i to iv) and Major Penalties (clauses v to ix)."
+            },
+            {
+                q: "Which of the following is categorized as a MINOR penalty under Rule 11?",
+                options: ["Compulsory Retirement", "Reduction to a lower stage in time-scale for 3 years with cumulative effect", "Censure", "Removal from service"],
+                ans: 2,
+                exp: "Censure is clause (i) of Rule 11, which is a minor penalty."
+            },
+            {
+                q: "Withholding of increments of pay without cumulative effect is classified as:",
+                options: ["Major Penalty", "Minor Penalty", "Administrative warning", "Financial recovery"],
+                ans: 1,
+                exp: "Withholding of increments of pay without cumulative effect falls under Minor Penalties (Rule 11(iv))."
+            },
+            {
+                q: "Which of the following is NOT a penalty under Rule 11 of CCS (CCA) Rules?",
+                options: ["Warning (in writing)", "Censure", "Reduction to a lower post", "Dismissal from service"],
+                ans: 0,
+                exp: "An administrative warning is not a statutory penalty listed under Rule 11."
+            },
+            {
+                q: "Reduction to a lower stage in the time-scale of pay with cumulative effect is a:",
+                options: ["Minor penalty", "Major penalty", "Statutory caution", "Financial recovery"],
+                ans: 1,
+                exp: "Reduction to a lower stage in time-scale with cumulative effect or affecting future increments is classified as a Major Penalty under Rule 11(v)."
+            },
+            {
+                q: "Which penalty disqualifies a person from future employment under the Government?",
+                options: ["Compulsory Retirement", "Removal from service", "Dismissal from service", "Reduction in rank"],
+                ans: 2,
+                exp: "Dismissal from service shall ordinarily be a disqualification for future employment under Government, whereas Removal does not automatically disqualify."
+            },
+            {
+                q: "What is the procedure for imposing MAJOR penalties prescribed under which rule?",
+                options: ["Rule 11", "Rule 14", "Rule 16", "Rule 19"],
+                ans: 1,
+                exp: "Rule 14 prescribes the detailed procedure for imposing major penalties."
+            },
+            {
+                q: "The procedure for imposing MINOR penalties is prescribed under which rule of CCS (CCA) Rules?",
+                options: ["Rule 12", "Rule 14", "Rule 16", "Rule 18"],
+                ans: 2,
+                exp: "Rule 16 prescribes the procedure for imposing minor penalties."
+            },
+            {
+                q: "Under Rule 14, how many days' time is ordinarily allowed to the charged officer to submit a written statement of defense?",
+                options: ["7 days", "10 days", "15 days", "30 days"],
+                ans: 1,
+                exp: "Under Rule 14(4), the charged officer is given 10 days (extendable upon request) to submit a written statement of defense."
+            },
+            {
+                q: "Who conducts the oral inquiry under Rule 14 when the charged officer denies the charges?",
+                options: ["Disciplinary Authority itself or an Inquiring Authority appointed by it", "Controlling Officer", "Head of Office", "Police Inspector"],
+                ans: 0,
+                exp: "The Disciplinary Authority may itself inquire into the charges or appoint an Inquiring Authority (IA) under Rule 14(2)."
+            },
+            {
+                q: "Can a Government servant engage a legal practitioner (lawyer) as a Defense Assistant during a departmental inquiry?",
+                options: ["Yes, unconditionally", "No, never", "Only if the Presenting Officer appointed by Disciplinary Authority is a legal practitioner / prosecutor, or with permission of DA", "Only with High Court permission"],
+                ans: 2,
+                exp: "Under Rule 14(8)(b), a charged officer may not engage a legal practitioner unless the Presenting Officer is a legal practitioner or permission is granted by the Disciplinary Authority."
+            },
+            {
+                q: "What is the role of the Presenting Officer (PO) in an inquiry under Rule 14?",
+                options: ["To assist the charged officer", "To present the case in support of the articles of charge on behalf of Disciplinary Authority", "To pass the penalty order", "To write the inquiry report"],
+                ans: 1,
+                exp: "The Presenting Officer presents the evidence and documents supporting the charges before the Inquiring Authority."
+            },
+            {
+                q: "Under Rule 14, after completion of inquiry, the Inquiring Authority submits its report to:",
+                options: ["Central Vigilance Commission", "Disciplinary Authority", "Appellate Authority", "President of India"],
+                ans: 1,
+                exp: "The Inquiring Authority prepares an inquiry report containing findings on each charge and submits it to the Disciplinary Authority."
+            },
+            {
+                q: "Before taking a final decision on the inquiry report, the Disciplinary Authority must forward a copy of the report to the charged employee to allow representation within:",
+                options: ["7 days", "15 days", "30 days", "45 days"],
+                ans: 1,
+                exp: "Under Rule 15(2), the Disciplinary Authority forwards a copy of the inquiry report to the delinquent employee allowing 15 days to submit a representation."
+            },
+            {
+                q: "Special procedure in certain cases where regular inquiry under Rule 14 or 16 is dispensed with is governed by which rule?",
+                options: ["Rule 17", "Rule 19", "Rule 20", "Rule 22"],
+                ans: 1,
+                exp: "Rule 19 specifies special procedure for dispensing with inquiry (e.g., conviction on criminal charge, impracticable to hold inquiry, interest of security of State)."
+            },
+            {
+                q: "Under Rule 19(i), penalty can be imposed without holding an inquiry if the employee is penalized on the ground of conduct which led to:",
+                options: ["Conviction on a criminal charge", "Unauthorized absence of 1 day", "Disobedience of transfer order", "Failing an internal exam"],
+                ans: 0,
+                exp: "Rule 19(i) applies when a penalty is imposed on a Government servant on the ground of conduct which has led to his conviction on a criminal charge."
+            },
+            {
+                q: "Which authority can institute disciplinary proceedings against a Group 'A' officer?",
+                options: ["Head of Office", "President of India or an authority empowered by President", "Immediate Supervisor", "District Magistrate"],
+                ans: 1,
+                exp: "Disciplinary proceedings against Group A officers are instituted by the President or an authority specifically empowered by general or special order of the President."
+            },
+            {
+                q: "Appeals against orders passed under CCS (CCA) Rules are dealt with under which Part of the rules?",
+                options: ["Part IV", "Part VI (Rules 22 to 28)", "Part VIII", "Part X"],
+                ans: 1,
+                exp: "Part VI (Rules 22 to 28) deals with Appeals."
+            },
+            {
+                q: "What is the time limit for filing an Appeal against a disciplinary order under Rule 25 of CCS (CCA) Rules?",
+                options: ["15 days", "30 days", "45 days", "90 days"],
+                ans: 2,
+                exp: "Rule 25 provides that no appeal shall be entertained unless it is submitted within a period of 45 days from the date on which copy of the order is delivered."
+            },
+            {
+                q: "An appeal against an order passed by a Disciplinary Authority lies to the:",
+                options: ["Head of Office", "Appellate Authority designated in the Schedule", "Central Administrative Tribunal", "Supreme Court"],
+                ans: 1,
+                exp: "An appeal lies to the specified Appellate Authority designated under the rules/schedule."
+            },
+            {
+                q: "Revision and Review provisions under CCS (CCA) Rules are contained in which rules?",
+                options: ["Rule 14 and 15", "Rule 29 and 29-A", "Rule 31 and 32", "Rule 10 and 11"],
+                ans: 1,
+                exp: "Rule 29 deals with Revision and Rule 29-A deals with Review."
+            },
+            {
+                q: "Who holds the power of Revision under Rule 29 of CCS (CCA) Rules?",
+                options: ["President, Head of Department, or Appellate Authority within specified period", "Inquiring Authority", "Presenting Officer", "Central Vigilance Commission"],
+                ans: 0,
+                exp: "Rule 29 empowers the President, HoD, or Appellate Authority to revise an order passed under these rules."
+            },
+            {
+                q: "The President may review any order passed under CCS (CCA) Rules when any new material or evidence comes to light under:",
+                options: ["Rule 19", "Rule 25", "Rule 29-A", "Rule 32"],
+                ans: 2,
+                exp: "Rule 29-A gives the President power to review any order when new evidence/material becomes available."
+            },
+            {
+                q: "Which rule deals with Common Proceedings against two or more Government servants involved in the same case?",
+                options: ["Rule 14", "Rule 16", "Rule 18", "Rule 21"],
+                ans: 2,
+                exp: "Rule 18 governs the procedure for Common Proceedings when two or more Government servants are concerned in any case."
+            },
+            {
+                q: "Where two or more government servants are involved in a common case, an order for common proceedings must specify:",
+                options: ["The authority which shall function as Disciplinary Authority for such common proceedings", "Separate inquiries for each", "Immediate dismissal", "Transfer of all officers"],
+                ans: 0,
+                exp: "Under Rule 18, the competent authority specifies which Disciplinary Authority shall act for the common proceedings."
+            },
+            {
+                q: "What is the timeline prescribed by DoPT for completing a departmental inquiry by the Inquiring Authority under Rule 14?",
+                options: ["3 months", "6 months", "9 months", "12 months"],
+                ans: 1,
+                exp: "DoPT guidelines mandate that the Inquiring Authority should complete the inquiry and submit its report within 6 months."
+            },
+            {
+                q: "Which rule specifies the authorities competent to institute disciplinary proceedings?",
+                options: ["Rule 10", "Rule 12", "Rule 15", "Rule 24"],
+                ans: 1,
+                exp: "Rule 12 specifies the Disciplinary Authorities competent to impose penalties or institute proceedings."
+            },
+            {
+                q: "Can a suspended Government servant leave their headquarters without prior permission?",
+                options: ["Yes, unrestricted", "No, prior permission of the competent authority is required", "Yes, up to 7 days", "Only during holidays"],
+                ans: 1,
+                exp: "A Government servant under suspension must obtain prior permission from the competent authority before leaving headquarters."
+            },
+            {
+                q: "Is an ex-parte inquiry permissible under Rule 14 of CCS (CCA) Rules?",
+                options: ["No, ex-parte inquiries are illegal", "Yes, if the charged officer refuses or fails to appear without reasonable cause", "Only with High Court permission", "Only in Group A cases"],
+                ans: 1,
+                exp: "Under Rule 14(20), if the charged officer fails to appear or refuses to comply, the Inquiring Authority may hold an ex-parte inquiry."
+            },
+            {
+                q: "What standard of proof is required in a departmental inquiry under CCS (CCA) Rules?",
+                options: ["Proof beyond reasonable doubt", "Preponderance of probability", "Prima facie evidence only", "Absolute mathematical certainty"],
+                ans: 1,
+                exp: "Departmental proceedings are decided based on the standard of 'Preponderance of Probability', not 'Proof beyond reasonable doubt'."
+            },
+            {
+                q: "Can a retired Government servant be appointed as an Inquiring Authority for conducting a departmental inquiry?",
+                options: ["No", "Yes, as per empanelment guidelines of DoPT/CVC", "Only if retired as Judge", "Only with Cabinet approval"],
+                ans: 1,
+                exp: "DoPT guidelines permit appointment of eligible retired government officers from approved panels to act as Inquiring Authorities."
+            },
+            {
+                q: "Which rule protects the right of a Government servant to submit a Petition/Memorial to the President?",
+                options: ["Rule 25", "Rule 29", "Rule 30 (read with instructions)", "Rule 11"],
+                ans: 2,
+                exp: "Rule 30 and supplementary instructions govern petitions/memorials submitted to the President."
+            },
+            {
+                q: "What happens if a major penalty is imposed on a Government servant without holding an inquiry under Rule 14 (and not covered under Rule 19)?",
+                options: ["It is valid if approved by Minister", "It is legally void and violative of Article 311(2) of Constitution", "It becomes a minor penalty automatically", "It is converted to warning"],
+                ans: 1,
+                exp: "Imposing a major penalty without an inquiry (unless covered by Rule 19 exceptions) violates Article 311(2) of the Constitution and renders the order invalid."
+            },
+            {
+                q: "Is consultation with Central Vigilance Commission (CVC) mandatory in vigilance cases before passing final penalty orders?",
+                options: ["No consultation needed", "Yes, initial and second stage advice as per vigilance manual for covered categories", "Only for Group C employees", "Only for dismissal"],
+                ans: 1,
+                exp: "In vigilance cases involving officers in CVC jurisdiction, consultation for CVC advice is required at prescribed stages."
+            },
+            {
+                q: "Which minor penalty order requires holding a regular oral inquiry under Rule 14 as per Rule 16(1-A)?",
+                options: ["Censure", "Withholding of promotion", "Withholding of increment for more than 3 years or with cumulative effect", "Recovery of small loss"],
+                ans: 2,
+                exp: "Under Rule 16(1-A), if it is proposed to withhold increments for a period exceeding 3 years or with cumulative effect, a Rule 14 inquiry must be held."
+            },
+            {
+                q: "Can the Disciplinary Authority disagree with the findings of the Inquiring Authority?",
+                options: ["No, findings are binding", "Yes, but it must record reasons for disagreement and send tentative disagreement note to employee", "Only if Appellate Authority directs", "Only by cancelling the charge sheet"],
+                ans: 1,
+                exp: "Under Rule 15(2), if the DA disagrees with IA findings, it records tentative reasons for disagreement and provides them to the charged officer for representation."
+            },
+            {
+                q: "In case of conviction by a criminal court, can penalty under Rule 19(i) be imposed before the criminal appeal is decided?",
+                options: ["No, must wait for final appeal in Supreme Court", "Yes, action can be taken upon conviction without waiting for appeal outcome", "Only if sentence exceeds 7 years", "Only with Governor's permission"],
+                ans: 1,
+                exp: "Action under Rule 19(i) can be initiated immediately upon conviction by a criminal court, without waiting for the outcome of an appeal."
+            },
+            {
+                q: "Does a Government servant under suspension draw regular pay?",
+                options: ["Yes, full basic pay", "No, receives Subsistence Allowance governed by FR 53", "Receives 10% pay", "No payment at all"],
+                ans: 1,
+                exp: "A suspended employee does not draw regular pay but receives Subsistence Allowance as per FR 53."
+            },
+            {
+                q: "When an order of suspension is revoked without prejudice, the period of suspension is regularized under which rule?",
+                options: ["FR 54 / FR 54-B", "Rule 14", "Rule 16", "Rule 29"],
+                ans: 0,
+                exp: "Regularization of pay and allowances for suspension period upon revocation is governed by Fundamental Rules 54 / 54-B."
+            },
+            {
+                q: "Which form/standard document is used for issuing a charge-sheet for MAJOR penalty under Rule 14?",
+                options: ["Standard Form No. 1", "Standard Form No. 5", "Standard Form No. 11", "Standard Form No. 7"],
+                ans: 1,
+                exp: "Standard Form No. 5 (SF-5) is used for issuing a charge memorandum for major penalties."
+            },
+            {
+                q: "Standard Form No. 11 (SF-11) is used for issuing a charge-sheet for:",
+                options: ["Suspension", "Minor Penalty", "Major Penalty", "Appointment of Inquiry Officer"],
+                ans: 1,
+                exp: "SF-11 is the standard form used for issuing charge sheet for minor penalties under Rule 16."
+            },
+            {
+                q: "Which Standard Form is used for issuing an order of Suspension under Rule 10(1)?",
+                options: ["SF-1", "SF-2", "SF-5", "SF-7"],
+                ans: 0,
+                exp: "Standard Form No. 1 (SF-1) is used for placing a Government servant under suspension."
+            },
+            {
+                q: "Standard Form No. 2 (SF-2) is issued for:",
+                options: ["Deemed Suspension", "Revocation of Suspension", "Minor penalty", "Appointment of Presenting Officer"],
+                ans: 0,
+                exp: "SF-2 is used for issuing order of Deemed Suspension under Rule 10(2)."
+            },
+            {
+                q: "Which Standard Form is used to appoint the Inquiring Authority under Rule 14?",
+                options: ["SF-5", "SF-7", "SF-8", "SF-10"],
+                ans: 1,
+                exp: "Standard Form No. 7 (SF-7) is used for appointing the Inquiring Authority."
+            }
+        ];
+
+        let currentQ = 0;
+        let userAnswers = new Array(50).fill(null);
+        let submitted = false;
+        let timerSeconds = 1800;
+        let timerInterval = null;
+
+        function init() {
+            renderPalette();
+            loadQuestion(0);
+            startTimer();
+        }
+
+        function startTimer() {
+            timerInterval = setInterval(() => {
+                if (timerSeconds <= 0) {
+                    clearInterval(timerInterval);
+                    autoSubmit();
+                    return;
+                }
+                timerSeconds--;
+                const m = Math.floor(timerSeconds / 60).toString().padStart(2, '0');
+                const s = (timerSeconds % 60).toString().padStart(2, '0');
+                document.getElementById('timer').textContent = `Time Remaining: ${m}:${s}`;
+            }, 1000);
+        }
+
+        function renderPalette() {
+            const palette = document.getElementById('palette');
+            palette.innerHTML = '';
+            for (let i = 0; i < 50; i++) {
+                const btn = document.createElement('button');
+                btn.className = 'palette-btn';
+                btn.id = `palette-btn-${i}`;
+                btn.textContent = i + 1;
+                btn.onclick = () => jumpToQuestion(i);
+                palette.appendChild(btn);
+            }
+        }
+
+        function updatePaletteUI() {
+            for (let i = 0; i < 50; i++) {
+                const btn = document.getElementById(`palette-btn-${i}`);
+                btn.className = 'palette-btn';
+                if (i === currentQ) btn.classList.add('active');
+
+                if (submitted) {
+                    if (userAnswers[i] === rawQuestions[i].ans) {
+                        btn.classList.add('correct');
+                    } else {
+                        btn.classList.add('incorrect');
+                    }
+                } else {
+                    if (userAnswers[i] !== null) {
+                        btn.classList.add('answered');
+                    }
+                }
+            }
+        }
+
+        function loadQuestion(index) {
+            currentQ = index;
+            const q = rawQuestions[index];
+            document.getElementById('q-number').textContent = `Question ${index + 1} of 50`;
+            document.getElementById('q-text').textContent = q.q;
+
+            const optsContainer = document.getElementById('options-container');
+            optsContainer.innerHTML = '';
+
+            const prefixes = ['A', 'B', 'C', 'D'];
+            q.options.forEach((optText, optIdx) => {
+                const item = document.createElement('div');
+                item.className = 'option-item';
+                
+                if (userAnswers[index] === optIdx) {
+                    item.classList.add('selected');
+                }
+
+                if (submitted) {
+                    item.classList.add('disabled');
+                    if (optIdx === q.ans) {
+                        item.classList.add('correct-answer');
+                    }
+                    if (userAnswers[index] === optIdx && optIdx !== q.ans) {
+                        item.classList.add('wrong-answer');
+                    }
+                } else {
+                    item.onclick = () => selectOption(optIdx);
+                }
+
+                item.innerHTML = `<span class="option-prefix">${prefixes[optIdx]}.</span><span>${optText}</span>`;
+                optsContainer.appendChild(item);
+            });
+
+            const expBox = document.getElementById('explanation');
+            if (submitted) {
+                document.getElementById('exp-text').textContent = q.exp;
+                expBox.style.display = 'block';
+            } else {
+                expBox.style.display = 'none';
+            }
+
+            document.getElementById('prev-btn').disabled = (index === 0);
+            document.getElementById('next-btn').disabled = (index === 49);
+
+            updatePaletteUI();
+        }
+
+        function selectOption(optIdx) {
+            if (submitted) return;
+            userAnswers[currentQ] = optIdx;
+            loadQuestion(currentQ);
+        }
+
+        function jumpToQuestion(index) {
+            loadQuestion(index);
+        }
+
+        function navigate(direction) {
+            const target = currentQ + direction;
+            if (target >= 0 && target < 50) {
+                loadQuestion(target);
+            }
+        }
+
+        function confirmSubmit() {
+            const unanswered = userAnswers.filter(a => a === null).length;
+            let msg = "Are you sure you want to submit your quiz?";
+            if (unanswered > 0) {
+                msg = `You have ${unanswered} unanswered question(s). Are you sure you want to submit?`;
+            }
+            if (confirm(msg)) {
+                submitQuiz();
+            }
+        }
+
+        function autoSubmit() {
+            alert("Time is up! Your quiz will be submitted automatically.");
+            submitQuiz();
+        }
+
+        function submitQuiz() {
+            submitted = true;
+            clearInterval(timerInterval);
+
+            let score = 0;
+            for (let i = 0; i < 50; i++) {
+                if (userAnswers[i] === rawQuestions[i].ans) {
+                    score++;
+                }
+            }
+
+            document.getElementById('timer').textContent = "Quiz Completed";
+            document.getElementById('submit-btn').classList.add('hide');
+            
+            const resultsCard = document.getElementById('results');
+            document.getElementById('score-text').textContent = `${score} / 50`;
+            document.getElementById('percentage-text').textContent = `Percentage: ${((score / 50) * 100).toFixed(1)}%`;
+            resultsCard.style.display = 'block';
+
+            loadQuestion(currentQ);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        window.onload = init;
+    </script>
+</body>
+</html>
