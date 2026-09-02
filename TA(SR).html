@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travelling Allowance (TA) Rules Quiz</title>
+    <style>
+        :root {
+            --primary: #0f766e;
+            --primary-light: #0d9488;
+            --secondary: #334155;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text: #0f172a;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --correct: #16a34a;
+            --correct-bg: #f0fdf4;
+            --incorrect: #dc2626;
+            --incorrect-bg: #fef2f2;
+            --selected: #ccfbf1;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.5;
+            padding-bottom: 40px;
+        }
+
+        header {
+            background-color: var(--primary);
+            color: white;
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .header-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        .timer-box {
+            background-color: rgba(255, 255, 255, 0.15);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            font-family: monospace;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 1.5rem auto;
+            padding: 0 1rem;
+        }
+
+        .palette-card {
+            background: var(--card-bg);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid var(--border);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .palette-title {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            margin-bottom: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .palette-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(36px, 1fr));
+            gap: 6px;
+        }
+
+        .palette-btn {
+            aspect-ratio: 1;
+            border: 1px solid var(--border);
+            background: white;
+            color: var(--text);
+            font-weight: 600;
+            font-size: 0.85rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .palette-btn:hover {
+            border-color: var(--primary-light);
+        }
+
+        .palette-btn.active {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px var(--primary-light);
+        }
+
+        .palette-btn.answered {
+            background-color: #2563eb;
+            color: white;
+            border-color: #2563eb;
+        }
+
+        .palette-btn.correct {
+            background-color: var(--correct);
+            color: white;
+            border-color: var(--correct);
+        }
+
+        .palette-btn.incorrect {
+            background-color: var(--incorrect);
+            color: white;
+            border-color: var(--incorrect);
+        }
+
+        .question-card {
+            background: var(--card-bg);
+            border-radius: 8px;
+            padding: 1.5rem;
+            border: 1px solid var(--border);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            margin-bottom: 1.5rem;
+        }
+
+        .question-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .question-text {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 1.25rem;
+            color: var(--primary);
+        }
+
+        .options-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .option-item {
+            display: flex;
+            align-items: flex-start;
+            padding: 0.85rem 1rem;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+            background: white;
+        }
+
+        .option-item:hover:not(.disabled) {
+            background-color: var(--selected);
+            border-color: var(--primary-light);
+        }
+
+        .option-item.selected {
+            background-color: var(--selected);
+            border-color: var(--primary-light);
+            border-width: 2px;
+        }
+
+        .option-item.correct-answer {
+            background-color: var(--correct-bg);
+            border-color: var(--correct);
+            color: var(--correct);
+            font-weight: 600;
+        }
+
+        .option-item.wrong-answer {
+            background-color: var(--incorrect-bg);
+            border-color: var(--incorrect);
+            color: var(--incorrect);
+        }
+
+        .option-prefix {
+            font-weight: 600;
+            margin-right: 0.75rem;
+            min-width: 20px;
+        }
+
+        .explanation-box {
+            margin-top: 1.25rem;
+            padding: 1rem;
+            background-color: #f8fafc;
+            border-left: 4px solid var(--primary-light);
+            border-radius: 0 6px 6px 0;
+            font-size: 0.95rem;
+            display: none;
+        }
+
+        .explanation-title {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+            color: var(--secondary);
+        }
+
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.65rem 1.25rem;
+            border-radius: 6px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: background 0.2s;
+            font-size: 0.95rem;
+        }
+
+        .btn-secondary {
+            background-color: #e2e8f0;
+            color: var(--secondary);
+        }
+
+        .btn-secondary:hover:not(:disabled) {
+            background-color: #cbd5e0;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-light);
+            color: white;
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            background-color: var(--primary);
+        }
+
+        .btn-submit {
+            background-color: var(--correct);
+            color: white;
+        }
+
+        .btn-submit:hover {
+            background-color: #15803d;
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .results-card {
+            background: var(--card-bg);
+            border-radius: 8px;
+            padding: 2rem;
+            border: 1px solid var(--border);
+            text-align: center;
+            margin-bottom: 1.5rem;
+            display: none;
+        }
+
+        .score-display {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 1rem 0;
+        }
+
+        .percentage-display {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+
+        .hide {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-title">TA Rules (Supplementary Rules) Quiz</div>
+        <div class="timer-box" id="timer">Time Remaining: 30:00</div>
+    </header>
+
+    <div class="container">
+        <div class="palette-card">
+            <div class="palette-title">Question Navigator</div>
+            <div class="palette-grid" id="palette"></div>
+        </div>
+
+        <div id="results" class="results-card">
+            <h2>Quiz Results</h2>
+            <div class="score-display" id="score-text">0 / 50</div>
+            <div class="percentage-display" id="percentage-text">0%</div>
+            <p>Review your answers below.</p>
+        </div>
+
+        <div class="question-card" id="quiz-card">
+            <div class="question-header">
+                <span id="q-number">Question 1 of 50</span>
+                <span>1 Mark</span>
+            </div>
+            <div class="question-text" id="q-text">Loading...</div>
+            <div class="options-list" id="options-container"></div>
+            <div class="explanation-box" id="explanation">
+                <div class="explanation-title">Rule Reference & Explanation:</div>
+                <div id="exp-text"></div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <button class="btn btn-secondary" id="prev-btn" onclick="navigate(-1)">Previous</button>
+            <button class="btn btn-primary" id="next-btn" onclick="navigate(1)">Next</button>
+            <button class="btn btn-submit" id="submit-btn" onclick="confirmSubmit()">Submit Quiz</button>
+        </div>
+    </div>
+
+    <script>
+        const rawQuestions = [
+            {
+                q: "Travelling Allowance (TA) rules for Central Government employees are primarily contained in which set of rules?",
+                options: ["Fundamental Rules (FR)", "Supplementary Rules (SR)", "General Financial Rules (GFR)", "CCS (Leave) Rules"],
+                ans: 1,
+                exp: "Travelling Allowance rules are incorporated under the Supplementary Rules (SR 17 to SR 205)."
+            },
+            {
+                q: "Under SR 22, Travelling Allowance is granted to cover:",
+                options: ["An additional source of income", "Expenses incurred by a Government servant in travelling in the interest of public service", "Personal family vacations", "A fixed monthly perk"],
+                ans: 1,
+                exp: "SR 22 states that TA is intended to cover expenses incurred by a government servant in travelling in the interest of the public service and is not to be a source of profit."
+            },
+            {
+                q: "Which Supplementary Rule defines the different kinds of Travelling Allowances admissible to Government servants?",
+                options: ["SR 17", "SR 21", "SR 25", "SR 30"],
+                ans: 1,
+                exp: "SR 21 defines the five main kinds of Travelling Allowances (Permanent TA, Conveyance Allowance, Mileage Allowance, Daily Allowance, Actual Expenses)."
+            },
+            {
+                q: "Which of the following is NOT one of the standard components of Travelling Allowance on Tour under 7th CPC guidelines?",
+                options: ["Travel entitlement for journey (Mileage Allowance)", "Reimbursement of hotel accommodation charges", "Reimbursement of food expenses", "Entertainment Allowance"],
+                ans: 3,
+                exp: "TA on tour includes journey entitlement, hotel accommodation, and food charges (plus local travel). Entertainment allowance is not a component of TA."
+            },
+            {
+                q: "What is the Pay Level threshold (7th CPC Pay Matrix) for entitlement to travel by Air on domestic tour?",
+                options: ["Pay Level 9 and above", "Pay Level 11 and above", "Pay Level 14 and above", "Pay Level 6 and above"],
+                ans: 2,
+                exp: "Under 7th CPC TA rules, Officers in Pay Level 14 and above are entitled to Economy / Business Class air travel on tour as per post level, while Level 14 and above get Business/Economy and Level 9 to 13 are entitled to Air travel in Economy class."
+            },
+            {
+                q: "Government servants in Pay Level 9 to Level 13 are entitled to travel on domestic tour by:",
+                options: ["AC First Class by train or Economy Class by Air", "Executive Class in Shatabdi only", "Business Class by Air", "Non-AC Sleeper Class"],
+                ans: 0,
+                exp: "Pay Levels 9 to 13 are entitled to travel by Economy Class by Air or AC 1st Class / Executive Class by Train."
+            },
+            {
+                q: "What is the train travel entitlement for employees in Pay Level 6 to Level 8?",
+                options: ["AC First Class", "AC II Tier / Executive Class", "AC III Tier / AC Chair Car", "Sleeper Class"],
+                ans: 1,
+                exp: "Employees in Pay Levels 6 to 8 are entitled to travel by AC II Tier / Executive Chair Car by train."
+            },
+            {
+                q: "Employees in Pay Level 1 to 5 are entitled to travel by train in:",
+                options: ["AC II Tier", "AC III Tier / AC Chair Car", "Sleeper Class", "First Class (Non-AC)"],
+                ans: 1,
+                exp: "Pay Levels 1 to 5 are entitled to travel by AC III Tier / AC Chair Car by train."
+            },
+            {
+                q: "Air tickets for official domestic travel must be booked strictly through which authorized travel agency/agencies?",
+                options: ["Any private online portal", "Balmer Lawrie & Co., IRCTC, and Ashoka Travels & Tours (ATT)", "MakeMyTrip and Yatra only", "Directly at airline counter only"],
+                ans: 1,
+                exp: "As per Ministry of Finance guidelines, air tickets must be booked through Balmer Lawrie & Company, IRCTC, or Ashoka Travels & Tours."
+            },
+            {
+                q: "Daily Allowance (DA) on tour is intended to cover:",
+                options: ["Loss of private business", "Expenses for hotel stay, food charges, and local travel", "Purchase of clothes for tour", "Gifts for family"],
+                ans: 1,
+                exp: "Under 7th CPC, DA on tour was restructured into reimbursement of hotel accommodation, food expenses, and local travel charges."
+            },
+            {
+                q: "Reimbursement of food charges during official tour under 7th CPC rules requires submission of food bills for officers in:",
+                options: ["Pay Level 1 to 5", "Pay Level 6 to 11", "Pay Level 12 and above", "No pay level requires production of vouchers (reimbursed on self-certification) / per revised simplified norms"],
+                ans: 3,
+                exp: "Under revised 7th CPC guidelines (OM dated 13.07.2017 & subsequent clarifications), food reimbursement is paid on lump-sum / self-certification basis without producing vouchers."
+            },
+            {
+                q: "What is the maximum duration for which Daily Allowance can be drawn at a single station during continuous tour without special sanction under SR 73?",
+                options: ["30 days", "60 days", "180 days", "365 days"],
+                ans: 2,
+                exp: "Under SR 73, DA is admissible up to 180 days at a single station during tour (full rates up to 180 days subject to conditions)."
+            },
+            {
+                q: "Beyond 180 days of continuous halt at an outstation during tour, drawal of DA requires sanction of:",
+                options: ["Head of Office", "Head of Department", "Administrative Ministry / Department of Expenditure", "No DA is admissible beyond 180 days under any circumstance"],
+                ans: 2,
+                exp: "Continuous halt beyond 180 days requires approval of the Administrative Ministry / Department."
+            },
+            {
+                q: "If an officer is provided free boarding and lodging at the tour station by Government/Host organization, what proportion of Daily Allowance is admissible?",
+                options: ["Nil (0%)", "25%", "50%", "100%"],
+                ans: 1,
+                exp: "When both free boarding and lodging are provided, DA/food reimbursement is restricted to 25% of the prescribed entitlement."
+            },
+            {
+                q: "If only free lodging is provided to an officer on tour, what proportion of food entitlement under DA is admissible?",
+                options: ["25%", "50%", "75%", "100%"],
+                ans: 1,
+                exp: "If only free lodging is provided, the officer gets 50% of the food component."
+            },
+            {
+                q: "Travelling Allowance on Transfer includes which of the following components?",
+                options: ["Travel entitlement for employee and family, composite transfer grant, and freight of personal effects", "Hotel bill reimbursement for 30 days", "Free LTC ticket", "Overtime allowance"],
+                ans: 0,
+                exp: "TA on Transfer comprises travel fare for self and family, Composite Transfer Grant (CTG), and transportation charges for personal effects and motor car/cycle."
+            },
+            {
+                q: "What is the rate of Composite Transfer Grant (CTG) admissible on transfer involving change of station located beyond 20 km?",
+                options: ["50% of Basic Pay", "80% of Basic Pay", "100% of Basic Pay", "200% of Basic Pay"],
+                ans: 1,
+                exp: "Under 7th CPC rules, Composite Transfer Grant (CTG) is paid at the rate of 80% of last drawn Basic Pay on transfer involving change of station beyond 20 km."
+            },
+            {
+                q: "In case of transfer to a station within 20 km or within the same city, CTG is admissible at what rate provided there is a change of residence?",
+                options: ["Nil", "one-third (1/3rd) of Basic Pay", "50% of Basic Pay", "80% of Basic Pay"],
+                ans: 1,
+                exp: "For transfer within 20 km or same station involving change of residence, CTG is paid at 1/3rd (33.33%) of Basic Pay."
+            },
+            {
+                q: "If both husband and wife are Central Government employees and are transferred to the same station within 6 months of each other, how is CTG granted?",
+                options: ["Full CTG to both", "Full CTG to one and 50% to the other", "Full CTG to one spouse and NO CTG to the second spouse", "No CTG to either"],
+                ans: 2,
+                exp: "If transferred to the same station within 6 months, only one spouse gets full CTG, and no second CTG is admissible to the other spouse."
+            },
+            {
+                q: "What is the maximum weight limit of personal effects permitted for transportation on transfer for employees in Pay Level 12 and above?",
+                options: ["1,500 kg", "3,000 kg", "6,000 kg", "8,000 kg"],
+                ans: 2,
+                exp: "Pay Level 12 and above are entitled to transport up to 6,000 kg of personal effects by train/road."
+            },
+            {
+                q: "Employees in Pay Level 6 to Level 11 are entitled to transport how much weight of personal effects on transfer?",
+                options: ["1,500 kg", "3,000 kg", "4,500 kg", "6,000 kg"],
+                ans: 1,
+                exp: "Pay Levels 6 to 11 are entitled to transport up to 3,000 kg of personal effects on transfer."
+            },
+            {
+                q: "Pay Level 5 and below are entitled to transport up to what limit of personal effects on transfer?",
+                options: ["1,000 kg", "1,500 kg", "2,000 kg", "3,000 kg"],
+                ans: 1,
+                exp: "Pay Level 5 and below are entitled to transport up to 1,500 kg of personal effects."
+            },
+            {
+                q: "Is transportation of a personal motor car admissible on transfer for employees in Pay Level 6 and above?",
+                options: ["No, only two-wheelers allowed", "Yes, one motor car or one motor cycle/scooter", "Yes, up to 2 cars", "Only for Group A officers"],
+                ans: 1,
+                exp: "Pay Level 6 and above are entitled to transport one motor car or one motor cycle/scooter on transfer."
+            },
+            {
+                q: "For employees in Pay Level 5 and below, what vehicle transport entitlement is admissible on transfer?",
+                options: ["One Motor Car", "One Motor Cycle / Scooter / Moped / Bicycle", "No vehicle transport allowed", "Truck freight only"],
+                ans: 1,
+                exp: "Pay Level 5 and below are entitled to transport one motor cycle/scooter/bicycle on transfer."
+            },
+            {
+                q: "Within what time limit from the date of retirement must Travelling Allowance on Retirement (TA on Retirement) journey be completed?",
+                options: ["3 months", "6 months", "1 year", "2 years"],
+                ans: 2,
+                exp: "TA on retirement journey must be undertaken within 1 year from the date of retirement."
+            },
+            {
+                q: "Is Travelling Allowance on Retirement admissible to a Government servant who resigns from service?",
+                options: ["Yes, full TA", "No, TA on retirement is NOT admissible in case of resignation", "50% TA", "Only CTG"],
+                ans: 1,
+                exp: "TA on retirement is admissible on superannuation, voluntary retirement, or compulsory retirement, but NOT on resignation."
+            },
+            {
+                q: "What is the time limit for submitting Travelling Allowance (TA) claim on completion of tour to avoid forfeiture?",
+                options: ["30 days", "60 days", "180 days", "1 year"],
+                ans: 1,
+                exp: "As per Ministry of Finance OM dated 13.03.2018, the time limit for submission of TA claim on tour/transfer/retirement is 60 days from completion of journey."
+            },
+            {
+                q: "What percentage of estimated TA expense can be granted as a Travelling Allowance Advance for an official tour under GFR/SR?",
+                options: ["50%", "75%", "90%", "100%"],
+                ans: 2,
+                exp: "TA Advance for tour can be granted up to 90% of the estimated Travelling Allowance."
+            },
+            {
+                q: "If a TA Advance was drawn by an employee for a tour, within how many days of return from tour must the final TA bill be submitted?",
+                options: ["15 days", "30 days", "60 days", "90 days"],
+                ans: 0,
+                exp: "When a TA advance is drawn, the final adjustment bill must be submitted within 15 days of completion of the journey."
+            },
+            {
+                q: "What happens if an employee fails to adjust a TA Advance within the prescribed time limit?",
+                options: ["No penalty", "The entire advance amount is recovered in lump sum from next salary with penal interest", "Written warning only", "Cancellation of tour orders"],
+                ans: 1,
+                exp: "Failure to submit adjustment bill for TA advance within time results in recovery of the entire advance in one lump sum from salary along with penal interest."
+            },
+            {
+                q: "Travelling Allowance for attending a departmental inquiry as a Defense Assistant to another Government servant is admissible under which rule?",
+                options: ["SR 120", "SR 154", "SR 190", "SR 200"],
+                ans: 1,
+                exp: "SR 154 governs TA admissible to a government servant functioning as Defense Assistant in disciplinary proceedings."
+            },
+            {
+                q: "When a Government servant is summoned by a Court of Law to give evidence as a official witness in their official capacity, TA is paid by:",
+                options: ["The Court directly in cash", "The Government Department of the employee (as TA on tour)", "The accused party", "No TA is allowed"],
+                ans: 1,
+                exp: "When giving evidence in official capacity, the employee is treated as on tour and TA is paid by their parent department."
+            },
+            {
+                q: "Is TA admissible to a Government servant for attending a mandatory departmental examination or training course?",
+                options: ["No, exams are personal", "Yes, treated as journey on tour", "Only return fare", "Only 50% DA"],
+                ans: 1,
+                exp: "Journeys performed for attending obligatory departmental examinations or mandatory training programs are treated as journeys on duty/tour."
+            },
+            {
+                q: "Under SR 89, Daily Allowance is NOT admissible for halts at headquarters or within how many kilometers from headquarters?",
+                options: ["5 km", "8 km", "12 km", "20 km"],
+                ans: 1,
+                exp: "SR 89 provides that no DA is admissible for journeys/halts within 8 km from the employee's headquarters/duty point."
+            },
+            {
+                q: "Mileage Allowance for road journeys performed by taxi / auto-rickshaw is regulated by rates approved by:",
+                options: ["Ministry of Railways", "Directorate of Estates", "Local State Transport Authority / RTO rates as notified by Ministry of Finance", "Hotel Association"],
+                ans: 2,
+                exp: "Road mileage rates are based on rates prescribed by the Directorate of Transport / RTO of the concerned station/state."
+            },
+            {
+                q: "If an officer travels on tour by a higher class of train than their entitlement without proper authorization, reimbursement is restricted to:",
+                options: ["Actual fare paid", "Fare of the entitled class", "Nil fare", "Sleeper Class fare"],
+                ans: 1,
+                exp: "If a government servant travels in a higher class than entitled without competent sanction, reimbursement is capped at the fare of the entitled class."
+            },
+            {
+                q: "Can a Government servant claim TA for a journey undertaken to submit a representation/appeal against a disciplinary order?",
+                options: ["Yes, full TA", "No, journey for personal representation is NOT on duty and no TA is admissible", "Only 50% fare", "Only with President's permission"],
+                ans: 1,
+                exp: "Journeys undertaken for personal matters, such as submitting appeals or personal representations, are not official duty journeys and TA is not admissible."
+            },
+            {
+                q: "What is the rule regarding booking of premium/tatkal train tickets for urgent official tours?",
+                options: ["Strictly prohibited", "Reimbursable if urgency is certified by the Controlling Officer / Head of Office", "Allowed for Group A only", "Paid from contingency only"],
+                ans: 1,
+                exp: "Tatkal / Premium Tatkal charges are reimbursable in official interest if urgency is certified by the Controlling Officer."
+            },
+            {
+                q: "Under 7th CPC TA rules, reimbursement of hotel accommodation charges for Pay Level 14 and above on domestic tour is capped at:",
+                options: ["₹2,500 per day", "₹4,500 per day", "₹7,500 per day + GST", "₹10,000 per day"],
+                ans: 2,
+                exp: "For Pay Level 14 and above, hotel accommodation reimbursement ceiling is ₹7,500 per day plus taxes."
+            },
+            {
+                q: "For Pay Level 12 and 13, hotel room ceiling on tour under 7th CPC rules is:",
+                options: ["₹2,250 per day", "₹4,500 per day + GST", "₹7,500 per day", "₹1,000 per day"],
+                ans: 1,
+                exp: "Pay Levels 12 and 13 have a hotel room ceiling of ₹4,500 per day plus applicable taxes."
+            },
+            {
+                q: "Hotel room ceiling per day for Pay Level 9 to 11 on tour is:",
+                options: ["₹1,000", "₹2,250 + GST", "₹4,500", "₹5,000"],
+                ans: 1,
+                exp: "Pay Levels 9 to 11 are entitled to hotel accommodation reimbursement up to ₹2,250 per day plus taxes."
+            },
+            {
+                q: "Hotel room ceiling per day for Pay Level 6 to 8 on tour is:",
+                options: ["₹450", "₹750 + GST", "₹1,000", "₹1,500"],
+                ans: 1,
+                exp: "Pay Levels 6 to 8 are entitled to hotel accommodation up to ₹750 per day plus taxes."
+            },
+            {
+                q: "Hotel accommodation reimbursement for Pay Level 5 and below on tour is capped at:",
+                options: ["₹300 per day", "₹450 per day + GST", "₹750 per day", "₹1,000 per day"],
+                ans: 1,
+                exp: "Pay Level 5 and below have a ceiling of ₹450 per day for hotel room accommodation."
+            },
+            {
+                q: "Which authority is empowered to act as the 'Controlling Officer' for countersigning TA bills of subordinate staff under SR 191?",
+                options: ["Head of Office or an officer declared as Controlling Officer by HoD", "Auditor General", "Any Senior Clerk", "Station Master"],
+                ans: 0,
+                exp: "SR 191 defines the Controlling Authority empowered to countersign TA bills, usually the Head of Office or designated officer."
+            },
+            {
+                q: "Is cancellation charge on air/train ticket reimbursable if an official tour is cancelled due to administrative reasons?",
+                options: ["No, employee bears cancellation loss", "Yes, fully reimbursable upon production of cancellation certificate/receipt and administrative reasons for cancellation", "Only 50% reimbursed", "Only for train tickets"],
+                ans: 1,
+                exp: "Ticket cancellation charges are fully reimbursable if the official tour is cancelled in public interest by competent authority."
+            },
+            {
+                q: "Can a Government servant perform a tour journey by their personal car/vehicle and claim Mileage Allowance?",
+                options: ["No, private cars forbidden", "Yes, if authorized by competent authority, at prescribed road mileage rates", "Only on Sundays", "Only up to 50 km"],
+                ans: 1,
+                exp: "With prior authorization from competent authority, a government servant may travel by personal vehicle for official tour and claim prescribed road mileage rates."
+            },
+            {
+                q: "Under SR 130, TA for a journey to join a first appointment under Government is generally:",
+                options: ["Fully admissible", "NOT admissible, unless specifically sanctioned by Government in public interest", "Admissible for Group A only", "Admissible for SC/ST only"],
+                ans: 1,
+                exp: "SR 130 states that no TA is admissible for joining a first appointment in government service unless explicitly provided by rules/sanction."
+            },
+            {
+                q: "If a Central Government employee is recalled to duty from leave while at an outstation, TA for the return journey to headquarters is:",
+                options: ["Not admissible", "Admissible from the place where recalled to headquarters under SR 142", "Only 50%", "Admissible only if leave was under 5 days"],
+                ans: 1,
+                exp: "Under SR 142, a government servant recalled to duty from leave is entitled to TA for the journey back to headquarters."
+            },
+            {
+                q: "What is the entitlement of luggage/personal effects transportation by road for transfer between places not connected by rail?",
+                options: ["1.5 times the road mileage rate", "Reimbursement of actual truck hire charges up to prescribed ceiling rate per km based on pay level", "Flat rate of ₹500", "No road transport allowed"],
+                ans: 1,
+                exp: "Transportation of personal effects by road is reimbursed based on approved per km rates up to the weight ceiling of the employee's pay level."
+            },
+            {
+                q: "For calculating Daily Allowance on tour, how is the duration of absence from headquarters determined when journey involves train/air travel?",
+                options: ["From midnight to midnight only", "From scheduled departure time to actual arrival time", "From time of departure of train/flight from HQ to time of arrival back at HQ", "Fixed 24-hour block system"],
+                ans: 2,
+                exp: "Absence from headquarters is calculated from the time of departure from duty station/HQ to the time of return to HQ."
+            }
+        ];
+
+        let currentQ = 0;
+        let userAnswers = new Array(50).fill(null);
+        let submitted = false;
+        let timerSeconds = 1800;
+        let timerInterval = null;
+
+        function init() {
+            renderPalette();
+            loadQuestion(0);
+            startTimer();
+        }
+
+        function startTimer() {
+            timerInterval = setInterval(() => {
+                if (timerSeconds <= 0) {
+                    clearInterval(timerInterval);
+                    autoSubmit();
+                    return;
+                }
+                timerSeconds--;
+                const m = Math.floor(timerSeconds / 60).toString().padStart(2, '0');
+                const s = (timerSeconds % 60).toString().padStart(2, '0');
+                document.getElementById('timer').textContent = `Time Remaining: ${m}:${s}`;
+            }, 1000);
+        }
+
+        function renderPalette() {
+            const palette = document.getElementById('palette');
+            palette.innerHTML = '';
+            for (let i = 0; i < 50; i++) {
+                const btn = document.createElement('button');
+                btn.className = 'palette-btn';
+                btn.id = `palette-btn-${i}`;
+                btn.textContent = i + 1;
+                btn.onclick = () => jumpToQuestion(i);
+                palette.appendChild(btn);
+            }
+        }
+
+        function updatePaletteUI() {
+            for (let i = 0; i < 50; i++) {
+                const btn = document.getElementById(`palette-btn-${i}`);
+                btn.className = 'palette-btn';
+                if (i === currentQ) btn.classList.add('active');
+
+                if (submitted) {
+                    if (userAnswers[i] === rawQuestions[i].ans) {
+                        btn.classList.add('correct');
+                    } else {
+                        btn.classList.add('incorrect');
+                    }
+                } else {
+                    if (userAnswers[i] !== null) {
+                        btn.classList.add('answered');
+                    }
+                }
+            }
+        }
+
+        function loadQuestion(index) {
+            currentQ = index;
+            const q = rawQuestions[index];
+            document.getElementById('q-number').textContent = `Question ${index + 1} of 50`;
+            document.getElementById('q-text').textContent = q.q;
+
+            const optsContainer = document.getElementById('options-container');
+            optsContainer.innerHTML = '';
+
+            const prefixes = ['A', 'B', 'C', 'D'];
+            q.options.forEach((optText, optIdx) => {
+                const item = document.createElement('div');
+                item.className = 'option-item';
+                
+                if (userAnswers[index] === optIdx) {
+                    item.classList.add('selected');
+                }
+
+                if (submitted) {
+                    item.classList.add('disabled');
+                    if (optIdx === q.ans) {
+                        item.classList.add('correct-answer');
+                    }
+                    if (userAnswers[index] === optIdx && optIdx !== q.ans) {
+                        item.classList.add('wrong-answer');
+                    }
+                } else {
+                    item.onclick = () => selectOption(optIdx);
+                }
+
+                item.innerHTML = `<span class="option-prefix">${prefixes[optIdx]}.</span><span>${optText}</span>`;
+                optsContainer.appendChild(item);
+            });
+
+            const expBox = document.getElementById('explanation');
+            if (submitted) {
+                document.getElementById('exp-text').textContent = q.exp;
+                expBox.style.display = 'block';
+            } else {
+                expBox.style.display = 'none';
+            }
+
+            document.getElementById('prev-btn').disabled = (index === 0);
+            document.getElementById('next-btn').disabled = (index === 49);
+
+            updatePaletteUI();
+        }
+
+        function selectOption(optIdx) {
+            if (submitted) return;
+            userAnswers[currentQ] = optIdx;
+            loadQuestion(currentQ);
+        }
+
+        function jumpToQuestion(index) {
+            loadQuestion(index);
+        }
+
+        function navigate(direction) {
+            const target = currentQ + direction;
+            if (target >= 0 && target < 50) {
+                loadQuestion(target);
+            }
+        }
+
+        function confirmSubmit() {
+            const unanswered = userAnswers.filter(a => a === null).length;
+            let msg = "Are you sure you want to submit your quiz?";
+            if (unanswered > 0) {
+                msg = `You have ${unanswered} unanswered question(s). Are you sure you want to submit?`;
+            }
+            if (confirm(msg)) {
+                submitQuiz();
+            }
+        }
+
+        function autoSubmit() {
+            alert("Time is up! Your quiz will be submitted automatically.");
+            submitQuiz();
+        }
+
+        function submitQuiz() {
+            submitted = true;
+            clearInterval(timerInterval);
+
+            let score = 0;
+            for (let i = 0; i < 50; i++) {
+                if (userAnswers[i] === rawQuestions[i].ans) {
+                    score++;
+                }
+            }
+
+            document.getElementById('timer').textContent = "Quiz Completed";
+            document.getElementById('submit-btn').classList.add('hide');
+            
+            const resultsCard = document.getElementById('results');
+            document.getElementById('score-text').textContent = `${score} / 50`;
+            document.getElementById('percentage-text').textContent = `Percentage: ${((score / 50) * 100).toFixed(1)}%`;
+            resultsCard.style.display = 'block';
+
+            loadQuestion(currentQ);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        window.onload = init;
+    </script>
+</body>
+</html>
