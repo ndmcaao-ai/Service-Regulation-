@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CCS (Commutation of Pension) Rules Quiz</title>
+    <style>
+        :root {
+            --primary: #1a365d;
+            --primary-light: #2b6cb0;
+            --secondary: #2d3748;
+            --accent: #3182ce;
+            --bg: #f7fafc;
+            --card-bg: #ffffff;
+            --text: #2d3748;
+            --text-muted: #718096;
+            --border: #e2e8f0;
+            --correct: #38a169;
+            --correct-bg: #f0fff4;
+            --incorrect: #e53e3e;
+            --incorrect-bg: #fff5f5;
+            --selected: #ebf8ff;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.5;
+            padding-bottom: 40px;
+        }
+
+        header {
+            background-color: var(--primary);
+            color: white;
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .header-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        .timer-box {
+            background-color: rgba(255, 255, 255, 0.15);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            font-mono: monospace;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 1.5rem auto;
+            padding: 0 1rem;
+        }
+
+        .palette-card {
+            background: var(--card-bg);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid var(--border);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .palette-title {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            margin-bottom: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .palette-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(36px, 1fr));
+            gap: 6px;
+        }
+
+        .palette-btn {
+            aspect-ratio: 1;
+            border: 1px solid var(--border);
+            background: white;
+            color: var(--text);
+            font-weight: 600;
+            font-size: 0.85rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .palette-btn:hover {
+            border-color: var(--primary-light);
+        }
+
+        .palette-btn.active {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px var(--primary-light);
+        }
+
+        .palette-btn.answered {
+            background-color: var(--accent);
+            color: white;
+            border-color: var(--accent);
+        }
+
+        .palette-btn.correct {
+            background-color: var(--correct);
+            color: white;
+            border-color: var(--correct);
+        }
+
+        .palette-btn.incorrect {
+            background-color: var(--incorrect);
+            color: white;
+            border-color: var(--incorrect);
+        }
+
+        .question-card {
+            background: var(--card-bg);
+            border-radius: 8px;
+            padding: 1.5rem;
+            border: 1px solid var(--border);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            margin-bottom: 1.5rem;
+        }
+
+        .question-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .question-text {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 1.25rem;
+            color: var(--primary);
+        }
+
+        .options-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .option-item {
+            display: flex;
+            align-items: flex-start;
+            padding: 0.85rem 1rem;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+            background: white;
+        }
+
+        .option-item:hover:not(.disabled) {
+            background-color: var(--selected);
+            border-color: var(--primary-light);
+        }
+
+        .option-item.selected {
+            background-color: var(--selected);
+            border-color: var(--accent);
+            border-width: 2px;
+        }
+
+        .option-item.correct-answer {
+            background-color: var(--correct-bg);
+            border-color: var(--correct);
+            color: var(--correct);
+            font-weight: 600;
+        }
+
+        .option-item.wrong-answer {
+            background-color: var(--incorrect-bg);
+            border-color: var(--incorrect);
+            color: var(--incorrect);
+        }
+
+        .option-prefix {
+            font-weight: 600;
+            margin-right: 0.75rem;
+            min-width: 20px;
+        }
+
+        .explanation-box {
+            margin-top: 1.25rem;
+            padding: 1rem;
+            background-color: #f7fafc;
+            border-left: 4px solid var(--accent);
+            border-radius: 0 6px 6px 0;
+            font-size: 0.95rem;
+            display: none;
+        }
+
+        .explanation-title {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+            color: var(--secondary);
+        }
+
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.65rem 1.25rem;
+            border-radius: 6px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: background 0.2s;
+            font-size: 0.95rem;
+        }
+
+        .btn-secondary {
+            background-color: #e2e8f0;
+            color: var(--secondary);
+        }
+
+        .btn-secondary:hover:not(:disabled) {
+            background-color: #cbd5e0;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-light);
+            color: white;
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            background-color: var(--primary);
+        }
+
+        .btn-submit {
+            background-color: var(--correct);
+            color: white;
+        }
+
+        .btn-submit:hover {
+            background-color: #2f855a;
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .results-card {
+            background: var(--card-bg);
+            border-radius: 8px;
+            padding: 2rem;
+            border: 1px solid var(--border);
+            text-align: center;
+            margin-bottom: 1.5rem;
+            display: none;
+        }
+
+        .score-display {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 1rem 0;
+        }
+
+        .percentage-display {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+
+        .hide {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-title">CCS (Commutation of Pension) Rules Quiz</div>
+        <div class="timer-box" id="timer">Time Remaining: 30:00</div>
+    </header>
+
+    <div class="container">
+        <div class="palette-card">
+            <div class="palette-title">Question Navigator</div>
+            <div class="palette-grid" id="palette"></div>
+        </div>
+
+        <div id="results" class="results-card">
+            <h2>Quiz Results</h2>
+            <div class="score-display" id="score-text">0 / 50</div>
+            <div class="percentage-display" id="percentage-text">0%</div>
+            <p>Review your answers below.</p>
+        </div>
+
+        <div class="question-card" id="quiz-card">
+            <div class="question-header">
+                <span id="q-number">Question 1 of 50</span>
+                <span>1 Mark</span>
+            </div>
+            <div class="question-text" id="q-text">Loading...</div>
+            <div class="options-list" id="options-container"></div>
+            <div class="explanation-box" id="explanation">
+                <div class="explanation-title">Rule Reference & Explanation:</div>
+                <div id="exp-text"></div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <button class="btn btn-secondary" id="prev-btn" onclick="navigate(-1)">Previous</button>
+            <button class="btn btn-primary" id="next-btn" onclick="navigate(1)">Next</button>
+            <button class="btn btn-submit" id="submit-btn" onclick="confirmSubmit()">Submit Quiz</button>
+        </div>
+    </div>
+
+    <script>
+        const rawQuestions = [
+            {
+                q: "Which of the following rules governs the commutation of pension for Central Government Employees?",
+                options: ["CCS (Pension) Rules, 1972", "CCS (Commutation of Pension) Rules, 1981", "CCS (Extraordinary Pension) Rules, 1939", "CCS (Leave) Rules, 1972"],
+                ans: 1,
+                exp: "CCS (Commutation of Pension) Rules, 1981 came into force on 1st July, 1981 and explicitly governs the commutation of pension."
+            },
+            {
+                q: "What is the maximum limit of pension that a Government servant can commute under the CCS (Commutation of Pension) Rules?",
+                options: ["33.33%", "40%", "50%", "60%"],
+                ans: 1,
+                exp: "Under Rule 5, a Government servant can commute a fraction not exceeding 40% of their pension."
+            },
+            {
+                q: "Restoration of commuted portion of pension is permissible after completion of how many years from the date of commutation?",
+                options: ["10 years", "12 years", "15 years", "20 years"],
+                ans: 2,
+                exp: "As per Rule 10A, the commuted portion of pension is restored after the expiry of 15 years from the date of commutation."
+            },
+            {
+                q: "If a government servant applies for commutation after one year from the date of retirement, which of the following is mandatory?",
+                options: ["No medical examination", "Medical examination by a prescribed medical authority", "Countersignature of Head of Department only", "Prior approval of Ministry of Finance"],
+                ans: 1,
+                exp: "As per Rule 18, application for commutation made after one year from the date of retirement requires a medical examination."
+            },
+            {
+                q: "Under which form does an applicant apply for commutation without medical examination within one year of retirement?",
+                options: ["Form 1", "Form 2", "Form 3", "Form 4"],
+                ans: 0,
+                exp: "Form 1 is used for application for commutation of a fraction of pension without medical examination within one year."
+            },
+            {
+                q: "In which form is an application submitted for commutation of pension subject to a medical examination?",
+                options: ["Form 1", "Form 2", "Form 3", "Form 5"],
+                ans: 1,
+                exp: "Form 2 is the prescribed application form for commutation of pension requiring a medical examination."
+            },
+            {
+                q: "A person granted Compulsory Retirement Pension under Rule 40 of CCS (Pension) Rules can commute pension without medical examination:",
+                options: ["Yes, unconditionally", "No, medical examination is compulsory", "Only if approved by President", "Only if service is over 20 years"],
+                ans: 1,
+                exp: "Under Rule 9, a person retired compulsorily as a penalty cannot commute pension without medical examination."
+            },
+            {
+                q: "Which authority is competent to issue authorization for payment of commuted value of pension?",
+                options: ["Head of Office", "Pay & Accounts Officer (PAO)", "Medical Board", "Treasury Officer"],
+                ans: 1,
+                exp: "The Accounts Officer / PAO issues authorization for the payment of the commuted value of pension."
+            },
+            {
+                q: "What is the Commutation Factor based upon?",
+                options: ["Length of total qualifying service", "Age next birthday", "Age last birthday", "Basic pay drawn at retirement"],
+                ans: 1,
+                exp: "The Commutation Table prescribes factors calculated on the basis of the age next birthday of the applicant."
+            },
+            {
+                q: "Commutation of pension becomes absolute for an applicant retiring on superannuation on:",
+                options: ["The date of application", "The date following the date of retirement", "The date payment is received", "The date medical report is signed"],
+                ans: 1,
+                exp: "Under Rule 6, in the case of superannuation, commutation becomes absolute on the date following the date of retirement if applied before."
+            },
+            {
+                q: "Is a government servant against whom departmental or judicial proceedings are pending eligible to commute pension?",
+                options: ["Yes, up to 40%", "Yes, up to 20%", "No, provisional pension cannot be commuted", "Yes, with special approval"],
+                ans: 2,
+                exp: "Under Rule 4, no government servant against whom departmental or judicial proceedings are pending shall be eligible to commute any fraction of provisional pension."
+            },
+            {
+                q: "When does commutation become absolute in cases where medical examination is required?",
+                options: ["On the date of application", "On the date of medical examination", "On the date on which the medical authority signs the medical report", "On the date of receipt of payment"],
+                ans: 2,
+                exp: "As per Rule 6(1)(b), commutation becomes absolute on the date on which the medical authority signs the medical report."
+            },
+            {
+                q: "What happens if a government servant dies before the commutation becomes absolute?",
+                options: ["Nominee gets commuted amount", "Amount paid to legal heirs", "No commuted value is payable", "50% of commuted value paid"],
+                ans: 2,
+                exp: "If the applicant dies before the commutation becomes absolute, no amount is payable as commuted value."
+            },
+            {
+                q: "Can an applicant withdraw their application for commutation after medical examination?",
+                options: ["No, never", "Yes, before the medical examination begins", "Yes, within 14 days of receiving the medical report if factor changes", "Yes, at any time before payment"],
+                ans: 2,
+                exp: "Under Rule 26, applicant may withdraw application by written notice within 14 days of receiving medical board's decision if factor is reduced."
+            },
+            {
+                q: "What table is used to calculate the commuted value of pension?",
+                options: ["Life Expectancy Table", "Commutation Value Table prescribed under Rules", "Central Treasury Interest Table", "LIC Mortality Table"],
+                ans: 1,
+                exp: "Commutation value is calculated using the official Commutation Value Table annexed to the CCS (Commutation) Rules."
+            },
+            {
+                q: "Formula for calculating lump-sum commuted value of pension is:",
+                options: ["Commuted portion × 12 × Commutation Factor", "Commuted portion × 10 × Commutation Factor", "Commuted portion × 12 × Basic Pay", "Commuted portion × 100 / Age next birthday"],
+                ans: 0,
+                exp: "Lump sum payable = Portion of pension commuted × 12 × Commutation factor for age next birthday."
+            },
+            {
+                q: "If fraction of pension commuted results in a fraction of a rupee, how is it rounded?",
+                options: ["Rounded off to nearest 50 paise", "Ignored", "Rounded off to next higher rupee", "Rounded off to lower rupee"],
+                ans: 2,
+                exp: "In determining the amount of fraction of pension to be commuted, fractions of a rupee are rounded off to the next higher rupee."
+            },
+            {
+                q: "Can a pensioner commute pension more than once if they commuted less than maximum permissible fraction originally?",
+                options: ["No, second commutation is prohibited", "Yes, up to the maximum limit of 40%", "Yes, but only after 5 years", "Yes, but maximum 10% extra"],
+                ans: 1,
+                exp: "If a pensioner commuted less than maximum allowed limit initially, they can commute a further fraction up to maximum limit later."
+            },
+            {
+                q: "In case of invalid pension, commutation is allowed:",
+                options: ["Without medical examination", "Only after medical examination", "Not allowed at all", "Only with President approval"],
+                ans: 1,
+                exp: "Commutation of invalid pension always requires a medical examination."
+            },
+            {
+                q: "Who constitutes the medical authority for commutation of pension exceeding normal limits or in medical cases?",
+                options: ["Civil Surgeon / District Medical Officer / Medical Board as prescribed", "Any Registered Medical Practitioner", "Pharmacist", "Head of Office"],
+                ans: 0,
+                exp: "Medical examination must be conducted by the prescribed medical authority (Medical Board / Civil Surgeon / DMO)."
+            },
+            {
+                q: "The age next birthday is calculated with reference to which date in superannuation cases (where applied before retirement)?",
+                options: ["Date of application", "Date of birth", "Date following the date of superannuation retirement", "First day of next month"],
+                ans: 2,
+                exp: "In case of superannuation, age next birthday is determined with reference to the date following the date of superannuation."
+            },
+            {
+                q: "If an applicant applies for commutation within one year of retirement on absorption in a PSU, do they need medical exam?",
+                options: ["Yes, mandatory", "No, exempt under Rule 9", "Depends on PSU", "Only if age > 60"],
+                ans: 1,
+                exp: "Retirement on absorption in PSU allows commutation without medical exam if applied within prescribed time."
+            },
+            {
+                q: "Reduction in pension on account of commutation becomes operative from:",
+                options: ["Date of retirement", "Date of application", "Date of receipt of commuted value or 3 months after issue of authority", "Date of medical board"],
+                ans: 2,
+                exp: "Reduction of pension takes effect from the date of receipt of commuted value by pensioner or 3 months after authorization."
+            },
+            {
+                q: "Dearness Relief (DR) after commutation is calculated on:",
+                options: ["Reduced (balance) basic pension", "Original full basic pension before commutation", "Commuted portion only", "50% of basic pension"],
+                ans: 1,
+                exp: "Dearness Relief is always admissible on the original full basic pension without taking into account the commuted portion."
+            },
+            {
+                q: "Form 3 under CCS (Commutation of Pension) Rules is used for:",
+                options: ["Application for commutation without medical exam", "Form of medical examination", "Form of application for commutation with medical exam", "Intimation of payment"],
+                ans: 1,
+                exp: "Form 3 is used as the form for medical examination by the Medical Authority."
+            },
+            {
+                q: "Can compassionate allowance granted under Rule 41 of Pension Rules be commuted?",
+                options: ["No, never", "Yes, with medical examination", "Yes, without medical examination", "Only 10% allowed"],
+                ans: 1,
+                exp: "A pensioner in receipt of Compassionate Allowance can commute pension only after undergoing a medical examination."
+            },
+            {
+                q: "Applicant must submit application for commutation without medical exam within how long from date of retirement?",
+                options: ["6 months", "1 year", "2 years", "3 years"],
+                ans: 1,
+                exp: "Under Rule 12, application without medical exam must be submitted within 1 year from the date of retirement."
+            },
+            {
+                q: "Which form is used by Head of Office to forward application to PAO for commutation requiring medical exam?",
+                options: ["Form 1", "Form 2", "Form 4", "Form 5"],
+                ans: 2,
+                exp: "Form 4 is used for forwarding application for commutation of pension with medical examination."
+            },
+            {
+                q: "What happens if a medical authority declares an applicant unfit for commutation?",
+                options: ["Re-examination automatically after 1 month", "Applicant cannot commute unless re-examined after 1 year", "Commutation allowed with 50% penalty", "Decision referred to Cabinet"],
+                ans: 1,
+                exp: "If declared unfit, applicant cannot commute unless a re-examination is permitted after expiry of one year."
+            },
+            {
+                q: "Is commutation of family pension permissible under CCS Rules?",
+                options: ["Yes, up to 40%", "Yes, up to 30%", "No, family pension cannot be commuted", "Yes, with medical exam"],
+                ans: 2,
+                exp: "Family pension cannot be commuted under CCS (Commutation of Pension) Rules."
+            },
+            {
+                q: "If a pensioner gets re-employed in government service, does it affect the commuted portion of pension reduction?",
+                options: ["Reduction stops", "Reduction continues as usual", "Full pension restored", "Commutation cancelled"],
+                ans: 1,
+                exp: "Re-employment does not affect the deduction of commuted value from pension; reduction continues as per rules."
+            },
+            {
+                q: "Who pays the fees for the medical board/examination for commutation after one year of retirement?",
+                options: ["Government", "Applicant / Pensioner", "PAO", "Treasury"],
+                ans: 1,
+                exp: "The applicant has to pay the prescribed fee for medical examination when applying after one year of retirement."
+            },
+            {
+                q: "Commutation factor corresponding to age next birthday 61 as per present commutation table (7th CPC) is approximately:",
+                options: ["8.194", "8.371", "9.810", "10.12"],
+                ans: 1,
+                exp: "As per the standard Commutation Table under 6th/7th CPC, factor for age next birthday 61 is 8.371."
+            },
+            {
+                q: "The age next birthday for a pensioner retiring on 31st May on superannuation at age 60 is:",
+                options: ["60 years", "61 years", "62 years", "59 years"],
+                ans: 1,
+                exp: "On superannuation at 60, the age next birthday is 61 years."
+            },
+            {
+                q: "In case of voluntary retirement under Rule 48 / 48-A, commutation without medical exam is allowed if applied within:",
+                options: ["6 months", "1 year", "2 years", "100 days"],
+                ans: 1,
+                exp: "Voluntary retirees can apply for commutation without medical examination within 1 year from retirement date."
+            },
+            {
+                q: "Can a government servant commute pension while under suspension?",
+                options: ["Yes", "No", "Yes, up to 10%", "Only with Court order"],
+                ans: 1,
+                exp: "Under suspension, only provisional pension may be sanctioned, and provisional pension cannot be commuted."
+            },
+            {
+                q: "If an applicant applies for second commutation of residual fraction within 1 year of retirement, is medical exam needed?",
+                options: ["Yes", "No", "Depends on PAO", "Only if age > 65"],
+                ans: 1,
+                exp: "If submitted within 1 year of retirement, medical examination is not required even for additional/residual fraction."
+            },
+            {
+                q: "When commuted pension is restored after 15 years, is a fresh medical exam required?",
+                options: ["Yes", "No, restoration is automatic on application/expiry", "Only if requested by PAO", "Yes, if age > 75"],
+                ans: 1,
+                exp: "Restoration after 15 years is done without any requirement of a fresh medical examination."
+            },
+            {
+                q: "If the commuted value of pension is paid in installments, 15 years for restoration is counted from:",
+                options: ["Date of retirement", "Date of payment of first installment", "Date of payment of final installment", "Date of application"],
+                ans: 1,
+                exp: "If paid in installments, the 15-year period for restoration of each commuted fraction is counted from the date of payment of that installment."
+            },
+            {
+                q: "Who is authorized to sign Form 5 (Report of Medical Authority)?",
+                options: ["Head of Office", "Prescribed Medical Authority", "Pay and Accounts Officer", "Treasury Officer"],
+                ans: 1,
+                exp: "Form 5 (or relevant medical report form) is signed by the examining Medical Authority."
+            },
+            {
+                q: "If a pensioner dies after commutation becomes absolute but before receiving the cash, to whom is the amount paid?",
+                options: ["Lapses to Government", "Paid to legal heirs / nominee as arrears", "Transferred to welfare fund", "Cancelled"],
+                ans: 1,
+                exp: "Once commutation is absolute, the commuted value becomes part of estate and is paid to nominee/legal heirs if pensioner dies before receiving payment."
+            },
+            {
+                q: "If a retrospective enhancement in pension occurs due to wage revision, commutation of additional pension:",
+                options: ["Is not allowed", "Is allowed without further medical exam if applied within time", "Requires mandatory medical board", "Is capped at 10%"],
+                ans: 1,
+                exp: "Retrospective revisions allow commutation of additional differential pension without medical exam subject to prescribed conditions."
+            },
+            {
+                q: "Which authority maintains the Commutation Table under CCS Rules?",
+                options: ["Ministry of Finance / Department of Pension & Pensioners' Welfare", "RBI", "CAG", "UPSC"],
+                ans: 0,
+                exp: "The Commutation Table is issued and maintained by Central Government (DoPPW / Ministry of Finance)."
+            },
+            {
+                q: "Is income tax exempted on lump sum commuted pension received by Central Government employees?",
+                options: ["Fully taxable", "Fully exempt under Section 10(10A) of Income Tax Act", "Exempt up to 1 Lakh", "Taxable at 10%"],
+                ans: 1,
+                exp: "Under Section 10(10A)(i) of Income Tax Act, commuted pension received by Government employees is fully exempt from income tax."
+            },
+            {
+                q: "Application for restoration of commuted pension after 15 years should be submitted to:",
+                options: ["Head of Department", "Pension Disbursing Authority (Bank / Treasury)", "UPSC", "Ministry of Home Affairs"],
+                ans: 1,
+                exp: "Application for restoration after 15 years is submitted directly to the Pension Disbursing Authority (PDA/Bank)."
+            },
+            {
+                q: "What is the minimum fraction of pension required to be commuted under rules?",
+                options: ["5%", "10%", "1%", "There is no minimum specified, subject to max limit"],
+                ans: 3,
+                exp: "Rules specify a maximum limit (40%), but do not mandate a minimum fraction; pensioner can commute any percentage up to 40%."
+            },
+            {
+                q: "Commutation of pension is optional or compulsory?",
+                options: ["Compulsory", "Purely optional on the part of pensioner", "Compulsory for Officers", "Mandatory after 60"],
+                ans: 1,
+                exp: "Commutation of pension is purely voluntary/optional for the government servant."
+            },
+            {
+                q: "In case of compulsory retirement as penalty, application for commutation must be made within:",
+                options: ["1 year with medical exam", "1 year without medical exam", "No time limit, always with medical exam", "3 months"],
+                ans: 2,
+                exp: "In compulsory retirement penalty cases, commutation is allowed only after medical exam regardless of time limit."
+            },
+            {
+                q: "If an applicant refuses to appear before Medical Board for commutation, what happens?",
+                options: ["Fined", "Application deemed withdrawn", "Pension stopped", "Forced examination"],
+                ans: 1,
+                exp: "If applicant fails/refuses to appear before medical authority, application is treated as withdrawn."
+            },
+            {
+                q: "Can commuted portion of pension be restored before 15 years under special circumstances?",
+                options: ["Yes, on medical grounds", "Yes, at age 70", "No, no relaxation under rules prior to 15 years", "Yes, with Minister approval"],
+                ans: 2,
+                exp: "Rules do not permit restoration of commuted pension prior to completion of 15 years under any circumstances."
+            }
+        ];
+
+        let currentQ = 0;
+        let userAnswers = new Array(50).fill(null);
+        let submitted = false;
+        let timerSeconds = 1800; // 30 minutes
+        let timerInterval = null;
+
+        function init() {
+            renderPalette();
+            loadQuestion(0);
+            startTimer();
+        }
+
+        function startTimer() {
+            timerInterval = setInterval(() => {
+                if (timerSeconds <= 0) {
+                    clearInterval(timerInterval);
+                    autoSubmit();
+                    return;
+                }
+                timerSeconds--;
+                const m = Math.floor(timerSeconds / 60).toString().padStart(2, '0');
+                const s = (timerSeconds % 60).toString().padStart(2, '0');
+                document.getElementById('timer').textContent = `Time Remaining: ${m}:${s}`;
+            }, 1000);
+        }
+
+        function renderPalette() {
+            const palette = document.getElementById('palette');
+            palette.innerHTML = '';
+            for (let i = 0; i < 50; i++) {
+                const btn = document.createElement('button');
+                btn.className = 'palette-btn';
+                btn.id = `palette-btn-${i}`;
+                btn.textContent = i + 1;
+                btn.onclick = () => jumpToQuestion(i);
+                palette.appendChild(btn);
+            }
+        }
+
+        function updatePaletteUI() {
+            for (let i = 0; i < 50; i++) {
+                const btn = document.getElementById(`palette-btn-${i}`);
+                btn.className = 'palette-btn';
+                if (i === currentQ) btn.classList.add('active');
+
+                if (submitted) {
+                    if (userAnswers[i] === rawQuestions[i].ans) {
+                        btn.classList.add('correct');
+                    } else {
+                        btn.classList.add('incorrect');
+                    }
+                } else {
+                    if (userAnswers[i] !== null) {
+                        btn.classList.add('answered');
+                    }
+                }
+            }
+        }
+
+        function loadQuestion(index) {
+            currentQ = index;
+            const q = rawQuestions[index];
+            document.getElementById('q-number').textContent = `Question ${index + 1} of 50`;
+            document.getElementById('q-text').textContent = q.q;
+
+            const optsContainer = document.getElementById('options-container');
+            optsContainer.innerHTML = '';
+
+            const prefixes = ['A', 'B', 'C', 'D'];
+            q.options.forEach((optText, optIdx) => {
+                const item = document.createElement('div');
+                item.className = 'option-item';
+                
+                if (userAnswers[index] === optIdx) {
+                    item.classList.add('selected');
+                }
+
+                if (submitted) {
+                    item.classList.add('disabled');
+                    if (optIdx === q.ans) {
+                        item.classList.add('correct-answer');
+                    }
+                    if (userAnswers[index] === optIdx && optIdx !== q.ans) {
+                        item.classList.add('wrong-answer');
+                    }
+                } else {
+                    item.onclick = () => selectOption(optIdx);
+                }
+
+                item.innerHTML = `<span class="option-prefix">${prefixes[optIdx]}.</span><span>${optText}</span>`;
+                optsContainer.appendChild(item);
+            });
+
+            const expBox = document.getElementById('explanation');
+            if (submitted) {
+                document.getElementById('exp-text').textContent = q.exp;
+                expBox.style.display = 'block';
+            } else {
+                expBox.style.display = 'none';
+            }
+
+            document.getElementById('prev-btn').disabled = (index === 0);
+            document.getElementById('next-btn').disabled = (index === 49);
+
+            updatePaletteUI();
+        }
+
+        function selectOption(optIdx) {
+            if (submitted) return;
+            userAnswers[currentQ] = optIdx;
+            loadQuestion(currentQ);
+        }
+
+        function jumpToQuestion(index) {
+            loadQuestion(index);
+        }
+
+        function navigate(direction) {
+            const target = currentQ + direction;
+            if (target >= 0 && target < 50) {
+                loadQuestion(target);
+            }
+        }
+
+        function confirmSubmit() {
+            const unanswered = userAnswers.filter(a => a === null).length;
+            let msg = "Are you sure you want to submit your quiz?";
+            if (unanswered > 0) {
+                msg = `You have ${unanswered} unanswered question(s). Are you sure you want to submit?`;
+            }
+            if (confirm(msg)) {
+                submitQuiz();
+            }
+        }
+
+        function autoSubmit() {
+            alert("Time is up! Your quiz will be submitted automatically.");
+            submitQuiz();
+        }
+
+        function submitQuiz() {
+            submitted = true;
+            clearInterval(timerInterval);
+
+            let score = 0;
+            for (let i = 0; i < 50; i++) {
+                if (userAnswers[i] === rawQuestions[i].ans) {
+                    score++;
+                }
+            }
+
+            document.getElementById('timer').textContent = "Quiz Completed";
+            document.getElementById('submit-btn').classList.add('hide');
+            
+            const resultsCard = document.getElementById('results');
+            document.getElementById('score-text').textContent = `${score} / 50`;
+            document.getElementById('percentage-text').textContent = `Percentage: ${((score / 50) * 100).toFixed(1)}%`;
+            resultsCard.style.display = 'block';
+
+            loadQuestion(currentQ);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        window.onload = init;
+    </script>
+</body>
+</html>
