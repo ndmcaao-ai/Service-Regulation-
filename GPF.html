@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>General Provident Fund (Central Services) Rules Quiz</title>
+    <style>
+        :root {
+            --primary: #1e3a8a;
+            --primary-light: #2563eb;
+            --secondary: #334155;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text: #0f172a;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --correct: #16a34a;
+            --correct-bg: #f0fdf4;
+            --incorrect: #dc2626;
+            --incorrect-bg: #fef2f2;
+            --selected: #dbeafe;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.5;
+            padding-bottom: 40px;
+        }
+
+        header {
+            background-color: var(--primary);
+            color: white;
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .header-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        .timer-box {
+            background-color: rgba(255, 255, 255, 0.15);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            font-family: monospace;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 1.5rem auto;
+            padding: 0 1rem;
+        }
+
+        .palette-card {
+            background: var(--card-bg);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid var(--border);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .palette-title {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            margin-bottom: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .palette-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(36px, 1fr));
+            gap: 6px;
+        }
+
+        .palette-btn {
+            aspect-ratio: 1;
+            border: 1px solid var(--border);
+            background: white;
+            color: var(--text);
+            font-weight: 600;
+            font-size: 0.85rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .palette-btn:hover {
+            border-color: var(--primary-light);
+        }
+
+        .palette-btn.active {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px var(--primary-light);
+        }
+
+        .palette-btn.answered {
+            background-color: #2563eb;
+            color: white;
+            border-color: #2563eb;
+        }
+
+        .palette-btn.correct {
+            background-color: var(--correct);
+            color: white;
+            border-color: var(--correct);
+        }
+
+        .palette-btn.incorrect {
+            background-color: var(--incorrect);
+            color: white;
+            border-color: var(--incorrect);
+        }
+
+        .question-card {
+            background: var(--card-bg);
+            border-radius: 8px;
+            padding: 1.5rem;
+            border: 1px solid var(--border);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            margin-bottom: 1.5rem;
+        }
+
+        .question-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .question-text {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 1.25rem;
+            color: var(--primary);
+        }
+
+        .options-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .option-item {
+            display: flex;
+            align-items: flex-start;
+            padding: 0.85rem 1rem;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+            background: white;
+        }
+
+        .option-item:hover:not(.disabled) {
+            background-color: var(--selected);
+            border-color: var(--primary-light);
+        }
+
+        .option-item.selected {
+            background-color: var(--selected);
+            border-color: var(--primary-light);
+            border-width: 2px;
+        }
+
+        .option-item.correct-answer {
+            background-color: var(--correct-bg);
+            border-color: var(--correct);
+            color: var(--correct);
+            font-weight: 600;
+        }
+
+        .option-item.wrong-answer {
+            background-color: var(--incorrect-bg);
+            border-color: var(--incorrect);
+            color: var(--incorrect);
+        }
+
+        .option-prefix {
+            font-weight: 600;
+            margin-right: 0.75rem;
+            min-width: 20px;
+        }
+
+        .explanation-box {
+            margin-top: 1.25rem;
+            padding: 1rem;
+            background-color: #f8fafc;
+            border-left: 4px solid var(--primary-light);
+            border-radius: 0 6px 6px 0;
+            font-size: 0.95rem;
+            display: none;
+        }
+
+        .explanation-title {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+            color: var(--secondary);
+        }
+
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.65rem 1.25rem;
+            border-radius: 6px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: background 0.2s;
+            font-size: 0.95rem;
+        }
+
+        .btn-secondary {
+            background-color: #e2e8f0;
+            color: var(--secondary);
+        }
+
+        .btn-secondary:hover:not(:disabled) {
+            background-color: #cbd5e0;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-light);
+            color: white;
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            background-color: var(--primary);
+        }
+
+        .btn-submit {
+            background-color: var(--correct);
+            color: white;
+        }
+
+        .btn-submit:hover {
+            background-color: #15803d;
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .results-card {
+            background: var(--card-bg);
+            border-radius: 8px;
+            padding: 2rem;
+            border: 1px solid var(--border);
+            text-align: center;
+            margin-bottom: 1.5rem;
+            display: none;
+        }
+
+        .score-display {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 1rem 0;
+        }
+
+        .percentage-display {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+
+        .hide {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-title">GPF (Central Services) Rules Quiz</div>
+        <div class="timer-box" id="timer">Time Remaining: 30:00</div>
+    </header>
+
+    <div class="container">
+        <div class="palette-card">
+            <div class="palette-title">Question Navigator</div>
+            <div class="palette-grid" id="palette"></div>
+        </div>
+
+        <div id="results" class="results-card">
+            <h2>Quiz Results</h2>
+            <div class="score-display" id="score-text">0 / 50</div>
+            <div class="percentage-display" id="percentage-text">0%</div>
+            <p>Review your answers below.</p>
+        </div>
+
+        <div class="question-card" id="quiz-card">
+            <div class="question-header">
+                <span id="q-number">Question 1 of 50</span>
+                <span>1 Mark</span>
+            </div>
+            <div class="question-text" id="q-text">Loading...</div>
+            <div class="options-list" id="options-container"></div>
+            <div class="explanation-box" id="explanation">
+                <div class="explanation-title">Rule Reference & Explanation:</div>
+                <div id="exp-text"></div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <button class="btn btn-secondary" id="prev-btn" onclick="navigate(-1)">Previous</button>
+            <button class="btn btn-primary" id="next-btn" onclick="navigate(1)">Next</button>
+            <button class="btn btn-submit" id="submit-btn" onclick="confirmSubmit()">Submit Quiz</button>
+        </div>
+    </div>
+
+    <script>
+        const rawQuestions = [
+            {
+                q: "In which year were the General Provident Fund (Central Services) Rules promulgated?",
+                options: ["1955", "1960", "1972", "1981"],
+                ans: 1,
+                exp: "The General Provident Fund (Central Services) Rules were issued in the year 1960."
+            },
+            {
+                q: "All Central Government servants entering service before 01.01.2004 are eligible to subscribe to GPF after completing how many years of continuous service (or on confirmation)?",
+                options: ["6 months", "1 year", "2 years", "5 years"],
+                ans: 1,
+                exp: "Under GPF Rule 4, all permanent government servants and temporary government servants who have completed one year of continuous service are eligible to join the Fund."
+            },
+            {
+                q: "What is the minimum subscription rate to the GPF account expressed as a percentage of the subscriber's emoluments?",
+                options: ["5%", "6%", "8%", "10%"],
+                ans: 1,
+                exp: "Rule 11(1)(b) lays down that the minimum subscription rate shall not be less than 6% of the subscriber's total emoluments."
+            },
+            {
+                q: "What is the maximum limit of subscription to GPF in a financial year as per recent DoPT/Department of Expenditure guidelines?",
+                options: ["₹1.5 Lakhs", "₹5 Lakhs", "₹10 Lakhs", "100% of basic pay with no cap"],
+                ans: 1,
+                exp: "As per the amendment to GPF rules (OM dated 15.06.2022), the total subscription by a subscriber to GPF in a financial year shall not exceed ₹5,00,000."
+            },
+            {
+                q: "Under GPF Rule 2(c), what does 'Emoluments' for the purpose of GPF subscription mean?",
+                options: ["Pay only", "Pay plus Dearness Allowance and House Rent Allowance", "Basic Pay, Seniority Pay, Special Pay, and Personal Pay", "Gross salary excluding NPS"],
+                ans: 2,
+                exp: "Rule 2(c) defines 'Emoluments' as pay, leave salary, or subsistence grant as defined in Fundamental Rules, including special pay and personal pay."
+            },
+            {
+                q: "When can a subscriber change their rate of subscription during a financial year?",
+                options: ["Increase twice and reduce once", "Increase once and reduce twice", "Increase twice and reduce twice", "Can be changed every month"],
+                ans: 0,
+                exp: "Under Rule 11, the rate of subscription may be increased twice and reduced once during the course of a financial year."
+            },
+            {
+                q: "Subscription to the GPF account is compulsory during which of the following periods?",
+                options: ["Period of suspension", "Period spent on duty", "Last 3 months of service before superannuation", "Period of extraordinary leave without pay"],
+                ans: 1,
+                exp: "A subscriber must subscribe monthly to the Fund except during periods of suspension or during the last 3 months of service before retirement."
+            },
+            {
+                q: "Subscription to GPF MUST be stopped automatically before how many months from the date of superannuation of a Government servant?",
+                options: ["1 month", "2 months", "3 months", "6 months"],
+                ans: 2,
+                exp: "Rule 7(1) stipulates that subscription to the GPF shall be stopped 3 months prior to the date of superannuation."
+            },
+            {
+                q: "Can a subscriber contribute to GPF during a period of Suspension?",
+                options: ["Yes, compulsorily", "No, subscription remains suspended during suspension period", "Yes, at half rate", "Only with President's sanction"],
+                ans: 1,
+                exp: "Under Rule 7, a subscriber under suspension shall not subscribe to the Fund during the period of suspension."
+            },
+            {
+                q: "If a subscriber is on leave on full pay or half pay, subscription to GPF is:",
+                options: ["Prohibited", "Compulsory unless opted out in writing during leave on half pay", "Half of regular rate", "Optional in all leave cases"],
+                ans: 1,
+                exp: "Subscription during leave on full pay is compulsory. During leave on half pay or leave without pay, it is optional at subscriber's choice."
+            },
+            {
+                q: "Interest on GPF balances is credited to the subscriber's account on which date every year?",
+                options: ["1st January", "31st March / 1st April", "30th June", "31st December"],
+                ans: 1,
+                exp: "Interest calculated for each financial year is credited to the subscriber's GPF account as on the last day of each financial year (31st March)."
+            },
+            {
+                q: "Which rule governs Nominations under GPF (CS) Rules?",
+                options: ["Rule 5", "Rule 8", "Rule 12", "Rule 15"],
+                ans: 0,
+                exp: "Rule 5 of the GPF (Central Services) Rules regulates the process and execution of Nominations."
+            },
+            {
+                q: "If a subscriber has a family at the time of making a nomination, can they nominate a person outside their family?",
+                options: ["Yes, fully allowed", "No, nomination in favor of a non-family member is invalid if family exists", "Yes, up to 50% share", "Only with HoD permission"],
+                ans: 1,
+                exp: "Under Rule 5(1), if a subscriber has a family at the time of making nomination, the nomination can only be made in favor of a member or members of his family."
+            },
+            {
+                q: "What happens to a nomination made in favor of a non-family member when the subscriber subsequently acquires a family?",
+                options: ["It remains valid", "It becomes invalid immediately upon acquiring family", "It transfers to the spouse automatically", "It is reviewed by Accounts Officer"],
+                ans: 1,
+                exp: "Rule 5(3) states that a nomination made in favor of a person other than a family member becomes invalid automatically upon the subscriber acquiring a family."
+            },
+            {
+                q: "Under GPF rules, does 'family' include a adopted child?",
+                options: ["No, only biological children", "Yes, a legally adopted child is included in family definition", "Only if adopted before 5 years of age", "Only with Accounts Officer approval"],
+                ans: 1,
+                exp: "Rule 2(c) defines family and explicitly includes legally adopted children."
+            },
+            {
+                q: "Can a married female subscriber exclude her husband from her family for GPF purpose?",
+                options: ["No, husband is compulsory", "Yes, by expressing intention in writing to the Accounts Officer", "Only if judicial separation is ordered", "Only with Ministry of Finance approval"],
+                ans: 1,
+                exp: "Under Proviso to Rule 2(c), a female subscriber can exclude her husband from her family by notice in writing to the Accounts Officer."
+            },
+            {
+                q: "Advances from GPF are governed under which rule of GPF (CS) Rules?",
+                options: ["Rule 12", "Rule 15", "Rule 18", "Rule 20"],
+                ans: 0,
+                exp: "Rule 12 specifies the purposes and conditions for grant of advances from the Fund."
+            },
+            {
+                q: "What is the maximum amount of GPF Advance that can be sanctioned by the competent authority for general approved purposes?",
+                options: ["3 months' pay or 50% of balance (whichever is less)", "12 months' pay or 75% of balance", "100% of balance", "6 months' pay"],
+                ans: 1,
+                exp: "Under Rule 12, a temporary advance may be granted up to 12 months' pay or 75% of the balance, whichever is less (and up to 90% in special cases)."
+            },
+            {
+                q: "Advances drawn from GPF are recoverable in how many maximum equal monthly installments?",
+                options: ["12 to 24", "12 to 36", "12 to 60", "24 to 84"],
+                ans: 2,
+                exp: "Under Rule 13, an advance from GPF is recoverable in not less than 12 and not more than 60 equal monthly installments."
+            },
+            {
+                q: "During period of leave without pay or suspension, recovery of GPF advance is:",
+                options: ["Compulsory", "Refused", "Optionally postponed at the subscriber's request", "Deducted from spouse's salary"],
+                ans: 2,
+                exp: "Recovery of GPF advance is not made except with the subscriber's consent during leave without pay or suspension."
+            },
+            {
+                q: "Withdrawals (non-refundable) from GPF are governed by which rule?",
+                options: ["Rule 10", "Rule 12", "Rule 15", "Rule 22"],
+                ans: 2,
+                exp: "Rule 15 prescribes the conditions, purposes, and eligibility for non-refundable withdrawals from GPF."
+            },
+            {
+                q: "To be eligible for a non-refundable GPF withdrawal for higher education or marriage, a subscriber must have completed how many years of service?",
+                options: ["5 years", "10 years", "15 years", "20 years"],
+                ans: 1,
+                exp: "Rule 15 permits non-refundable withdrawals for higher education or marriage after completion of 10 years of continuous service (revised to 15 years for certain housing rules, but 10 years for general purposes)."
+            },
+            {
+                q: "What is the maximum percentage of GPF balance that can be withdrawn as a non-refundable withdrawal for marriage of subscriber's daughter/son?",
+                options: ["50%", "75%", "90%", "100%"],
+                ans: 1,
+                exp: "Withdrawal up to 75% of the credit balance in GPF is permitted for marriage/education of children under Rule 15."
+            },
+            {
+                q: "Within how many months prior to retirement on superannuation can a subscriber withdraw up to 90% of GPF balance without assigning any specific reason?",
+                options: ["6 months", "12 months", "24 months", "36 months"],
+                ans: 1,
+                exp: "Under Rule 15(1)(x), a subscriber may withdraw up to 90% of the credit balance within 12 months before retirement on superannuation without stating any reason."
+            },
+            {
+                q: "Is interest charged on a temporary Advance drawn from GPF?",
+                options: ["Yes, at 2% higher rate", "Yes, same as GPF interest rate", "No, GPF advances are interest-free", "Only if delayed"],
+                ans: 2,
+                exp: "GPF advances are interest-free because the subscriber is withdrawing from their own accumulated fund balance (interest ceases to accrue on the advance amount drawn until repaid)."
+            },
+            {
+                q: "Can a subscriber convert an outstanding temporary GPF Advance into a non-refundable Withdrawal?",
+                options: ["No, strictly prohibited", "Yes, if the subscriber satisfies the conditions for grant of a withdrawal under Rule 15", "Only with Finance Ministry approval", "Only once during whole career"],
+                ans: 1,
+                exp: "Under Rule 16-A, a subscriber may convert an outstanding balance of an advance into a non-refundable withdrawal if eligible under Rule 15."
+            },
+            {
+                q: "Under Deposit Linked Insurance Scheme (DLIS) associated with GPF, on the death of a subscriber while in service, an additional amount is paid to the nominee provided the subscriber maintained a minimum balance for how many preceding years?",
+                options: ["1 year", "2 years", "3 years", "5 years"],
+                ans: 2,
+                exp: "Under the DLIS scheme, the subscriber must have maintained the prescribed minimum balance in GPF for 3 years immediately preceding death."
+            },
+            {
+                q: "What is the maximum benefit ceiling payable under the GPF Deposit Linked Insurance Scheme (DLIS) upon the death of an employee in service (revised limits)?",
+                options: ["₹30,000", "₹60,000", "₹1,000,000", "₹60,000 / ₹6,000 as per latest 7th CPC revisions (capped up to ₹60,000)"],
+                ans: 3,
+                exp: "The maximum additional amount payable under DLIS to the beneficiary on subscriber's death in service is capped at ₹60,000 as per revised orders."
+            },
+            {
+                q: "When a subscriber quits service or retires, the amount standing to their credit in GPF becomes payable under which rule?",
+                options: ["Rule 12", "Rule 18", "Rule 29", "Rule 34"],
+                ans: 2,
+                exp: "Rule 29 deals with the final payment of accumulated balance when a subscriber quits service, retires, or is dismissed."
+            },
+            {
+                q: "If a subscriber is dismissed or removed from service, the GPF balance standing to their credit shall be:",
+                options: ["Forfeited to Government", "Paid to subscriber", "Paid to family only", "Transferred to Pension Fund"],
+                ans: 1,
+                exp: "GPF subscription belongs to the subscriber; even upon dismissal/removal, the subscriber's own GPF accumulations plus interest are paid to them."
+            },
+            {
+                q: "If a subscriber dies while in service without making a valid nomination, to whom is the GPF balance paid?",
+                options: ["Lapses to Government", "Paid in equal shares to surviving members of his family (excluding married daughters whose husbands are alive/etc.)", "Paid to eldest child only", "Paid to executor of will"],
+                ans: 1,
+                exp: "Under Rule 30, in the absence of a valid nomination, the GPF balance is paid in equal shares to members of the family as defined in the rules."
+            },
+            {
+                q: "Up to how many months from the date of retirement/death is interest payable on the GPF balance if final payment is delayed?",
+                options: ["3 months", "6 months", "12 months", "36 months"],
+                ans: 1,
+                exp: "Rule 11(4) provides that interest on GPF balance is payable up to the end of the month preceding that in which payment is made, or up to 6 months, whichever is shorter (extendable up to 1 year with Head of Account approval)."
+            },
+            {
+                q: "Can GPF balance be attached by a court decree for private debt of the subscriber under the Provident Funds Act, 1925?",
+                options: ["Yes, fully attachable", "No, compulsory deposits in GPF are immune from attachment under court decree", "Only up to 50%", "Only with President's consent"],
+                ans: 1,
+                exp: "Under Section 3 of the Provident Funds Act, 1925, GPF balances are protected from attachment under any decree or order of any court."
+            },
+            {
+                q: "What is the minimum service requirement for grant of GPF withdrawal for purchasing a plot or constructing a house?",
+                options: ["5 years", "10 years", "15 years", "20 years"],
+                ans: 2,
+                exp: "Rule 15(1)(c) permits withdrawal for house construction/purchase of plot after completion of 15 years of service (or within 10 years of retirement)."
+            },
+            {
+                q: "For purchasing consumer durables (like TV, Washing Machine, Computer), what is the maximum percentage of GPF balance allowed as withdrawal?",
+                options: ["25%", "50% or 6 months' pay", "75%", "90%"],
+                ans: 1,
+                exp: "Withdrawal up to 75% or basic pay threshold (50%/6 months' pay depending on category) is permitted for consumer durables/equipment under modern guidelines."
+            },
+            {
+                q: "Who maintains the GPF account of a Central Government employee?",
+                options: ["State Bank of India", "Pay and Accounts Office (PAO) / Accountant General", "Head of Office locally", "LIC"],
+                ans: 1,
+                exp: "GPF accounts are maintained by the respective Pay and Accounts Office (PAO) or Accountant General (AG)."
+            },
+            {
+                q: "Can a subscriber nominate more than one person to receive GPF proceeds in case of death?",
+                options: ["No, only single nominee allowed", "Yes, and must specify the share/percentage payable to each nominee", "Yes, maximum 2 nominees", "Only if both are sons"],
+                ans: 1,
+                exp: "Rule 5 allows nomination of more than one person and requires specifying the exact proportion/share for each."
+            },
+            {
+                q: "If a subscriber assigns a GPF policy/nomination to a minor, they must appoint a:",
+                options: ["Bank Manager", "Guardian/Trustee to receive the amount during minority", "Public Prosecutor", "Civil Judge"],
+                ans: 1,
+                exp: "If a nominee is a minor, the subscriber should specify a guardian/person to whom payment is to be made during the nominee's minority."
+            },
+            {
+                q: "If a Government servant proceeds on deputation to a Central Public Sector Undertaking (PSU), can they continue subscribing to GPF?",
+                options: ["Yes, throughout deputation", "No, GPF subscription stops on PSU absorption", "Yes, at double rate", "Only for 1 year"],
+                ans: 0,
+                exp: "During foreign service/deputation within India without absorption, the employee continues to subscribe to GPF."
+            },
+            {
+                q: "In case of transfer of an employee from one Ministry/Department to another Central Department, their GPF balance is:",
+                options: ["Closed and refunded", "Transferred to the new PAO maintaining their account", "Forfeited", "Kept in suspense account forever"],
+                ans: 1,
+                exp: "On transfer between central departments, the GPF ledger balance along with interest is transferred to the new PAO."
+            },
+            {
+                q: "What happens to GPF interest income exceeding ₹5 Lakhs annual subscription under the Income Tax Act rules introduced in 2021?",
+                options: ["Tax-free completely", "Interest earned on annual contribution above ₹5 Lakhs is taxable", "Entire GPF becomes invalid", "20% penalty"],
+                ans: 1,
+                exp: "As per IT Act Section 10(11), interest on GPF contribution exceeding ₹5,00,000 in a financial year is taxable in the hands of the subscriber."
+            },
+            {
+                q: "Can GPF balance be utilized to pay premium for Life Insurance Policies of the subscriber under GPF Rules?",
+                options: ["Yes, under Rules 17 to 27", "No, prohibited since 1990", "Only for LIC government schemes", "Only for spouse policies"],
+                ans: 0,
+                exp: "Rules 17 to 27 allow financing of Life Insurance Policies from GPF funds subject to prescribed conditions."
+            },
+            {
+                q: "If a policy financed out of GPF matures before the retirement of the subscriber, the maturity amount must be:",
+                options: ["Retained by employee", "Paid back into the GPF account immediately", "Given to spouse", "Deposited in Treasury as tax"],
+                ans: 1,
+                exp: "When an LIC policy financed from GPF matures before retirement, the proceeds drawn must be repaid back into the GPF account."
+            },
+            {
+                q: "An advance from GPF for illness of subscriber or family member can be granted up to:",
+                options: ["3 months' pay or 50% of balance", "12 months' pay or 75% of balance (whichever is less)", "90% of balance", "100% of balance"],
+                ans: 2,
+                exp: "For severe illness, special rules permit advance/withdrawal up to 90% of the balance in the account."
+            },
+            {
+                q: "Under GPF rules, the term 'Head of Office' has the same meaning as assigned in:",
+                options: ["CCS (Conduct) Rules", "General Financial Rules (GFR) / Delegation of Financial Powers Rules", "Fundamental Rules", "Income Tax Act"],
+                ans: 1,
+                exp: "Head of Office carries the meaning declared under Delegation of Financial Powers Rules / GFR."
+            },
+            {
+                q: "When a subscriber resigns from service to take up another appointment under Central Government with proper permission, GPF balance is:",
+                options: ["Refunded in cash", "Transferred to the new GPF account", "Forfeited", "Converted to FD"],
+                ans: 1,
+                exp: "When resigning to take up another Central Government post with technical formality, the GPF balance is transferred to the new account."
+            },
+            {
+                q: "If a subscriber dies leaving no family and no valid nomination, the amount in GPF shall be paid to:",
+                options: ["Prime Minister Relief Fund", "Any person producing a legal heir certificate / probate of will", "Government Treasury", "Class IV employees fund"],
+                ans: 1,
+                exp: "In the absence of family and nomination, the balance is payable to the person producing legal heirship/letters of administration."
+            },
+            {
+                q: "The Annual Statement of GPF Account issued to each subscriber shows:",
+                options: ["Opening balance, monthly subscriptions, advances, withdrawals, interest, and closing balance", "Only final balance", "Only interest earned", "Tax deductions only"],
+                ans: 0,
+                exp: "The annual statement details opening balance, deposits, withdrawals/advances, interest credited, and closing balance at year end."
+            },
+            {
+                q: "Any discrepancy in the GPF annual statement must be brought to the notice of Accounts Officer within:",
+                options: ["1 month", "3 months", "6 months", "1 year"],
+                ans: 1,
+                exp: "Subscribers should satisfy themselves as to the correctness of the statement and report discrepancies within 3 months."
+            },
+            {
+                q: "Under Rule 11(3), if a subscriber dies, interest on GPF balance is calculated up to:",
+                options: ["Date of death", "End of the month preceding that in which payment is made (subject to maximum 6 months limit)", "End of financial year", "No interest after death"],
+                ans: 1,
+                exp: "Interest upon subscriber's death is calculated up to the end of the month preceding the month of payment, capped at 6 months standard."
+            }
+        ];
+
+        let currentQ = 0;
+        let userAnswers = new Array(50).fill(null);
+        let submitted = false;
+        let timerSeconds = 1800;
+        let timerInterval = null;
+
+        function init() {
+            renderPalette();
+            loadQuestion(0);
+            startTimer();
+        }
+
+        function startTimer() {
+            timerInterval = setInterval(() => {
+                if (timerSeconds <= 0) {
+                    clearInterval(timerInterval);
+                    autoSubmit();
+                    return;
+                }
+                timerSeconds--;
+                const m = Math.floor(timerSeconds / 60).toString().padStart(2, '0');
+                const s = (timerSeconds % 60).toString().padStart(2, '0');
+                document.getElementById('timer').textContent = `Time Remaining: ${m}:${s}`;
+            }, 1000);
+        }
+
+        function renderPalette() {
+            const palette = document.getElementById('palette');
+            palette.innerHTML = '';
+            for (let i = 0; i < 50; i++) {
+                const btn = document.createElement('button');
+                btn.className = 'palette-btn';
+                btn.id = `palette-btn-${i}`;
+                btn.textContent = i + 1;
+                btn.onclick = () => jumpToQuestion(i);
+                palette.appendChild(btn);
+            }
+        }
+
+        function updatePaletteUI() {
+            for (let i = 0; i < 50; i++) {
+                const btn = document.getElementById(`palette-btn-${i}`);
+                btn.className = 'palette-btn';
+                if (i === currentQ) btn.classList.add('active');
+
+                if (submitted) {
+                    if (userAnswers[i] === rawQuestions[i].ans) {
+                        btn.classList.add('correct');
+                    } else {
+                        btn.classList.add('incorrect');
+                    }
+                } else {
+                    if (userAnswers[i] !== null) {
+                        btn.classList.add('answered');
+                    }
+                }
+            }
+        }
+
+        function loadQuestion(index) {
+            currentQ = index;
+            const q = rawQuestions[index];
+            document.getElementById('q-number').textContent = `Question ${index + 1} of 50`;
+            document.getElementById('q-text').textContent = q.q;
+
+            const optsContainer = document.getElementById('options-container');
+            optsContainer.innerHTML = '';
+
+            const prefixes = ['A', 'B', 'C', 'D'];
+            q.options.forEach((optText, optIdx) => {
+                const item = document.createElement('div');
+                item.className = 'option-item';
+                
+                if (userAnswers[index] === optIdx) {
+                    item.classList.add('selected');
+                }
+
+                if (submitted) {
+                    item.classList.add('disabled');
+                    if (optIdx === q.ans) {
+                        item.classList.add('correct-answer');
+                    }
+                    if (userAnswers[index] === optIdx && optIdx !== q.ans) {
+                        item.classList.add('wrong-answer');
+                    }
+                } else {
+                    item.onclick = () => selectOption(optIdx);
+                }
+
+                item.innerHTML = `<span class="option-prefix">${prefixes[optIdx]}.</span><span>${optText}</span>`;
+                optsContainer.appendChild(item);
+            });
+
+            const expBox = document.getElementById('explanation');
+            if (submitted) {
+                document.getElementById('exp-text').textContent = q.exp;
+                expBox.style.display = 'block';
+            } else {
+                expBox.style.display = 'none';
+            }
+
+            document.getElementById('prev-btn').disabled = (index === 0);
+            document.getElementById('next-btn').disabled = (index === 49);
+
+            updatePaletteUI();
+        }
+
+        function selectOption(optIdx) {
+            if (submitted) return;
+            userAnswers[currentQ] = optIdx;
+            loadQuestion(currentQ);
+        }
+
+        function jumpToQuestion(index) {
+            loadQuestion(index);
+        }
+
+        function navigate(direction) {
+            const target = currentQ + direction;
+            if (target >= 0 && target < 50) {
+                loadQuestion(target);
+            }
+        }
+
+        function confirmSubmit() {
+            const unanswered = userAnswers.filter(a => a === null).length;
+            let msg = "Are you sure you want to submit your quiz?";
+            if (unanswered > 0) {
+                msg = `You have ${unanswered} unanswered question(s). Are you sure you want to submit?`;
+            }
+            if (confirm(msg)) {
+                submitQuiz();
+            }
+        }
+
+        function autoSubmit() {
+            alert("Time is up! Your quiz will be submitted automatically.");
+            submitQuiz();
+        }
+
+        function submitQuiz() {
+            submitted = true;
+            clearInterval(timerInterval);
+
+            let score = 0;
+            for (let i = 0; i < 50; i++) {
+                if (userAnswers[i] === rawQuestions[i].ans) {
+                    score++;
+                }
+            }
+
+            document.getElementById('timer').textContent = "Quiz Completed";
+            document.getElementById('submit-btn').classList.add('hide');
+            
+            const resultsCard = document.getElementById('results');
+            document.getElementById('score-text').textContent = `${score} / 50`;
+            document.getElementById('percentage-text').textContent = `Percentage: ${((score / 50) * 100).toFixed(1)}%`;
+            resultsCard.style.display = 'block';
+
+            loadQuestion(currentQ);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        window.onload = init;
+    </script>
+</body>
+</html>
