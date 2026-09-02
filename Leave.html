@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CCS (Leave) Rules Quiz</title>
+    <style>
+        :root {
+            --primary: #0369a1;
+            --primary-light: #0284c7;
+            --secondary: #334155;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text: #0f172a;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --correct: #16a34a;
+            --correct-bg: #f0fdf4;
+            --incorrect: #dc2626;
+            --incorrect-bg: #fef2f2;
+            --selected: #e0f2fe;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.5;
+            padding-bottom: 40px;
+        }
+
+        header {
+            background-color: var(--primary);
+            color: white;
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .header-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        .timer-box {
+            background-color: rgba(255, 255, 255, 0.15);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            font-family: monospace;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 1.5rem auto;
+            padding: 0 1rem;
+        }
+
+        .palette-card {
+            background: var(--card-bg);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid var(--border);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .palette-title {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            margin-bottom: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .palette-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(36px, 1fr));
+            gap: 6px;
+        }
+
+        .palette-btn {
+            aspect-ratio: 1;
+            border: 1px solid var(--border);
+            background: white;
+            color: var(--text);
+            font-weight: 600;
+            font-size: 0.85rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .palette-btn:hover {
+            border-color: var(--primary-light);
+        }
+
+        .palette-btn.active {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px var(--primary-light);
+        }
+
+        .palette-btn.answered {
+            background-color: #2563eb;
+            color: white;
+            border-color: #2563eb;
+        }
+
+        .palette-btn.correct {
+            background-color: var(--correct);
+            color: white;
+            border-color: var(--correct);
+        }
+
+        .palette-btn.incorrect {
+            background-color: var(--incorrect);
+            color: white;
+            border-color: var(--incorrect);
+        }
+
+        .question-card {
+            background: var(--card-bg);
+            border-radius: 8px;
+            padding: 1.5rem;
+            border: 1px solid var(--border);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            margin-bottom: 1.5rem;
+        }
+
+        .question-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .question-text {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 1.25rem;
+            color: var(--primary);
+        }
+
+        .options-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .option-item {
+            display: flex;
+            align-items: flex-start;
+            padding: 0.85rem 1rem;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+            background: white;
+        }
+
+        .option-item:hover:not(.disabled) {
+            background-color: var(--selected);
+            border-color: var(--primary-light);
+        }
+
+        .option-item.selected {
+            background-color: var(--selected);
+            border-color: var(--primary-light);
+            border-width: 2px;
+        }
+
+        .option-item.correct-answer {
+            background-color: var(--correct-bg);
+            border-color: var(--correct);
+            color: var(--correct);
+            font-weight: 600;
+        }
+
+        .option-item.wrong-answer {
+            background-color: var(--incorrect-bg);
+            border-color: var(--incorrect);
+            color: var(--incorrect);
+        }
+
+        .option-prefix {
+            font-weight: 600;
+            margin-right: 0.75rem;
+            min-width: 20px;
+        }
+
+        .explanation-box {
+            margin-top: 1.25rem;
+            padding: 1rem;
+            background-color: #f8fafc;
+            border-left: 4px solid var(--primary-light);
+            border-radius: 0 6px 6px 0;
+            font-size: 0.95rem;
+            display: none;
+        }
+
+        .explanation-title {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+            color: var(--secondary);
+        }
+
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.65rem 1.25rem;
+            border-radius: 6px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: background 0.2s;
+            font-size: 0.95rem;
+        }
+
+        .btn-secondary {
+            background-color: #e2e8f0;
+            color: var(--secondary);
+        }
+
+        .btn-secondary:hover:not(:disabled) {
+            background-color: #cbd5e0;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-light);
+            color: white;
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            background-color: var(--primary);
+        }
+
+        .btn-submit {
+            background-color: var(--correct);
+            color: white;
+        }
+
+        .btn-submit:hover {
+            background-color: #15803d;
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .results-card {
+            background: var(--card-bg);
+            border-radius: 8px;
+            padding: 2rem;
+            border: 1px solid var(--border);
+            text-align: center;
+            margin-bottom: 1.5rem;
+            display: none;
+        }
+
+        .score-display {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 1rem 0;
+        }
+
+        .percentage-display {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+
+        .hide {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-title">CCS (Leave) Rules, 1972 Quiz</div>
+        <div class="timer-box" id="timer">Time Remaining: 30:00</div>
+    </header>
+
+    <div class="container">
+        <div class="palette-card">
+            <div class="palette-title">Question Navigator</div>
+            <div class="palette-grid" id="palette"></div>
+        </div>
+
+        <div id="results" class="results-card">
+            <h2>Quiz Results</h2>
+            <div class="score-display" id="score-text">0 / 50</div>
+            <div class="percentage-display" id="percentage-text">0%</div>
+            <p>Review your answers below.</p>
+        </div>
+
+        <div class="question-card" id="quiz-card">
+            <div class="question-header">
+                <span id="q-number">Question 1 of 50</span>
+                <span>1 Mark</span>
+            </div>
+            <div class="question-text" id="q-text">Loading...</div>
+            <div class="options-list" id="options-container"></div>
+            <div class="explanation-box" id="explanation">
+                <div class="explanation-title">Rule Reference & Explanation:</div>
+                <div id="exp-text"></div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <button class="btn btn-secondary" id="prev-btn" onclick="navigate(-1)">Previous</button>
+            <button class="btn btn-primary" id="next-btn" onclick="navigate(1)">Next</button>
+            <button class="btn btn-submit" id="submit-btn" onclick="confirmSubmit()">Submit Quiz</button>
+        </div>
+    </div>
+
+    <script>
+        const rawQuestions = [
+            {
+                q: "In which year were the Central Civil Services (Leave) Rules promulgated?",
+                options: ["1965", "1972", "1981", "1997"],
+                ans: 1,
+                exp: "The Central Civil Services (Leave) Rules were promulgated in the year 1972."
+            },
+            {
+                q: "Which rule under CCS (Leave) Rules, 1972 states that 'Leave cannot be claimed as a matter of right'?",
+                options: ["Rule 5", "Rule 7", "Rule 10", "Rule 12"],
+                ans: 1,
+                exp: "Rule 7(1) explicitly states that leave cannot be claimed as a matter of right."
+            },
+            {
+                q: "Can the Leave Sanctioning Authority alter the kind of leave requested by a Government servant?",
+                options: ["Yes, at its sole discretion", "No, it cannot alter the kind of leave due and applied for", "Yes, with approval of Head of Department", "Yes, if the employee has no EL left"],
+                ans: 1,
+                exp: "Under Rule 7(2), the leave sanctioning authority may refuse or revoke leave, but it cannot alter the kind of leave requested by the employee."
+            },
+            {
+                q: "Earned Leave (EL) is credited to a Government servant's account in advance at the rate of how many days on 1st January and 1st July each year?",
+                options: ["10 days", "12 days", "15 days", "30 days"],
+                ans: 2,
+                exp: "Under Rule 26, EL is credited in advance in two installments of 15 days each on 1st January and 1st July."
+            },
+            {
+                q: "What is the maximum limit up to which Earned Leave (EL) can be accumulated in the leave account under Rule 26?",
+                options: ["180 days", "240 days", "300 days", "360 days"],
+                ans: 2,
+                exp: "Under Rule 26(1), Earned Leave can be accumulated up to a maximum limit of 300 days (plus up to 15 days which can be kept in buffer for encashment during LTC/superannuation as applicable)."
+            },
+            {
+                q: "What is the maximum amount of Earned Leave that can be granted at a single time to a Group A or B officer in India under Rule 26?",
+                options: ["120 days", "180 days", "240 days", "300 days"],
+                ans: 1,
+                exp: "Under Rule 26(2), the maximum Earned Leave that can be granted at one time to a Government servant in India is 180 days."
+            },
+            {
+                q: "Half Pay Leave (HPL) is credited in advance to a Government servant's account on 1st January and 1st July at the rate of how many days per installment?",
+                options: ["5 days", "10 days", "15 days", "20 days"],
+                ans: 1,
+                exp: "Under Rule 29, Half Pay Leave is credited in advance at the rate of 10 days on 1st January and 10 days on 1st July (total 20 days per year)."
+            },
+            {
+                q: "What is the upper limit for accumulation of Half Pay Leave (HPL)?",
+                options: ["300 days", "400 days", "500 days", "There is no maximum limit for accumulation of HPL"],
+                ans: 3,
+                exp: "There is no ceiling/limit on the accumulation of Half Pay Leave in a Government servant's leave account."
+            },
+            {
+                q: "Commuted Leave is granted on medical certificate by debiting how many days of HPL for every 1 day of Commuted Leave granted?",
+                options: ["Half day", "1 day", "2 days", "3 days"],
+                ans: 2,
+                exp: "Under Rule 30, Commuted Leave not exceeding half the amount of HPL due can be granted on medical certificate, debiting TWICE the amount of HPL."
+            },
+            {
+                q: "What is the maximum limit of Commuted Leave that can be granted during the entire service without medical certificate for pursuing a course of study?",
+                options: ["90 days", "180 days", "240 days", "360 days"],
+                ans: 1,
+                exp: "Under Rule 30(1), Commuted Leave up to a maximum of 180 days can be granted during entire service for an approved course of study certified in public interest without medical certificate."
+            },
+            {
+                q: "Leave Not Due (LND) can be granted to a permanent Government servant up to a maximum limit of how many days during entire service?",
+                options: ["180 days", "240 days", "360 days", "500 days"],
+                ans: 2,
+                exp: "Under Rule 31, Leave Not Due (LND) is limited to a maximum of 360 days during the entire service, debited against future HPL to be earned."
+            },
+            {
+                q: "Extraordinary Leave (EOL) without medical certificate can be granted to a temporary employee (with less than 3 years continuous service) up to a maximum limit of:",
+                options: ["3 months", "6 months", "12 months", "18 months"],
+                ans: 0,
+                exp: "Under Rule 32, EOL for a temporary employee with less than 3 years service cannot exceed 3 months without medical certificate."
+            },
+            {
+                q: "What is the maximum period of continuous absence from duty (including all kinds of leave) after which a Government servant may cease to be in Government service under Rule 12?",
+                options: ["2 years", "3 years", "5 years", "7 years"],
+                ans: 2,
+                exp: "Under Rule 12(2), no Government servant shall be granted leave of any kind for a continuous period exceeding five years, except with President's sanction."
+            },
+            {
+                q: "Maternity Leave admissible to a female Government servant with less than two surviving children is:",
+                options: ["120 days", "135 days", "180 days", "240 days"],
+                ans: 2,
+                exp: "Under Rule 43, Maternity Leave is admissible for a period of 180 days to a female employee with less than two surviving children."
+            },
+            {
+                q: "Maternity Leave may also be granted in case of miscarriage or abortion. What is the total maximum limit of such leave during entire service under Rule 43(1)?",
+                options: ["30 days", "45 days", "60 days", "90 days"],
+                ans: 1,
+                exp: "Under Rule 43(1), Maternity leave in case of miscarriage/abortion is restricted to a maximum of 45 days during the entire service."
+            },
+            {
+                q: "Paternity Leave is admissible to a male Government servant with less than two surviving children for how many days?",
+                options: ["7 days", "10 days", "15 days", "30 days"],
+                ans: 2,
+                exp: "Under Rule 43-A, Paternity Leave is granted for 15 days during the confinement of his wife."
+            },
+            {
+                q: "Within what period from the date of delivery of the child must Paternity Leave be availed, failing which it lapses?",
+                options: ["3 months", "6 months", "9 months", "1 year"],
+                ans: 1,
+                exp: "Paternity Leave must be availed within 6 months from the date of delivery of the child; otherwise, it lapses."
+            },
+            {
+                q: "Child Care Leave (CCL) can be granted to female employees and single male employees for a maximum period of how many days during entire service?",
+                options: ["365 days", "500 days", "730 days", "1000 days"],
+                ans: 2,
+                exp: "Under Rule 43-C, CCL can be granted for a maximum of 730 days (2 years) during the entire service for taking care of up to two eldest surviving children."
+            },
+            {
+                q: "Child Care Leave (CCL) can be availed for care of a child up to what age limit (except for a child with benchmark disability)?",
+                options: ["12 years", "15 years", "18 years", "21 years"],
+                ans: 2,
+                exp: "CCL is admissible for children up to the age of 18 years (no age limit for children with benchmark disability)."
+            },
+            {
+                q: "During the first 365 days of Child Care Leave, what percentage of leave salary is paid to the employee?",
+                options: ["50%", "75%", "80%", "100%"],
+                ans: 3,
+                exp: "As per amended CCL rules, 100% of leave salary is paid for the first 365 days, and 80% for the subsequent 365 days."
+            },
+            {
+                q: "What is the maximum number of spells of Child Care Leave (CCL) that can be granted in a single calendar year?",
+                options: ["2 spells", "3 spells", "5 spells", "Unlimited"],
+                ans: 1,
+                exp: "Under Rule 43-C, Child Care Leave cannot be granted in more than 3 spells in a single calendar year (for single female/single male employees, up to 6 spells as per recent DoPT guidelines)."
+            },
+            {
+                q: "Child Adoption Leave is admissible to a female Government servant with less than two surviving children on adopting a child below 1 year of age for how many days?",
+                options: ["90 days", "135 days", "180 days", "240 days"],
+                ans: 2,
+                exp: "Under Rule 43-B, Child Adoption Leave is granted for 180 days on valid adoption of a child below 1 year of age."
+            },
+            {
+                q: "Paternity Leave for Child Adoption is admissible to a male employee with less than two surviving children for how many days?",
+                options: ["7 days", "10 days", "15 days", "30 days"],
+                ans: 2,
+                exp: "Under Rule 43-AA, male employees adopting a child below 1 year can avail 15 days of Paternity Leave for Child Adoption."
+            },
+            {
+                q: "Study Leave can be granted to a Government servant who has completed a minimum of how many years of continuous service?",
+                options: ["2 years", "3 years", "5 years", "10 years"],
+                ans: 2,
+                exp: "Under Rule 50, Study Leave may be granted to a Government servant who has completed not less than 5 years of continuous service."
+            },
+            {
+                q: "What is the maximum total period of Study Leave that can be granted to a Government servant (other than CHS officers) during their entire service?",
+                options: ["12 months", "24 months", "36 months", "48 months"],
+                ans: 1,
+                exp: "Under Rule 51, the maximum period of Study Leave is 24 months in all during the entire service (can be granted up to 24 months at one time)."
+            },
+            {
+                q: "For Central Health Service (CHS) officers, what is the maximum duration of Study Leave admissible to undergo post-graduation/specialized courses?",
+                options: ["24 months", "36 months", "48 months", "60 months"],
+                ans: 1,
+                exp: "For CHS officers, Study Leave can be granted up to 36 months for acquiring post-graduate qualifications under Rule 51."
+            },
+            {
+                q: "Does Study Leave count as service for the purpose of earning Earned Leave (EL)?",
+                options: ["Yes, fully", "No, Study Leave does NOT earn EL", "Earns half EL", "Only if taken in India"],
+                ans: 1,
+                exp: "Under Rule 53, a Government servant on Study Leave does not earn Earned Leave."
+            },
+            {
+                q: "Casual Leave (CL) is categorized under CCS (Leave) Rules as:",
+                options: ["Regular Leave", "Not a recognized form of leave under CCS (Leave) Rules, 1972", "Special Leave", "Statutory Leave"],
+                ans: 1,
+                exp: "Casual Leave is not a recognized form of leave under CCS (Leave) Rules; it is governed by administrative executive instructions."
+            },
+            {
+                q: "What is the maximum period of Special Disability Leave that can be granted for injury/disability intentionally inflicted in performance of duty under Rule 44?",
+                options: ["12 months", "24 months", "36 months", "48 months"],
+                ans: 1,
+                exp: "Under Rule 44, Special Disability Leave was granted up to 24 months (now subsumed under Work Related Illness and Injury Leave - WRIIL)."
+            },
+            {
+                q: "Work Related Illness and Injury Leave (WRIIL), introduced under 7th CPC revisions, replaced which existing leaves?",
+                options: ["Hospital Leave, Special Disability Leave, and Sick Leave", "Casual Leave and Restricted Holiday", "Study Leave and EOL", "Child Care Leave"],
+                ans: 0,
+                exp: "WRIIL subsumed Special Disability Leave and Hospital Leave into a single unified leave category."
+            },
+            {
+                q: "Under WRIIL, full pay and allowances are paid for how many months when hospitalized/recovering from injury sustained on duty?",
+                options: ["First 3 months", "First 4 months", "First 6 months", "Full pay for entire period of hospitalization without limit"],
+                ans: 3,
+                exp: "Under WRIIL rules, full pay and allowances are paid for the entire period of hospitalization and treatment."
+            },
+            {
+                q: "What is the maximum amount of Earned Leave encashment permitted at the time of Superannuation/Retirement?",
+                options: ["180 days", "240 days", "300 days (combining EL and HPL)", "500 days"],
+                ans: 2,
+                exp: "Rule 39 allows encashment of accumulated EL and HPL up to a combined maximum cap of 300 days at retirement."
+            },
+            {
+                q: "Under Rule 38-A, encashment of Earned Leave up to 10 days while availing Leave Travel Concession (LTC) is subject to a maximum of how many days during the entire career?",
+                options: ["30 days", "60 days", "90 days", "120 days"],
+                ans: 1,
+                exp: "Under Rule 38-A, an employee can encash up to 10 days of EL while availing LTC, subject to a maximum of 60 days in their entire career."
+            },
+            {
+                q: "To encash 10 days EL during LTC, a balance of at least how many days of EL must remain in the employee's account after encashment?",
+                options: ["15 days", "30 days", "60 days", "100 days"],
+                ans: 2,
+                exp: "Rule 38-A mandates that a minimum balance of 60 days of Earned Leave must remain at credit after deducting the encashed 10 days."
+            },
+            {
+                q: "Is Leave Encashment during LTC deducted from the maximum 300 days cap available for encashment at retirement?",
+                options: ["Yes, fully deducted", "No, LTC EL encashment is separate and NOT deducted from the 300 days cap at retirement", "Only 50% is deducted", "Deducted only if employee opts"],
+                ans: 1,
+                exp: "EL encashed during LTC (up to 60 days career limit) is independent and does not impact the 300 days retirement encashment limit."
+            },
+            {
+                q: "Hospital Leave (now part of WRIIL) was admissible to which category of Government servants under original Rule 46?",
+                options: ["Group A officers only", "Group B officers", "Group C Government servants whose duties involved specified hazards", "All employees equally"],
+                ans: 2,
+                exp: "Hospital leave was admissible to Group C employees whose duties involved handling dangerous machinery/explosives/poisonous substances."
+            },
+            {
+                q: "Quarantine Leave was abolished under CCS (Leave) Rules in which year?",
+                options: ["1981", "1997", "2008", "2016"],
+                ans: 0,
+                exp: "Quarantine Leave was abolished under CCS (Leave) Rules in 1981 following medical advancements."
+            },
+            {
+                q: "What is the leave salary payable for the period of Commuted Leave?",
+                options: ["Equal to half pay salary", "Equal to full pay salary (amount of pay drawn before proceeding on leave)", "75% of pay", "No salary"],
+                ans: 1,
+                exp: "Under Rule 40(1), a Government servant on Commuted Leave is entitled to leave salary equal to the amount admissible on Earned Leave (Full Pay)."
+            },
+            {
+                q: "Leave Salary for Half Pay Leave is equal to:",
+                options: ["Full basic pay", "Half of basic pay plus proportionate DA", "25% of basic pay", "Fixed stipend"],
+                ans: 1,
+                exp: "Leave salary during HPL is equal to half the basic pay plus corresponding DA applicable on that reduced pay."
+            },
+            {
+                q: "Is Leave Salary payable during Extraordinary Leave (EOL)?",
+                options: ["Yes, 50% pay", "Yes, basic pay only without DA", "No, no leave salary is drawn during EOL", "10% token payment"],
+                ans: 2,
+                exp: "Under Rule 40(5), a Government servant on Extraordinary Leave is not entitled to any leave salary."
+            },
+            {
+                q: "When a Government servant is recalled to duty before expiry of sanctioned leave, the period from date of leaving station to date of joining duty is treated as:",
+                options: ["Lapsed", "Duty / Journey period for which TA is admissible", "EOL", "Casual Leave"],
+                ans: 1,
+                exp: "Under Rule 23, if recalled from leave outstation, the journey back to station is treated as duty and TA is admissible."
+            },
+            {
+                q: "If a Government servant overstays leave without sanctioned extension, such period of willful absence under Rule 25 is treated as:",
+                options: ["Automatically converted to EL", "Debited against HPL", "Dies-non for purpose of increment, leave, and pension unless regularized", "Dismissal automatically"],
+                ans: 2,
+                exp: "Under Rule 25, willful absence from duty after expiry of leave renders the employee liable to disciplinary action and the period is treated as dies-non."
+            },
+            {
+                q: "Can Leave of any kind be combined with Casual Leave?",
+                options: ["Yes, unconditionally", "No, Casual Leave cannot be combined with any other regular leave under CCS (Leave) Rules", "Only with EL", "Only with Medical Leave"],
+                ans: 1,
+                exp: "Casual Leave is not a statutory leave and cannot be combined with any regular leave under CCS (Leave) Rules."
+            },
+            {
+                q: "Can Earned Leave, Half Pay Leave, and Commuted Leave be combined with each other?",
+                options: ["No, only one type of leave at a time", "Yes, any kind of leave under these rules may be granted in combination with or in continuation of any other kind of leave", "Only EL and HPL can be combined", "Requires Ministry of Finance approval"],
+                ans: 1,
+                exp: "Under Rule 11, any kind of leave under these rules may be granted in combination with or in continuation of any other kind of leave."
+            },
+            {
+                q: "What is the maximum limit of Special Casual Leave granted in a calendar year for participation in national/international sporting events?",
+                options: ["10 days", "30 days", "60 days", "90 days"],
+                ans: 2,
+                exp: "Special Casual Leave up to a maximum of 30 days (extendable up to 90 days in exceptional cases for sports events) is granted for national/international sports competitions."
+            },
+            {
+                q: "Special Casual Leave for undergoing Family Welfare voluntary sterilization (vasectomy) for male employees is admissible up to:",
+                options: ["3 working days", "5 working days", "7 working days", "14 working days"],
+                ans: 1,
+                exp: "Male government employees undergoing vasectomy operation are granted Special Casual Leave up to 5 working days."
+            },
+            {
+                q: "Special Casual Leave admissible to female employees undergoing tubectomy operation is:",
+                options: ["5 days", "10 days", "14 days", "21 days"],
+                ans: 2,
+                exp: "Female government servants undergoing tubectomy operation are entitled to Special Casual Leave up to 14 days."
+            },
+            {
+                q: "If a Government servant resigns from service, what proportion of Earned Leave at credit is encashable under Rule 39(3)?",
+                options: ["100% up to 300 days", "50% of EL at credit up to maximum 150 days", "Nil", "25% of total balance"],
+                ans: 1,
+                exp: "Under Rule 39(3), if a Government servant resigns, encashment is permitted for 50% of EL at credit up to a maximum of 150 days."
+            },
+            {
+                q: "For employees serving in a Vacation Department (e.g. teachers/instructors), how is EL credited if they avail full vacation in a year?",
+                options: ["30 days credited as usual", "No EL is credited if full vacation is availed", "15 days EL credited", "5 days EL credited"],
+                ans: 1,
+                exp: "Under Rule 28, a Government servant serving in a Vacation Department is not entitled to EL if they avail full vacation in any year."
+            },
+            {
+                q: "What happens to the leave account balance of an employee who is dismissed or removed from Government service?",
+                options: ["Encased up to 50%", "Transferred to spouse", "Lapses completely upon dismissal/removal", "Paid to GPF"],
+                ans: 2,
+                exp: "Under Rule 9, leave at the credit of a Government servant lapses entirely upon dismissal, removal, or termination of service."
+            }
+        ];
+
+        let currentQ = 0;
+        let userAnswers = new Array(50).fill(null);
+        let submitted = false;
+        let timerSeconds = 1800;
+        let timerInterval = null;
+
+        function init() {
+            renderPalette();
+            loadQuestion(0);
+            startTimer();
+        }
+
+        function startTimer() {
+            timerInterval = setInterval(() => {
+                if (timerSeconds <= 0) {
+                    clearInterval(timerInterval);
+                    autoSubmit();
+                    return;
+                }
+                timerSeconds--;
+                const m = Math.floor(timerSeconds / 60).toString().padStart(2, '0');
+                const s = (timerSeconds % 60).toString().padStart(2, '0');
+                document.getElementById('timer').textContent = `Time Remaining: ${m}:${s}`;
+            }, 1000);
+        }
+
+        function renderPalette() {
+            const palette = document.getElementById('palette');
+            palette.innerHTML = '';
+            for (let i = 0; i < 50; i++) {
+                const btn = document.createElement('button');
+                btn.className = 'palette-btn';
+                btn.id = `palette-btn-${i}`;
+                btn.textContent = i + 1;
+                btn.onclick = () => jumpToQuestion(i);
+                palette.appendChild(btn);
+            }
+        }
+
+        function updatePaletteUI() {
+            for (let i = 0; i < 50; i++) {
+                const btn = document.getElementById(`palette-btn-${i}`);
+                btn.className = 'palette-btn';
+                if (i === currentQ) btn.classList.add('active');
+
+                if (submitted) {
+                    if (userAnswers[i] === rawQuestions[i].ans) {
+                        btn.classList.add('correct');
+                    } else {
+                        btn.classList.add('incorrect');
+                    }
+                } else {
+                    if (userAnswers[i] !== null) {
+                        btn.classList.add('answered');
+                    }
+                }
+            }
+        }
+
+        function loadQuestion(index) {
+            currentQ = index;
+            const q = rawQuestions[index];
+            document.getElementById('q-number').textContent = `Question ${index + 1} of 50`;
+            document.getElementById('q-text').textContent = q.q;
+
+            const optsContainer = document.getElementById('options-container');
+            optsContainer.innerHTML = '';
+
+            const prefixes = ['A', 'B', 'C', 'D'];
+            q.options.forEach((optText, optIdx) => {
+                const item = document.createElement('div');
+                item.className = 'option-item';
+                
+                if (userAnswers[index] === optIdx) {
+                    item.classList.add('selected');
+                }
+
+                if (submitted) {
+                    item.classList.add('disabled');
+                    if (optIdx === q.ans) {
+                        item.classList.add('correct-answer');
+                    }
+                    if (userAnswers[index] === optIdx && optIdx !== q.ans) {
+                        item.classList.add('wrong-answer');
+                    }
+                } else {
+                    item.onclick = () => selectOption(optIdx);
+                }
+
+                item.innerHTML = `<span class="option-prefix">${prefixes[optIdx]}.</span><span>${optText}</span>`;
+                optsContainer.appendChild(item);
+            });
+
+            const expBox = document.getElementById('explanation');
+            if (submitted) {
+                document.getElementById('exp-text').textContent = q.exp;
+                expBox.style.display = 'block';
+            } else {
+                expBox.style.display = 'none';
+            }
+
+            document.getElementById('prev-btn').disabled = (index === 0);
+            document.getElementById('next-btn').disabled = (index === 49);
+
+            updatePaletteUI();
+        }
+
+        function selectOption(optIdx) {
+            if (submitted) return;
+            userAnswers[currentQ] = optIdx;
+            loadQuestion(currentQ);
+        }
+
+        function jumpToQuestion(index) {
+            loadQuestion(index);
+        }
+
+        function navigate(direction) {
+            const target = currentQ + direction;
+            if (target >= 0 && target < 50) {
+                loadQuestion(target);
+            }
+        }
+
+        function confirmSubmit() {
+            const unanswered = userAnswers.filter(a => a === null).length;
+            let msg = "Are you sure you want to submit your quiz?";
+            if (unanswered > 0) {
+                msg = `You have ${unanswered} unanswered question(s). Are you sure you want to submit?`;
+            }
+            if (confirm(msg)) {
+                submitQuiz();
+            }
+        }
+
+        function autoSubmit() {
+            alert("Time is up! Your quiz will be submitted automatically.");
+            submitQuiz();
+        }
+
+        function submitQuiz() {
+            submitted = true;
+            clearInterval(timerInterval);
+
+            let score = 0;
+            for (let i = 0; i < 50; i++) {
+                if (userAnswers[i] === rawQuestions[i].ans) {
+                    score++;
+                }
+            }
+
+            document.getElementById('timer').textContent = "Quiz Completed";
+            document.getElementById('submit-btn').classList.add('hide');
+            
+            const resultsCard = document.getElementById('results');
+            document.getElementById('score-text').textContent = `${score} / 50`;
+            document.getElementById('percentage-text').textContent = `Percentage: ${((score / 50) * 100).toFixed(1)}%`;
+            resultsCard.style.display = 'block';
+
+            loadQuestion(currentQ);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        window.onload = init;
+    </script>
+</body>
+</html>
