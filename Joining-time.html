@@ -567,8 +567,9 @@ const rawQuizData = [
     }
 ];
 
+let quizData = [];    
 let currentIndex = 0;
-let selectedAnswers = new Array(quizData.length).fill(null);
+let selectedAnswers = [];
 let isSubmitted = false;
 let timerInterval = null;
 let timeLeft = 1800; // 30 minutes
