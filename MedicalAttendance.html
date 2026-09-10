@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CCS (Medical Attendance) Rules Quiz</title>
+    <title>CCS (Medical Attendance) Rules Quiz - 50 Questions</title>
     <style>
         :root {
             --primary: #065f46;
@@ -301,8 +301,8 @@
 <body>
 
     <header>
-        <div class="header-title">CCS (Medical Attendance) Rules Quiz</div>
-        <div class="timer-box" id="timer">Time Remaining: 30:00</div>
+        <div class="header-title">CCS (Medical Attendance) Rules - 50 MCQ Quiz</div>
+        <div class="timer-box" id="timer">Time Remaining: 45:00</div>
     </header>
 
     <div class="container">
@@ -621,6 +621,24 @@
                 options: ["Yes, automatically", "No, CCS (MA) Rules apply only to serving employees; retirees are covered under CGHS or FMA", "Only retired Group A officers", "Only if approved by Head of Office"],
                 ans: 1,
                 exp: "CCS (MA) Rules apply to serving Central Government employees. Pensioners are governed by CGHS or Fixed Medical Allowance (FMA)."
+            },
+            {
+                q: "What is the first consultation fee paid to a Private Registered Medical Practitioner / AMA holding MBBS qualification?",
+                options: ["₹100", "₹70", "₹200", "₹500"],
+                ans: 1,
+                exp: "Under CS (MA) Rules, the prescribed first consultation fee for medical graduates (MBBS) appointed as AMA is ₹70."
+            },
+            {
+                q: "What is the consultation fee paid to a Post Graduate / Specialist Doctor appointed as AMA for the first consultation?",
+                options: ["₹70", "₹100", "₹250", "₹500"],
+                ans: 1,
+                exp: "The prescribed first consultation fee for Post Graduate / Specialist medical doctors appointed as AMA is ₹100."
+            },
+            {
+                q: "Which authority has the power to recognize private hospitals for treatment of Central Government employees under CS (MA) Rules?",
+                options: ["State Government", "Ministry of Health and Family Welfare", "Department of Personnel & Training", "District Magistrate"],
+                ans: 1,
+                exp: "The Ministry of Health and Family Welfare (MoHFW) holds the power to recognize private hospitals for medical care under CS (MA) Rules."
             }
         ];
 
@@ -635,7 +653,6 @@
 
         // --- PREPARE DATA WITH SHUFFLED QUESTIONS & OPTIONS ---
         function getShuffledQuizData(data) {
-            // Clone original array so rawQuizData remains untouched
             let shuffled = JSON.parse(JSON.stringify(data));
             
             // 1. Shuffle Questions order
@@ -664,7 +681,6 @@
         let timerInterval;
 
         function initQuiz() {
-            // Reshuffle questions on reload
             quizData = getShuffledQuizData(rawQuizData);
             userAnswers = {};
             currentQuestion = 0;
@@ -672,7 +688,7 @@
 
             renderPalette();
             loadQuestion(currentQuestion);
-            startTimer(30 * 60); // 30 minutes
+            startTimer(45 * 60); // 45 minutes for 50 questions
         }
 
         function renderPalette() {
