@@ -646,13 +646,39 @@
             }
         ];
 
+        let questions = [];
         let currentQ = 0;
         let userAnswers = new Array(50).fill(null);
         let submitted = false;
         let timerSeconds = 1800;
         let timerInterval = null;
 
+        // Fisher-Yates Shuffle Algorithm
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        // Reshuffles both questions and options dynamically
+        function prepareQuestions() {
+            // Clone original dataset
+            questions = JSON.parse(JSON.stringify(rawQuestions));
+            
+            // Shuffle array of questions
+            shuffleArray(questions);
+
+            // Shuffle options within each question and update correct answer index
+            questions.forEach(q => {
+                const originalCorrectOptionText = q.options[q.ans];
+                shuffleArray(q.options);
+                q.ans = q.options.indexOf(originalCorrectOptionText);
+            });
+        }
+
         function init() {
+            prepareQuestions();
             renderPalette();
             loadQuestion(0);
             startTimer();
@@ -692,7 +718,7 @@
                 if (i === currentQ) btn.classList.add('active');
 
                 if (submitted) {
-                    if (userAnswers[i] === rawQuestions[i].ans) {
+                    if (userAnswers[i] === questions[i].ans) {
                         btn.classList.add('correct');
                     } else {
                         btn.classList.add('incorrect');
@@ -707,7 +733,7 @@
 
         function loadQuestion(index) {
             currentQ = index;
-            const q = rawQuestions[index];
+            const q = questions[index];
             document.getElementById('q-number').textContent = `Question ${index + 1} of 50`;
             document.getElementById('q-text').textContent = q.q;
 
@@ -792,7 +818,7 @@
 
             let score = 0;
             for (let i = 0; i < 50; i++) {
-                if (userAnswers[i] === rawQuestions[i].ans) {
+                if (userAnswers[i] === questions[i].ans) {
                     score++;
                 }
             }
