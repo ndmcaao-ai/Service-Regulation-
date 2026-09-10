@@ -343,7 +343,7 @@
     </div>
 
     <script>
-        const rawQuestions = [
+        const rawQuizData = [
             {
                 q: "The Central Civil Services (Medical Attendance) Rules were framed in which year?",
                 options: ["1944", "1954", "1965", "1972"],
@@ -646,16 +646,38 @@
             }
         ];
 
-        let currentQ = 0;
-        let userAnswers = new Array(50).fill(null);
-        let submitted = false;
-        let timerSeconds = 1800;
-        let timerInterval = null;
+let quizData = [];
+let currentIndex = 0;
+let selectedAnswers = [];
+let isSubmitted = false;
+let timerInterval = null;
+let timeLeft = 1800; // 30 minutes in seconds
 
-        function init() {
-            renderPalette();
-            loadQuestion(0);
-            startTimer();
+// Fisher-Yates Shuffle Function
+function shuffleArray(array) {
+    const shuffled = JSON.parse(JSON.stringify(array)); // Deep copy
+    for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
+}
+
+       function initQuiz() {
+    // Shuffle questions on each initialize/load
+    quizData = shuffleArray(rawQuizData);
+    
+    currentIndex = 0;
+    selectedAnswers = new Array(quizData.length).fill(null);
+    isSubmitted = false;
+    
+    document.getElementById('results-panel').style.display = 'none';
+    document.getElementById('submit-btn').disabled = false;
+    
+    buildGrid();
+    renderQuestion();
+    startTimer();
+}
         }
 
         function startTimer() {
