@@ -583,7 +583,9 @@ function shuffleArray(array) {
 }
 
 function initQuiz() {
+    // Shuffle questions on each initialize/load
     quizData = shuffleArray(rawQuizData);
+    
     currentIndex = 0;
     selectedAnswers = new Array(quizData.length).fill(null);
     isSubmitted = false;
