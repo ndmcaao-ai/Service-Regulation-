@@ -1,0 +1,1742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Right to Information Act, 2005 - Interactive Practice Quiz</title>
+    <style>
+        :root {
+            --bg-primary: #f8fafc;
+            --bg-card: #ffffff;
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --text-muted: #94a3b8;
+            --border-color: #cbd5e1;
+            --accent-primary: #2563eb;
+            --accent-hover: #1d4ed8;
+            --accent-light: #eff6ff;
+            --success: #16a34a;
+            --success-light: #f0fdf4;
+            --danger: #dc2626;
+            --danger-light: #fef2f2;
+            --warning: #d97706;
+            --warning-light: #fffbeb;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            --radius-sm: 0.375rem;
+            --radius-md: 0.5rem;
+            --radius-lg: 0.75rem;
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: #0f172a;
+            --bg-card: #1e293b;
+            --text-primary: #f8fafc;
+            --text-secondary: #cbd5e1;
+            --text-muted: #64748b;
+            --border-color: #334155;
+            --accent-primary: #3b82f6;
+            --accent-hover: #60a5fa;
+            --accent-light: #1e3a8a;
+            --success: #22c55e;
+            --success-light: #14532d;
+            --danger: #ef4444;
+            --danger-light: #7f1d1d;
+            --warning: #f59e0b;
+            --warning-light: #78350f;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.5;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Sticky Header */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background-color: var(--bg-card);
+            border-bottom: 1px solid var(--border-color);
+            box-shadow: var(--shadow-sm);
+            padding: 0.75rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .header-title {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .header-title h1 {
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .badge {
+            background-color: var(--accent-light);
+            color: var(--accent-primary);
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 0.25rem 0.5rem;
+            border-radius: var(--radius-sm);
+            white-space: nowrap;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        /* Timer Widget */
+        .timer-box {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background-color: var(--accent-light);
+            color: var(--accent-primary);
+            padding: 0.4rem 0.8rem;
+            border-radius: var(--radius-md);
+            font-weight: 700;
+            font-size: 1rem;
+            font-family: monospace;
+            border: 1px solid var(--border-color);
+        }
+
+        .timer-box.warning {
+            background-color: var(--warning-light);
+            color: var(--warning);
+            animation: pulse 1s infinite;
+        }
+
+        .timer-box.danger {
+            background-color: var(--danger-light);
+            color: var(--danger);
+            animation: pulse 0.5s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .btn-header {
+            padding: 0.45rem 0.85rem;
+            border-radius: var(--radius-md);
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            border: 1px solid var(--border-color);
+            background-color: var(--bg-card);
+            color: var(--text-primary);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .btn-header:hover {
+            background-color: var(--bg-primary);
+        }
+
+        .icon-btn {
+            background: none;
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            cursor: pointer;
+            width: 2.25rem;
+            height: 2.25rem;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+        }
+
+        .icon-btn:hover {
+            background-color: var(--border-color);
+        }
+
+        /* Container Layout */
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            margin: 1.5rem auto;
+            padding: 0 1rem;
+            display: grid;
+            grid-template-columns: 1fr 320px;
+            gap: 1.5rem;
+            flex: 1;
+        }
+
+        @media (max-width: 900px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Question Section */
+        .main-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 480px;
+        }
+
+        .question-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .question-number {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+
+        .bookmark-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--text-muted);
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            font-weight: 600;
+        }
+
+        .bookmark-btn.active {
+            color: var(--warning);
+        }
+
+        .question-text {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 1.25rem;
+            line-height: 1.6;
+        }
+
+        /* Options */
+        .options-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .option-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            padding: 0.875rem 1rem;
+            border: 1.5px solid var(--border-color);
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            background-color: var(--bg-card);
+            font-size: 0.95rem;
+            color: var(--text-primary);
+            position: relative;
+        }
+
+        .option-item:hover {
+            border-color: var(--accent-primary);
+            background-color: var(--accent-light);
+        }
+
+        .option-item.selected {
+            border-color: var(--accent-primary);
+            background-color: var(--accent-light);
+            font-weight: 500;
+        }
+
+        .option-prefix {
+            width: 1.5rem;
+            height: 1.5rem;
+            border-radius: 50%;
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 700;
+            flex-shrink: 0;
+            background-color: var(--bg-primary);
+        }
+
+        .option-item.selected .option-prefix {
+            background-color: var(--accent-primary);
+            color: #ffffff;
+            border-color: var(--accent-primary);
+        }
+
+        /* Review Mode Option Styles */
+        .option-item.correct {
+            border-color: var(--success) !important;
+            background-color: var(--success-light) !important;
+            color: var(--text-primary);
+        }
+
+        .option-item.correct .option-prefix {
+            background-color: var(--success);
+            color: #ffffff;
+            border-color: var(--success);
+        }
+
+        .option-item.wrong {
+            border-color: var(--danger) !important;
+            background-color: var(--danger-light) !important;
+            color: var(--text-primary);
+        }
+
+        .option-item.wrong .option-prefix {
+            background-color: var(--danger);
+            color: #ffffff;
+            border-color: var(--danger);
+        }
+
+        /* Explanation Box */
+        .explanation-box {
+            margin-top: 1rem;
+            padding: 1rem;
+            background-color: var(--accent-light);
+            border-left: 4px solid var(--accent-primary);
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        .explanation-box strong {
+            color: var(--text-primary);
+            display: block;
+            margin-bottom: 0.25rem;
+        }
+
+        /* Navigation Bar */
+        .nav-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-color);
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.6rem 1.2rem;
+            border-radius: var(--radius-md);
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            border: 1px solid transparent;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4rem;
+        }
+
+        .btn-secondary {
+            background-color: var(--bg-primary);
+            border-color: var(--border-color);
+            color: var(--text-primary);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--border-color);
+        }
+
+        .btn-primary {
+            background-color: var(--accent-primary);
+            color: #ffffff;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--accent-hover);
+        }
+
+        .btn-danger {
+            background-color: var(--danger);
+            color: #ffffff;
+        }
+
+        .btn-danger:hover {
+            opacity: 0.9;
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* Sidebar Palette */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .palette-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 1.25rem;
+            box-shadow: var(--shadow-md);
+        }
+
+        .palette-header {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .filter-select {
+            padding: 0.25rem 0.5rem;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border-color);
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            font-size: 0.8rem;
+        }
+
+        .palette-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 0.5rem;
+            max-height: 360px;
+            overflow-y: auto;
+            padding-right: 0.25rem;
+        }
+
+        .palette-item {
+            aspect-ratio: 1;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-color);
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .palette-item:hover {
+            border-color: var(--accent-primary);
+        }
+
+        .palette-item.current {
+            outline: 2px solid var(--accent-primary);
+            outline-offset: 1px;
+        }
+
+        .palette-item.answered {
+            background-color: var(--accent-primary);
+            color: #ffffff;
+            border-color: var(--accent-primary);
+        }
+
+        .palette-item.bookmarked::after {
+            content: '★';
+            position: absolute;
+            top: 1px;
+            right: 2px;
+            font-size: 0.65rem;
+            color: var(--warning);
+        }
+
+        /* Review Mode Palette Status */
+        .palette-item.status-correct {
+            background-color: var(--success) !important;
+            color: #ffffff !important;
+            border-color: var(--success) !important;
+        }
+
+        .palette-item.status-wrong {
+            background-color: var(--danger) !important;
+            color: #ffffff !important;
+            border-color: var(--danger) !important;
+        }
+
+        .palette-item.status-unattempted {
+            background-color: var(--bg-primary) !important;
+            color: var(--text-muted) !important;
+        }
+
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-top: 1rem;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+        }
+
+        .legend-color {
+            width: 0.75rem;
+            height: 0.75rem;
+            border-radius: 2px;
+        }
+
+        /* Modal Score Card */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.6);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-card {
+            background-color: var(--bg-card);
+            border-radius: var(--radius-lg);
+            max-width: 500px;
+            width: 100%;
+            padding: 2rem;
+            box-shadow: var(--shadow-lg);
+            text-align: center;
+        }
+
+        .score-circle {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background-color: var(--accent-light);
+            color: var(--accent-primary);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 1rem auto;
+            border: 4px solid var(--accent-primary);
+        }
+
+        .score-value {
+            font-size: 2rem;
+            font-weight: 800;
+            line-height: 1;
+        }
+
+        .score-total {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .stat-box {
+            background-color: var(--bg-primary);
+            padding: 0.6rem;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-color);
+        }
+
+        .stat-val {
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+
+        .stat-lbl {
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+        }
+
+        /* Message Banner */
+        .alert-banner {
+            display: none;
+            padding: 0.75rem;
+            border-radius: var(--radius-md);
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        .alert-banner.info {
+            background-color: var(--accent-light);
+            color: var(--accent-primary);
+            border: 1px solid var(--accent-primary);
+        }
+
+        /* Animations */
+        .fade-in {
+            animation: fadeIn 0.25s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-title">
+            <h1>Right to Information Act, 2005</h1>
+            <span class="badge">Interactive Practice Quiz</span>
+        </div>
+        <div class="header-actions">
+            <div id="timer" class="timer-box" title="Time Remaining">
+                ⏱️ <span id="timer-display">30:00</span>
+            </div>
+            <button class="btn-header" id="restart-btn" title="Reshuffle questions and restart timer">
+                🔄 Reshuffle & Restart
+            </button>
+            <button class="icon-btn" id="theme-toggle" title="Toggle Dark/Light Mode">🌙</button>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Main Quiz Section -->
+        <main class="main-card fade-in" id="main-card">
+            <div>
+                <div id="status-banner" class="alert-banner info"></div>
+
+                <div class="question-header">
+                    <span class="question-number" id="q-number">Question 1 of 50</span>
+                    <button class="bookmark-btn" id="bookmark-btn" title="Bookmark Question">
+                        <span id="bookmark-icon">☆</span> Bookmark
+                    </button>
+                </div>
+                
+                <div class="question-text" id="q-text">
+                    Loading Question...
+                </div>
+
+                <div class="options-list" id="options-container">
+                    <!-- Dynamic Options -->
+                </div>
+
+                <div id="explanation-container" style="display: none;">
+                    <!-- Explanation shown post-submission -->
+                </div>
+            </div>
+
+            <!-- Navigation Bar -->
+            <div class="nav-controls">
+                <div>
+                    <button class="btn btn-secondary" id="prev-btn">← Previous</button>
+                    <button class="btn btn-secondary" id="clear-btn">Clear Selection</button>
+                </div>
+                <div>
+                    <button class="btn btn-primary" id="next-btn">Next →</button>
+                    <button class="btn btn-danger" id="submit-btn">Submit Quiz</button>
+                </div>
+            </div>
+        </main>
+
+        <!-- Sidebar / Palette -->
+        <aside class="sidebar">
+            <div class="palette-card">
+                <div class="palette-header">
+                    <span>Question Palette</span>
+                    <select id="palette-filter" class="filter-select">
+                        <option value="all">All (50)</option>
+                        <option value="answered">Answered</option>
+                        <option value="unanswered">Unanswered</option>
+                        <option value="bookmarked">Bookmarked</option>
+                    </select>
+                </div>
+
+                <div class="palette-grid" id="palette-grid">
+                    <!-- Grid Buttons generated dynamically -->
+                </div>
+
+                <div class="legend" id="legend-container">
+                    <div class="legend-item"><div class="legend-color" style="background:var(--accent-primary)"></div> Answered</div>
+                    <div class="legend-item"><div class="legend-color" style="background:var(--bg-primary); border:1px solid var(--border-color)"></div> Unanswered</div>
+                    <div class="legend-item"><div class="legend-color" style="outline:2px solid var(--accent-primary)"></div> Current</div>
+                    <div class="legend-item"><span style="color:var(--warning)">★</span> Bookmarked</div>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Score Card Modal -->
+    <div class="modal-overlay" id="score-modal">
+        <div class="modal-card fade-in">
+            <h2>Quiz Results</h2>
+            <p style="font-size: 0.875rem; color: var(--text-secondary); margin-top: 0.25rem;">Right to Information Act, 2005</p>
+
+            <div class="score-circle">
+                <span class="score-value" id="modal-score">0</span>
+                <span class="score-total">out of 50</span>
+            </div>
+
+            <p id="pass-fail-badge" style="font-weight: 700; font-size: 1.1rem; margin-bottom: 0.5rem;"></p>
+
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <div class="stat-val" id="stat-percentage" style="color: var(--accent-primary);">0%</div>
+                    <div class="stat-lbl">Percentage</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-val" id="stat-correct" style="color: var(--success);">0</div>
+                    <div class="stat-lbl">Correct</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-val" id="stat-incorrect" style="color: var(--danger);">0</div>
+                    <div class="stat-lbl">Incorrect</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-val" id="stat-skipped" style="color: var(--text-muted);">0</div>
+                    <div class="stat-lbl">Skipped</div>
+                </div>
+            </div>
+
+            <button class="btn btn-primary" id="review-btn" style="width: 100%;">Review Detailed Answers</button>
+        </div>
+    </div>
+
+    <script>
+        // --- 50 MCQs DATA POOL FOR RIGHT TO INFORMATION ACT, 2005 ---
+        const originalQuestions = [
+            {
+                id: 1,
+                question: "When did the Right to Information Act, 2005 receive the assent of the President of India?",
+                options: [
+                    "15th June 2005",
+                    "12th October 2005",
+                    "2nd October 2005",
+                    "26th January 2005"
+                ],
+                answer: "15th June 2005",
+                explanation: "Section 1: The RTI Act received the assent of the President of India on 15th June 2005 and came into full force on 12th October 2005 (120th day of its enactment)."
+            },
+            {
+                id: 2,
+                question: "Under Section 7(1) of the RTI Act, 2005, what is the mandatory timeframe for providing information if it concerns the life or liberty of a person?",
+                options: [
+                    "24 hours",
+                    "48 hours",
+                    "7 days",
+                    "30 days"
+                ],
+                answer: "48 hours",
+                explanation: "Proviso to Section 7(1): Where the information sought for concerns the life or liberty of a person, the same shall be provided within forty-eight hours of the receipt of the request."
+            },
+            {
+                id: 3,
+                question: "What is the maximum penalty that can be imposed on a CPIO under Section 20(1) for unreasonably delaying or denying information?",
+                options: [
+                    "₹10,000",
+                    "₹25,000",
+                    "₹50,000",
+                    "₹1,000"
+                ],
+                answer: "₹25,000",
+                explanation: "Section 20(1): The Information Commission shall impose a penalty of ₹250 each day till application is received or information is furnished, subject to a maximum total penalty of ₹25,000."
+            },
+            {
+                id: 4,
+                question: "As per Section 20(1), what is the per-day rate of penalty for delay in furnishing information without reasonable cause?",
+                options: [
+                    "₹100 per day",
+                    "₹250 per day",
+                    "₹500 per day",
+                    "₹1,000 per day"
+                ],
+                answer: "₹250 per day",
+                explanation: "Section 20(1): Penalty is calculated at the rate of ₹250 per day for each day's delay until the information is provided, not exceeding ₹25,000."
+            },
+            {
+                id: 5,
+                question: "Under Section 6(1), who among the following is entitled to file an application for obtaining information under the RTI Act?",
+                options: [
+                    "Any person residing in South Asia",
+                    "Only Indian Citizens",
+                    "Foreign Diplomats and NRIs only",
+                    "Registered Private Corporations"
+                ],
+                answer: "Only Indian Citizens",
+                explanation: "Section 3 & Section 6(1): Subject to the provisions of the Act, all 'citizens' shall have the right to information. Corporations or foreigners cannot file RTI applications as citizens."
+            },
+            {
+                id: 6,
+                question: "Which Section of the RTI Act, 2005 deals with exemptions from disclosure of information?",
+                options: [
+                    "Section 6",
+                    "Section 8",
+                    "Section 11",
+                    "Section 19"
+                ],
+                answer: "Section 8",
+                explanation: "Section 8(1) outlines various grounds under which public authorities are exempted from disclosing specific categories of information."
+            },
+            {
+                id: 7,
+                question: "Under Section 11(1), within how many days must a Third Party submit written representation after receiving notice from the CPIO?",
+                options: [
+                    "5 days",
+                    "10 days",
+                    "15 days",
+                    "30 days"
+                ],
+                answer: "10 days",
+                explanation: "Section 11(1): The third party shall, within ten days from the date of receipt of notice, be given the opportunity to make oral or written representation against proposed disclosure."
+            },
+            {
+                id: 8,
+                question: "What is the timeline for a CPIO to give a final decision on third-party information under Section 11(2)?",
+                options: [
+                    "Within 20 days of notice",
+                    "Within 30 days of notice",
+                    "Within 40 days after receipt of request",
+                    "Within 60 days"
+                ],
+                answer: "Within 40 days after receipt of request",
+                explanation: "Section 11(2): The CPIO shall, within 40 days after receipt of the request under Section 6, make a decision on disclosure if the third party was given an opportunity to make representation."
+            },
+            {
+                id: 9,
+                question: "According to Section 19(1), within how many days must a First Appeal be filed from the date of receipt of the decision or expiry of timeline?",
+                options: [
+                    "15 days",
+                    "30 days",
+                    "45 days",
+                    "90 days"
+                ],
+                answer: "30 days",
+                explanation: "Section 19(1): Any person aggrieved by a decision of the CPIO may within 30 days from the expiry of response period or receipt of decision prefer an appeal to the First Appellate Authority."
+            },
+            {
+                id: 10,
+                question: "What is the standard time limit for the First Appellate Authority to dispose of a First Appeal under Section 19(6)?",
+                options: [
+                    "15 days (extendable to 30 days)",
+                    "30 days (extendable to 45 days for reasons to be recorded)",
+                    "60 days fixed",
+                    "90 days"
+                ],
+                answer: "30 days (extendable to 45 days for reasons to be recorded)",
+                explanation: "Section 19(6): First Appeal shall be disposed of within 30 days of receipt or within an extended period not exceeding 45 days for reasons recorded in writing."
+            },
+            {
+                id: 11,
+                question: "A Second Appeal against a First Appellate Authority decision must be filed before the Information Commission under Section 19(3) within how many days?",
+                options: [
+                    "30 days",
+                    "60 days",
+                    "90 days",
+                    "180 days"
+                ],
+                answer: "90 days",
+                explanation: "Section 19(3): A second appeal against the decision under sub-section (1) shall lie within 90 days from the date on which the decision should have been made or was actually received."
+            },
+            {
+                id: 12,
+                question: "In Second Appeals before the Information Commission, who bears the onus of proving that a denial of request was justified under Section 19(5)?",
+                options: [
+                    "The Citizen/Appellant",
+                    "The CPIO or Public Authority",
+                    "The First Appellate Authority",
+                    "The High Court"
+                ],
+                answer: "The CPIO or Public Authority",
+                explanation: "Section 19(5): In any appeal proceedings, the onus to prove that a denial of a request was justified shall be on the Central Public Information Officer (CPIO) or State Public Information Officer."
+            },
+            {
+                id: 13,
+                question: "Under Section 6(2), is an applicant required to give reasons for requesting information?",
+                options: [
+                    "Yes, detailed justification is mandatory",
+                    "No reason is required except contact details necessary for communication",
+                    "Only if requested by the Head of Department",
+                    "Yes, but only for financial documents"
+                ],
+                answer: "No reason is required except contact details necessary for communication",
+                explanation: "Section 6(2): An applicant making request for information shall not be required to give any reason for requesting the information or any other personal details except those necessary for contacting him."
+            },
+            {
+                id: 14,
+                question: "What is the fee rule for applicants belonging to Below Poverty Line (BPL) category under Section 7(5)?",
+                options: [
+                    "50% concession on standard fee",
+                    "No fee shall be charged",
+                    "Flat rate of ₹5 per page",
+                    "Exemption applies only to postal charges"
+                ],
+                answer: "No fee shall be charged",
+                explanation: "Proviso to Section 7(5): No fee shall be charged from the persons who are of below poverty line as may be determined by the appropriate Government."
+            },
+            {
+                id: 15,
+                question: "If the CPIO fails to give a decision within the period specified under Section 7(1), what is the legal consequence?",
+                options: [
+                    "Application is deemed rejected & information must be provided free of charge under Sec 7(6)",
+                    "Application is automatically transferred to the Supreme Court",
+                    "The applicant must pay double application fees for re-filing",
+                    "No further appeal is allowed"
+                ],
+                answer: "Application is deemed rejected & information must be provided free of charge under Sec 7(6)",
+                explanation: "Section 7(2) deems failure as rejection, and Section 7(6) states that information shall be provided free of charge where a public authority fails to comply with the time limits."
+            },
+            {
+                id: 16,
+                question: "Which Section of the RTI Act exempts intelligence and security organizations listed in the Second Schedule from general purview?",
+                options: [
+                    "Section 12",
+                    "Section 18",
+                    "Section 24",
+                    "Section 28"
+                ],
+                answer: "Section 24",
+                explanation: "Section 24(1): Nothing contained in this Act shall apply to the intelligence and security organizations specified in the Second Schedule (e.g., IB, RAW, BSF, etc.)."
+            },
+            {
+                id: 17,
+                question: "Even for organizations listed under the Second Schedule (Section 24), information pertaining to which matters CANNOT be excluded?",
+                options: [
+                    "Budgetary allocations and staff promotions",
+                    "Allegations of corruption and human rights violations",
+                    "Foreign travel allowances",
+                    "Internal communication logs"
+                ],
+                answer: "Allegations of corruption and human rights violations",
+                explanation: "Proviso to Section 24(1): Information pertaining to allegations of corruption and human rights violations shall not be excluded under Section 24."
+            },
+            {
+                id: 18,
+                question: "Information relating to human rights violations from exempt organizations under Section 24(1) shall only be provided after approval of Information Commission within how many days?",
+                options: [
+                    "15 days",
+                    "30 days",
+                    "45 days",
+                    "60 days"
+                ],
+                answer: "45 days",
+                explanation: "Second Proviso to Section 24(1): Information in respect of allegations of violation of human rights shall only be provided after the approval of the Central Information Commission within 45 days."
+            },
+            {
+                id: 19,
+                question: "Which Section bars the jurisdiction of lower courts in respect of any order made under the RTI Act 2005?",
+                options: [
+                    "Section 20",
+                    "Section 22",
+                    "Section 23",
+                    "Section 25"
+                ],
+                answer: "Section 23",
+                explanation: "Section 23: No court shall entertain any suit, application or other proceeding in respect of any order made under this Act and no such order shall be called in question otherwise than by way of an appeal under this Act."
+            },
+            {
+                id: 20,
+                question: "What does Section 22 of the RTI Act establish regarding other laws or instruments?",
+                options: [
+                    "The RTI Act is subordinate to the Official Secrets Act, 1923",
+                    "The RTI Act has an overriding effect over conflicting provisions of any other law including Official Secrets Act",
+                    "RTI Act applies only if all other laws are silent",
+                    "RTI Act can be suspended by any Ministry notification"
+                ],
+                answer: "The RTI Act has an overriding effect over conflicting provisions of any other law including Official Secrets Act",
+                explanation: "Section 22: The provisions of this Act shall have effect notwithstanding anything inconsistent therewith contained in the Official Secrets Act, 1923, or any other law."
+            },
+            {
+                id: 21,
+                question: "Under Section 12(2), what is the maximum number of Information Commissioners (besides Chief Information Commissioner) in the Central Information Commission?",
+                options: [
+                    "5",
+                    "8",
+                    "10",
+                    "12"
+                ],
+                answer: "10",
+                explanation: "Section 12(2): The Central Information Commission shall consist of the Chief Information Commissioner and such number of Central Information Commissioners not exceeding ten."
+            },
+            {
+                id: 22,
+                question: "Who heads the committee that recommends the appointment of the Chief Information Commissioner under Section 12(3)?",
+                options: [
+                    "Chief Justice of India",
+                    "Prime Minister of India",
+                    "Speaker of Lok Sabha",
+                    "President of India"
+                ],
+                answer: "Prime Minister of India",
+                explanation: "Section 12(3): The CIC and Information Commissioners are appointed by President on recommendation of a committee consisting of: Prime Minister (Chair), Leader of Opposition in Lok Sabha, and a Union Cabinet Minister."
+            },
+            {
+                id: 23,
+                question: "Under Section 18, what powers are vested in the Information Commission while inquiring into a complaint?",
+                options: [
+                    "Powers of a Criminal Court",
+                    "Powers of a Civil Court under the Code of Civil Procedure, 1908",
+                    "Powers of High Court under Article 226",
+                    "No judicial powers"
+                ],
+                answer: "Powers of a Civil Court under the Code of Civil Procedure, 1908",
+                explanation: "Section 18(3): The Information Commission shall have the same powers as are vested in a civil court while trying a suit under Code of Civil Procedure, 1908."
+            },
+            {
+                id: 24,
+                question: "If an RTI application is lodged with an Assistant CPIO (ACPIO), by how many days is the standard 30-day response period extended?",
+                options: [
+                    "2 days",
+                    "5 days",
+                    "10 days",
+                    "15 days"
+                ],
+                answer: "5 days",
+                explanation: "Proviso to Section 5(2): Where an application for information or appeal is given to an Assistant Public Information Officer, a period of 5 days shall be added in computing the period for response."
+            },
+            {
+                id: 25,
+                question: "What is the maximum period within which an RTI application must be transferred to another public authority under Section 6(3)?",
+                options: [
+                    "3 days",
+                    "5 days",
+                    "7 days",
+                    "10 days"
+                ],
+                answer: "5 days",
+                explanation: "Section 6(3): Transfer of an application to another public authority holding the information must be made as soon as practicable but in no case later than 5 days from date of receipt."
+            },
+            {
+                id: 26,
+                question: "Which Section mandates proactive mandatory voluntary disclosure of information by public authorities (Suo Motu Disclosure)?",
+                options: [
+                    "Section 4(1)(b)",
+                    "Section 6(1)",
+                    "Section 8(2)",
+                    "Section 12(1)"
+                ],
+                answer: "Section 4(1)(b)",
+                explanation: "Section 4(1)(b) lists 17 manual points that every public authority must publish proactively within 120 days from enactment."
+            },
+            {
+                id: 27,
+                question: "Can information exempted under Section 8(1) still be disclosed under Section 8(2)?",
+                options: [
+                    "No, Section 8 exemptions are absolute and permanent",
+                    "Yes, if public interest in disclosure outweighs the harm to protected interests",
+                    "Only if approved by Parliament",
+                    "Only after 50 years"
+                ],
+                answer: "Yes, if public interest in disclosure outweighs the harm to protected interests",
+                explanation: "Section 8(2): A public authority may allow access to information if public interest in disclosure outweighs the harm to the protected interests, notwithstanding Official Secrets Act or Section 8(1)."
+            },
+            {
+                id: 28,
+                question: "Subject to provisions of Section 8(1)(a), (c) and (i), any information relating to an event that occurred how many years ago must ordinarily be disclosed under Section 8(3)?",
+                options: [
+                    "10 years",
+                    "15 years",
+                    "20 years",
+                    "30 years"
+                ],
+                answer: "20 years",
+                explanation: "Section 8(3): Any information relating to any occurrence, event or matter which has taken place 20 years before the date of request shall be provided, subject to exemptions in 8(1)(a), (c), (i)."
+            },
+            {
+                id: 29,
+                question: "Under Section 8(1)(j), personal information can be denied UNLESS the CPIO/Appellate Authority is satisfied that disclosure is justified by what?",
+                options: [
+                    "Commercial value of document",
+                    "Larger public interest",
+                    "Political consensus",
+                    "Consent of local municipality"
+                ],
+                answer: "Larger public interest",
+                explanation: "Section 8(1)(j) exempts personal information having no relationship to public activity unless the CPIO/Appellate Authority is satisfied that larger public interest justifies disclosure."
+            },
+            {
+                id: 30,
+                question: "What does the proviso to Section 8(1)(j) specify regarding availability of information to Parliament or State Legislature?",
+                options: [
+                    "Information which cannot be denied to Parliament or State Legislature shall not be denied to any person",
+                    "MPs and MLAs must pay double fee for personal information",
+                    "Legislature can view secret files without CPIO approval",
+                    "Information available to citizens cannot be given to Parliament"
+                ],
+                answer: "Information which cannot be denied to Parliament or State Legislature shall not be denied to any person",
+                explanation: "Proviso to Section 8(1)(j): Information which cannot be denied to the Parliament or a State Legislature shall not be denied to any person."
+            },
+            {
+                id: 31,
+                question: "Which section authorizes partial disclosure of non-exempt parts of a record when exempt parts are severed (Doctrine of Severability)?",
+                options: [
+                    "Section 7(9)",
+                    "Section 10",
+                    "Section 11",
+                    "Section 14"
+                ],
+                answer: "Section 10",
+                explanation: "Section 10(1): Where a request for access to information is rejected because it contains exempt information, access may be provided to that part of record which can reasonably be severed."
+            },
+            {
+                id: 32,
+                question: "Under Section 20(2), what action can the Information Commission recommend against a recalcitrant CPIO in addition to financial penalty?",
+                options: [
+                    "Criminal imprisonment up to 2 years",
+                    "Disciplinary action under the service rules applicable to the officer",
+                    "Demotion of rank immediately without inquiry",
+                    "Forfeiture of full pension benefits"
+                ],
+                answer: "Disciplinary action under the service rules applicable to the officer",
+                explanation: "Section 20(2): The Information Commission can recommend disciplinary action against the CPIO under the service rules applicable to him if delay/denial was persistent without reasonable cause."
+            },
+            {
+                id: 33,
+                question: "Who recommends the appointment of State Chief Information Commissioner and State Information Commissioners under Section 15(3)?",
+                options: [
+                    "Governor, High Court Chief Justice, and Chief Minister",
+                    "Chief Minister, Leader of Opposition in Assembly, and a Cabinet Minister nominated by CM",
+                    "State Public Service Commission",
+                    "President of India"
+                ],
+                answer: "Chief Minister, Leader of Opposition in Assembly, and a Cabinet Minister nominated by CM",
+                explanation: "Section 15(3): Committee comprises Chief Minister (Chair), Leader of Opposition in Legislative Assembly, and a Cabinet Minister nominated by the Chief Minister."
+            },
+            {
+                id: 34,
+                question: "Which Section defines 'Public Authority' under the RTI Act, 2005?",
+                options: [
+                    "Section 2(a)",
+                    "Section 2(h)",
+                    "Section 2(j)",
+                    "Section 2(f)"
+                ],
+                answer: "Section 2(h)",
+                explanation: "Section 2(h) defines 'public authority' as any authority/body established by Constitution, Parliament, State Legislature, or notification, including substantially financed bodies."
+            },
+            {
+                id: 35,
+                question: "What is defined under Section 2(f) of the RTI Act?",
+                options: [
+                    "Right to Information",
+                    "Information",
+                    "Public Authority",
+                    "Third Party"
+                ],
+                answer: "Information",
+                explanation: "Section 2(f) defines 'information' as any material in any form, including records, documents, memos, e-mails, opinions, advices, press releases, circulars, orders, logbooks, etc."
+            },
+            {
+                id: 36,
+                question: "Under Section 2(j), what activities are explicitly included in the 'Right to Information'?",
+                options: [
+                    "Inspection of work, documents, records, taking notes/certified copies, and taking certified samples of material",
+                    "Demand for phone tap recordings only",
+                    "Mandatory questioning of officers in person under oath",
+                    "Drafting new government policy on behalf of Ministry"
+                ],
+                answer: "Inspection of work, documents, records, taking notes/certified copies, and taking certified samples of material",
+                explanation: "Section 2(j) includes inspection of work/documents, taking notes/extracts/certified copies, taking certified samples of material, and obtaining info in electronic tapes/disks."
+            },
+            {
+                id: 37,
+                question: "Under Section 7(9), an information request shall ordinarily be provided in the form in which it is sought UNLESS it would:",
+                options: [
+                    "Take more than 10 pages to print",
+                    "Disproportionately divert resources of public authority or safety/preservation of record",
+                    "Be inconvenient to CPIO personal schedule",
+                    "Require approval of Cabinet Secretary"
+                ],
+                answer: "Disproportionately divert resources of public authority or safety/preservation of record",
+                explanation: "Section 7(9): An information shall ordinarily be provided in the form in which it is sought unless it would disproportionately divert the resources of the public authority or be detrimental to safety."
+            },
+            {
+                id: 38,
+                question: "What protection is granted to officers acting under the RTI Act under Section 21?",
+                options: [
+                    "No suit, prosecution or legal proceeding shall lie against any person for anything done in good faith",
+                    "Complete immunity from tax audit",
+                    "Right to refuse all court summons",
+                    "Automatic promotion after 5 years"
+                ],
+                answer: "No suit, prosecution or legal proceeding shall lie against any person for anything done in good faith",
+                explanation: "Section 21: No suit, prosecution or other legal proceeding shall lie against any person for anything which is in good faith done or intended to be done under this Act."
+            },
+            {
+                id: 39,
+                question: "Which section empowers the Central Government to make rules to carry out the provisions of the RTI Act?",
+                options: [
+                    "Section 27",
+                    "Section 28",
+                    "Section 29",
+                    "Section 30"
+                ],
+                answer: "Section 27",
+                explanation: "Section 27 empowers the appropriate Government (Central/State) to make rules by notification in Official Gazette to carry out RTI provisions."
+            },
+            {
+                id: 40,
+                question: "Under Section 28, who has the power to make rules regarding application fee and costs?",
+                options: [
+                    "Chief Information Commissioner independently",
+                    "Competent Authorities (like Chief Justice of India, Speaker of Lok Sabha, Governors)",
+                    "Central Bureau of Investigation",
+                    "District Magistrates"
+                ],
+                answer: "Competent Authorities (like Chief Justice of India, Speaker of Lok Sabha, Governors)",
+                explanation: "Section 28 empowers the Competent Authority (presiding officers of legislature, Chief Justices, Governors) to make rules regarding fees and costs."
+            },
+            {
+                id: 41,
+                question: "Under Section 8(1)(a), disclosure of information can be refused if it prejudicially affects:",
+                options: [
+                    "Sovereignty and integrity of India, security, strategic, scientific or economic interests of State",
+                    "Commercial profit of foreign private airlines",
+                    "Electoral chances of local municipal candidate",
+                    "Personal reputation of retired private citizens"
+                ],
+                answer: "Sovereignty and integrity of India, security, strategic, scientific or economic interests of State",
+                explanation: "Section 8(1)(a) exempts information disclosure of which would prejudicially affect sovereignty, integrity, security, strategic, scientific, or economic interests of India."
+            },
+            {
+                id: 42,
+                question: "Exemption under Section 8(1)(d) protects which type of information unless larger public interest warrants disclosure?",
+                options: [
+                    "Cabinet papers and committee records",
+                    "Commercial confidence, trade secrets or intellectual property",
+                    "Information received in confidence from foreign government",
+                    "Contempt of court records"
+                ],
+                answer: "Commercial confidence, trade secrets or intellectual property",
+                explanation: "Section 8(1)(d) exempts commercial confidence, trade secrets or intellectual property, where disclosure would harm competitive position of a third party."
+            },
+            {
+                id: 43,
+                question: "Cabinet papers including records of deliberations of the Council of Ministers are exempt under Section 8(1)(i). When do they become accessible?",
+                options: [
+                    "Never, they remain permanent secrets",
+                    "After the decision has been taken, and the matter is complete, or over",
+                    "After 50 years with Presidential decree",
+                    "Immediately upon filing RTI"
+                ],
+                answer: "After the decision has been taken, and the matter is complete, or over",
+                explanation: "First Proviso to Section 8(1)(i): Decisions of Council of Ministers, reasons, and material on basis of which decisions were taken shall be made public after decision is taken and matter complete."
+            },
+            {
+                id: 44,
+                question: "What is the status of information available to a person in his fiduciary relationship under Section 8(1)(e)?",
+                options: [
+                    "Exempt from disclosure unless competent authority is satisfied that larger public interest warrants it",
+                    "Mandatorily disclosable within 24 hours",
+                    "Always exempt without any exception",
+                    "Disclosable only on payment of ₹10,000 fee"
+                ],
+                answer: "Exempt from disclosure unless competent authority is satisfied that larger public interest warrants it",
+                explanation: "Section 8(1)(e) exempts info available in fiduciary relationship unless competent authority is satisfied larger public interest warrants disclosure."
+            },
+            {
+                id: 45,
+                question: "Who is a 'Third Party' under Section 2(n) of the RTI Act?",
+                options: [
+                    "Only foreign national observers",
+                    "A person other than the citizen who has made a request for information, including a public authority",
+                    "Only private companies registered abroad",
+                    "Any government minister"
+                ],
+                answer: "A person other than the citizen who has made a request for information, including a public authority",
+                explanation: "Section 2(n): 'Third party' means a person other than the citizen who has made a request for information and includes a public authority."
+            },
+            {
+                id: 46,
+                question: "If an Assistant CPIO receives an RTI application, within how many days must information be provided under standard conditions?",
+                options: [
+                    "30 days",
+                    "35 days",
+                    "40 days",
+                    "45 days"
+                ],
+                answer: "35 days",
+                explanation: "Combining Sec 7(1) [30 days] and Proviso to Sec 5(2) [+5 days], when an application is submitted via ACPIO, the total response limit is 35 days."
+            },
+            {
+                id: 47,
+                question: "Under Section 19(8)(a), what power does the Information Commission have regarding public authorities?",
+                options: [
+                    "Power to require public authority to take steps to conform to provisions (publish manuals, appoint CPIO, train staff)",
+                    "Power to dissolve the legislative assembly",
+                    "Power to order criminal arrest without warrant",
+                    "Power to revise tax brackets"
+                ],
+                answer: "Power to require public authority to take steps to conform to provisions (publish manuals, appoint CPIO, train staff)",
+                explanation: "Section 19(8)(a) empowers Information Commission to require public authority to take necessary steps like designating CPIOs, publishing manuals, improving records, etc."
+            },
+            {
+                id: 48,
+                question: "Under Section 19(8)(b), the Information Commission has the power to require the public authority to compensate the complainant for:",
+                options: [
+                    "Loss or other detriment suffered",
+                    "Legal retainer fees for supreme court advocates",
+                    "Loss of business profit over 5 years",
+                    "Mental stress calculated at flat ₹1 Lakh"
+                ],
+                answer: "Loss or other detriment suffered",
+                explanation: "Section 19(8)(b) empowers the Information Commission to require the public authority to compensate the complainant for any loss or other detriment suffered."
+            },
+            {
+                id: 49,
+                question: "Who is empowered under Section 30 to issue orders for removing difficulties in giving effect to the RTI Act within 2 years of commencement?",
+                options: [
+                    "Central Government",
+                    "Supreme Court of India",
+                    "Comptroller and Auditor General",
+                    "Bar Council of India"
+                ],
+                answer: "Central Government",
+                explanation: "Section 30: If any difficulty arises in giving effect to the provisions, Central Government may by order published in Gazette make provisions not inconsistent with Act."
+            },
+            {
+                id: 50,
+                question: "Under Section 25, who prepares the annual report on the implementation of RTI provisions to be laid before Parliament/State Legislature?",
+                options: [
+                    "Central/State Information Commission",
+                    "Ministry of Home Affairs",
+                    "Law Commission of India",
+                    "Department of Personnel and Training (DoPT) alone"
+                ],
+                answer: "Central/State Information Commission",
+                explanation: "Section 25(1): The Central Information Commission / State Information Commission shall prepare an annual report on implementation of RTI provisions to be laid before Parliament/Legislature."
+            }
+        ];
+
+        // --- APPLICATION STATE ---
+        let questions = []; // Shuffled runtime questions
+        let currentIdx = 0;
+        let userAnswers = []; // Stores chosen option string or null
+        let bookmarked = [];
+        let isSubmitted = false;
+        let timerInterval = null;
+        let timeRemaining = 30 * 60; // 30 mins in seconds
+
+        /**
+         * Fisher-Yates Shuffle Algorithm for Array
+         */
+        function fisherYatesShuffle(array) {
+            const arr = [...array];
+            for (let i = arr.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [arr[i], arr[j]] = [arr[j], arr[i]];
+            }
+            return arr;
+        }
+
+        /**
+         * Prepares question set by shuffling question order AND option order for each question
+         */
+        function initializeShuffledQuestions() {
+            const shuffledQ = fisherYatesShuffle(originalQuestions);
+            questions = shuffledQ.map(q => {
+                const shuffledOpts = fisherYatesShuffle(q.options);
+                return {
+                    ...q,
+                    options: shuffledOpts
+                };
+            });
+
+            userAnswers = new Array(questions.length).fill(null);
+            bookmarked = new Array(questions.length).fill(false);
+        }
+
+        // DOM Elements
+        const mainCard = document.getElementById('main-card');
+        const qNumberEl = document.getElementById('q-number');
+        const qTextEl = document.getElementById('q-text');
+        const optionsContainer = document.getElementById('options-container');
+        const explanationContainer = document.getElementById('explanation-container');
+        const bookmarkBtn = document.getElementById('bookmark-btn');
+        const bookmarkIcon = document.getElementById('bookmark-icon');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const clearBtn = document.getElementById('clear-btn');
+        const submitBtn = document.getElementById('submit-btn');
+        const restartBtn = document.getElementById('restart-btn');
+        const paletteGrid = document.getElementById('palette-grid');
+        const paletteFilter = document.getElementById('palette-filter');
+        const timerDisplay = document.getElementById('timer-display');
+        const timerBox = document.getElementById('timer');
+        const themeToggle = document.getElementById('theme-toggle');
+        const scoreModal = document.getElementById('score-modal');
+        const reviewBtn = document.getElementById('review-btn');
+        const statusBanner = document.getElementById('status-banner');
+
+        window.addEventListener('DOMContentLoaded', () => {
+            initQuizApp();
+            setupEventListeners();
+        });
+
+        function initQuizApp() {
+            initializeShuffledQuestions();
+            isSubmitted = false;
+            currentIdx = 0;
+            timeRemaining = 30 * 60;
+            
+            // Reset UI
+            submitBtn.style.display = 'inline-flex';
+            clearBtn.style.display = 'inline-flex';
+            statusBanner.style.display = 'none';
+            scoreModal.classList.remove('active');
+
+            document.getElementById('legend-container').innerHTML = `
+                <div class="legend-item"><div class="legend-color" style="background:var(--accent-primary)"></div> Answered</div>
+                <div class="legend-item"><div class="legend-color" style="background:var(--bg-primary); border:1px solid var(--border-color)"></div> Unanswered</div>
+                <div class="legend-item"><div class="legend-color" style="outline:2px solid var(--accent-primary)"></div> Current</div>
+                <div class="legend-item"><span style="color:var(--warning)">★</span> Bookmarked</div>
+            `;
+
+            startTimer();
+            renderPalette();
+            loadQuestion(0);
+        }
+
+        function startTimer() {
+            if (timerInterval) clearInterval(timerInterval);
+            updateTimerDisplay();
+            
+            timerInterval = setInterval(() => {
+                if (timeRemaining <= 0) {
+                    clearInterval(timerInterval);
+                    autoSubmitQuiz();
+                    return;
+                }
+                timeRemaining--;
+                updateTimerDisplay();
+            }, 1000);
+        }
+
+        function updateTimerDisplay() {
+            const mins = Math.floor(timeRemaining / 60);
+            const secs = timeRemaining % 60;
+            timerDisplay.textContent = `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+
+            if (timeRemaining <= 300 && timeRemaining > 60) {
+                timerBox.className = 'timer-box warning';
+            } else if (timeRemaining <= 60) {
+                timerBox.className = 'timer-box danger';
+            } else {
+                timerBox.className = 'timer-box';
+            }
+        }
+
+        function loadQuestion(idx) {
+            currentIdx = idx;
+            const q = questions[idx];
+
+            // Animate card transition
+            mainCard.classList.remove('fade-in');
+            void mainCard.offsetWidth; // trigger reflow
+            mainCard.classList.add('fade-in');
+
+            qNumberEl.textContent = `Question ${idx + 1} of ${questions.length}`;
+            qTextEl.textContent = q.question;
+
+            // Bookmark Status
+            if (bookmarked[idx]) {
+                bookmarkBtn.classList.add('active');
+                bookmarkIcon.textContent = '★';
+            } else {
+                bookmarkBtn.classList.remove('active');
+                bookmarkIcon.textContent = '☆';
+            }
+
+            // Options Rendering
+            optionsContainer.innerHTML = '';
+            const labels = ['A', 'B', 'C', 'D'];
+
+            q.options.forEach((optText, optIdx) => {
+                const optEl = document.createElement('div');
+                optEl.className = 'option-item';
+
+                const isSelected = userAnswers[idx] === optText;
+                if (isSelected) {
+                    optEl.classList.add('selected');
+                }
+
+                // Review Mode Styles
+                if (isSubmitted) {
+                    if (optText === q.answer) {
+                        optEl.classList.add('correct');
+                    }
+                    if (isSelected && optText !== q.answer) {
+                        optEl.classList.add('wrong');
+                    }
+                }
+
+                optEl.innerHTML = `
+                    <div class="option-prefix">${labels[optIdx]}</div>
+                    <div style="flex:1;">${optText}</div>
+                `;
+
+                if (!isSubmitted) {
+                    optEl.addEventListener('click', () => selectOption(optText));
+                }
+
+                optionsContainer.appendChild(optEl);
+            });
+
+            // Explanation Display in Review Mode
+            if (isSubmitted) {
+                explanationContainer.style.display = 'block';
+                explanationContainer.className = 'explanation-box';
+                explanationContainer.innerHTML = `
+                    <strong>Statutory Reference & Legal Explanation:</strong>
+                    ${q.explanation}
+                `;
+            } else {
+                explanationContainer.style.display = 'none';
+            }
+
+            // Nav Controls Update
+            prevBtn.disabled = idx === 0;
+            nextBtn.disabled = idx === questions.length - 1;
+
+            updatePaletteCurrent();
+        }
+
+        function selectOption(optText) {
+            userAnswers[currentIdx] = optText;
+            loadQuestion(currentIdx);
+            renderPalette();
+        }
+
+        function clearSelection() {
+            if (isSubmitted) return;
+            userAnswers[currentIdx] = null;
+            loadQuestion(currentIdx);
+            renderPalette();
+        }
+
+        function toggleBookmark() {
+            bookmarked[currentIdx] = !bookmarked[currentIdx];
+            loadQuestion(currentIdx);
+            renderPalette();
+        }
+
+        function renderPalette() {
+            paletteGrid.innerHTML = '';
+            const filter = paletteFilter.value;
+
+            questions.forEach((q, idx) => {
+                const isAnswered = userAnswers[idx] !== null;
+                const isBookmarked = bookmarked[idx];
+
+                // Filter Evaluation
+                if (filter === 'answered' && !isAnswered) return;
+                if (filter === 'unanswered' && isAnswered) return;
+                if (filter === 'bookmarked' && !isBookmarked) return;
+
+                const item = document.createElement('button');
+                item.className = 'palette-item';
+                item.textContent = idx + 1;
+
+                if (idx === currentIdx) {
+                    item.classList.add('current');
+                }
+
+                if (!isSubmitted) {
+                    if (isAnswered) item.classList.add('answered');
+                } else {
+                    // Post-submission palette coloring
+                    if (userAnswers[idx] === q.answer) {
+                        item.classList.add('status-correct');
+                    } else if (userAnswers[idx] !== null) {
+                        item.classList.add('status-wrong');
+                    } else {
+                        item.classList.add('status-unattempted');
+                    }
+                }
+
+                if (isBookmarked) item.classList.add('bookmarked');
+
+                item.addEventListener('click', () => loadQuestion(idx));
+                paletteGrid.appendChild(item);
+            });
+        }
+
+        function updatePaletteCurrent() {
+            const items = paletteGrid.querySelectorAll('.palette-item');
+            items.forEach(item => {
+                if (parseInt(item.textContent) === currentIdx + 1) {
+                    item.classList.add('current');
+                } else {
+                    item.classList.remove('current');
+                }
+            });
+        }
+
+        function autoSubmitQuiz() {
+            showBanner("Time expired! Your answers have been submitted automatically.", "info");
+            finalizeQuiz();
+        }
+
+        function submitQuiz() {
+            const unansweredCount = userAnswers.filter(a => a === null).length;
+            let msg = "Are you sure you want to submit your quiz?";
+            if (unansweredCount > 0) {
+                msg = `You have ${unansweredCount} unanswered question(s). Are you sure you want to submit?`;
+            }
+            if (confirm(msg)) {
+                finalizeQuiz();
+            }
+        }
+
+        function finalizeQuiz() {
+            isSubmitted = true;
+            clearInterval(timerInterval);
+
+            let score = 0;
+            let correctCount = 0;
+            let incorrectCount = 0;
+            let skippedCount = 0;
+
+            questions.forEach((q, idx) => {
+                const ans = userAnswers[idx];
+                if (ans === q.answer) {
+                    score++;
+                    correctCount++;
+                } else if (ans !== null) {
+                    incorrectCount++;
+                } else {
+                    skippedCount++;
+                }
+            });
+
+            const percentage = ((score / questions.length) * 100).toFixed(1);
+
+            // Populate Modal Stats
+            document.getElementById('modal-score').textContent = score;
+            document.getElementById('stat-percentage').textContent = `${percentage}%`;
+            document.getElementById('stat-correct').textContent = correctCount;
+            document.getElementById('stat-incorrect').textContent = incorrectCount;
+            document.getElementById('stat-skipped').textContent = skippedCount;
+
+            const badge = document.getElementById('pass-fail-badge');
+            if (percentage >= 75) {
+                badge.textContent = "EXCELLENT PERFORMANCE";
+                badge.style.color = "var(--success)";
+            } else if (percentage >= 50) {
+                badge.textContent = "PASSED";
+                badge.style.color = "var(--accent-primary)";
+            } else {
+                badge.textContent = "NEEDS IMPROVEMENT";
+                badge.style.color = "var(--danger)";
+            }
+
+            // Display Results Modal
+            scoreModal.classList.add('active');
+
+            // Hide action controls and show submission banner
+            submitBtn.style.display = 'none';
+            clearBtn.style.display = 'none';
+            timerDisplay.textContent = 'Completed';
+
+            // Review Legend Mode
+            document.getElementById('legend-container').innerHTML = `
+                <div class="legend-item"><div class="legend-color" style="background:var(--success)"></div> Correct</div>
+                <div class="legend-item"><div class="legend-color" style="background:var(--danger)"></div> Incorrect</div>
+                <div class="legend-item"><div class="legend-color" style="background:var(--bg-primary); border:1px solid var(--border-color)"></div> Unattempted</div>
+            `;
+
+            renderPalette();
+            loadQuestion(currentIdx);
+        }
+
+        function showBanner(text, type) {
+            statusBanner.textContent = text;
+            statusBanner.className = `alert-banner ${type}`;
+            statusBanner.style.display = 'block';
+        }
+
+        function setupEventListeners() {
+            prevBtn.addEventListener('click', () => {
+                if (currentIdx > 0) loadQuestion(currentIdx - 1);
+            });
+
+            nextBtn.addEventListener('click', () => {
+                if (currentIdx < questions.length - 1) loadQuestion(currentIdx + 1);
+            });
+
+            clearBtn.addEventListener('click', clearSelection);
+            bookmarkBtn.addEventListener('click', toggleBookmark);
+            submitBtn.addEventListener('click', submitQuiz);
+
+            restartBtn.addEventListener('click', () => {
+                if (confirm("Reshuffling will randomize all questions and options, resetting your current progress and timer. Continue?")) {
+                    initQuizApp();
+                }
+            });
+
+            paletteFilter.addEventListener('change', renderPalette);
+
+            reviewBtn.addEventListener('click', () => {
+                scoreModal.classList.remove('active');
+                showBanner("Review Mode Active: Examine options and section explanations below each question card.", "info");
+            });
+
+            // Theme Switcher Logic
+            themeToggle.addEventListener('click', () => {
+                const currentTheme = document.documentElement.getAttribute('data-theme');
+                if (currentTheme === 'dark') {
+                    document.documentElement.removeAttribute('data-theme');
+                    themeToggle.textContent = '🌙';
+                } else {
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                    themeToggle.textContent = '☀️';
+                }
+            });
+        }
+    </script>
+</body>
+</html>
