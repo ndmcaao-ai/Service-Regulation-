@@ -1,0 +1,1710 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>General Financial Rules (GFR) 2017 - Interactive Practice Quiz</title>
+    <style>
+        :root {
+            --bg-primary: #f8fafc;
+            --bg-card: #ffffff;
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --text-muted: #94a3b8;
+            --border-color: #cbd5e1;
+            --accent-primary: #2563eb;
+            --accent-hover: #1d4ed8;
+            --accent-light: #eff6ff;
+            --success: #16a34a;
+            --success-light: #f0fdf4;
+            --danger: #dc2626;
+            --danger-light: #fef2f2;
+            --warning: #d97706;
+            --warning-light: #fffbeb;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            --radius-sm: 0.375rem;
+            --radius-md: 0.5rem;
+            --radius-lg: 0.75rem;
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: #0f172a;
+            --bg-card: #1e293b;
+            --text-primary: #f8fafc;
+            --text-secondary: #cbd5e1;
+            --text-muted: #64748b;
+            --border-color: #334155;
+            --accent-primary: #3b82f6;
+            --accent-hover: #60a5fa;
+            --accent-light: #1e3a8a;
+            --success: #22c55e;
+            --success-light: #14532d;
+            --danger: #ef4444;
+            --danger-light: #7f1d1d;
+            --warning: #f59e0b;
+            --warning-light: #78350f;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.5;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background-color: var(--bg-card);
+            border-bottom: 1px solid var(--border-color);
+            box-shadow: var(--shadow-sm);
+            padding: 0.75rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+
+        .header-title-box h1 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .header-title-box p {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .timer-box {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background-color: var(--accent-light);
+            color: var(--accent-primary);
+            padding: 0.4rem 0.8rem;
+            border-radius: var(--radius-md);
+            font-weight: 700;
+            font-size: 0.95rem;
+            font-family: monospace;
+            border: 1px solid var(--border-color);
+        }
+
+        .timer-box.warning {
+            background-color: var(--warning-light);
+            color: var(--warning);
+            animation: pulse 1s infinite;
+        }
+
+        .timer-box.danger {
+            background-color: var(--danger-light);
+            color: var(--danger);
+            animation: pulse 0.5s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .icon-btn {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            cursor: pointer;
+            padding: 0.45rem 0.75rem;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .icon-btn:hover {
+            background-color: var(--border-color);
+        }
+
+        .container {
+            max-width: 1240px;
+            width: 100%;
+            margin: 1.25rem auto;
+            padding: 0 1rem;
+            display: grid;
+            grid-template-columns: 1fr 320px;
+            gap: 1.25rem;
+            flex: 1;
+        }
+
+        @media (max-width: 900px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .main-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 520px;
+        }
+
+        .question-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .question-number {
+            font-size: 0.875rem;
+            font-weight: 700;
+            color: var(--accent-primary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .bookmark-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+        }
+
+        .bookmark-btn.active {
+            color: var(--warning);
+        }
+
+        .question-text {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 1.25rem;
+            line-height: 1.6;
+        }
+
+        .options-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .option-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.85rem;
+            padding: 0.85rem 1rem;
+            border: 1.5px solid var(--border-color);
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            background-color: var(--bg-card);
+            font-size: 0.95rem;
+            color: var(--text-primary);
+            position: relative;
+        }
+
+        .option-item:hover {
+            border-color: var(--accent-primary);
+            background-color: var(--accent-light);
+        }
+
+        .option-item.selected {
+            border-color: var(--accent-primary);
+            background-color: var(--accent-light);
+            font-weight: 500;
+        }
+
+        .option-prefix {
+            width: 1.6rem;
+            height: 1.6rem;
+            border-radius: 50%;
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 700;
+            flex-shrink: 0;
+            background-color: var(--bg-primary);
+        }
+
+        .option-item.selected .option-prefix {
+            background-color: var(--accent-primary);
+            color: #ffffff;
+            border-color: var(--accent-primary);
+        }
+
+        /* Post-Submission Styles */
+        .option-item.correct {
+            border-color: var(--success) !important;
+            background-color: var(--success-light) !important;
+            color: var(--text-primary);
+        }
+
+        .option-item.correct .option-prefix {
+            background-color: var(--success);
+            color: #ffffff;
+            border-color: var(--success);
+        }
+
+        .option-item.wrong {
+            border-color: var(--danger) !important;
+            background-color: var(--danger-light) !important;
+            color: var(--text-primary);
+        }
+
+        .option-item.wrong .option-prefix {
+            background-color: var(--danger);
+            color: #ffffff;
+            border-color: var(--danger);
+        }
+
+        .explanation-box {
+            margin-top: 1rem;
+            padding: 1rem 1.25rem;
+            background-color: var(--accent-light);
+            border-left: 4px solid var(--accent-primary);
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+            font-size: 0.925rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .explanation-box strong {
+            color: var(--text-primary);
+            display: block;
+            margin-bottom: 0.35rem;
+        }
+
+        /* Navigation Bar Controls */
+        .nav-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-color);
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.6rem 1.2rem;
+            border-radius: var(--radius-md);
+            font-size: 0.875rem;
+            font-weight: 600;
+            cursor: pointer;
+            border: 1px solid transparent;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4rem;
+        }
+
+        .btn-secondary {
+            background-color: var(--bg-primary);
+            border-color: var(--border-color);
+            color: var(--text-primary);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--border-color);
+        }
+
+        .btn-primary {
+            background-color: var(--accent-primary);
+            color: #ffffff;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--accent-hover);
+        }
+
+        .btn-danger {
+            background-color: var(--danger);
+            color: #ffffff;
+        }
+
+        .btn-danger:hover {
+            opacity: 0.9;
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .palette-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 1.25rem;
+            box-shadow: var(--shadow-md);
+        }
+
+        .palette-header {
+            font-size: 0.95rem;
+            font-weight: 700;
+            margin-bottom: 0.85rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .filter-select {
+            padding: 0.3rem 0.5rem;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border-color);
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            font-size: 0.8rem;
+            outline: none;
+        }
+
+        .palette-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 0.5rem;
+            max-height: 380px;
+            overflow-y: auto;
+            padding-right: 0.25rem;
+        }
+
+        .palette-item {
+            aspect-ratio: 1;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-color);
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .palette-item:hover {
+            border-color: var(--accent-primary);
+        }
+
+        .palette-item.current {
+            outline: 2px solid var(--accent-primary);
+            outline-offset: 1px;
+        }
+
+        .palette-item.answered {
+            background-color: var(--accent-primary);
+            color: #ffffff;
+            border-color: var(--accent-primary);
+        }
+
+        .palette-item.bookmarked::after {
+            content: '★';
+            position: absolute;
+            top: 2px;
+            right: 3px;
+            font-size: 0.65rem;
+            color: var(--warning);
+        }
+
+        /* Post-submission Palette Indicators */
+        .palette-item.status-correct {
+            background-color: var(--success) !important;
+            color: #ffffff !important;
+            border-color: var(--success) !important;
+        }
+
+        .palette-item.status-wrong {
+            background-color: var(--danger) !important;
+            color: #ffffff !important;
+            border-color: var(--danger) !important;
+        }
+
+        .palette-item.status-unattempted {
+            background-color: var(--bg-primary) !important;
+            color: var(--text-muted) !important;
+        }
+
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-top: 1rem;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            border-top: 1px solid var(--border-color);
+            padding-top: 0.75rem;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+        }
+
+        .legend-color {
+            width: 0.75rem;
+            height: 0.75rem;
+            border-radius: 2px;
+        }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.65);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-card {
+            background-color: var(--bg-card);
+            border-radius: var(--radius-lg);
+            max-width: 480px;
+            width: 100%;
+            padding: 2rem;
+            box-shadow: var(--shadow-lg);
+            text-align: center;
+        }
+
+        .score-circle {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background-color: var(--accent-light);
+            color: var(--accent-primary);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 1.25rem auto;
+            border: 4px solid var(--accent-primary);
+        }
+
+        .score-value {
+            font-size: 2rem;
+            font-weight: 800;
+            line-height: 1;
+        }
+
+        .score-total {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.75rem;
+            margin: 1.5rem 0;
+        }
+
+        .stat-box {
+            background-color: var(--bg-primary);
+            padding: 0.75rem;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-color);
+        }
+
+        .stat-val {
+            font-size: 1.15rem;
+            font-weight: 700;
+        }
+
+        .stat-lbl {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        .toast-box {
+            position: fixed;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            background-color: var(--text-primary);
+            color: var(--bg-primary);
+            padding: 0.75rem 1.25rem;
+            border-radius: var(--radius-md);
+            font-size: 0.875rem;
+            font-weight: 600;
+            box-shadow: var(--shadow-lg);
+            z-index: 2000;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            pointer-events: none;
+        }
+
+        .toast-box.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .fade-in {
+            animation: fadeIn 0.25s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-title-box">
+            <h1>GFR 2017 - Practice Quiz</h1>
+            <p>General Financial Rules, Ministry of Finance (Govt of India)</p>
+        </div>
+        <div class="header-actions">
+            <div id="timer" class="timer-box" title="Time Remaining">
+                ⏱️ <span id="timer-display">30:00</span>
+            </div>
+            <button class="icon-btn" id="restart-btn" title="Reshuffle questions & restart quiz">
+                🔄 <span>Restart</span>
+            </button>
+            <button class="icon-btn" id="theme-toggle" title="Toggle Light/Dark Theme">
+                🌙
+            </button>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Main Quiz Section -->
+        <main class="main-card fade-in" id="main-card">
+            <div>
+                <div class="question-header">
+                    <span class="question-number" id="q-number">Question 1 of 50</span>
+                    <button class="bookmark-btn" id="bookmark-btn">
+                        <span id="bookmark-icon">☆</span> <span id="bookmark-text">Bookmark</span>
+                    </button>
+                </div>
+                
+                <div class="question-text" id="q-text">
+                    Loading General Financial Rules questions...
+                </div>
+
+                <div class="options-list" id="options-container">
+                    <!-- Dynamic Options -->
+                </div>
+
+                <div id="explanation-container" style="display: none;">
+                    <!-- Explanation post-submission -->
+                </div>
+            </div>
+
+            <!-- Navigation Controls -->
+            <div class="nav-controls">
+                <div>
+                    <button class="btn btn-secondary" id="prev-btn">← Previous</button>
+                    <button class="btn btn-secondary" id="clear-btn">Clear Answer</button>
+                </div>
+                <div>
+                    <button class="btn btn-primary" id="next-btn">Next →</button>
+                    <button class="btn btn-danger" id="submit-btn">Submit Quiz</button>
+                </div>
+            </div>
+        </main>
+
+        <!-- Sidebar Question Palette -->
+        <aside class="sidebar">
+            <div class="palette-card">
+                <div class="palette-header">
+                    <span>Question Grid</span>
+                    <select id="palette-filter" class="filter-select">
+                        <option value="all">All (50)</option>
+                        <option value="answered">Answered</option>
+                        <option value="unanswered">Unanswered</option>
+                        <option value="bookmarked">Bookmarked</option>
+                    </select>
+                </div>
+
+                <div class="palette-grid" id="palette-grid">
+                    <!-- Matrix buttons generated dynamically -->
+                </div>
+
+                <div class="legend" id="legend-container">
+                    <div class="legend-item"><div class="legend-color" style="background:var(--accent-primary)"></div> Answered</div>
+                    <div class="legend-item"><div class="legend-color" style="background:var(--bg-primary); border:1px solid var(--border-color)"></div> Unanswered</div>
+                    <div class="legend-item"><div class="legend-color" style="outline:2px solid var(--accent-primary)"></div> Current</div>
+                    <div class="legend-item"><span style="color:var(--warning)">★</span> Bookmarked</div>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Results Score Card Modal -->
+    <div class="modal-overlay" id="score-modal">
+        <div class="modal-card fade-in">
+            <h2>Quiz Results</h2>
+            <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.25rem;">General Financial Rules (GFR), 2017</p>
+
+            <div class="score-circle">
+                <span class="score-value" id="modal-score">0</span>
+                <span class="score-total">out of 50</span>
+            </div>
+
+            <p id="pass-fail-badge" style="font-weight: 700; font-size: 1.1rem; margin-bottom: 0.5rem;"></p>
+
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <div class="stat-val" id="stat-percentage" style="color: var(--accent-primary);">0%</div>
+                    <div class="stat-lbl">Percentage</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-val" id="stat-correct" style="color: var(--success);">0</div>
+                    <div class="stat-lbl">Correct</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-val" id="stat-incorrect" style="color: var(--danger);">0</div>
+                    <div class="stat-lbl">Incorrect</div>
+                </div>
+            </div>
+
+            <button class="btn btn-primary" id="review-btn" style="width: 100%;">Review Detailed Answers</button>
+        </div>
+    </div>
+
+    <!-- Notification Toast -->
+    <div class="toast-box" id="toast">Message notification</div>
+
+    <script>
+        const rawQuestionsData = [
+            {
+                id: 1,
+                question: "Under Rule 149 of GFR 2017, procurement of goods and services through the Government e-Marketplace (GeM) is mandatory for Items/Services available on GeM. What is the monetary threshold up to which direct online purchase on GeM is permitted without comparing other suppliers?",
+                options: [
+                    "Up to Rs. 25,000",
+                    "Up to Rs. 50,000",
+                    "Up to Rs. 1,00,000",
+                    "Up to Rs. 2,50,000"
+                ],
+                correctIndex: 0,
+                explanation: "Rule 149(i) of GFR 2017: Direct purchase on GeM can be made up to Rs. 25,000 through any available supplier on GeM meeting requisite quality, specification, and delivery period."
+            },
+            {
+                id: 2,
+                question: "According to Rule 149(ii) of GFR 2017, what is the value limit for purchasing goods on GeM through L1 comparison among available sellers?",
+                options: [
+                    "Above Rs. 25,000 and up to Rs. 2,50,000",
+                    "Above Rs. 25,000 and up to Rs. 5,00,000",
+                    "Above Rs. 50,000 and up to Rs. 10,00,000",
+                    "Above Rs. 1,00,000 and up to Rs. 25,00,000"
+                ],
+                correctIndex: 1,
+                explanation: "Rule 149(ii) of GFR 2017: Procurement above Rs. 25,000 and up to Rs. 5,00,000 on GeM can be made through L1 comparison among at least 3 distinct manufacturers/sellers."
+            },
+            {
+                id: 3,
+                question: "Under Rule 154 of GFR 2017, purchase of goods up to what monetary limit can be made on each occasion without inviting quotations or bids on the basis of a certificate recorded by the competent authority?",
+                options: [
+                    "Rs. 10,000",
+                    "Rs. 25,000",
+                    "Rs. 50,000",
+                    "Rs. 1,00,000"
+                ],
+                correctIndex: 1,
+                explanation: "Rule 154 of GFR 2017: Purchase of goods up to value of Rs. 25,000 only on each occasion may be made without inviting quotations or bids on the basis of a certificate recorded by the buyer."
+            },
+            {
+                id: 4,
+                question: "Under Rule 155 of GFR 2017, purchase of goods costing above Rs. 25,000 and up to what amount on each occasion may be made on the recommendations of a duly constituted Local Purchase Committee?",
+                options: [
+                    "Rs. 1,00,000",
+                    "Rs. 2,50,000",
+                    "Rs. 5,00,000",
+                    "Rs. 10,00,000"
+                ],
+                correctIndex: 1,
+                explanation: "Rule 155 of GFR 2017: Purchase of goods costing above Rs. 25,000 and up to Rs. 2,50,000 on each occasion may be made on the recommendation of a Local Purchase Committee consisting of three members."
+            },
+            {
+                id: 5,
+                question: "According to Rule 161 of GFR 2017, Limited Tender Enquiry (LTE) should ordinarily be adopted for procurement of goods of estimated value up to what threshold?",
+                options: [
+                    "Rs. 10,00,000",
+                    "Rs. 25,00,000",
+                    "Rs. 50,00,000",
+                    "Rs. 1,00,00,000"
+                ],
+                correctIndex: 1,
+                explanation: "Rule 161 of GFR 2017: Limited Tender Enquiry method should be adopted when the estimated value of goods to be procured is up to Rs. 25 Lakhs."
+            },
+            {
+                id: 6,
+                question: "Under Rule 161 of GFR 2017, what is the minimum number of vendor firms to which copies of bidding documents should be sent under Limited Tender Enquiry?",
+                options: [
+                    "Minimum 2",
+                    "Minimum 3",
+                    "Minimum 5",
+                    "Minimum 7"
+                ],
+                correctIndex: 1,
+                explanation: "Rule 161(i) of GFR 2017: Under Limited Tender Enquiry, copies of the bidding document should be sent directly to not less than three supplier firms."
+            },
+            {
+                id: 7,
+                question: "Advertised Tender Enquiry (Open Tender Enquiry) under Rule 160 of GFR 2017 is mandatory for procurement of goods of estimated value equal to or exceeding which amount?",
+                options: [
+                    "Rs. 10 Lakhs",
+                    "Rs. 25 Lakhs",
+                    "Rs. 50 Lakhs",
+                    "Rs. 1 Crore"
+                ],
+                correctIndex: 1,
+                explanation: "Rule 160 of GFR 2017: Invitation to tenders by advertisement should be used for procurement of goods of estimated value of Rs. 25 Lakhs and above."
+            },
+            {
+                id: 8,
+                question: "What is the minimum time limit required for submission of bids under Advertised Tender Enquiry for national tenders under GFR 2017 guidelines?",
+                options: [
+                    "10 days",
+                    "2 weeks (14 days)",
+                    "3 weeks (21 days)",
+                    "4 weeks (28 days)"
+                ],
+                correctIndex: 2,
+                explanation: "Rule 161(v) of GFR 2017: Minimum time allowed for submission of bids should be 3 weeks from the date of publication of tender notice or availability of bidding document."
+            },
+            {
+                id: 9,
+                question: "Under Rule 170 of GFR 2017, what is the standard percentage range of Bid Security (Earnest Money Deposit - EMD) required on the estimated value of the goods?",
+                options: [
+                    "1% to 3%",
+                    "2% to 5%",
+                    "5% to 10%",
+                    "10% to 15%"
+                ],
+                correctIndex: 1,
+                explanation: "Rule 170(i) of GFR 2017: To safeguard against bidder's defaulting, Bid Security (EMD) is ordinarily taken for an amount between 2% and 5% of the estimated value of goods."
+            },
+            {
+                id: 10,
+                question: "Which category of bidders is exempted from submitting Bid Security (EMD) under Rule 170(i) of GFR 2017?",
+                options: [
+                    "Foreign suppliers only",
+                    "Micro and Small Enterprises (MSEs) and Departmentally registered suppliers",
+                    "Public Sector Undertakings (PSUs) only",
+                    "All registered partnership firms"
+                ],
+                correctIndex: 1,
+                explanation: "Rule 170(i) of GFR 2017: Micro and Small Enterprises (MSEs) and firms registered with the Central Purchase Organization or Ministry/Department are exempted from submitting EMD."
+            },
+            {
+                id: 11,
+                question: "What is the prescribed validity period for Bid Security (EMD) beyond the final bid validity period under Rule 170(ii)?",
+                options: [
+                    "15 days",
+                    "30 days",
+                    "45 days",
+                    "60 days"
+                ],
+                correctIndex: 2,
+                explanation: "Rule 170(ii) of GFR 2017: Bid Security should remain valid for a period of 45 days beyond the final bid validity period."
+            },
+            {
+                id: 12,
+                question: "Under Rule 171 of GFR 2017, what percentage of the value of the contract is mandated as Performance Security?",
+                options: [
+                    "2% to 5%",
+                    "3% to 10%",
+                    "5% to 10%",
+                    "10% to 15%"
+                ],
+                correctIndex: 2,
+                explanation: "Rule 171(i) of GFR 2017: Performance Security should be obtained for an amount of 5% to 10% of the value of the contract."
+            },
+            {
+                id: 13,
+                question: "Performance Security under Rule 171(ii) should remain valid for a period of how many days beyond the date of completion of all contractual obligations including warranty?",
+                options: [
+                    "30 days",
+                    "45 days",
+                    "60 days",
+                    "90 days"
+                ],
+                correctIndex: 2,
+                explanation: "Rule 171(ii) of GFR 2017: Performance Security should remain valid for a period of 60 days beyond the date of completion of all contractual obligations of the supplier including warranty obligations."
+            },
+            {
+                id: 14,
+                question: "Under Rule 166 of GFR 2017, Single Tender Enquiry may be adopted without resorting to competitive bidding under which of the following conditions?",
+                options: [
+                    "To save administrative time of the Ministry",
+                    "It is in the knowledge of the user department that only a particular firm is the manufacturer of required goods",
+                    "When the item value is below Rs. 10 Lakhs",
+                    "Whenever requested by a PSU"
+                ],
+                correctIndex: 1,
+                explanation: "Rule 166 of GFR 2017: Single Tender Enquiry can be used if it is known that only a particular firm manufactures required goods (Proprietary Article Certificate)."
+            },
+            {
+                id: 15,
+                question: "What is the mandatory portal for publishing tender notifications for all Central Government Ministries/Departments under Rule 159?",
+                options: [
+                    "GeM Portal",
+                    "Central Public Procurement Portal (CPPP)",
+                    "Digital India Portal",
+                    "Ministry of Finance Web Portal"
+                ],
+                correctIndex: 1,
+                explanation: "Rule 159 of GFR 2017: It is mandatory for all Ministries/Departments to publish their tender enquiries and notices on the Central Public Procurement Portal (CPPP)."
+            },
+            {
+                id: 16,
+                question: "Under Rule 144 of GFR 2017 (Fundamental Principles of Public Buying), every authority delegated with financial powers must ensure transparency, fairness, and what essential principle?",
+                options: [
+                    "Maximum revenue generation",
+                    "Efficiency, economy, and equal opportunity to all eligible bidders",
+                    "Preferential placement to local contractors without tender",
+                    "Exemption of audit scrutiny"
+                ],
+                answer: 1,
+                correctIndex: 1,
+                explanation: "Rule 144 of GFR 2017: Public procurement must ensure efficiency, economy, transparency, and equal opportunity for all eligible bidders."
+            },
+            {
+                id: 17,
+                question: "Under Rule 173(i) of GFR 2017, two-bid system (simultaneous technical and financial bids) is mandatory for procurement of complex high-value goods costing above what amount?",
+                options: [
+                    "Rs. 10 Lakhs",
+                    "Rs. 25 Lakhs",
+                    "Rs. 50 Lakhs",
+                    "Rs. 1 Crore"
+                ],
+                correctIndex: 1,
+                explanation: "Rule 173(i) of GFR 2017: For purchasing complex/high-value plant & machinery costing above Rs. 25 Lakhs, Two-Bid System (Technical & Financial) should be followed."
+            },
+            {
+                id: 18,
+                question: "Under Rule 181 of GFR 2017, engagement of consultants by a Ministry can be done through Quality and Cost Based Selection (QCBS) where weightage for technical evaluation is typically:",
+                options: [
+                    "50% maximum",
+                    "Up to 80%",
+                    "100%",
+                    "Fixed 60%"
+                ],
+                correctIndex: 1,
+                explanation: "Rule 192 of GFR 2017: Under QCBS method for consultancy, the weightage given to technical score is generally 80% and financial score 20%."
+            },
+            {
+                id: 19,
+                question: "Under Rule 201 of GFR 2017, non-consulting services up to what value can be procured through Limited Tender Enquiry?",
+                options: [
+                    "Up to Rs. 10 Lakhs",
+                    "Up to Rs. 25 Lakhs",
+                    "Up to Rs. 50 Lakhs",
+                    "Up to Rs. 1 Crore"
+                ],
+                correctIndex: 1,
+                explanation: "Rule 201 of GFR 2017: Limited Tender Enquiry for non-consulting services can be adopted for estimated value up to Rs. 25 Lakhs."
+            },
+            {
+                id: 20,
+                question: "Under Rule 130 of GFR 2017, a Ministry/Department may execute original works estimated up to what amount departmentally without entrusting to a Public Works Organization?",
+                options: [
+                    "Up to Rs. 5 Lakhs",
+                    "Up to Rs. 10 Lakhs",
+                    "Up to Rs. 25 Lakhs",
+                    "Up to Rs. 50 Lakhs"
+                ],
+                correctIndex: 1,
+                explanation: "Rule 130 of GFR 2017: A Ministry/Department may at its discretion execute original works costing up to Rs. 10 Lakhs directly through departmental execution."
+            },
+            {
+                id: 21,
+                question: "According to Rule 133(3) of GFR 2017, a Ministry/Department can award works to Public Sector Undertakings (PSUs) or Public Works Organizations (PWOs) on what basis?",
+                options: [
+                    "Nomination basis without financial limit",
+                    "Competition among eligible PWOs/PSUs or transparent tendering",
+                    "Oral agreement approved by Secretary",
+                    "Direct negotiation without estimates"
+                ],
+                correctIndex: 1,
+                explanation: "Rule 133(3) of GFR 2017: Award of work to PWOs/PSUs should be done through competition among eligible agencies."
+            },
+            {
+                id: 22,
+                question: "Under Rule 136 of GFR 2017, before initiating execution of any work, which crucial condition must be fulfilled?",
+                options: [
+                    "Sanction of C&AG",
+                    "Administrative approval, Technical Sanction, and Availability of funds",
+                    "Gazzette notification by Ministry of Law",
+                    "Consent of State Government"
+                ],
+                correctIndex: 1,
+                explanation: "Rule 136 of GFR 2017: No work shall commence without Administrative Approval, Technical Sanction, and allotment of funds."
+            },
+            {
+                id: 23,
+                question: "Under Rule 211 of GFR 2017, physical verification of fixed assets (furniture, office equipment) should be carried out at least once in how many years/months?",
+                options: [
+                    "Every 6 months",
+                    "Every year (annually)",
+                    "Every 2 years",
+                    "Every 5 years"
+                ],
+                correctIndex: 1,
+                explanation: "Rule 211 of GFR 2017: Physical verification of Fixed Assets should be done at least once every year."
+            },
+            {
+                id: 24,
+                question: "Under Rule 213 of GFR 2017, physical verification of inventory/consumables store items must be carried out at least once in:",
+                options: [
+                    "3 months",
+                    "6 months",
+                    "1 year (Every year)",
+                    "3 years"
+                ],
+                correctIndex: 2,
+                explanation: "Rule 213(1) of GFR 2017: Physical verification of all consumable and non-consumables stores should be made at least once in every year."
+            },
+            {
+                id: 25,
+                question: "According to Rule 213(2) of GFR 2017, sample physical verification of stores is permitted for libraries containing how many books?",
+                options: [
+                    "More than 10,000 volumes",
+                    "More than 20,000 volumes",
+                    "More than 50,000 volumes",
+                    "More than 1,00,000 volumes"
+                ],
+                correctIndex: 1,
+                explanation: "Rule 215(i) of GFR 2017: Complete physical verification of books in a library having up to 20,000 volumes should be done annually; above 20,000 sample verification is permitted."
+            },
+            {
+                id: 26,
+                question: "Under Rule 217 of GFR 2017, stores/goods are declared surplus, obsolete, or unserviceable by which competent authority?",
+                options: [
+                    "Head of Office / Competent Financial Authority based on a duly constituted Survey Committee report",
+                    "Dealing Assistant managing stores",
+                    "Local Police Department",
+                    "Central Vigilance Commission"
+                ],
+                correctIndex: 0,
+                explanation: "Rule 217 of GFR 2017: Goods declared surplus or unserviceable must be inspected and recommended by a Survey Committee before disposal sanction by CFA."
+            },
+            {
+                id: 27,
+                question: "Under Rule 218 of GFR 2017, what is the primary mode of disposal of surplus/unserviceable goods having residual value above Rs. 2,00,000?",
+                options: [
+                    "Direct sale to staff members",
+                    "Advertised tender or Public Auction / e-Auction",
+                    "Dumping as waste",
+                    "Free distribution to local NGOs"
+                ],
+                correctIndex: 1,
+                explanation: "Rule 218 of GFR 2017: Surplus goods exceeding Rs. 2 Lakhs in value should be disposed of through Advertised Tender or e-Auction."
+            },
+            {
+                id: 28,
+                question: "Under Rule 230(8) of GFR 2017, interest earned out of Grants-in-Aid released to grantee institutions must be:",
+                options: [
+                    "Retained by grantee for future developmental expenditure",
+                    "Remitted to Consolidated Fund of India or adjusted against subsequent grant releases",
+                    "Paid as bonus to society staff",
+                    "Deposited into commercial fixed deposits indefinitely"
+                ],
+                correctIndex: 1,
+                explanation: "Rule 230(8) of GFR 2017: All interest or other earnings generated from Grants-in-Aid must be remitted to the Consolidated Fund of India."
+            },
+            {
+                id: 29,
+                question: "Under Rule 238 of GFR 2017, Utilisation Certificate (UC) for Grants-in-Aid released in a financial year should be submitted within how many months of the closure of the financial year?",
+                options: [
+                    "3 months",
+                    "6 months",
+                    "9 months",
+                    "12 months"
+                ],
+                correctIndex: 3,
+                explanation: "Rule 238(1) of GFR 2017: Utilization Certificates should be submitted within 12 months of the closure of the financial year by the grantee institution."
+            },
+            {
+                id: 30,
+                question: "Which prescribed standard form in GFR 2017 is used for submitting Utilisation Certificates for non-recurring Grants-in-Aid?",
+                options: [
+                    "Form GFR 12-A",
+                    "Form GFR 12-C",
+                    "Form GFR 19-A",
+                    "Form GFR 7"
+                ],
+                correctIndex: 1,
+                explanation: "Form GFR 12-C is the standard format for submitting Utilization Certificate for Grants-in-Aid under GFR 2017."
+            },
+            {
+                id: 31,
+                question: "Under Rule 33 of GFR 2017, any loss of public money, departmental property, or stores due to fraud or negligence exceeding what amount must be reported to the next higher authority and C&AG?",
+                options: [
+                    "Rs. 10,000",
+                    "Rs. 25,000",
+                    "Rs. 50,000",
+                    "Rs. 1,00,000"
+                ],
+                correctIndex: 2,
+                explanation: "Rule 33 of GFR 2017: Any loss of public money/property exceeding Rs. 50,000 due to fraud/negligence must be reported immediately to higher authorities and Statutory Audit Officer."
+            },
+            {
+                id: 32,
+                question: "Under Rule 34 of GFR 2017, loss of public money due to fire, theft, or natural calamity exceeding what amount should be reported to the Police?",
+                options: [
+                    "Rs. 10,000",
+                    "Rs. 25,000",
+                    "Rs. 50,000",
+                    "Rs. 1,00,000"
+                ],
+                correctIndex: 0,
+                explanation: "Rule 34 of GFR 2017: All cases of theft, burglary, fire, or arson involving loss exceeding Rs. 10,000 should be reported to the police without delay."
+            },
+            {
+                id: 33,
+                question: "What is the overarching financial principle under Rule 21 of GFR 2017 regarding standards of financial propriety?",
+                options: [
+                    "Spend money liberally to achieve budget exhaustion by March 31st",
+                    "Every officer should exercise the same vigilance in respect of expenditure incurred from public money as a person of ordinary prudence would exercise in respect of expenditure of his own money",
+                    "Delegate all spending authority to subordinate staff without monitoring",
+                    "Maximize cash transactions for fast delivery"
+                ],
+                correctIndex: 1,
+                explanation: "Rule 21(i) of GFR 2017: Standard of Financial Propriety requires spending public money with the prudence expected of a person spending their own money."
+            },
+            {
+                id: 34,
+                question: "Under Rule 21(iv) of GFR 2017, can public money be utilized for the benefit of a particular person or section of the community?",
+                options: [
+                    "Yes, at the discretion of the DDO",
+                    "No, unless the amount of expenditure involved is insignificant, or the claim is enforced in a court of law, or in pursuance of recognized policy",
+                    "Yes, provided approval of local police is taken",
+                    "No, strictly prohibited under all circumstances without exception"
+                ],
+                correctIndex: 1,
+                explanation: "Rule 21(iv) of GFR 2017: No expenditure should be incurred for the benefit of a particular person/section unless pursuant to established policy or court order."
+            },
+            {
+                id: 35,
+                question: "Under Rule 8 of GFR 2017, all money received by or on behalf of the Government shall be brought into Government Account without delay. Which Article of the Constitution governs this principle?",
+                options: [
+                    "Article 148 & 149",
+                    "Article 266 & 267",
+                    "Article 280",
+                    "Article 300A"
+                ],
+                correctIndex: 1,
+                explanation: "Rule 8 & Constitution Articles 266/267: Public moneys collected must be credited into the Consolidated Fund or Public Account of India without delay."
+            },
+            {
+                id: 36,
+                question: "Under Rule 225 of GFR 2017, advance payment to private suppliers/contractors is ordinarily not permitted. However, advance up to what percentage of contract value can be granted for maintenance contracts (AMC)?",
+                options: [
+                    "Up to 25%",
+                    "Up to 50%",
+                    "Up to 75%",
+                    "Up to 100%"
+                ],
+                correctIndex: 0,
+                explanation: "Rule 225(27) / Procurement rules: Advance payment up to 25% of contract value to private firms or 100% to Govt/PSU entities can be granted for maintenance contracts against proper safeguards."
+            },
+            {
+                id: 37,
+                question: "Under Rule 172 of GFR 2017, what is the 'Rate Contract' system defined as?",
+                options: [
+                    "A contract for supply of specific fixed quantity of goods over 10 years",
+                    "An agreement between purchaser and supplier to supply specified goods at specified rates during a specified period without quantity commitment",
+                    "A lump-sum building construction contract",
+                    "A loan arrangement with commercial banks"
+                ],
+                correctIndex: 1,
+                explanation: "Rule 172 of GFR 2017: Rate Contract is an agreement for supply of stores at specified rates during a specified period without binding minimum quantity."
+            },
+            {
+                id: 38,
+                question: "Under Rule 153 of GFR 2017, the Government may issue order for mandatory procurement of reserved items from which category of organizations?",
+                options: [
+                    "Multinational Corporations",
+                    "Micro and Small Enterprises (MSEs) / Khadi and Village Industries",
+                    "Foreign joint ventures",
+                    "Large scale private manufacturers"
+                ],
+                correctIndex: 1,
+                explanation: "Rule 153 of GFR 2017: Policy directives give preference to Micro & Small Enterprises (MSEs) and KVIC/Handloom sectors."
+            },
+            {
+                id: 39,
+                question: "Under Rule 162 of GFR 2017, Two-Stage Bidding may be adopted in which specific scenario?",
+                options: [
+                    "When purchasing standard office stationery",
+                    "When the procuring entity does not precisely frame detailed specifications or needs to evaluate alternative technical solutions",
+                    "When value is below Rs. 25,000",
+                    "For routine recruitment of casual labor"
+                ],
+                correctIndex: 1,
+                explanation: "Rule 162 of GFR 2017: Two-stage bidding is used when technical specifications cannot be precisely formulated beforehand."
+            },
+            {
+                id: 40,
+                question: "Under Rule 175 of GFR 2017, 'Code of Integrity' in public procurement prohibits which of the following practices?",
+                options: [
+                    "Offering bribes or inducements to influence procurement",
+                    "Collusive bidding and anti-competitive behavior",
+                    "Misrepresentation of facts and submission of forged documents",
+                    "All of the above"
+                ],
+                correctIndex: 3,
+                explanation: "Rule 175 of GFR 2017: Code of Integrity strictly prohibits corruption, bribery, collusion, misrepresentation, and coercion."
+            },
+            {
+                id: 41,
+                question: "Under Rule 151 of GFR 2017, a bidder can be debarred / blacklisted from participating in procurement for up to how many years if convicted of an offence under the Prevention of Corruption Act?",
+                options: [
+                    "Up to 1 year",
+                    "Up to 2 years",
+                    "Up to 3 years",
+                    "Up to 5 years"
+                ],
+                correctIndex: 2,
+                explanation: "Rule 151(i) of GFR 2017: Debarment for corruption offences under PC Act can be for a period not exceeding 3 years."
+            },
+            {
+                id: 42,
+                question: "Under Rule 29 of GFR 2017, unspent balance of grant or appropriation lapses at the close of the financial year on which date?",
+                options: [
+                    "31st December",
+                    "31st March",
+                    "30th June",
+                    "1st April"
+                ],
+                correctIndex: 1,
+                explanation: "Rule 29 of GFR 2017: Unspent financial appropriations lapse at the end of the financial year on 31st March."
+            },
+            {
+                id: 43,
+                question: "Under Rule 207 of GFR 2017, 'Inventory management' principles dictate that receipt and inspection of incoming stores must be recorded in which primary register?",
+                options: [
+                    "Stock Register / Goods Receipt Register",
+                    "Attendance Register",
+                    "Contingent Bill Register",
+                    "Service Book"
+                ],
+                correctIndex: 0,
+                explanation: "Rule 207 of GFR 2017: All incoming materials must be inspected and taken onto Stock / Goods Receipt Registers."
+            },
+            {
+                id: 44,
+                question: "Under Rule 28 of GFR 2017, 'Rush of expenditure' in the closing month of the financial year is regarded as:",
+                options: [
+                    "Commendable administrative efficiency",
+                    "A serious financial irregularity requiring prevention",
+                    "Standard operating procedure for all departments",
+                    "A requirement under Parliamentary rules"
+                ],
+                correctIndex: 1,
+                explanation: "Rule 28 of GFR 2017: Rush of expenditure particularly in the closing month (March) is regarded as a financial irregularity."
+            },
+            {
+                id: 45,
+                question: "Under Rule 220 of GFR 2017, 'Buy-Back Offer' clause allows procuring entities to trade in existing old items while purchasing new ones if:",
+                options: [
+                    "The old item is less than 6 months old",
+                    "A suitable clause is incorporated in the bidding document with clear specification of old items",
+                    "The vendor agrees verbally without contract text",
+                    "Approved by Ministry of Commerce"
+                ],
+                correctIndex: 1,
+                explanation: "Rule 220 of GFR 2017: Buy-back offer requires explicit inclusion of terms in bidding documents."
+            },
+            {
+                id: 46,
+                question: "Under Rule 231 of GFR 2017, Grants-in-Aid to voluntary non-governmental organizations (NGOs) are released subject to registration on which portal?",
+                options: [
+                    "GeM Portal",
+                    "NGO Darpan Portal (NITI Aayog) and PFMS",
+                    "Incometax e-filing portal",
+                    "Shram Suvidha Portal"
+                ],
+                correctIndex: 1,
+                explanation: "Rule 230 & guidelines: Registration on NGO Darpan portal and mapping on Public Financial Management System (PFMS) is mandatory for Grant-in-Aid to NGOs."
+            },
+            {
+                id: 47,
+                question: "Under Rule 282 of GFR 2017, what does 'PFMS' stand for in Central Government accounts?",
+                options: [
+                    "Public Financial Management System",
+                    "Primary Funds Management System",
+                    "Public Procurement Financial Structure",
+                    "Pension Fund Monitoring Service"
+                ],
+                correctIndex: 0,
+                explanation: "PFMS stands for Public Financial Management System, managed by Controller General of Accounts (CGA)."
+            },
+            {
+                id: 48,
+                question: "Under Rule 170(iii) of GFR 2017, in case of a successful bidder, the Bid Security (EMD) is returned/refunded:",
+                options: [
+                    "Immediately after opening technical bids",
+                    "Upon receipt of Performance Security as specified in the contract",
+                    "After 3 years of contract completion",
+                    "It is never refunded"
+                ],
+                correctIndex: 1,
+                explanation: "Rule 170(iii) of GFR 2017: EMD of successful bidder is returned upon signing contract and furnishing Performance Security."
+            },
+            {
+                id: 49,
+                question: "Under Rule 170(iii) of GFR 2017, Bid Securities of unsuccessful bidders should be returned to them at the latest on or before the:",
+                options: [
+                    "15th day after finalization of tender",
+                    "30th day after the award of the contract",
+                    "60th day after contract signing",
+                    "End of the financial year"
+                ],
+                correctIndex: 1,
+                explanation: "Rule 170(iii) of GFR 2017: Bid Security of unsuccessful bidders should be returned at the latest on or before the 30th day after award of contract."
+            },
+            {
+                id: 50,
+                question: "Under Rule 143 of GFR 2017, who is the authority responsible for framing Detailed Financial Rules for individual Ministries consistent with GFR?",
+                options: [
+                    "Cabinet Secretary",
+                    "Ministry or Department concerned in consultation with the Financial Adviser",
+                    "Comptroller and Auditor General of India",
+                    "Pay and Accounts Officer"
+                ],
+                correctIndex: 1,
+                explanation: "Rule 143 of GFR 2017: Ministries/Departments may issue detailed instructions/rules consistent with GFR in consultation with their Integrated Finance Division / Financial Adviser."
+            }
+        ];
+
+        let shuffledQuestions = [];
+        let userAnswers = [];
+        let bookmarked = [];
+        let isSubmitted = false;
+        let currentQuestionIdx = 0;
+        let timerInterval = null;
+        let timeRemaining = 30 * 60; // 30 minutes in seconds
+
+        // DOM elements references
+        const mainCard = document.getElementById('main-card');
+        const qNumberEl = document.getElementById('q-number');
+        const qTextEl = document.getElementById('q-text');
+        const optionsContainer = document.getElementById('options-container');
+        const explanationContainer = document.getElementById('explanation-container');
+        const bookmarkBtn = document.getElementById('bookmark-btn');
+        const bookmarkIcon = document.getElementById('bookmark-icon');
+        const bookmarkText = document.getElementById('bookmark-text');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const clearBtn = document.getElementById('clear-btn');
+        const submitBtn = document.getElementById('submit-btn');
+        const paletteGrid = document.getElementById('palette-grid');
+        const paletteFilter = document.getElementById('palette-filter');
+        const timerDisplay = document.getElementById('timer-display');
+        const timerBox = document.getElementById('timer');
+        const themeToggle = document.getElementById('theme-toggle');
+        const restartBtn = document.getElementById('restart-btn');
+        const scoreModal = document.getElementById('score-modal');
+        const reviewBtn = document.getElementById('review-btn');
+        const toastEl = document.getElementById('toast');
+
+        function fisherYatesShuffle(array) {
+            const arr = [...array];
+            for (let i = arr.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [arr[i], arr[j]] = [arr[j], arr[i]];
+            }
+            return arr;
+        }
+
+        function prepareShuffledQuizData() {
+            // Shuffle main questions
+            const shuffledQList = fisherYatesShuffle(rawQuestionsData);
+
+            // Shuffle options within each question while maintaining correct choice index
+            shuffledQuestions = shuffledQList.map(q => {
+                const indexedOptions = q.options.map((opt, idx) => ({
+                    text: opt,
+                    isCorrect: idx === q.correctIndex
+                }));
+
+                const shuffledOpts = fisherYatesShuffle(indexedOptions);
+                const newCorrectIndex = shuffledOpts.findIndex(o => o.isCorrect);
+
+                return {
+                    id: q.id,
+                    question: q.question,
+                    options: shuffledOpts.map(o => o.text),
+                    correctIndex: newCorrectIndex,
+                    explanation: q.explanation
+                };
+            });
+
+            userAnswers = new Array(shuffledQuestions.length).fill(null);
+            bookmarked = new Array(shuffledQuestions.length).fill(false);
+            isSubmitted = false;
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            startNewQuizSession();
+            setupEventListeners();
+        });
+
+        function startNewQuizSession() {
+            clearInterval(timerInterval);
+            timeRemaining = 30 * 60;
+            isSubmitted = false;
+
+            prepareShuffledQuizData();
+
+            // Reset UI components
+            submitBtn.style.display = 'inline-flex';
+            clearBtn.style.display = 'inline-flex';
+            timerBox.className = 'timer-box';
+            
+            document.getElementById('legend-container').innerHTML = `
+                <div class="legend-item"><div class="legend-color" style="background:var(--accent-primary)"></div> Answered</div>
+                <div class="legend-item"><div class="legend-color" style="background:var(--bg-primary); border:1px solid var(--border-color)"></div> Unanswered</div>
+                <div class="legend-item"><div class="legend-color" style="outline:2px solid var(--accent-primary)"></div> Current</div>
+                <div class="legend-item"><span style="color:var(--warning)">★</span> Bookmarked</div>
+            `;
+
+            initTimer();
+            renderPalette();
+            loadQuestion(0);
+            showToast("Quiz reshuffled & restarted!");
+        }
+
+        function initTimer() {
+            updateTimerDisplay();
+            timerInterval = setInterval(() => {
+                if (timeRemaining <= 0) {
+                    clearInterval(timerInterval);
+                    showToast("Time expired! Submitting automatically...");
+                    finalizeQuiz();
+                    return;
+                }
+                timeRemaining--;
+                updateTimerDisplay();
+            }, 1000);
+        }
+
+        function updateTimerDisplay() {
+            const mins = Math.floor(timeRemaining / 60);
+            const secs = timeRemaining % 60;
+            timerDisplay.textContent = `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+
+            if (timeRemaining <= 300 && timeRemaining > 60) {
+                timerBox.className = 'timer-box warning';
+            } else if (timeRemaining <= 60) {
+                timerBox.className = 'timer-box danger';
+            }
+        }
+
+        function loadQuestion(idx) {
+            currentQuestionIdx = idx;
+            const q = shuffledQuestions[idx];
+
+            // Trigger smooth transition
+            mainCard.classList.remove('fade-in');
+            void mainCard.offsetWidth; // Force reflow
+            mainCard.classList.add('fade-in');
+
+            qNumberEl.textContent = `Question ${idx + 1} of ${shuffledQuestions.length}`;
+            qTextEl.textContent = q.question;
+
+            // Bookmark Status
+            if (bookmarked[idx]) {
+                bookmarkBtn.classList.add('active');
+                bookmarkIcon.textContent = '★';
+                bookmarkText.textContent = 'Bookmarked';
+            } else {
+                bookmarkBtn.classList.remove('active');
+                bookmarkIcon.textContent = '☆';
+                bookmarkText.textContent = 'Bookmark';
+            }
+
+            // Render Options
+            optionsContainer.innerHTML = '';
+            const labels = ['A', 'B', 'C', 'D'];
+
+            q.options.forEach((opt, optIdx) => {
+                const optEl = document.createElement('div');
+                optEl.className = 'option-item';
+
+                if (userAnswers[idx] === optIdx) {
+                    optEl.classList.add('selected');
+                }
+
+                // Post-submission review mode option styling
+                if (isSubmitted) {
+                    if (optIdx === q.correctIndex) {
+                        optEl.classList.add('correct');
+                    }
+                    if (userAnswers[idx] === optIdx && userAnswers[idx] !== q.correctIndex) {
+                        optEl.classList.add('wrong');
+                    }
+                }
+
+                optEl.innerHTML = `
+                    <div class="option-prefix">${labels[optIdx]}</div>
+                    <div style="flex:1; padding-top:0.1rem;">${opt}</div>
+                `;
+
+                if (!isSubmitted) {
+                    optEl.addEventListener('click', () => selectOption(optIdx));
+                }
+
+                optionsContainer.appendChild(optEl);
+            });
+
+            // Post-submission explanation box
+            if (isSubmitted) {
+                explanationContainer.style.display = 'block';
+                explanationContainer.className = 'explanation-box';
+                explanationContainer.innerHTML = `
+                    <strong>Explanation / GFR 2017 Citation:</strong>
+                    ${q.explanation}
+                `;
+            } else {
+                explanationContainer.style.display = 'none';
+            }
+
+            // Button states
+            prevBtn.disabled = idx === 0;
+            nextBtn.disabled = idx === shuffledQuestions.length - 1;
+
+            updatePaletteCurrent();
+        }
+
+        function selectOption(optIdx) {
+            userAnswers[currentQuestionIdx] = optIdx;
+            loadQuestion(currentQuestionIdx);
+            renderPalette();
+        }
+
+        function clearSelection() {
+            if (isSubmitted) return;
+            userAnswers[currentQuestionIdx] = null;
+            loadQuestion(currentQuestionIdx);
+            renderPalette();
+            showToast("Answer cleared");
+        }
+
+        function toggleBookmark() {
+            bookmarked[currentQuestionIdx] = !bookmarked[currentQuestionIdx];
+            loadQuestion(currentQuestionIdx);
+            renderPalette();
+            showToast(bookmarked[currentQuestionIdx] ? "Question bookmarked" : "Bookmark removed");
+        }
+
+        function renderPalette() {
+            paletteGrid.innerHTML = '';
+            const filter = paletteFilter.value;
+
+            shuffledQuestions.forEach((q, idx) => {
+                const isAnswered = userAnswers[idx] !== null;
+                const isBookmarked = bookmarked[idx];
+
+                // Filter condition checks
+                if (filter === 'answered' && !isAnswered) return;
+                if (filter === 'unanswered' && isAnswered) return;
+                if (filter === 'bookmarked' && !isBookmarked) return;
+
+                const item = document.createElement('button');
+                item.className = 'palette-item';
+                item.textContent = idx + 1;
+
+                if (idx === currentQuestionIdx) {
+                    item.classList.add('current');
+                }
+
+                if (!isSubmitted) {
+                    if (isAnswered) item.classList.add('answered');
+                } else {
+                    if (userAnswers[idx] === q.correctIndex) {
+                        item.classList.add('status-correct');
+                    } else if (userAnswers[idx] !== null) {
+                        item.classList.add('status-wrong');
+                    } else {
+                        item.classList.add('status-unattempted');
+                    }
+                }
+
+                if (isBookmarked) item.classList.add('bookmarked');
+
+                item.addEventListener('click', () => loadQuestion(idx));
+                paletteGrid.appendChild(item);
+            });
+        }
+
+        function updatePaletteCurrent() {
+            const items = paletteGrid.querySelectorAll('.palette-item');
+            items.forEach(item => {
+                if (parseInt(item.textContent) === currentQuestionIdx + 1) {
+                    item.classList.add('current');
+                } else {
+                    item.classList.remove('current');
+                }
+            });
+        }
+
+        function finalizeQuiz() {
+            isSubmitted = true;
+            clearInterval(timerInterval);
+
+            let score = 0;
+            let correctCount = 0;
+            let incorrectCount = 0;
+
+            shuffledQuestions.forEach((q, idx) => {
+                if (userAnswers[idx] === q.correctIndex) {
+                    score++;
+                    correctCount++;
+                } else if (userAnswers[idx] !== null) {
+                    incorrectCount++;
+                }
+            });
+
+            const percentage = ((score / shuffledQuestions.length) * 100).toFixed(1);
+
+            // Populate Modal
+            document.getElementById('modal-score').textContent = score;
+            document.getElementById('stat-percentage').textContent = `${percentage}%`;
+            document.getElementById('stat-correct').textContent = correctCount;
+            document.getElementById('stat-incorrect').textContent = incorrectCount;
+
+            const badge = document.getElementById('pass-fail-badge');
+            if (percentage >= 60) {
+                badge.textContent = "PASSED / EXCELLENT";
+                badge.style.color = "var(--success)";
+            } else {
+                badge.textContent = "NEEDS IMPROVEMENT";
+                badge.style.color = "var(--danger)";
+            }
+
+            // Show Score Modal
+            scoreModal.classList.add('active');
+
+            // Hide action buttons post submit
+            submitBtn.style.display = 'none';
+            clearBtn.style.display = 'none';
+            timerDisplay.textContent = 'Completed';
+
+            // Post-submission legend update
+            document.getElementById('legend-container').innerHTML = `
+                <div class="legend-item"><div class="legend-color" style="background:var(--success)"></div> Correct</div>
+                <div class="legend-item"><div class="legend-color" style="background:var(--danger)"></div> Incorrect</div>
+                <div class="legend-item"><div class="legend-color" style="background:var(--bg-primary); border:1px solid var(--border-color)"></div> Unattempted</div>
+            `;
+
+            renderPalette();
+            loadQuestion(currentQuestionIdx);
+        }
+
+        function showToast(msg) {
+            toastEl.textContent = msg;
+            toastEl.classList.add('show');
+            setTimeout(() => toastEl.classList.remove('show'), 2200);
+        }
+
+        function setupEventListeners() {
+            prevBtn.addEventListener('click', () => {
+                if (currentQuestionIdx > 0) loadQuestion(currentQuestionIdx - 1);
+            });
+
+            nextBtn.addEventListener('click', () => {
+                if (currentQuestionIdx < shuffledQuestions.length - 1) loadQuestion(currentQuestionIdx + 1);
+            });
+
+            clearBtn.addEventListener('click', clearSelection);
+            bookmarkBtn.addEventListener('click', toggleBookmark);
+
+            submitBtn.addEventListener('click', () => {
+                const unansweredCount = userAnswers.filter(a => a === null).length;
+                let msg = "Are you sure you want to submit your quiz?";
+                if (unansweredCount > 0) {
+                    msg = `You have ${unansweredCount} unanswered questions. Are you sure you want to submit?`;
+                }
+                if (confirm(msg)) {
+                    finalizeQuiz();
+                }
+            });
+
+            restartBtn.addEventListener('click', () => {
+                if (confirm("Are you sure you want to restart? All current progress will be lost and questions will be reshuffled.")) {
+                    startNewQuizSession();
+                }
+            });
+
+            paletteFilter.addEventListener('change', renderPalette);
+
+            reviewBtn.addEventListener('click', () => {
+                scoreModal.classList.remove('active');
+            });
+
+            // Theme Toggle
+            themeToggle.addEventListener('click', () => {
+                const currentTheme = document.documentElement.getAttribute('data-theme');
+                if (currentTheme === 'dark') {
+                    document.documentElement.removeAttribute('data-theme');
+                    themeToggle.textContent = '🌙';
+                    showToast("Switched to Light Theme");
+                } else {
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                    themeToggle.textContent = '☀️';
+                    showToast("Switched to Dark Theme");
+                }
+            });
+        }
+    </script>
+</body>
+</html>
