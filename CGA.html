@@ -1,0 +1,1692 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Central Government Accounts (Receipts & Payments) Rules, 2022 - Interactive Quiz</title>
+    <style>
+        :root {
+            --bg-primary: #f8fafc;
+            --bg-card: #ffffff;
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --text-muted: #94a3b8;
+            --border-color: #e2e8f0;
+            --accent-primary: #2563eb;
+            --accent-hover: #1d4ed8;
+            --accent-light: #eff6ff;
+            --success: #16a34a;
+            --success-light: #f0fdf4;
+            --danger: #dc2626;
+            --danger-light: #fef2f2;
+            --warning: #d97706;
+            --warning-light: #fffbeb;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            --radius-sm: 0.375rem;
+            --radius-md: 0.5rem;
+            --radius-lg: 0.75rem;
+            --radius-full: 9999px;
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: #0f172a;
+            --bg-card: #1e293b;
+            --text-primary: #f8fafc;
+            --text-secondary: #cbd5e1;
+            --text-muted: #64748b;
+            --border-color: #334155;
+            --accent-primary: #3b82f6;
+            --accent-hover: #60a5fa;
+            --accent-light: #1e3a8a;
+            --success: #22c55e;
+            --success-light: #14532d;
+            --danger: #ef4444;
+            --danger-light: #7f1d1d;
+            --warning: #f59e0b;
+            --warning-light: #78350f;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.5;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background-color: var(--bg-card);
+            border-bottom: 1px solid var(--border-color);
+            box-shadow: var(--shadow-sm);
+            padding: 0.75rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .header-title {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .header-title h1 {
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .badge {
+            background-color: var(--accent-light);
+            color: var(--accent-primary);
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 0.25rem 0.5rem;
+            border-radius: var(--radius-sm);
+            white-space: nowrap;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        /* Timer Widget */
+        .timer-box {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background-color: var(--accent-light);
+            color: var(--accent-primary);
+            padding: 0.4rem 0.8rem;
+            border-radius: var(--radius-md);
+            font-weight: 700;
+            font-size: 1rem;
+            font-family: monospace;
+            border: 1px solid var(--border-color);
+        }
+
+        .timer-box.warning {
+            background-color: var(--warning-light);
+            color: var(--warning);
+            animation: pulse 1s infinite;
+        }
+
+        .timer-box.danger {
+            background-color: var(--danger-light);
+            color: var(--danger);
+            animation: pulse 0.5s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
+        }
+
+        /* Buttons & Actions */
+        .icon-btn {
+            background: none;
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            cursor: pointer;
+            padding: 0.4rem 0.75rem;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        .icon-btn:hover {
+            background-color: var(--border-color);
+        }
+
+        /* Layout */
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            margin: 1.5rem auto;
+            padding: 0 1rem;
+            display: grid;
+            grid-template-columns: 1fr 320px;
+            gap: 1.5rem;
+            flex: 1;
+        }
+
+        @media (max-width: 900px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Main Question Box */
+        .main-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 480px;
+        }
+
+        .question-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .question-number {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+
+        .bookmark-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            font-weight: 600;
+        }
+
+        .bookmark-btn.active {
+            color: var(--warning);
+        }
+
+        .question-text {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 1.25rem;
+            line-height: 1.6;
+        }
+
+        /* Options */
+        .options-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .option-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            padding: 0.875rem 1rem;
+            border: 1.5px solid var(--border-color);
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            background-color: var(--bg-card);
+            font-size: 0.95rem;
+            color: var(--text-primary);
+            position: relative;
+        }
+
+        .option-item:hover {
+            border-color: var(--accent-primary);
+            background-color: var(--accent-light);
+        }
+
+        .option-item.selected {
+            border-color: var(--accent-primary);
+            background-color: var(--accent-light);
+            font-weight: 500;
+        }
+
+        .option-prefix {
+            width: 1.5rem;
+            height: 1.5rem;
+            border-radius: 50%;
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 700;
+            flex-shrink: 0;
+            background-color: var(--bg-primary);
+        }
+
+        .option-item.selected .option-prefix {
+            background-color: var(--accent-primary);
+            color: #ffffff;
+            border-color: var(--accent-primary);
+        }
+
+        /* Review Mode Option Styles */
+        .option-item.correct {
+            border-color: var(--success) !important;
+            background-color: var(--success-light) !important;
+            color: var(--text-primary);
+        }
+
+        .option-item.correct .option-prefix {
+            background-color: var(--success);
+            color: #ffffff;
+            border-color: var(--success);
+        }
+
+        .option-item.wrong {
+            border-color: var(--danger) !important;
+            background-color: var(--danger-light) !important;
+            color: var(--text-primary);
+        }
+
+        .option-item.wrong .option-prefix {
+            background-color: var(--danger);
+            color: #ffffff;
+            border-color: var(--danger);
+        }
+
+        /* Explanation Box */
+        .explanation-box {
+            margin-top: 1rem;
+            padding: 1rem;
+            background-color: var(--accent-light);
+            border-left: 4px solid var(--accent-primary);
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .explanation-box strong {
+            color: var(--text-primary);
+            display: block;
+            margin-bottom: 0.25rem;
+        }
+
+        /* Navigation Bar */
+        .nav-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-color);
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.6rem 1.2rem;
+            border-radius: var(--radius-md);
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            border: 1px solid transparent;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4rem;
+        }
+
+        .btn-secondary {
+            background-color: var(--bg-primary);
+            border-color: var(--border-color);
+            color: var(--text-primary);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--border-color);
+        }
+
+        .btn-primary {
+            background-color: var(--accent-primary);
+            color: #ffffff;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--accent-hover);
+        }
+
+        .btn-danger {
+            background-color: var(--danger);
+            color: #ffffff;
+        }
+
+        .btn-danger:hover {
+            opacity: 0.9;
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* Sidebar Palette */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .palette-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 1.25rem;
+            box-shadow: var(--shadow-md);
+        }
+
+        .palette-header {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .filter-select {
+            padding: 0.25rem 0.5rem;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border-color);
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            font-size: 0.8rem;
+        }
+
+        .palette-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 0.5rem;
+            max-height: 360px;
+            overflow-y: auto;
+            padding-right: 0.25rem;
+        }
+
+        .palette-item {
+            aspect-ratio: 1;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-color);
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .palette-item:hover {
+            border-color: var(--accent-primary);
+        }
+
+        .palette-item.current {
+            outline: 2px solid var(--accent-primary);
+            outline-offset: 1px;
+        }
+
+        .palette-item.answered {
+            background-color: var(--accent-primary);
+            color: #ffffff;
+            border-color: var(--accent-primary);
+        }
+
+        .palette-item.bookmarked::after {
+            content: '★';
+            position: absolute;
+            top: 1px;
+            right: 2px;
+            font-size: 0.6rem;
+            color: var(--warning);
+        }
+
+        /* Review Mode Palette Status */
+        .palette-item.status-correct {
+            background-color: var(--success) !important;
+            color: #ffffff !important;
+            border-color: var(--success) !important;
+        }
+
+        .palette-item.status-wrong {
+            background-color: var(--danger) !important;
+            color: #ffffff !important;
+            border-color: var(--danger) !important;
+        }
+
+        .palette-item.status-unattempted {
+            background-color: var(--bg-primary) !important;
+            color: var(--text-muted) !important;
+        }
+
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-top: 1rem;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+        }
+
+        .legend-color {
+            width: 0.75rem;
+            height: 0.75rem;
+            border-radius: 2px;
+        }
+
+        /* Custom Modal Dialog */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.6);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-card {
+            background-color: var(--bg-card);
+            border-radius: var(--radius-lg);
+            max-width: 500px;
+            width: 100%;
+            padding: 2rem;
+            box-shadow: var(--shadow-lg);
+            text-align: center;
+        }
+
+        .score-circle {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background-color: var(--accent-light);
+            color: var(--accent-primary);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 1rem auto;
+            border: 4px solid var(--accent-primary);
+        }
+
+        .score-value {
+            font-size: 2rem;
+            font-weight: 800;
+            line-height: 1;
+        }
+
+        .score-total {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.75rem;
+            margin: 1.5rem 0;
+        }
+
+        .stat-box {
+            background-color: var(--bg-primary);
+            padding: 0.75rem;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-color);
+        }
+
+        .stat-val {
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+
+        .stat-lbl {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        .fade-in {
+            animation: fadeIn 0.25s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-title">
+            <h1>CGA Receipts & Payments Rules, 2022</h1>
+            <span class="badge">Official Exam Quiz</span>
+        </div>
+        <div class="header-actions">
+            <button class="icon-btn" id="restart-btn" title="Reshuffle & Restart Quiz">
+                🔄 Reshuffle & Restart
+            </button>
+            <div id="timer" class="timer-box">
+                ⏱️ <span id="timer-display">30:00</span>
+            </div>
+            <button class="icon-btn" id="theme-toggle" title="Toggle Dark/Light Mode">🌙</button>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Main Quiz Section -->
+        <main class="main-card fade-in" id="main-card">
+            <div>
+                <div class="question-header">
+                    <span class="question-number" id="q-number">Question 1 of 50</span>
+                    <button class="bookmark-btn" id="bookmark-btn" title="Bookmark Question">
+                        <span id="bookmark-icon">☆</span> Bookmark
+                    </button>
+                </div>
+                
+                <div class="question-text" id="q-text">
+                    Loading Question...
+                </div>
+
+                <div class="options-list" id="options-container">
+                    <!-- Dynamic Options -->
+                </div>
+
+                <div id="explanation-container" style="display: none;">
+                    <!-- Explanation shown post-submission -->
+                </div>
+            </div>
+
+            <!-- Navigation Bar -->
+            <div class="nav-controls">
+                <div>
+                    <button class="btn btn-secondary" id="prev-btn">← Previous</button>
+                    <button class="btn btn-secondary" id="clear-btn">Clear Answer</button>
+                </div>
+                <div>
+                    <button class="btn btn-primary" id="next-btn">Next →</button>
+                    <button class="btn btn-danger" id="submit-btn">Submit Quiz</button>
+                </div>
+            </div>
+        </main>
+
+        <!-- Sidebar / Palette -->
+        <aside class="sidebar">
+            <div class="palette-card">
+                <div class="palette-header">
+                    <span>Question Palette</span>
+                    <select id="palette-filter" class="filter-select">
+                        <option value="all">All (50)</option>
+                        <option value="answered">Answered</option>
+                        <option value="unanswered">Unanswered</option>
+                        <option value="bookmarked">Bookmarked</option>
+                    </select>
+                </div>
+
+                <div class="palette-grid" id="palette-grid">
+                    <!-- Grid Buttons generated dynamically -->
+                </div>
+
+                <div class="legend" id="legend-container">
+                    <div class="legend-item"><div class="legend-color" style="background:var(--accent-primary)"></div> Answered</div>
+                    <div class="legend-item"><div class="legend-color" style="background:var(--bg-primary); border:1px solid var(--border-color)"></div> Unanswered</div>
+                    <div class="legend-item"><div class="legend-color" style="outline:2px solid var(--accent-primary)"></div> Current</div>
+                    <div class="legend-item"><span style="color:var(--warning)">★</span> Bookmarked</div>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Custom Modal Dialog (Score Card) -->
+    <div class="modal-overlay" id="score-modal">
+        <div class="modal-card fade-in">
+            <h2>Quiz Results</h2>
+            <p style="font-size: 0.875rem; color: var(--text-secondary); margin-top: 0.25rem;">Central Government Accounts (R&P) Rules, 2022</p>
+
+            <div class="score-circle">
+                <span class="score-value" id="modal-score">0</span>
+                <span class="score-total">out of 50</span>
+            </div>
+
+            <p id="pass-fail-badge" style="font-weight: 700; font-size: 1.1rem; margin-bottom: 0.5rem;"></p>
+
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <div class="stat-val" id="stat-percentage" style="color: var(--accent-primary);">0%</div>
+                    <div class="stat-lbl">Percentage</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-val" id="stat-correct" style="color: var(--success);">0</div>
+                    <div class="stat-lbl">Correct</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-val" id="stat-incorrect" style="color: var(--danger);">0</div>
+                    <div class="stat-lbl">Incorrect</div>
+                </div>
+            </div>
+
+            <button class="btn btn-primary" id="review-btn" style="width: 100%;">Review Answers</button>
+        </div>
+    </div>
+
+    <script>
+        // --- 50 MASTER MCQs ON CENTRAL GOVERNMENT ACCOUNTS (RECEIPTS AND PAYMENTS) RULES, 2022 ---
+        const rawQuestions = [
+            {
+                id: 1,
+                question: "Under the Central Government Accounts (Receipts and Payments) Rules, 2022, which entity is primarily responsible for maintaining the detailed accounts of receipts and payments for a Civil Ministry/Department?",
+                options: [
+                    "Principal Accounts Office (Pr. AO)",
+                    "Pay and Accounts Office (PAO)",
+                    "Drawing and Disbursing Officer (DDO)",
+                    "Controller General of Accounts (CGA)"
+                ],
+                answer: 1,
+                explanation: "Rule 3 & 4 of CGA R&P Rules, 2022: The Pay and Accounts Office (PAO) functions as the primary accounting unit responsible for maintaining detailed receipt and payment accounts of the assigned Department/Ministry."
+            },
+            {
+                id: 2,
+                question: "In what form or medium must Government accounts primarily be maintained according to modern accounting standards under R&P Rules, 2022?",
+                options: [
+                    "Only physical paper ledgers with ink signatures",
+                    "Electronic mode through designated IT/PFMS platforms",
+                    "Dual physical and cloud storage mode mandatorily",
+                    "Microfilm and magnetic tape archives"
+                ],
+                answer: 1,
+                explanation: "Under Rules 5 & 6, payments, receipts, and accounting records are processed and maintained electronically through designated IT systems like Public Financial Management System (PFMS) / e-Payment portals."
+            },
+            {
+                id: 3,
+                question: "Which of the following describes the Consolidated Fund of India?",
+                options: [
+                    "Fund for emergency unfunded contingencies created under Article 267",
+                    "Fund containing all revenues received, loans raised, and money received in repayment of loans under Article 266(1)",
+                    "Fund holding money received in trust by public servants under Article 266(2)",
+                    "Fund managed directly by the Reserve Bank of India without Parliamentary authorization"
+                ],
+                answer: 1,
+                explanation: "Article 266(1) of the Constitution & Rule 2: Consolidated Fund of India includes all revenues received, loans raised by Government, and moneys received in repayment of loans."
+            },
+            {
+                id: 4,
+                question: "What is the primary requirement for withdrawing money out of the Consolidated Fund of India?",
+                options: [
+                    "An executive order issued by the Ministry of Finance",
+                    "Appropriation made by law passed by Parliament",
+                    "A special warrant issued by the Controller General of Accounts",
+                    "Sanction of the Comptroller and Auditor General of India"
+                ],
+                answer: 1,
+                explanation: "Article 266(3) & R&P Rules: No moneys out of the Consolidated Fund of India shall be appropriated except in accordance with law and for the purposes provided in the Constitution."
+            },
+            {
+                id: 5,
+                question: "Moneys received by or deposited with any officer of the Central Government other than revenues/loans belong to which account?",
+                options: [
+                    "Consolidated Fund of India",
+                    "Contingency Fund of India",
+                    "Public Account of India",
+                    "Reserve Bank Account"
+                ],
+                answer: 2,
+                explanation: "Article 266(2) & R&P Rules: All other public moneys received by or on behalf of the Government of India are credited to the Public Account of India."
+            },
+            {
+                id: 6,
+                question: "Under whose custody is the Contingency Fund of India held on behalf of the President?",
+                options: [
+                    "Controller General of Accounts",
+                    "Secretary to the Government of India, Ministry of Finance (Department of Economic Affairs)",
+                    "Comptroller and Auditor General of India",
+                    "Governor of the Reserve Bank of India"
+                ],
+                answer: 1,
+                explanation: "The Contingency Fund of India is held on behalf of the President by the Secretary, Department of Economic Affairs, Ministry of Finance."
+            },
+            {
+                id: 7,
+                question: "All government receipts deposited into authorized banks must be remitted to which institution for ultimate settlement?",
+                options: [
+                    "State Bank of India Main Branch",
+                    "Reserve Bank of India (RBI)",
+                    "Controller General of Accounts Office",
+                    "Ministry of Finance Treasury"
+                ],
+                answer: 1,
+                explanation: "Under R&P Rules, 2022, all collections made by accredited/authorized agent banks must be remitted to the central account of the Reserve Bank of India (RBI)."
+            },
+            {
+                id: 8,
+                question: "What is the designated instrument/portal used for digital payment collections and direct revenue deposits by citizens to Central Ministries?",
+                options: [
+                    "e-Sampark",
+                    "Bharatkosh (NTRP)",
+                    "GeM Portal",
+                    "PFMS Trade Portal"
+                ],
+                answer: 1,
+                explanation: "Bharatkosh (Non-Tax Receipt Portal) is the central portal for online collection of non-tax receipts under the Government of India accounting guidelines."
+            },
+            {
+                id: 9,
+                question: "What is a 'Scroll' provided by accredited banks to the Pay and Accounts Office (PAO)?",
+                options: [
+                    "A list of retired government employees receiving pension",
+                    "A daily statement showing transaction details of receipts or payments credited/debited to Government Account",
+                    "An annual audit certification submitted to C&AG",
+                    "A certificate of physical cash verification"
+                ],
+                answer: 1,
+                explanation: "Daily Scrolls (Receipt/Payment Scrolls) are statements sent electronically or physically by accredited banks detailing transactions processed against the government account."
+            },
+            {
+                id: 10,
+                question: "Who among the following is authorized to draw money from the PAO by presenting bills?",
+                options: [
+                    "Head of Department only",
+                    "Drawing and Disbursing Officer (DDO)",
+                    "Dealing Assistant",
+                    "Internal Audit Officer"
+                ],
+                answer: 1,
+                explanation: "A gazetted officer designated as Drawing and Disbursing Officer (DDO) is authorized to draw money for payments by presenting bills to the PAO."
+            },
+            {
+                id: 11,
+                question: "What is the general validity period of a Cheque issued by a Government Pay and Accounts Office?",
+                options: [
+                    "1 month from the date of issue",
+                    "3 months from the month of issue / 3 months from date of issue",
+                    "6 months from date of issue",
+                    "Till the end of the financial year"
+                ],
+                answer: 1,
+                explanation: "Under R&P Rules, a Central Government cheque remains valid for 3 months from the date of issue."
+            },
+            {
+                id: 12,
+                question: "If a government cheque becomes time-barred (exceeds validity period), what action should the DDO/PAO take for revalidation?",
+                options: [
+                    "Issue a completely new cheque without cancelling the old one",
+                    "Cancel the old cheque and issue a fresh cheque or revalidate by dating and signing subject to rules",
+                    "Refund the amount directly into the officer's personal bank account",
+                    "Write off the cheque amount to general revenue"
+                ],
+                answer: 1,
+                explanation: "A time-barred cheque must be presented to the issuing authority who may revalidate it after verifying that payment has not already been made or issue a replacement cheque after proper cancellation."
+            },
+            {
+                id: 13,
+                question: "Under the R&P Rules 2022, what is the mandatory mechanism for direct disbursement of salaries and vendor payments?",
+                options: [
+                    "Cash payment across the treasury counter",
+                    "Demand Drafts sent by registered post",
+                    "e-Payment through PFMS directly into the bank accounts of beneficiaries",
+                    "Account Payee physical cheques handed over in person"
+                ],
+                answer: 2,
+                explanation: "Direct Benefit Transfer / e-Payment via PFMS into the beneficiary's bank account is mandatory for almost all disbursements under R&P Rules."
+            },
+            {
+                id: 14,
+                question: "When a cheque issued by a PAO is reported lost, what document must be obtained from the bank before issuing a duplicate cheque?",
+                options: [
+                    "No-Objection Certificate from C&AG",
+                    "'Non-Payment Certificate' (Stop Payment confirmation) from the bank",
+                    "Police FIR clearance from Ministry of Home Affairs",
+                    "Indemnity bond signed by the Governor"
+                ],
+                answer: 1,
+                explanation: "Before a duplicate cheque is issued, a 'Non-Payment Certificate' must be obtained from the bank certifying that the lost cheque has not been paid and will not be honored if presented later."
+            },
+            {
+                id: 15,
+                question: "What is a 'Challan' (GAR-7 / e-Challan) used for in Central Government accounts?",
+                options: [
+                    "To claim TA/DA allowances for official journeys",
+                    "To tender cash or payments into the bank/treasury for credit to Government Account",
+                    "To sanction advances to government servants",
+                    "To audit local headquarter expenses"
+                ],
+                answer: 1,
+                explanation: "A Challan is the prescribed receipt form used by depositors for crediting money into the Government Account at a bank or treasury."
+            },
+            {
+                id: 16,
+                question: "Which accounting form prescribed in the General Accounting Rules (GAR) represents the standard receipt voucher for money paid to the government?",
+                options: [
+                    "GAR-1",
+                    "GAR-6 / GAR-7",
+                    "GAR-14",
+                    "GAR-43"
+                ],
+                answer: 1,
+                explanation: "GAR-6 is the standard form for official receipt granted to a payer, and GAR-7 is the Challan form for crediting moneys."
+            },
+            {
+                id: 17,
+                question: "What is the maximum cash amount a government department can retain as permanent advance / petty cash without special authorization?",
+                options: [
+                    "Rs. 1,00,000",
+                    "As fixed by the Head of Department based on actual essential contingent needs",
+                    "Rs. 5,00,000",
+                    "Unlimited subject to budget availability"
+                ],
+                answer: 1,
+                explanation: "Permanent Advance is granted by the Head of Department/Ministry based on genuine operational requirements for meeting contingent petty expenses."
+            },
+            {
+                id: 18,
+                question: "In the event of loss of public money, departmental property, or stamps due to fraud/negligence, to whom must an immediate report be sent if the loss exceeds prescribed thresholds?",
+                options: [
+                    "Nearest Police Station only",
+                    "Higher Administrative Authority, Principal Accounts Office, and C&AG",
+                    "Ministry of External Affairs",
+                    "Reserve Bank of India Main Office"
+                ],
+                answer: 1,
+                explanation: "Any significant loss of public money/property must be promptly reported to the next higher authority, the Principal Accounts Officer, and the Statutory Audit Officer (C&AG)."
+            },
+            {
+                id: 19,
+                question: "Can a loss of public money be written off by a Head of Department if it is caused by serious fraud or culpable negligence?",
+                options: [
+                    "Yes, up to Rs. 50,000 without restriction",
+                    "No, cases involving serious fraud/negligence generally require higher approval or Ministry of Finance concurrence depending on delegation powers",
+                    "Yes, with approval of the local DDO",
+                    "Write-off is strictly prohibited in all circumstances under law"
+                ],
+                answer: 1,
+                explanation: "Powers to write off losses resulting from fraud or criminal negligence are strictly restricted and usually require Ministry of Finance approval or specific delegated sanction."
+            },
+            {
+                id: 20,
+                question: "Who performs the physical verification of cash balances held with a Drawing and Disbursing Officer (DDO)?",
+                options: [
+                    "Pay and Accounts Officer annually",
+                    "The DDO or a responsible gazetted officer authorized by the Head of Office at least once a month",
+                    "Local Police Inspector",
+                    "Representative of the Reserve Bank of India"
+                ],
+                answer: 1,
+                explanation: "Physical cash in the chest must be counted and verified by the DDO or authorized gazetted officer at the end of every month, recording a signed certificate in the Cash Book."
+            },
+            {
+                id: 21,
+                question: "What is the rule regarding entry of transactions in the Cash Book maintained by a DDO?",
+                options: [
+                    "Transactions can be aggregated and entered weekly",
+                    "All monetary transactions must be entered in the cash book on the very day they occur",
+                    "Only cash withdrawals need to be entered; e-payments are excluded",
+                    "Entries are made at the end of the financial quarter"
+                ],
+                answer: 1,
+                explanation: "Every transaction involving receipt or payment of money must be recorded in the Cash Book immediately on the day of transaction."
+            },
+            {
+                id: 22,
+                question: "What is the classification structure of Government Accounts in India?",
+                options: [
+                    "2-tier structure: Major Head and Minor Head",
+                    "6-tier structure: Sector, Major Head, Sub-Major Head, Minor Head, Sub-Head, Detailed/Object Head",
+                    "3-tier structure: Primary, Secondary, Tertiary",
+                    "Single head accounting system"
+                ],
+                answer: 1,
+                explanation: "Government accounting follows a standard 6-tier functional classification structure ranging from Sector down to Object Head."
+            },
+            {
+                id: 23,
+                question: "Which Head of Account represents the actual object of expenditure such as Salaries, Office Expenses, or Travel Expenses?",
+                options: [
+                    "Major Head",
+                    "Minor Head",
+                    "Sub-Head",
+                    "Object Head / Detailed Head"
+                ],
+                answer: 3,
+                explanation: "The Object Head (Detailed Head) indicates the nature or object of expenditure (e.g., Salaries, Wages, Travel Expenses, Office Expenses)."
+            },
+            {
+                id: 24,
+                question: "What does a 4-digit Major Head starting with numbers '2' or '3' usually represent in Government Accounts?",
+                options: [
+                    "Capital Receipts",
+                    "Revenue Expenditure",
+                    "Public Debt",
+                    "Loans and Advances"
+                ],
+                answer: 1,
+                explanation: "Major Heads in the 2000 and 3000 series represent Revenue Expenditure of the Government."
+            },
+            {
+                id: 25,
+                question: "Which authority is empowered to prescribe the form of accounts of the Union and States under Article 150 of the Constitution?",
+                options: [
+                    "Union Finance Minister alone",
+                    "President of India on the advice of the Comptroller and Auditor General of India (C&AG)",
+                    "Controller General of Accounts independently",
+                    "Governor of the Reserve Bank of India"
+                ],
+                answer: 1,
+                explanation: "Article 150: Accounts of the Union and States shall be kept in such form as the President may, on the advice of C&AG, prescribe."
+            },
+            {
+                id: 26,
+                question: "What is the primary role of the Controller General of Accounts (CGA) in the Ministry of Finance?",
+                options: [
+                    "Conducting statutory external audit of Ministries",
+                    "Principal Advisor on Accounting matters to the Union Government and administering civil accounting structure",
+                    "Managing monetary policy and interest rates",
+                    "Sanctioning direct tax refunds"
+                ],
+                answer: 1,
+                explanation: "The CGA is the apex accounting authority advising the Union Government on accounting matters, maintaining accounting standards, and overseeing PFMS."
+            },
+            {
+                id: 27,
+                question: "Which document must accompany a bill presented to the PAO when claiming reimbursement of medical expenses or travel allowance?",
+                options: [
+                    "Sub-vouchers, essentiality certificates, and signed sanctions as prescribed by relevant rules",
+                    "Personal bank statement of the employee for 6 months",
+                    "Copy of income tax return",
+                    "Affidavit attested by First Class Magistrate"
+                ],
+                answer: 0,
+                explanation: "Bills presented to the PAO must be supported by proper sub-vouchers, sanctions, and prescribed certificates verifying the claim."
+            },
+            {
+                id: 28,
+                question: "Under R&P Rules 2022, what is meant by 'Lapsed Deposit' in Public Account?",
+                options: [
+                    "Deposits unclaimed for a prescribed period (e.g., 3 financial years) which are credited to Government Revenue",
+                    "Fixed deposits created in commercial banks",
+                    "Tax refunds withheld due to audit objections",
+                    "Security deposits returned on completion of contract"
+                ],
+                answer: 0,
+                explanation: "Deposits remaining unclaimed beyond the statutory period (typically 3 complete financial years) lapse to the Government as Revenue Receipts."
+            },
+            {
+                id: 29,
+                question: "Can a Lapsed Deposit be refunded to the legitimate claimant after it has been credited to Government Revenue?",
+                options: [
+                    "No, lapsed deposits are permanently forfeited",
+                    "Yes, upon proper verification and sanction by competent authority under specified procedures",
+                    "Only with the approval of Parliament through a Supplementary Grant",
+                    "Only through a court decree from the Supreme Court"
+                ],
+                answer: 1,
+                explanation: "Lapsed deposits can be refunded to the rightful claimant after proper verification of title and sanction by the competent authority."
+            },
+            {
+                id: 30,
+                question: "What is the function of the 'Pay and Accounts Office (PAO) Electronic Payment Gateway' integrated with PFMS?",
+                options: [
+                    "To generate physical paper currency notes",
+                    "To validate and transmit electronic payment instructions directly to RBI/e-Payment banks",
+                    "To audit income tax filings of government contractors",
+                    "To store government gold reserves"
+                ],
+                answer: 1,
+                explanation: "The PFMS e-Payment gateway allows PAOs to securely digitally sign and transmit advice for direct credit into beneficiary accounts via RBI/authorized banks."
+            },
+            {
+                id: 31,
+                question: "When a government servant receives cash/cheque on behalf of the Government, what immediate receipt must be issued to the payer?",
+                options: [
+                    "A plain paper slip signed by the clerk",
+                    "An official receipt in Form GAR-6 (or generated electronically via system)",
+                    "A stamped receipt on stamp paper",
+                    "No receipt is required if amount is less than Rs. 5,000"
+                ],
+                answer: 1,
+                explanation: "Rule 20 & GAR-6: Any government officer receiving money on behalf of the government must issue an official receipt in prescribed Form GAR-6."
+            },
+            {
+                id: 32,
+                question: "What is the procedure if an option selected on a payment bill is found mathematically or legally erroneous by the PAO?",
+                options: [
+                    "The PAO passes the bill and corrects it next year",
+                    "The PAO raises an Audit/Accounting Objection / return memo explaining the defect for rectifying",
+                    "The PAO cancels the DDO's drawing powers permanently",
+                    "The PAO adjusts the difference from DDO's salary"
+                ],
+                answer: 1,
+                explanation: "If a bill is defective or unauthorized, the PAO returns the bill under objection outlining the specific reasons or deficiencies."
+            },
+            {
+                id: 33,
+                question: "In Government Accounts, what is the 'Financial Year' duration?",
+                options: [
+                    "1st January to 31st December",
+                    "1st April to 31st March of the following calendar year",
+                    "1st July to 30th June",
+                    "Diwali to next Diwali"
+                ],
+                answer: 1,
+                explanation: "The financial year of the Central Government begins on 1st April and ends on 31st March."
+            },
+            {
+                id: 34,
+                question: "What is the accounting procedure for 'Inter-Departmental Adjustments' within Central Government?",
+                options: [
+                    "Cash is physically moved between Ministry offices",
+                    "Adjustments are made through book transfers / advice processed between respective PAOs / RBI clearance",
+                    "Payments are made through private commercial bills",
+                    "Inter-departmental transactions are prohibited"
+                ],
+                answer: 1,
+                explanation: "Inter-departmental transactions are settled through book adjustments/transfers without physical exchange of cash."
+            },
+            {
+                id: 35,
+                question: "Under the R&P Rules, what precautions must be taken for storing blank cheque books / digital signature tokens?",
+                options: [
+                    "Kept on open office desks for easy access",
+                    "Kept under personal safe custody of the authorized officer under lock and key / secure digital storage",
+                    "Handed over to the office messenger",
+                    "Stored at the local police station overnight"
+                ],
+                answer: 1,
+                explanation: "Cheque books and Digital Signature Certificates (DSC) / Tokens must be kept under strict personal custody of the authorized officer to prevent misuse."
+            },
+            {
+                id: 36,
+                question: "What is a 'Letter of Credit' (LC) system used for in specific engineering/works departments (like CPWD)?",
+                options: [
+                    "An authorization issued by PAO to the bank allowing the Executive Engineer to draw funds up to a specified limit",
+                    "A loan granted by commercial banks to government servants",
+                    "A passport endorsement for international travel",
+                    "A guarantee for tax exemption"
+                ],
+                answer: 0,
+                explanation: "In divisions like CPWD/Forests operating on cheque-drawing status, PAO issues Letters of Credit specifying the quarterly drawing limit at the bank."
+            },
+            {
+                id: 37,
+                question: "What action is required if a cheque remains uncashed beyond December 31st of the financial year following its issue?",
+                options: [
+                    "It automatically converts into government grant",
+                    "It is treated as lapsed and amount credited back to relevant head of account following standard cancellation procedure",
+                    "It is handed over to the police",
+                    "It carries interest penalty"
+                ],
+                answer: 1,
+                explanation: "Stale/unclaimed cheques beyond permissible limits are written back/cancelled and credited to accounting heads as per rules."
+            },
+            {
+                id: 38,
+                question: "Who is responsible for verifying the correctness of monthly account reconciliations between DDO and PAO figures?",
+                options: [
+                    "Drawing and Disbursing Officer (DDO) and Pay & Accounts Officer (PAO)",
+                    "Local Bank Manager",
+                    "Staff Selection Commission",
+                    "District Collector"
+                ],
+                answer: 0,
+                explanation: "Reconciliation of expenditure and receipt figures between DDO records and PAO ledgers is a mandatory monthly joint responsibility."
+            },
+            {
+                id: 39,
+                question: "Which major head category handles 'Public Debt' transactions in the Consolidated Fund?",
+                options: [
+                    "Major Head 6001 / Sector E (Public Debt)",
+                    "Major Head 2001",
+                    "Major Head 8000",
+                    "Major Head 4000"
+                ],
+                answer: 0,
+                explanation: "Public Debt transactions (loans raised by Central Govt) are accounted under Major Head 6001 / Public Debt Sector."
+            },
+            {
+                id: 40,
+                question: "What is 'Proforma Account' in Government accounting?",
+                options: [
+                    "An informal rough calculation notepad",
+                    "A specialized account prepared to determine the true financial results/cost of a commercial or quasi-commercial undertaking",
+                    "An account used exclusively for political donations",
+                    "A tax evasion register"
+                ],
+                answer: 1,
+                explanation: "Proforma accounts are maintained outside regular government accounts to reflect commercial profit/loss for departmental undertakings."
+            },
+            {
+                id: 41,
+                question: "Under R&P Rules, what is the rule regarding rounding off of Government transactions?",
+                options: [
+                    "Rounded off to nearest 100 rupees",
+                    "Transactions/bills are generally rounded off to the nearest rupee (50 paise and above rounded up)",
+                    "No rounding off is allowed under any circumstances",
+                    "Rounded off to nearest 10 rupees"
+                ],
+                answer: 1,
+                explanation: "Government payments and receipts are rounded off to the nearest rupee (fraction of 50 paise or more rounded to next higher rupee)."
+            },
+            {
+                id: 42,
+                question: "What is a 'Nil Bill' in government financial accounting?",
+                options: [
+                    "A bill where gross claim equals total deductions, resulting in zero net payable amount",
+                    "A bill submitted by a vendor who provided free services",
+                    "A bill rejected by the PAO",
+                    "A bill issued for zero tax items"
+                ],
+                answer: 0,
+                explanation: "A Nil Bill is a claim where total recovery/deductions equal the gross amount, resulting in net zero cash disbursement."
+            },
+            {
+                id: 43,
+                question: "Which system replaced physical scroll exchanges between banks and PAOs for electronic government transaction reporting?",
+                options: [
+                    "e-Scroll system integrated with PFMS and Core Banking Solution (CBS)",
+                    "SWIFT Messaging",
+                    "Postal Money Order System",
+                    "Manual Courier Delivery"
+                ],
+                answer: 0,
+                explanation: "e-Scroll system transmits encrypted digital data files of daily receipts and payments directly between Bank CBS and PFMS."
+            },
+            {
+                id: 44,
+                question: "What is the consequence if a government servant fails to deposit collected public cash into the bank chest or treasury promptly?",
+                options: [
+                    "It is treated as a temporary advance without penalty",
+                    "It constitutes a grave financial irregularity / risk of embezzlement under departmental rules",
+                    "It is allowed if deposited within 1 year",
+                    "No rule exists regarding cash deposit timelines"
+                ],
+                answer: 1,
+                explanation: "Delay in depositing public collections into government accounts violates basic financial principles and renders the officer liable for disciplinary action."
+            },
+            {
+                id: 45,
+                question: "What is the purpose of 'Internal Audit' in Civil Ministries under CGA guidance?",
+                options: [
+                    "To replace C&AG statutory audit",
+                    "To evaluate internal controls, risk management, accuracy of accounts, and compliance with rules",
+                    "To collect income tax from private firms",
+                    "To conduct political investigations"
+                ],
+                answer: 1,
+                explanation: "Internal Audit Wing under Chief Controller of Accounts evaluates financial management systems, rule compliance, and accounting internal controls."
+            },
+            {
+                id: 46,
+                question: "Under R&P Rules 2022, can payments be made in advance to private contractors/suppliers?",
+                options: [
+                    "Yes, 100% advance is standard practice",
+                    "Ordinarily no payments shall be made before service/goods delivery, except under specific authorized guidelines (e.g. GFR provisions with bank guarantees)",
+                    "Yes, if verbal consent is given by DDO",
+                    "Advances are strictly illegal under all circumstances"
+                ],
+                answer: 1,
+                explanation: "As a general rule, public money should not be paid in advance unless explicitly sanctioned under GFR/R&P Rules against proper safeguards like bank guarantees."
+            },
+            {
+                id: 47,
+                question: "What is 'GAR' expanding to in Central Government accounts framework?",
+                options: [
+                    "General Allocation Records",
+                    "General Accounting Rules",
+                    "Government Account Receipts",
+                    "General Audit Guidelines"
+                ],
+                answer: 1,
+                explanation: "GAR stands for General Accounting Rules, which prescribe forms and standards for Union accounts."
+            },
+            {
+                id: 48,
+                question: "Which primary record is maintained by a PAO to keep track of individual advances (like Computer advance, House Building Advance) paid to employees?",
+                options: [
+                    "Broadsheet of Advances",
+                    "Stock Register",
+                    "Service Book Part-2",
+                    "Contingent Register"
+                ],
+                answer: 0,
+                explanation: "Broadsheets are accounting registers maintained by PAOs to monitor recoveries and outstanding balances of long-term advances."
+            },
+            {
+                id: 49,
+                question: "When a government check is lost before presentation and a fresh check is issued, what entry is made in the Cash Book?",
+                options: [
+                    "Double expenditure is recorded",
+                    "The original cheque entry is cancelled/reversed and the new cheque issuance is recorded as per accounting rules",
+                    "No entry is required in Cash Book",
+                    "It is booked under loss of public money"
+                ],
+                answer: 1,
+                explanation: "Cancellation of the lost cheque is adjusted via reversal/minus-entry so that double expenditure booking does not occur."
+            },
+            {
+                id: 50,
+                question: "Who is the administrative head of the Central Civil Accounting Organization in a Ministry?",
+                options: [
+                    "Principal Chief Controller of Accounts (Pr. CCA) / Chief Controller of Accounts (CCA) / Controller of Accounts (CA)",
+                    "Under Secretary (Admin)",
+                    "Director of Audit",
+                    "Section Officer (Accounts)"
+                ],
+                answer: 0,
+                explanation: "The Departmentalized Accounting Organization in a Ministry is headed by Pr. CCA / CCA / CA who oversees all PAOs and financial reporting."
+            }
+        ];
+
+        // Active shuffled questions list
+        let questions = [];
+
+        // App State
+        let currentQuestionIdx = 0;
+        let userAnswers = [];
+        let bookmarked = [];
+        let isSubmitted = false;
+        let timerInterval = null;
+        let timeRemaining = 30 * 60; // 30 mins in seconds
+
+        // DOM Elements
+        const mainCard = document.getElementById('main-card');
+        const qNumberEl = document.getElementById('q-number');
+        const qTextEl = document.getElementById('q-text');
+        const optionsContainer = document.getElementById('options-container');
+        const explanationContainer = document.getElementById('explanation-container');
+        const bookmarkBtn = document.getElementById('bookmark-btn');
+        const bookmarkIcon = document.getElementById('bookmark-icon');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const clearBtn = document.getElementById('clear-btn');
+        const submitBtn = document.getElementById('submit-btn');
+        const paletteGrid = document.getElementById('palette-grid');
+        const paletteFilter = document.getElementById('palette-filter');
+        const timerDisplay = document.getElementById('timer-display');
+        const timerBox = document.getElementById('timer');
+        const themeToggle = document.getElementById('theme-toggle');
+        const restartBtn = document.getElementById('restart-btn');
+        const scoreModal = document.getElementById('score-modal');
+        const reviewBtn = document.getElementById('review-btn');
+
+        // --- SHUFFLE / RANDOMIZATION LOGIC ---
+        // Helper Fisher-Yates shuffle array
+        function shuffleArray(array) {
+            const arr = [...array];
+            for (let i = arr.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [arr[i], arr[j]] = [arr[j], arr[i]];
+            }
+            return arr;
+        }
+
+        // Prepares randomized questions and randomized options for each question
+        function prepareRandomizedQuestions() {
+            // 1. Shuffle main questions
+            const shuffled = shuffleArray(rawQuestions);
+
+            // 2. Shuffle options inside each question while mapping correct answer
+            return shuffled.map(q => {
+                const originalCorrectText = q.options[q.answer];
+                const shuffledOptions = shuffleArray(q.options);
+                const newAnswerIdx = shuffledOptions.indexOf(originalCorrectText);
+
+                return {
+                    id: q.id,
+                    question: q.question,
+                    options: shuffledOptions,
+                    answer: newAnswerIdx,
+                    explanation: q.explanation
+                };
+            });
+        }
+
+        // Initialize / Restart Quiz State
+        function startNewQuiz() {
+            questions = prepareRandomizedQuestions();
+            userAnswers = new Array(questions.length).fill(null);
+            bookmarked = new Array(questions.length).fill(false);
+            isSubmitted = false;
+            timeRemaining = 30 * 60;
+            currentQuestionIdx = 0;
+
+            // Reset UI components
+            submitBtn.style.display = 'inline-flex';
+            clearBtn.style.display = 'inline-flex';
+            scoreModal.classList.remove('active');
+
+            document.getElementById('legend-container').innerHTML = `
+                <div class="legend-item"><div class="legend-color" style="background:var(--accent-primary)"></div> Answered</div>
+                <div class="legend-item"><div class="legend-color" style="background:var(--bg-primary); border:1px solid var(--border-color)"></div> Unanswered</div>
+                <div class="legend-item"><div class="legend-color" style="outline:2px solid var(--accent-primary)"></div> Current</div>
+                <div class="legend-item"><span style="color:var(--warning)">★</span> Bookmarked</div>
+            `;
+
+            // Reset Timer
+            if (timerInterval) clearInterval(timerInterval);
+            initTimer();
+
+            // Render view
+            renderPalette();
+            loadQuestion(0);
+        }
+
+        // Application Start
+        window.addEventListener('DOMContentLoaded', () => {
+            startNewQuiz();
+            setupEventListeners();
+        });
+
+        function initTimer() {
+            updateTimerDisplay();
+            timerInterval = setInterval(() => {
+                if (timeRemaining <= 0) {
+                    clearInterval(timerInterval);
+                    autoSubmitQuiz();
+                    return;
+                }
+                timeRemaining--;
+                updateTimerDisplay();
+            }, 1000);
+        }
+
+        function updateTimerDisplay() {
+            const mins = Math.floor(timeRemaining / 60);
+            const secs = timeRemaining % 60;
+            timerDisplay.textContent = `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+
+            if (timeRemaining <= 300 && timeRemaining > 60) {
+                timerBox.className = 'timer-box warning';
+            } else if (timeRemaining <= 60) {
+                timerBox.className = 'timer-box danger';
+            } else {
+                timerBox.className = 'timer-box';
+            }
+        }
+
+        function loadQuestion(idx) {
+            currentQuestionIdx = idx;
+            const q = questions[idx];
+
+            // Animate card transition
+            mainCard.classList.remove('fade-in');
+            void mainCard.offsetWidth; // trigger reflow
+            mainCard.classList.add('fade-in');
+
+            qNumberEl.textContent = `Question ${idx + 1} of ${questions.length}`;
+            qTextEl.textContent = q.question;
+
+            // Bookmark Status
+            if (bookmarked[idx]) {
+                bookmarkBtn.classList.add('active');
+                bookmarkIcon.textContent = '★';
+            } else {
+                bookmarkBtn.classList.remove('active');
+                bookmarkIcon.textContent = '☆';
+            }
+
+            // Render Options
+            optionsContainer.innerHTML = '';
+            const labels = ['A', 'B', 'C', 'D'];
+
+            q.options.forEach((opt, optIdx) => {
+                const optEl = document.createElement('div');
+                optEl.className = 'option-item';
+                
+                if (userAnswers[idx] === optIdx) {
+                    optEl.classList.add('selected');
+                }
+
+                // Review Mode Adjustments
+                if (isSubmitted) {
+                    if (optIdx === q.answer) {
+                        optEl.classList.add('correct');
+                    }
+                    if (userAnswers[idx] === optIdx && userAnswers[idx] !== q.answer) {
+                        optEl.classList.add('wrong');
+                    }
+                }
+
+                optEl.innerHTML = `
+                    <div class="option-prefix">${labels[optIdx]}</div>
+                    <div style="flex:1;">${opt}</div>
+                `;
+
+                if (!isSubmitted) {
+                    optEl.addEventListener('click', () => selectOption(optIdx));
+                }
+
+                optionsContainer.appendChild(optEl);
+            });
+
+            // Explanation box in review mode
+            if (isSubmitted) {
+                explanationContainer.style.display = 'block';
+                explanationContainer.className = 'explanation-box';
+                explanationContainer.innerHTML = `
+                    <strong>Explanation / Rule Reference:</strong>
+                    ${q.explanation}
+                `;
+            } else {
+                explanationContainer.style.display = 'none';
+            }
+
+            // Navigation Buttons State
+            prevBtn.disabled = idx === 0;
+            nextBtn.disabled = idx === questions.length - 1;
+
+            updatePaletteCurrent();
+        }
+
+        function selectOption(optIdx) {
+            userAnswers[currentQuestionIdx] = optIdx;
+            loadQuestion(currentQuestionIdx);
+            renderPalette();
+        }
+
+        function clearSelection() {
+            if (isSubmitted) return;
+            userAnswers[currentQuestionIdx] = null;
+            loadQuestion(currentQuestionIdx);
+            renderPalette();
+        }
+
+        function toggleBookmark() {
+            bookmarked[currentQuestionIdx] = !bookmarked[currentQuestionIdx];
+            loadQuestion(currentQuestionIdx);
+            renderPalette();
+        }
+
+        function renderPalette() {
+            paletteGrid.innerHTML = '';
+            const filter = paletteFilter.value;
+
+            questions.forEach((q, idx) => {
+                const isAnswered = userAnswers[idx] !== null;
+                const isBookmarked = bookmarked[idx];
+
+                // Filter logic
+                if (filter === 'answered' && !isAnswered) return;
+                if (filter === 'unanswered' && isAnswered) return;
+                if (filter === 'bookmarked' && !isBookmarked) return;
+
+                const item = document.createElement('button');
+                item.className = 'palette-item';
+                item.textContent = idx + 1;
+
+                if (idx === currentQuestionIdx) {
+                    item.classList.add('current');
+                }
+
+                if (!isSubmitted) {
+                    if (isAnswered) item.classList.add('answered');
+                } else {
+                    // Review mode palette colors
+                    if (userAnswers[idx] === q.answer) {
+                        item.classList.add('status-correct');
+                    } else if (userAnswers[idx] !== null) {
+                        item.classList.add('status-wrong');
+                    } else {
+                        item.classList.add('status-unattempted');
+                    }
+                }
+
+                if (isBookmarked) item.classList.add('bookmarked');
+
+                item.addEventListener('click', () => loadQuestion(idx));
+                paletteGrid.appendChild(item);
+            });
+        }
+
+        function updatePaletteCurrent() {
+            const items = paletteGrid.querySelectorAll('.palette-item');
+            items.forEach(item => {
+                if (parseInt(item.textContent) === currentQuestionIdx + 1) {
+                    item.classList.add('current');
+                } else {
+                    item.classList.remove('current');
+                }
+            });
+        }
+
+        function submitQuiz() {
+            if (confirm("Are you sure you want to submit the quiz?")) {
+                finalizeQuiz();
+            }
+        }
+
+        function autoSubmitQuiz() {
+            alert("Time has expired! Your quiz will be submitted automatically.");
+            finalizeQuiz();
+        }
+
+        function finalizeQuiz() {
+            isSubmitted = true;
+            clearInterval(timerInterval);
+
+            let score = 0;
+            let correctCount = 0;
+            let incorrectCount = 0;
+
+            questions.forEach((q, idx) => {
+                if (userAnswers[idx] === q.answer) {
+                    score++;
+                    correctCount++;
+                } else if (userAnswers[idx] !== null) {
+                    incorrectCount++;
+                }
+            });
+
+            const percentage = ((score / questions.length) * 100).toFixed(1);
+
+            // Update Modal Stats
+            document.getElementById('modal-score').textContent = score;
+            document.getElementById('stat-percentage').textContent = `${percentage}%`;
+            document.getElementById('stat-correct').textContent = correctCount;
+            document.getElementById('stat-incorrect').textContent = incorrectCount;
+
+            const badge = document.getElementById('pass-fail-badge');
+            if (percentage >= 60) {
+                badge.textContent = "PASSED";
+                badge.style.color = "var(--success)";
+            } else {
+                badge.textContent = "NEEDS IMPROVEMENT";
+                badge.style.color = "var(--danger)";
+            }
+
+            // Show Score Modal
+            scoreModal.classList.add('active');
+
+            // Hide clear and submit buttons, disable timer
+            submitBtn.style.display = 'none';
+            clearBtn.style.display = 'none';
+            timerDisplay.textContent = 'Completed';
+
+            // Update legend for review mode
+            document.getElementById('legend-container').innerHTML = `
+                <div class="legend-item"><div class="legend-color" style="background:var(--success)"></div> Correct</div>
+                <div class="legend-item"><div class="legend-color" style="background:var(--danger)"></div> Incorrect</div>
+                <div class="legend-item"><div class="legend-color" style="background:var(--bg-primary); border:1px solid var(--border-color)"></div> Unattempted</div>
+            `;
+
+            renderPalette();
+            loadQuestion(currentQuestionIdx);
+        }
+
+        function setupEventListeners() {
+            prevBtn.addEventListener('click', () => {
+                if (currentQuestionIdx > 0) loadQuestion(currentQuestionIdx - 1);
+            });
+
+            nextBtn.addEventListener('click', () => {
+                if (currentQuestionIdx < questions.length - 1) loadQuestion(currentQuestionIdx + 1);
+            });
+
+            clearBtn.addEventListener('click', clearSelection);
+            bookmarkBtn.addEventListener('click', toggleBookmark);
+            submitBtn.addEventListener('click', submitQuiz);
+
+            paletteFilter.addEventListener('change', renderPalette);
+
+            reviewBtn.addEventListener('click', () => {
+                scoreModal.classList.remove('active');
+            });
+
+            // Reshuffle / Restart Button
+            restartBtn.addEventListener('click', () => {
+                if (confirm("This will reshuffle all questions & options and restart the quiz timer. Proceed?")) {
+                    startNewQuiz();
+                }
+            });
+
+            // Theme Toggle
+            themeToggle.addEventListener('click', () => {
+                const currentTheme = document.documentElement.getAttribute('data-theme');
+                if (currentTheme === 'dark') {
+                    document.documentElement.removeAttribute('data-theme');
+                    themeToggle.textContent = '🌙';
+                } else {
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                    themeToggle.textContent = '☀️';
+                }
+            });
+        }
+    </script>
+</body>
+</html>
