@@ -1,0 +1,1675 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>National Education Policy 2020 - Interactive Quiz</title>
+    <style>
+        :root {
+            --bg-primary: #f8fafc;
+            --bg-card: #ffffff;
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --text-muted: #94a3b8;
+            --border-color: #e2e8f0;
+            --accent-primary: #1d4ed8;
+            --accent-hover: #1e40af;
+            --accent-light: #eff6ff;
+            --success: #16a34a;
+            --success-light: #f0fdf4;
+            --danger: #dc2626;
+            --danger-light: #fef2f2;
+            --warning: #d97706;
+            --warning-light: #fffbeb;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            --radius-sm: 0.375rem;
+            --radius-md: 0.5rem;
+            --radius-lg: 0.75rem;
+            --radius-full: 9999px;
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: #0f172a;
+            --bg-card: #1e293b;
+            --text-primary: #f8fafc;
+            --text-secondary: #cbd5e1;
+            --text-muted: #64748b;
+            --border-color: #334155;
+            --accent-primary: #3b82f6;
+            --accent-hover: #60a5fa;
+            --accent-light: #1e3a8a;
+            --success: #22c55e;
+            --success-light: #14532d;
+            --danger: #ef4444;
+            --danger-light: #7f1d1d;
+            --warning: #f59e0b;
+            --warning-light: #78350f;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.5;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Sticky Header */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background-color: var(--bg-card);
+            border-bottom: 1px solid var(--border-color);
+            box-shadow: var(--shadow-sm);
+            padding: 0.75rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+
+        .header-title {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .header-title h1 {
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .badge {
+            background-color: var(--accent-light);
+            color: var(--accent-primary);
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 0.25rem 0.5rem;
+            border-radius: var(--radius-sm);
+            white-space: nowrap;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        /* Timer Widget */
+        .timer-box {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background-color: var(--accent-light);
+            color: var(--accent-primary);
+            padding: 0.4rem 0.8rem;
+            border-radius: var(--radius-md);
+            font-weight: 700;
+            font-size: 1rem;
+            font-family: monospace;
+            border: 1px solid var(--border-color);
+        }
+
+        .timer-box.warning {
+            background-color: var(--warning-light);
+            color: var(--warning);
+            animation: pulse 1s infinite;
+        }
+
+        .timer-box.danger {
+            background-color: var(--danger-light);
+            color: var(--danger);
+            animation: pulse 0.5s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
+        }
+
+        /* Action Buttons */
+        .icon-btn {
+            background: none;
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            cursor: pointer;
+            padding: 0.4rem 0.75rem;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .icon-btn:hover {
+            background-color: var(--border-color);
+        }
+
+        /* Main Container Layout */
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            margin: 1.5rem auto;
+            padding: 0 1rem;
+            display: grid;
+            grid-template-columns: 1fr 320px;
+            gap: 1.5rem;
+            flex: 1;
+        }
+
+        @media (max-width: 900px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Question Section */
+        .main-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 480px;
+        }
+
+        .question-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .question-number {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+
+        .bookmark-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--text-muted);
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            font-weight: 600;
+        }
+
+        .bookmark-btn.active {
+            color: var(--warning);
+        }
+
+        .question-text {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 1.25rem;
+            line-height: 1.6;
+        }
+
+        /* Options */
+        .options-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .option-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            padding: 0.875rem 1rem;
+            border: 1.5px solid var(--border-color);
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            background-color: var(--bg-card);
+            font-size: 0.95rem;
+            color: var(--text-primary);
+            position: relative;
+        }
+
+        .option-item:hover {
+            border-color: var(--accent-primary);
+            background-color: var(--accent-light);
+        }
+
+        .option-item.selected {
+            border-color: var(--accent-primary);
+            background-color: var(--accent-light);
+            font-weight: 500;
+        }
+
+        .option-prefix {
+            width: 1.5rem;
+            height: 1.5rem;
+            border-radius: 50%;
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 700;
+            flex-shrink: 0;
+            background-color: var(--bg-primary);
+        }
+
+        .option-item.selected .option-prefix {
+            background-color: var(--accent-primary);
+            color: #ffffff;
+            border-color: var(--accent-primary);
+        }
+
+        /* Review Mode Option Styles */
+        .option-item.correct {
+            border-color: var(--success) !important;
+            background-color: var(--success-light) !important;
+            color: var(--text-primary);
+        }
+
+        .option-item.correct .option-prefix {
+            background-color: var(--success);
+            color: #ffffff;
+            border-color: var(--success);
+        }
+
+        .option-item.wrong {
+            border-color: var(--danger) !important;
+            background-color: var(--danger-light) !important;
+            color: var(--text-primary);
+        }
+
+        .option-item.wrong .option-prefix {
+            background-color: var(--danger);
+            color: #ffffff;
+            border-color: var(--danger);
+        }
+
+        /* Explanation Box */
+        .explanation-box {
+            margin-top: 1rem;
+            padding: 1rem;
+            background-color: var(--accent-light);
+            border-left: 4px solid var(--accent-primary);
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        .explanation-box strong {
+            color: var(--text-primary);
+            display: block;
+            margin-bottom: 0.25rem;
+        }
+
+        /* Navigation Bar */
+        .nav-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-color);
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.6rem 1.2rem;
+            border-radius: var(--radius-md);
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            border: 1px solid transparent;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4rem;
+        }
+
+        .btn-secondary {
+            background-color: var(--bg-primary);
+            border-color: var(--border-color);
+            color: var(--text-primary);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--border-color);
+        }
+
+        .btn-primary {
+            background-color: var(--accent-primary);
+            color: #ffffff;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--accent-hover);
+        }
+
+        .btn-danger {
+            background-color: var(--danger);
+            color: #ffffff;
+        }
+
+        .btn-danger:hover {
+            opacity: 0.9;
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* Sidebar Palette */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .palette-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 1.25rem;
+            box-shadow: var(--shadow-md);
+        }
+
+        .palette-header {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .filter-select {
+            padding: 0.25rem 0.5rem;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border-color);
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            font-size: 0.8rem;
+        }
+
+        .palette-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 0.5rem;
+            max-height: 360px;
+            overflow-y: auto;
+            padding-right: 0.25rem;
+        }
+
+        .palette-item {
+            aspect-ratio: 1;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-color);
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .palette-item:hover {
+            border-color: var(--accent-primary);
+        }
+
+        .palette-item.current {
+            outline: 2px solid var(--accent-primary);
+            outline-offset: 1px;
+        }
+
+        .palette-item.answered {
+            background-color: var(--accent-primary);
+            color: #ffffff;
+            border-color: var(--accent-primary);
+        }
+
+        .palette-item.bookmarked::after {
+            content: '★';
+            position: absolute;
+            top: 1px;
+            right: 2px;
+            font-size: 0.6rem;
+            color: var(--warning);
+        }
+
+        /* Review Mode Palette Status */
+        .palette-item.status-correct {
+            background-color: var(--success) !important;
+            color: #ffffff !important;
+            border-color: var(--success) !important;
+        }
+
+        .palette-item.status-wrong {
+            background-color: var(--danger) !important;
+            color: #ffffff !important;
+            border-color: var(--danger) !important;
+        }
+
+        .palette-item.status-unattempted {
+            background-color: var(--bg-primary) !important;
+            color: var(--text-muted) !important;
+        }
+
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-top: 1rem;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+        }
+
+        .legend-color {
+            width: 0.75rem;
+            height: 0.75rem;
+            border-radius: 2px;
+        }
+
+        /* Modal Score Card */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.6);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-card {
+            background-color: var(--bg-card);
+            border-radius: var(--radius-lg);
+            max-width: 500px;
+            width: 100%;
+            padding: 2rem;
+            box-shadow: var(--shadow-lg);
+            text-align: center;
+        }
+
+        .score-circle {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background-color: var(--accent-light);
+            color: var(--accent-primary);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 1rem auto;
+            border: 4px solid var(--accent-primary);
+        }
+
+        .score-value {
+            font-size: 2rem;
+            font-weight: 800;
+            line-height: 1;
+        }
+
+        .score-total {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.75rem;
+            margin: 1.5rem 0;
+        }
+
+        .stat-box {
+            background-color: var(--bg-primary);
+            padding: 0.75rem;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-color);
+        }
+
+        .stat-val {
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+
+        .stat-lbl {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        /* Transitions */
+        .fade-in {
+            animation: fadeIn 0.25s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-title">
+            <h1>NEP 2020 Master Quiz</h1>
+            <span class="badge">National Education Policy</span>
+        </div>
+        <div class="header-actions">
+            <button class="icon-btn" id="restart-btn" title="Reshuffle & Restart Quiz">🔄 Restart</button>
+            <div id="timer" class="timer-box">
+                ⏱️ <span id="timer-display">30:00</span>
+            </div>
+            <button class="icon-btn" id="theme-toggle" title="Toggle Dark/Light Mode">🌙 Mode</button>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Main Quiz Section -->
+        <main class="main-card fade-in" id="main-card">
+            <div>
+                <div class="question-header">
+                    <span class="question-number" id="q-number">Question 1 of 50</span>
+                    <button class="bookmark-btn" id="bookmark-btn" title="Bookmark Question">
+                        <span id="bookmark-icon">☆</span> Bookmark
+                    </button>
+                </div>
+                
+                <div class="question-text" id="q-text">
+                    Loading Question...
+                </div>
+
+                <div class="options-list" id="options-container">
+                    <!-- Dynamic Options -->
+                </div>
+
+                <div id="explanation-container" style="display: none;">
+                    <!-- Explanation shown post-submission -->
+                </div>
+            </div>
+
+            <!-- Navigation Bar -->
+            <div class="nav-controls">
+                <div>
+                    <button class="btn btn-secondary" id="prev-btn">← Previous</button>
+                    <button class="btn btn-secondary" id="clear-btn">Clear Answer</button>
+                </div>
+                <div>
+                    <button class="btn btn-primary" id="next-btn">Next →</button>
+                    <button class="btn btn-danger" id="submit-btn">Submit Quiz</button>
+                </div>
+            </div>
+        </main>
+
+        <!-- Sidebar / Palette -->
+        <aside class="sidebar">
+            <div class="palette-card">
+                <div class="palette-header">
+                    <span>Question Palette</span>
+                    <select id="palette-filter" class="filter-select">
+                        <option value="all">All (50)</option>
+                        <option value="answered">Answered</option>
+                        <option value="unanswered">Unanswered</option>
+                        <option value="bookmarked">Bookmarked</option>
+                    </select>
+                </div>
+
+                <div class="palette-grid" id="palette-grid">
+                    <!-- Grid Buttons generated dynamically -->
+                </div>
+
+                <div class="legend" id="legend-container">
+                    <div class="legend-item"><div class="legend-color" style="background:var(--accent-primary)"></div> Answered</div>
+                    <div class="legend-item"><div class="legend-color" style="background:var(--bg-primary); border:1px solid var(--border-color)"></div> Unanswered</div>
+                    <div class="legend-item"><div class="legend-color" style="outline:2px solid var(--accent-primary)"></div> Current</div>
+                    <div class="legend-item"><span style="color:var(--warning)">★</span> Bookmarked</div>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Score Card Modal -->
+    <div class="modal-overlay" id="score-modal">
+        <div class="modal-card fade-in">
+            <h2>Quiz Results</h2>
+            <p style="font-size: 0.875rem; color: var(--text-secondary); margin-top: 0.25rem;">National Education Policy (NEP) 2020</p>
+
+            <div class="score-circle">
+                <span class="score-value" id="modal-score">0</span>
+                <span class="score-total">out of 50</span>
+            </div>
+
+            <p id="pass-fail-badge" style="font-weight: 700; font-size: 1.1rem; margin-bottom: 0.5rem;"></p>
+
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <div class="stat-val" id="stat-percentage" style="color: var(--accent-primary);">0%</div>
+                    <div class="stat-lbl">Percentage</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-val" id="stat-correct" style="color: var(--success);">0</div>
+                    <div class="stat-lbl">Correct</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-val" id="stat-incorrect" style="color: var(--danger);">0</div>
+                    <div class="stat-lbl">Incorrect</div>
+                </div>
+            </div>
+
+            <button class="btn btn-primary" id="review-btn" style="width: 100%;">Detailed Review Mode</button>
+        </div>
+    </div>
+
+    <!-- Custom Alert/Confirm Modal replacement -->
+    <div class="modal-overlay" id="confirm-modal">
+        <div class="modal-card fade-in" style="max-width: 400px; padding: 1.5rem;">
+            <h3 id="confirm-modal-title" style="margin-bottom: 0.5rem;">Confirm Submission</h3>
+            <p id="confirm-modal-msg" style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 1.5rem;">Are you sure you want to submit your quiz?</p>
+            <div style="display: flex; gap: 0.75rem; justify-content: flex-end;">
+                <button class="btn btn-secondary" id="confirm-cancel-btn">Cancel</button>
+                <button class="btn btn-primary" id="confirm-ok-btn">Confirm</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- 50 QUESTION BANK FOR NATIONAL EDUCATION POLICY 2020 ---
+        const rawQuestions = [
+            {
+                question: "What new pedagogical and curricular structure replaces the 10+2 system under NEP 2020 for school education?",
+                options: [
+                    "5 + 3 + 3 + 4",
+                    "3 + 5 + 3 + 4",
+                    "5 + 4 + 3 + 3",
+                    "4 + 3 + 3 + 5"
+                ],
+                answer: 0,
+                explanation: "NEP 2020 Para 4.1: The 10+2 structure is replaced by a 5+3+3+4 design covering ages 3-18 (5 years Foundational, 3 years Preparatory, 3 years Middle, 4 years Secondary)."
+            },
+            {
+                question: "According to NEP 2020, what is the target Gross Enrolment Ratio (GER) to be achieved in Higher Education (including vocational education) by 2035?",
+                options: [
+                    "35%",
+                    "50%",
+                    "65%",
+                    "100%"
+                ],
+                answer: 1,
+                explanation: "NEP 2020 Para 10.8: NEP 2020 aims to increase the Gross Enrolment Ratio in higher education including vocational education from 26.3% (2018) to 50% by 2035."
+            },
+            {
+                question: "What is the full form of 'PARAKH', the national assessment centre set up under NEP 2020?",
+                options: [
+                    "Performance Assessment, Review, and Analysis of Knowledge for Holistic Development",
+                    "Program for Academic Review, Assessment, and Knowledge Harnessing",
+                    "Performance Appraisal, Rating, and Assessment of Knowledge for Higher Education",
+                    "Pedagogical Assessment and Review of Academic Knowledge for Holistic Education"
+                ],
+                answer: 0,
+                explanation: "NEP 2020 Para 4.41: PARAKH stands for Performance Assessment, Review, and Analysis of Knowledge for Holistic Development, set up as a National Assessment Centre."
+            },
+            {
+                question: "Which overarching apex body is proposed by NEP 2020 to regulate all higher education in India (excluding medical and legal education)?",
+                options: [
+                    "University Grants Commission (UGC)",
+                    "Higher Education Council of India (HECI)",
+                    "Higher Education Regulatory Council (HERC)",
+                    "Higher Education Commission of India (HECI)"
+                ],
+                answer: 3,
+                explanation: "NEP 2020 Para 18.3: Higher Education Commission of India (HECI) will be set up as a single overarching umbrella body for entire higher education, excluding medical and legal education."
+            },
+            {
+                question: "Which vertical under HECI will function as the single-point regulator for higher education accreditation?",
+                options: [
+                    "National Higher Education Regulatory Council (NHERC)",
+                    "National Accreditation Council (NAC)",
+                    "Higher Education Grants Council (HEGC)",
+                    "General Education Council (GEC)"
+                ],
+                answer: 1,
+                explanation: "NEP 2020 Para 18.4: Accreditation of institutions will be overseen by the National Accreditation Council (NAC), the second vertical of HECI."
+            },
+            {
+                question: "Under NEP 2020, what is the role of the 'Academic Bank of Credits' (ABC)?",
+                options: [
+                    "To provide educational loans to students at low interest rates",
+                    "To digitally store academic credits earned from recognized HEIs to enable multiple entry and exit points",
+                    "To manage financial grants allocated to central universities",
+                    "To evaluate research grants allocated to PhD scholars"
+                ],
+                answer: 1,
+                explanation: "NEP 2020 Para 11.9: An Academic Bank of Credits (ABC) digitally stores academic credits earned from various recognized HEIs so that degrees can be awarded based on credits earned over time."
+            },
+            {
+                question: "What is the target timeline under NEP 2020 for achieving universal foundational literacy and numeracy (FLN) in primary school?",
+                options: [
+                    "By 2025 (NIPUN Bharat target 2026-27)",
+                    "By 2030",
+                    "By 2035",
+                    "By 2040"
+                ],
+                answer: 0,
+                explanation: "NEP 2020 Para 2.2 / NIPUN Bharat Mission: Achieving universal foundational literacy and numeracy in primary school by Grade 3 is given top priority (targeted originally by 2025, aligned with NIPUN Bharat 2026-27)."
+            },
+            {
+                question: "What is the proposed minimum degree qualification required for school teaching by the year 2030 as per NEP 2020?",
+                options: [
+                    "1-year B.Ed degree",
+                    "2-year B.Ed degree",
+                    "4-year Integrated B.Ed degree",
+                    "Diploma in Elementary Education (D.El.Ed)"
+                ],
+                answer: 2,
+                explanation: "NEP 2020 Para 5.23: By 2030, the minimum degree qualification for teaching will be a 4-year integrated B.Ed. degree that teaches a range of knowledge content and pedagogy."
+            },
+            {
+                question: "NEP 2020 recommends that the medium of instruction until at least Grade 5 (and preferably till Grade 8 and beyond) should be:",
+                options: [
+                    "English only",
+                    "Hindi only",
+                    "Home language / Mother tongue / Local language / Regional language",
+                    "Sanskrit"
+                ],
+                answer: 2,
+                explanation: "NEP 2020 Para 4.11: Wherever possible, the medium of instruction until at least Grade 5, but preferably till Grade 8 and beyond, will be the home language/mother tongue/local language/regional language."
+            },
+            {
+                question: "What minimum number of Continuous Professional Development (CPD) hours per year are teachers required to undertake as per NEP 2020?",
+                options: [
+                    "20 hours",
+                    "30 hours",
+                    "50 hours",
+                    "100 hours"
+                ],
+                answer: 2,
+                explanation: "NEP 2020 Para 5.15: Teachers will be given continuous opportunities for self-improvement and to learn the latest innovations in their profession through at least 50 hours of CPD modules every year."
+            },
+            {
+                question: "Which autonomous body is proposed under NEP 2020 to provide a platform for the free exchange of ideas on the use of technology to enhance learning, assessment, planning, and administration?",
+                options: [
+                    "National Educational Technology Forum (NETF)",
+                    "Indian Institute of Educational Technology (IIET)",
+                    "National Digital Education Architecture (NDEAR)",
+                    "Central Educational Technology Council (CETC)"
+                ],
+                answer: 0,
+                explanation: "NEP 2020 Para 23.2: An autonomous body, the National Educational Technology Forum (NETF), will be created to facilitate decision-making on the induction, deployment, and use of technology."
+            },
+            {
+                question: "What is the name of the new National Curriculum Framework created for early childhood care and education under NEP 2020?",
+                options: [
+                    "NCF-ECE",
+                    "NCFCPCE",
+                    "NCFSE",
+                    "NCF-ECCAE"
+                ],
+                answer: 1,
+                explanation: "NEP 2020 Para 1.3: A National Curricular and Pedagogical Framework for Early Childhood Care and Education (NCFCPCE) for children up to age 8 will be developed by NCERT."
+            },
+            {
+                question: "Which primary research funding body is recommended to be established under NEP 2020 to seed, grow, and facilitate research across universities and colleges?",
+                options: [
+                    "National Science Foundation (NSF)",
+                    "National Research Foundation (NRF)",
+                    "Indian Council of Academic Research (ICAR)",
+                    "Central Research Grant Agency (CRGA)"
+                ],
+                answer: 1,
+                explanation: "NEP 2020 Para 17.9: The National Research Foundation (NRF) will be established to seed, grow, and facilitate research across academic institutions in India."
+            },
+            {
+                question: "What key transformation is proposed for the Undergraduate (UG) degree duration under NEP 2020?",
+                options: [
+                    "Fixed 3-year degree with no exit option",
+                    "3 or 4-year duration with multiple entry and exit options with appropriate certifications",
+                    "Mandatory 5-year integrated Master's program",
+                    "2-year Associate Degree followed by 2-year Specialization"
+                ],
+                answer: 1,
+                explanation: "NEP 2020 Para 11.9: The UG degree will be of 3 or 4-year duration, with multiple entry and exit options (Certificate after 1 year, Diploma after 2 years, Bachelor's degree after 3 years, Bachelor's with Research after 4 years)."
+            },
+            {
+                question: "What degree program was discontinued as per the recommendations of NEP 2020?",
+                options: [
+                    "M.Ed",
+                    "M.Phil",
+                    "Diploma in Elementary Education",
+                    "Distance MBA"
+                ],
+                answer: 1,
+                explanation: "NEP 2020 Para 11.10: The M.Phil. program shall be discontinued to streamline the higher education qualification pathway leading directly into Ph.D. programs."
+            },
+            {
+                question: "Which fund is proposed under NEP 2020 to build the nation's capacity to provide equitable quality education for all girls and transgender students?",
+                options: [
+                    "Beti Bachao Padhao Fund",
+                    "Gender Inclusion Fund (GIF)",
+                    "Women Education Empowerment Fund",
+                    "Kanya Education Trust"
+                ],
+                answer: 1,
+                explanation: "NEP 2020 Para 6.3: The Government of India will constitute a 'Gender Inclusion Fund' to build the nation's capacity to provide equitable quality education for all girls and transgender students."
+            },
+            {
+                question: "By which year does NEP 2020 aim to ensure that all learners entering Grade 1 are school-ready through Early Childhood Care and Education (ECCE)?",
+                options: [
+                    "2025",
+                    "2030",
+                    "2035",
+                    "2040"
+                ],
+                answer: 1,
+                explanation: "NEP 2020 Para 1.5: The goal is to ensure that all students entering Grade 1 are school ready by 2030 through universal access to high-quality ECCE."
+            },
+            {
+                question: "Under NEP 2020, what is the '360-degree Holistic Progress Card' for school students?",
+                options: [
+                    "A report card based strictly on annual final exam scores",
+                    "A multi-dimensional report card reflecting progress in cognitive, affective, and psychomotor domains including self, peer, and teacher assessments",
+                    "A digital tracking report compiled exclusively by external audit agencies",
+                    "An attendance and physical fitness tracking system"
+                ],
+                answer: 1,
+                explanation: "NEP 2020 Para 4.35: The holistic progress card will be a 360-degree, multidimensional report that reflects in detail the progress and uniqueness of each learner in the cognitive, affective, and psychomotor domains."
+            },
+            {
+                question: "What exposure to vocational education is envisioned for school students under NEP 2020?",
+                options: [
+                    "Vocational courses starting only after Grade 12 graduation",
+                    "At least 10 'bagless days' during Grades 6-8 for hands-on vocational exposure and internships",
+                    "Mandatory 2 years of factory training during High School",
+                    "Vocational streams completely separated from academic streams"
+                ],
+                answer: 1,
+                explanation: "NEP 2020 Para 4.26: Every student will take a fun course during Grades 6-8 that gives hands-on experience in sample vocational crafts (carpentry, gardening, pottery, etc.) with 10 'bagless days'."
+            },
+            {
+                question: "What total percentage of GDP does NEP 2020 reaffirm as the public investment target for Education?",
+                options: [
+                    "4%",
+                    "6%",
+                    "8%",
+                    "10%"
+                ],
+                answer: 1,
+                explanation: "NEP 2020 Para 26.1: NEP 2020 endorses raising public investment in education by the Centre and States to reach 6% of GDP at the earliest."
+            },
+            {
+                question: "Which model universities are proposed under NEP 2020 as multidisciplinary education and research benchmark institutions, at par with IITs and IIMs?",
+                options: [
+                    "MERU (Multidisciplinary Education and Research Universities)",
+                    "HERU (Higher Education and Research Universities)",
+                    "NERU (National Education and Research Universities)",
+                    "SERU (Specialized Education and Research Universities)"
+                ],
+                answer: 0,
+                explanation: "NEP 2020 Para 11.2: Model multidisciplinary universities, called MERUs (Multidisciplinary Education and Research Universities), will be set up at par with IITs, IIMs, etc."
+            },
+            {
+                question: "As per NEP 2020, Board exams for Grades 10 and 12 will be redesigned to primarily test:",
+                options: [
+                    "Rote memorization and recall of facts",
+                    "Core capacities, higher-order skills, and conceptual clarity",
+                    "Speed writing and neat handwriting",
+                    "Syllabus completion percentage"
+                ],
+                answer: 1,
+                explanation: "NEP 2020 Para 4.37: Board exams will be redesigned to test core capacities and competencies rather than months of coaching and rote learning."
+            },
+            {
+                question: "What is the 'Three-Language Formula' modification recommended by NEP 2020?",
+                options: [
+                    "Mandatory learning of English, Hindi, and Foreign Language",
+                    "Three languages learned by children will be chosen by the States/UTs, with at least two of the three being native to India",
+                    "Mandatory study of Sanskrit along with two state languages",
+                    "A single uniform language formula imposed across all states"
+                ],
+                answer: 1,
+                explanation: "NEP 2020 Para 4.13: The three-language formula will be implemented with greater flexibility; no language will be imposed, and at least two of the three languages must be native to India."
+            },
+            {
+                question: "Under NEP 2020, what is the age group covered under the Foundational Stage of the 5+3+3+4 structure?",
+                options: [
+                    "Ages 6 to 11",
+                    "Ages 3 to 8",
+                    "Ages 8 to 11",
+                    "Ages 11 to 14"
+                ],
+                answer: 1,
+                explanation: "NEP 2020 Para 4.1: The Foundational Stage consists of 5 years of flexible, play/activity-based learning covering ages 3 to 8 (3 years of Anganwadi/preschool + Grades 1 and 2)."
+            },
+            {
+                question: "Which institution is responsible for preparing the National Professional Standards for Teachers (NPST) by 2022 as per NEP 2020?",
+                options: [
+                    "UGC",
+                    "NCTE (National Council for Teacher Education) restructured as a PSSA under General Education Council",
+                    "NCERT",
+                    "CBSE"
+                ],
+                answer: 1,
+                explanation: "NEP 2020 Para 5.20: A common guiding National Professional Standards for Teachers (NPST) will be developed by the NCTE in consultation with NCERT, SCERTs, and teachers."
+            },
+            {
+                question: "What is the full form of 'SEAG' under NEP 2020, referring to groups needing special attention for educational equity?",
+                options: [
+                    "Socio-Economically Disadvantaged Groups",
+                    "Socially and Economically Advanced Groups",
+                    "Special Educational Assistance Groups",
+                    "State Educational Advisory Groups"
+                ],
+                answer: 0,
+                explanation: "NEP 2020 Para 6.1: SEDGs stands for Socio-Economically Disadvantaged Groups, categorised based on gender, socio-cultural, geographical identities, and disabilities."
+            },
+            {
+                question: "What structural mechanism is recommended under NEP 2020 to streamline governance and sharing of resources among small schools in a region?",
+                options: [
+                    "School Complex / Cluster System",
+                    "Block Resource Management Board",
+                    "Centralized District School Board",
+                    "Municipal Education League"
+                ],
+                answer: 0,
+                explanation: "NEP 2020 Para 7.5: School Complexes/Clusters will be established to share resources such as ICT infrastructure, sports equipment, counselors, and specialized teachers across neighboring schools."
+            },
+            {
+                question: "What target does NEP 2020 set for 100% Gross Enrolment Ratio (GER) in school education from preschool to secondary level?",
+                options: [
+                    "By 2025",
+                    "By 2030",
+                    "By 2035",
+                    "By 2040"
+                ],
+                answer: 1,
+                explanation: "NEP 2020 Para 3.1: NEP 2020 aims to achieve 100% Gross Enrolment Ratio in school education from preschool to secondary level by 2030."
+            },
+            {
+                question: "Which regulatory vertical under HECI will handle financial grants and funding for higher education institutions?",
+                options: [
+                    "National Higher Education Regulatory Council (NHERC)",
+                    "Higher Education Grants Council (HEGC)",
+                    "National Accreditation Council (NAC)",
+                    "General Education Council (GEC)"
+                ],
+                answer: 1,
+                explanation: "NEP 2020 Para 18.8: The Higher Education Grants Council (HEGC) will carry out funding and financing of higher education based on transparent criteria."
+            },
+            {
+                question: "Which body will formulate the National Higher Education Qualification Framework (NHEQF) under HECI?",
+                options: [
+                    "General Education Council (GEC)",
+                    "National Accreditation Council (NAC)",
+                    "UGC Executive Committee",
+                    "National Testing Agency (NTA)"
+                ],
+                answer: 0,
+                explanation: "NEP 2020 Para 18.6: The General Education Council (GEC), the fourth vertical of HECI, will frame expected learning outcomes through the NHEQF."
+            },
+            {
+                question: "What key transformation in assessment for higher education entrance is promoted by NEP 2020 through NTA?",
+                options: [
+                    "Separate entrance exams by every single state university",
+                    "High-quality common aptitude test and subject-specific admissions tests offered twice a year",
+                    "Abolition of all entrance exams in favor of Class 12 marks",
+                    "Subjective essay-based manual evaluations"
+                ],
+                answer: 1,
+                explanation: "NEP 2020 Para 4.42 / 12.11: The National Testing Agency (NTA) will offer high-quality common aptitude tests and subject-specific exams to eliminate duplicate entrance exams."
+            },
+            {
+                question: "Under NEP 2020, what is 'SAMAGRA SHIKSHA' scheme aligned with?",
+                options: [
+                    "An overarching school education program extending from pre-school to class 12",
+                    "A scholarship program strictly for higher technical education",
+                    "A digital tablet distribution scheme for college professors",
+                    "A sports incentive initiative for rural athletes"
+                ],
+                answer: 0,
+                explanation: "The Samagra Shiksha Scheme is aligned with NEP 2020 recommendations, covering the continuum of school education from pre-school to senior secondary."
+            },
+            {
+                question: "Which Indian system of knowledge is emphasized under NEP 2020 to be integrated scientifically into school and college curricula?",
+                options: [
+                    "Indian Knowledge Systems (IKS)",
+                    "Ancient Colonial Archives",
+                    "Western Philosophical Canon",
+                    "Syllabus of Foreign Universities"
+                ],
+                answer: 0,
+                explanation: "NEP 2020 Para 4.27: Indian Knowledge Systems (IKS), including tribal ethno-medicinal practices, mathematics, astronomy, arts, and literature, will be integrated into curricula."
+            },
+            {
+                question: "What is the primary objective of establishing Special Education Zones (SEZs) under NEP 2020?",
+                options: [
+                    "Tax-free commercial zones for private coaching centers",
+                    "Geographical regions with high populations of SEDGs targeted for intensive educational interventions and resources",
+                    "Special tech parks for ed-tech startups",
+                    "Enclaves reserved exclusively for international student exchanges"
+                ],
+                answer: 1,
+                explanation: "NEP 2020 Para 6.4: Regions with large populations of educationally disadvantaged groups will be declared Special Education Zones (SEZs) to direct tailored resources and strategies."
+            },
+            {
+                question: "What major reform is proposed for the governance of school standards through an independent state authority under NEP 2020?",
+                options: [
+                    "State School Standards Authority (SSSA)",
+                    "Central School Inspection Bureau (CSIB)",
+                    "Directorate of Private School Oversight",
+                    "State Board of Academic Excellence"
+                ],
+                answer: 0,
+                explanation: "NEP 2020 Para 8.5: An independent, state-wide body called the State School Standards Authority (SSSA) will be set up to establish basic minimal standard parameters across all schools."
+            },
+            {
+                question: "According to NEP 2020, what is the pupil-teacher ratio (PTR) recommended to be maintained at the school level?",
+                options: [
+                    "Under 30:1 generally, and under 25:1 in areas with high socio-economically disadvantaged students",
+                    "Under 40:1 generally, and under 30:1 in rural areas",
+                    "Fixed 20:1 across all schools in India",
+                    "Under 50:1 across all levels"
+                ],
+                answer: 0,
+                explanation: "NEP 2020 Para 2.3: PTR of under 30:1 will be ensured at the school level; in areas with high numbers of socio-economically disadvantaged students, PTR will be below 25:1."
+            },
+            {
+                question: "What is the duration and age bracket for the Preparatory Stage in the 5+3+3+4 structure?",
+                options: [
+                    "3 years, for ages 8 to 11 (Grades 3 to 5)",
+                    "2 years, for ages 6 to 8 (Grades 1 to 2)",
+                    "3 years, for ages 11 to 14 (Grades 6 to 8)",
+                    "4 years, for ages 14 to 18 (Grades 9 to 12)"
+                ],
+                answer: 0,
+                explanation: "NEP 2020 Para 4.1: The Preparatory Stage covers 3 years of education for children aged 8-11 in Grades 3 to 5, building on play, discovery, and interactive classroom learning."
+            },
+            {
+                question: "Under NEP 2020, foreign universities ranked among the top _____ in the world will be facilitated to operate in India.",
+                options: [
+                    "50",
+                    "100",
+                    "200",
+                    "500"
+                ],
+                answer: 1,
+                explanation: "NEP 2020 Para 12.8: Selected top-performing foreign universities (among the top 100 in global rankings) will be facilitated to operate in India under a legislative framework."
+            },
+            {
+                question: "What initiative is promoted under NEP 2020 to preserve, promote, and revitalize endangered Indian classical and regional languages?",
+                options: [
+                    "Indian Institute of Translation and Interpretation (IITI)",
+                    "National Language Preservation Agency",
+                    "Central Sanskrit & Regional Academy",
+                    "Bhasha Digital Repository"
+                ],
+                answer: 0,
+                explanation: "NEP 2020 Para 22.12: An Indian Institute of Translation and Interpretation (IITI) will be established to promote translation and language preservation."
+            },
+            {
+                question: "How does NEP 2020 propose to transform adult education and lifelong learning?",
+                options: [
+                    "Through specialized Adult Education Centres aligned with 100% literacy goals using community volunteers and technology",
+                    "By making adult literacy compulsory for obtaining driving licenses",
+                    "By transferring adult education entirely to private commercial operators",
+                    "By phasing out adult education funds to focus solely on primary school"
+                ],
+                answer: 0,
+                explanation: "NEP 2020 Para 21.4: Adult education frameworks will focus on foundational literacy, critical life skills, and vocational skills through community synergy and tech platforms."
+            },
+            {
+                question: "Under NEP 2020, what is the role of 'National Higher Education Regulatory Council' (NHERC)?",
+                options: [
+                    "First vertical of HECI functioning as the single-point regulator for higher education including teacher education (excluding medical/legal)",
+                    "Funding agency for research projects in IITs",
+                    "Body responsible for conducting JEE and NEET exams",
+                    "A council managing central university infrastructure"
+                ],
+                answer: 0,
+                explanation: "NEP 2020 Para 18.4: NHERC will function as the primary, single-point regulator for the higher education sector."
+            },
+            {
+                question: "What key change does NEP 2020 suggest for the affiliation system of colleges under universities over a 15-year period?",
+                options: [
+                    "Affiliation system will be made permanent for all private colleges",
+                    "Phasing out the affiliation system by granting graded autonomy to colleges to turn them into autonomous degree-granting colleges or constituent colleges",
+                    "Transferring all affiliated colleges directly under central government ownership",
+                    "Replacing college affiliations with foreign university franchises"
+                ],
+                answer: 1,
+                explanation: "NEP 2020 Para 10.12: The affiliation of colleges is to be phased out in 15 years through a system of graded autonomy."
+            },
+            {
+                question: "What is the primary purpose of 'NIPUN Bharat Mission' launched under the ambit of NEP 2020?",
+                options: [
+                    "National Initiative for Proficiency in Reading with Understanding and Numeracy",
+                    "National Infrastructure Program for Urban and Rural Networking",
+                    "New Innovation Program for Undergraduate Research",
+                    "National Institute for Physical Education and Nutrition"
+                ],
+                answer: 0,
+                explanation: "NIPUN Bharat stands for National Initiative for Proficiency in Reading with Understanding and Numeracy, launched to fulfill NEP 2020's FLN goals."
+            },
+            {
+                question: "Which age bracket is explicitly integrated into the formal education roadmap under NEP 2020 that was not covered under the 10+2 structure?",
+                options: [
+                    "Ages 1 to 3",
+                    "Ages 3 to 6",
+                    "Ages 18 to 21",
+                    "Ages 0 to 2"
+                ],
+                answer: 1,
+                explanation: "NEP 2020 Para 1.1: Early Childhood Care and Education (ECCE) for children aged 3 to 6 is now formally integrated into the school curriculum framework (5+3+3+4)."
+            },
+            {
+                question: "Under NEP 2020, what is the role of gifted children and students with special talents?",
+                options: [
+                    "Encouraged through specialized topic-centric and project-centric clubs, Olympiads, and tailored enrichment activities",
+                    "Assigned directly to college courses at age 10",
+                    "Exempted from attending regular school classes permanently",
+                    "Evaluated solely by international testing bodies"
+                ],
+                answer: 0,
+                explanation: "NEP 2020 Para 4.43: Specialized topic-centric and project-centric clubs, Olympiads, and enrichment programs will be encouraged at all levels to nurture gifted children."
+            },
+            {
+                question: "What is the focus of the 'Middle Stage' in the school structural model (Grades 6 to 8)?",
+                options: [
+                    "Pure play-based and informal learning without books",
+                    "Experiential learning in sciences, mathematics, arts, social sciences, and humanities with abstract concepts introduced",
+                    "Job placement and industrial training exclusively",
+                    "Board exam preparation drills only"
+                ],
+                answer: 1,
+                explanation: "NEP 2020 Para 4.1: The Middle Stage (Grades 6-8, ages 11-14) focuses on experiential learning and introducing abstract concepts in subjects across sciences, math, and humanities."
+            },
+            {
+                question: "Which Ministry was renamed as the 'Ministry of Education' upon the approval of NEP 2020?",
+                options: [
+                    "Ministry of Human Resource Development (MHRD)",
+                    "Ministry of Youth Affairs and Sports",
+                    "Ministry of Science and Technology",
+                    "Ministry of Culture and Skills"
+                ],
+                answer: 0,
+                explanation: "NEP 2020 Para 26.2: The Ministry of Human Resource Development (MHRD) was re-designated as the Ministry of Education (MoE) to restore focus on education and learning."
+            },
+            {
+                question: "What provision does NEP 2020 make for assessment reform in Grades 3, 5, and 8?",
+                options: [
+                    "Pass/Fail elimination tests that determine repetition of grade",
+                    "Census-based school examinations conducted by competent authority to test core concepts and track school system health",
+                    "Complete abolition of any tests or assessments in these grades",
+                    "National level board rankings and public merit lists"
+                ],
+                answer: 1,
+                explanation: "NEP 2020 Para 4.40: All students will take school examinations in Grades 3, 5, and 8 to track progress and learning outcomes without high-stakes pressure."
+            },
+            {
+                question: "How does NEP 2020 define the vision for Vocational Education integration in schools and HEIs by 2025?",
+                options: [
+                    "At least 50% of learners through the school and higher education system shall have exposure to vocational education",
+                    "100% of college graduates must obtain a manual trade license",
+                    "Vocational training replaced entirely by artificial intelligence courses",
+                    "Vocational courses offered only in specialized industrial centers outside schools"
+                ],
+                answer: 0,
+                explanation: "NEP 2020 Para 16.5: By 2025, at least 50% of learners across school and higher education systems shall have exposure to vocational education."
+            },
+            {
+                question: "Under NEP 2020, what is the core philosophy behind the multidisciplinary approach in Higher Education?",
+                options: [
+                    "Rigid separation between Arts, Sciences, and Commerce streams",
+                    "Elimination of hard separations between arts and sciences, curricular and extra-curricular activities, vocational and academic streams",
+                    "Focusing student learning exclusively on a single narrow subject throughout college",
+                    "Restricting science students from taking humanities courses"
+                ],
+                answer: 1,
+                explanation: "NEP 2020 Executive Summary / Para 11.1: A key principle is broad-based, flexible, multidisciplinary education that removes rigid boundaries between streams and disciplines."
+            }
+        ];
+
+        // --- APP STATE ---
+        let questions = [];
+        let currentQuestionIdx = 0;
+        let userAnswers = [];
+        let bookmarked = [];
+        let isSubmitted = false;
+        let timerInterval = null;
+        let timeRemaining = 30 * 60; // 30 minutes in seconds
+
+        // DOM Elements
+        const mainCard = document.getElementById('main-card');
+        const qNumberEl = document.getElementById('q-number');
+        const qTextEl = document.getElementById('q-text');
+        const optionsContainer = document.getElementById('options-container');
+        const explanationContainer = document.getElementById('explanation-container');
+        const bookmarkBtn = document.getElementById('bookmark-btn');
+        const bookmarkIcon = document.getElementById('bookmark-icon');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const clearBtn = document.getElementById('clear-btn');
+        const submitBtn = document.getElementById('submit-btn');
+        const restartBtn = document.getElementById('restart-btn');
+        const paletteGrid = document.getElementById('palette-grid');
+        const paletteFilter = document.getElementById('palette-filter');
+        const timerDisplay = document.getElementById('timer-display');
+        const timerBox = document.getElementById('timer');
+        const themeToggle = document.getElementById('theme-toggle');
+        const scoreModal = document.getElementById('score-modal');
+        const reviewBtn = document.getElementById('review-btn');
+
+        // Modal elements
+        const confirmModal = document.getElementById('confirm-modal');
+        const confirmModalTitle = document.getElementById('confirm-modal-title');
+        const confirmModalMsg = document.getElementById('confirm-modal-msg');
+        const confirmOkBtn = document.getElementById('confirm-ok-btn');
+        const confirmCancelBtn = document.getElementById('confirm-cancel-btn');
+        let confirmCallback = null;
+
+        // Fisher-Yates Shuffle Algorithm
+        function shuffleArray(array) {
+            const arr = [...array];
+            for (let i = arr.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [arr[i], arr[j]] = [arr[j], arr[i]];
+            }
+            return arr;
+        }
+
+        function initializeQuizData() {
+            // Deep clone and shuffle questions
+            const shuffledQ = shuffleArray(rawQuestions);
+            
+            questions = shuffledQ.map((qItem, idx) => {
+                // Prepare option objects with original indices to track correct answers
+                const optObj = qItem.options.map((optText, oIdx) => ({
+                    text: optText,
+                    isCorrect: oIdx === qItem.answer
+                }));
+                
+                const shuffledOpts = shuffleArray(optObj);
+                const newCorrectIdx = shuffledOpts.findIndex(o => o.isCorrect);
+
+                return {
+                    id: idx + 1,
+                    question: qItem.question,
+                    options: shuffledOpts.map(o => o.text),
+                    answer: newCorrectIdx,
+                    explanation: qItem.explanation
+                };
+            });
+
+            userAnswers = new Array(questions.length).fill(null);
+            bookmarked = new Array(questions.length).fill(false);
+            isSubmitted = false;
+            timeRemaining = 30 * 60;
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            startNewQuiz();
+            setupEventListeners();
+        });
+
+        function startNewQuiz() {
+            clearInterval(timerInterval);
+            initializeQuizData();
+            initTimer();
+            renderPalette();
+            loadQuestion(0);
+
+            // UI Reset
+            submitBtn.style.display = 'inline-flex';
+            clearBtn.style.display = 'inline-flex';
+            timerBox.className = 'timer-box';
+            scoreModal.classList.remove('active');
+
+            document.getElementById('legend-container').innerHTML = `
+                <div class="legend-item"><div class="legend-color" style="background:var(--accent-primary)"></div> Answered</div>
+                <div class="legend-item"><div class="legend-color" style="background:var(--bg-primary); border:1px solid var(--border-color)"></div> Unanswered</div>
+                <div class="legend-item"><div class="legend-color" style="outline:2px solid var(--accent-primary)"></div> Current</div>
+                <div class="legend-item"><span style="color:var(--warning)">★</span> Bookmarked</div>
+            `;
+        }
+
+        function initTimer() {
+            updateTimerDisplay();
+            timerInterval = setInterval(() => {
+                if (timeRemaining <= 0) {
+                    clearInterval(timerInterval);
+                    showCustomAlert("Time Expired!", "Time has expired! Your quiz will now be submitted automatically.", () => {
+                        finalizeQuiz();
+                    });
+                    return;
+                }
+                timeRemaining--;
+                updateTimerDisplay();
+            }, 1000);
+        }
+
+        function updateTimerDisplay() {
+            const mins = Math.floor(timeRemaining / 60);
+            const secs = timeRemaining % 60;
+            timerDisplay.textContent = `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+
+            if (timeRemaining <= 300 && timeRemaining > 60) {
+                timerBox.className = 'timer-box warning';
+            } else if (timeRemaining <= 60) {
+                timerBox.className = 'timer-box danger';
+            }
+        }
+
+        function loadQuestion(idx) {
+            currentQuestionIdx = idx;
+            const q = questions[idx];
+
+            mainCard.classList.remove('fade-in');
+            void mainCard.offsetWidth; // trigger reflow
+            mainCard.classList.add('fade-in');
+
+            qNumberEl.textContent = `Question ${idx + 1} of ${questions.length}`;
+            qTextEl.textContent = q.question;
+
+            // Bookmark Status
+            if (bookmarked[idx]) {
+                bookmarkBtn.classList.add('active');
+                bookmarkIcon.textContent = '★';
+            } else {
+                bookmarkBtn.classList.remove('active');
+                bookmarkIcon.textContent = '☆';
+            }
+
+            // Render Options
+            optionsContainer.innerHTML = '';
+            const labels = ['A', 'B', 'C', 'D'];
+
+            q.options.forEach((opt, optIdx) => {
+                const optEl = document.createElement('div');
+                optEl.className = 'option-item';
+                
+                if (userAnswers[idx] === optIdx) {
+                    optEl.classList.add('selected');
+                }
+
+                // Review Mode Adjustments
+                if (isSubmitted) {
+                    if (optIdx === q.answer) {
+                        optEl.classList.add('correct');
+                    }
+                    if (userAnswers[idx] === optIdx && userAnswers[idx] !== q.answer) {
+                        optEl.classList.add('wrong');
+                    }
+                }
+
+                optEl.innerHTML = `
+                    <div class="option-prefix">${labels[optIdx]}</div>
+                    <div style="flex:1;">${opt}</div>
+                `;
+
+                if (!isSubmitted) {
+                    optEl.addEventListener('click', () => selectOption(optIdx));
+                }
+
+                optionsContainer.appendChild(optEl);
+            });
+
+            // Explanation box in review mode
+            if (isSubmitted) {
+                explanationContainer.style.display = 'block';
+                explanationContainer.className = 'explanation-box';
+                explanationContainer.innerHTML = `
+                    <strong>Policy Reference & Explanation:</strong>
+                    ${q.explanation}
+                `;
+            } else {
+                explanationContainer.style.display = 'none';
+            }
+
+            // Navigation Buttons State
+            prevBtn.disabled = idx === 0;
+            nextBtn.disabled = idx === questions.length - 1;
+
+            updatePaletteCurrent();
+        }
+
+        function selectOption(optIdx) {
+            userAnswers[currentQuestionIdx] = optIdx;
+            loadQuestion(currentQuestionIdx);
+            renderPalette();
+        }
+
+        function clearSelection() {
+            if (isSubmitted) return;
+            userAnswers[currentQuestionIdx] = null;
+            loadQuestion(currentQuestionIdx);
+            renderPalette();
+        }
+
+        function toggleBookmark() {
+            bookmarked[currentQuestionIdx] = !bookmarked[currentQuestionIdx];
+            loadQuestion(currentQuestionIdx);
+            renderPalette();
+        }
+
+        function renderPalette() {
+            paletteGrid.innerHTML = '';
+            const filter = paletteFilter.value;
+
+            questions.forEach((q, idx) => {
+                const isAnswered = userAnswers[idx] !== null;
+                const isBookmarked = bookmarked[idx];
+
+                if (filter === 'answered' && !isAnswered) return;
+                if (filter === 'unanswered' && isAnswered) return;
+                if (filter === 'bookmarked' && !isBookmarked) return;
+
+                const item = document.createElement('button');
+                item.className = 'palette-item';
+                item.textContent = idx + 1;
+
+                if (idx === currentQuestionIdx) {
+                    item.classList.add('current');
+                }
+
+                if (!isSubmitted) {
+                    if (isAnswered) item.classList.add('answered');
+                } else {
+                    if (userAnswers[idx] === q.answer) {
+                        item.classList.add('status-correct');
+                    } else if (userAnswers[idx] !== null) {
+                        item.classList.add('status-wrong');
+                    } else {
+                        item.classList.add('status-unattempted');
+                    }
+                }
+
+                if (isBookmarked) item.classList.add('bookmarked');
+
+                item.addEventListener('click', () => loadQuestion(idx));
+                paletteGrid.appendChild(item);
+            });
+        }
+
+        function updatePaletteCurrent() {
+            const items = paletteGrid.querySelectorAll('.palette-item');
+            items.forEach(item => {
+                if (parseInt(item.textContent) === currentQuestionIdx + 1) {
+                    item.classList.add('current');
+                } else {
+                    item.classList.remove('current');
+                }
+            });
+        }
+
+        function promptSubmitQuiz() {
+            const unansweredCount = userAnswers.filter(a => a === null).length;
+            let msg = "Are you sure you want to submit your quiz?";
+            if (unansweredCount > 0) {
+                msg = `You have ${unansweredCount} unanswered question(s). Are you sure you want to submit?`;
+            }
+            showCustomConfirm("Submit Quiz", msg, () => {
+                finalizeQuiz();
+            });
+        }
+
+        function finalizeQuiz() {
+            isSubmitted = true;
+            clearInterval(timerInterval);
+
+            let score = 0;
+            let correctCount = 0;
+            let incorrectCount = 0;
+
+            questions.forEach((q, idx) => {
+                if (userAnswers[idx] === q.answer) {
+                    score++;
+                    correctCount++;
+                } else if (userAnswers[idx] !== null) {
+                    incorrectCount++;
+                }
+            });
+
+            const percentage = ((score / questions.length) * 100).toFixed(1);
+
+            document.getElementById('modal-score').textContent = score;
+            document.getElementById('stat-percentage').textContent = `${percentage}%`;
+            document.getElementById('stat-correct').textContent = correctCount;
+            document.getElementById('stat-incorrect').textContent = incorrectCount;
+
+            const badge = document.getElementById('pass-fail-badge');
+            if (percentage >= 60) {
+                badge.textContent = "PASSED - EXCELLENT PERFORMANCE";
+                badge.style.color = "var(--success)";
+            } else {
+                badge.textContent = "NEEDS IMPROVEMENT";
+                badge.style.color = "var(--danger)";
+            }
+
+            scoreModal.classList.add('active');
+
+            submitBtn.style.display = 'none';
+            clearBtn.style.display = 'none';
+            timerDisplay.textContent = 'Completed';
+
+            document.getElementById('legend-container').innerHTML = `
+                <div class="legend-item"><div class="legend-color" style="background:var(--success)"></div> Correct</div>
+                <div class="legend-item"><div class="legend-color" style="background:var(--danger)"></div> Incorrect</div>
+                <div class="legend-item"><div class="legend-color" style="background:var(--bg-primary); border:1px solid var(--border-color)"></div> Unattempted</div>
+            `;
+
+            renderPalette();
+            loadQuestion(currentQuestionIdx);
+        }
+
+        function showCustomConfirm(title, message, onConfirm) {
+            confirmModalTitle.textContent = title;
+            confirmModalMsg.textContent = message;
+            confirmCancelBtn.style.display = 'inline-block';
+            confirmModal.classList.add('active');
+
+            confirmCallback = onConfirm;
+        }
+
+        function showCustomAlert(title, message, onClose) {
+            confirmModalTitle.textContent = title;
+            confirmModalMsg.textContent = message;
+            confirmCancelBtn.style.display = 'none';
+            confirmModal.classList.add('active');
+
+            confirmCallback = onClose;
+        }
+
+        function setupEventListeners() {
+            prevBtn.addEventListener('click', () => {
+                if (currentQuestionIdx > 0) loadQuestion(currentQuestionIdx - 1);
+            });
+
+            nextBtn.addEventListener('click', () => {
+                if (currentQuestionIdx < questions.length - 1) loadQuestion(currentQuestionIdx + 1);
+            });
+
+            clearBtn.addEventListener('click', clearSelection);
+            bookmarkBtn.addEventListener('click', toggleBookmark);
+            submitBtn.addEventListener('click', promptSubmitQuiz);
+
+            restartBtn.addEventListener('click', () => {
+                showCustomConfirm("Restart Quiz", "This will reshuffle all questions and options and reset your progress. Proceed?", () => {
+                    startNewQuiz();
+                });
+            });
+
+            paletteFilter.addEventListener('change', renderPalette);
+
+            reviewBtn.addEventListener('click', () => {
+                scoreModal.classList.remove('active');
+            });
+
+            confirmOkBtn.addEventListener('click', () => {
+                confirmModal.classList.remove('active');
+                if (confirmCallback) confirmCallback();
+            });
+
+            confirmCancelBtn.addEventListener('click', () => {
+                confirmModal.classList.remove('active');
+            });
+
+            // Theme Switcher
+            themeToggle.addEventListener('click', () => {
+                const currentTheme = document.documentElement.getAttribute('data-theme');
+                if (currentTheme === 'dark') {
+                    document.documentElement.removeAttribute('data-theme');
+                    themeToggle.textContent = '🌙 Mode';
+                } else {
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                    themeToggle.textContent = '☀️ Mode';
+                }
+            });
+        }
+    </script>
+</body>
+</html>
