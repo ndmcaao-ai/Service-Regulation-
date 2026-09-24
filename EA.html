@@ -1,0 +1,1802 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Electricity Act, 2003 - Comprehensive Interactive Exam Quiz</title>
+    <style>
+        :root {
+            --bg-primary: #f1f5f9;
+            --bg-card: #ffffff;
+            --bg-surface: #f8fafc;
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --text-muted: #94a3b8;
+            --border-color: #cbd5e1;
+            --accent-primary: #0284c7;
+            --accent-hover: #0369a1;
+            --accent-light: #e0f2fe;
+            --success: #16a34a;
+            --success-light: #dcfce7;
+            --danger: #dc2626;
+            --danger-light: #fee2e2;
+            --warning: #d97706;
+            --warning-light: #fef3c7;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+            --radius-sm: 0.375rem;
+            --radius-md: 0.5rem;
+            --radius-lg: 0.75rem;
+            --radius-full: 9999px;
+            --font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: #0f172a;
+            --bg-card: #1e293b;
+            --bg-surface: #334155;
+            --text-primary: #f8fafc;
+            --text-secondary: #cbd5e1;
+            --text-muted: #64748b;
+            --border-color: #334155;
+            --accent-primary: #38bdf8;
+            --accent-hover: #0284c7;
+            --accent-light: #0c4a6e;
+            --success: #4ade80;
+            --success-light: #14532d;
+            --danger: #f87171;
+            --danger-light: #7f1d1d;
+            --warning: #fbbf24;
+            --warning-light: #78350f;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: var(--font-family);
+            transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.5;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background-color: var(--bg-card);
+            border-bottom: 1px solid var(--border-color);
+            box-shadow: var(--shadow-sm);
+            padding: 0.75rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .header-title-container {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .header-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .header-subtitle {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .badge {
+            background-color: var(--accent-light);
+            color: var(--accent-primary);
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 0.25rem 0.6rem;
+            border-radius: var(--radius-sm);
+            white-space: nowrap;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .timer-box {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background-color: var(--accent-light);
+            color: var(--accent-primary);
+            padding: 0.4rem 0.8rem;
+            border-radius: var(--radius-md);
+            font-weight: 700;
+            font-size: 1rem;
+            font-family: monospace;
+            border: 1px solid var(--border-color);
+        }
+
+        .timer-box.warning {
+            background-color: var(--warning-light);
+            color: var(--warning);
+            animation: pulse 1s infinite;
+        }
+
+        .timer-box.danger {
+            background-color: var(--danger-light);
+            color: var(--danger);
+            animation: pulse 0.5s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .icon-btn {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            cursor: pointer;
+            padding: 0.4rem 0.75rem;
+            border-radius: var(--radius-md);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .icon-btn:hover {
+            background-color: var(--border-color);
+        }
+
+        .container {
+            max-width: 1280px;
+            width: 100%;
+            margin: 1.25rem auto;
+            padding: 0 1rem;
+            display: grid;
+            grid-template-columns: 1fr 320px;
+            gap: 1.5rem;
+            flex: 1;
+        }
+
+        @media (max-width: 900px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .main-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 500px;
+        }
+
+        .question-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.25rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .question-number {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--text-secondary);
+        }
+
+        .bookmark-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: var(--radius-sm);
+        }
+
+        .bookmark-btn:hover {
+            background-color: var(--bg-surface);
+        }
+
+        .bookmark-btn.active {
+            color: var(--warning);
+            font-weight: 700;
+        }
+
+        .question-text {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .options-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.85rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .option-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.85rem;
+            padding: 0.9rem 1.1rem;
+            border: 1.5px solid var(--border-color);
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            background-color: var(--bg-card);
+            font-size: 0.95rem;
+            color: var(--text-primary);
+            position: relative;
+            user-select: none;
+        }
+
+        .option-item:hover {
+            border-color: var(--accent-primary);
+            background-color: var(--accent-light);
+        }
+
+        .option-item.selected {
+            border-color: var(--accent-primary);
+            background-color: var(--accent-light);
+            font-weight: 600;
+        }
+
+        .option-prefix {
+            width: 1.6rem;
+            height: 1.6rem;
+            border-radius: 50%;
+            border: 1.5px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 700;
+            flex-shrink: 0;
+            background-color: var(--bg-primary);
+            color: var(--text-secondary);
+        }
+
+        .option-item.selected .option-prefix {
+            background-color: var(--accent-primary);
+            color: #ffffff;
+            border-color: var(--accent-primary);
+        }
+
+        /* Review Mode Option Styles */
+        .option-item.correct {
+            border-color: var(--success) !important;
+            background-color: var(--success-light) !important;
+            color: var(--text-primary);
+        }
+
+        .option-item.correct .option-prefix {
+            background-color: var(--success);
+            color: #ffffff;
+            border-color: var(--success);
+        }
+
+        .option-item.wrong {
+            border-color: var(--danger) !important;
+            background-color: var(--danger-light) !important;
+            color: var(--text-primary);
+        }
+
+        .option-item.wrong .option-prefix {
+            background-color: var(--danger);
+            color: #ffffff;
+            border-color: var(--danger);
+        }
+
+        .explanation-box {
+            margin-top: 1.25rem;
+            padding: 1.1rem;
+            background-color: var(--accent-light);
+            border-left: 4px solid var(--accent-primary);
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .explanation-box strong {
+            color: var(--text-primary);
+            display: block;
+            margin-bottom: 0.35rem;
+            font-size: 0.95rem;
+        }
+
+        .nav-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1.25rem;
+            border-top: 1px solid var(--border-color);
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.65rem 1.25rem;
+            border-radius: var(--radius-md);
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            border: 1px solid transparent;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4rem;
+        }
+
+        .btn-secondary {
+            background-color: var(--bg-surface);
+            border-color: var(--border-color);
+            color: var(--text-primary);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--border-color);
+        }
+
+        .btn-primary {
+            background-color: var(--accent-primary);
+            color: #ffffff;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--accent-hover);
+        }
+
+        .btn-danger {
+            background-color: var(--danger);
+            color: #ffffff;
+        }
+
+        .btn-danger:hover {
+            opacity: 0.9;
+        }
+
+        .btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .palette-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 1.25rem;
+            box-shadow: var(--shadow-md);
+        }
+
+        .palette-header {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 0.85rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .filter-select {
+            padding: 0.3rem 0.6rem;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border-color);
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            font-size: 0.825rem;
+            font-weight: 600;
+            outline: none;
+        }
+
+        .palette-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 0.5rem;
+            max-height: 380px;
+            overflow-y: auto;
+            padding-right: 0.25rem;
+        }
+
+        .palette-item {
+            aspect-ratio: 1;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-color);
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            font-size: 0.85rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .palette-item:hover {
+            border-color: var(--accent-primary);
+        }
+
+        .palette-item.current {
+            outline: 2.5px solid var(--accent-primary);
+            outline-offset: 1px;
+        }
+
+        .palette-item.answered {
+            background-color: var(--accent-primary);
+            color: #ffffff;
+            border-color: var(--accent-primary);
+        }
+
+        .palette-item.bookmarked::after {
+            content: '★';
+            position: absolute;
+            top: 2px;
+            right: 3px;
+            font-size: 0.65rem;
+            color: var(--warning);
+        }
+
+        /* Review Mode Palette Status */
+        .palette-item.status-correct {
+            background-color: var(--success) !important;
+            color: #ffffff !important;
+            border-color: var(--success) !important;
+        }
+
+        .palette-item.status-wrong {
+            background-color: var(--danger) !important;
+            color: #ffffff !important;
+            border-color: var(--danger) !important;
+        }
+
+        .palette-item.status-unattempted {
+            background-color: var(--bg-primary) !important;
+            color: var(--text-muted) !important;
+        }
+
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-top: 1.1rem;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+        }
+
+        .legend-color {
+            width: 0.8rem;
+            height: 0.8rem;
+            border-radius: 3px;
+        }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(15, 23, 42, 0.7);
+            backdrop-filter: blur(4px);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-card {
+            background-color: var(--bg-card);
+            border-radius: var(--radius-lg);
+            max-width: 520px;
+            width: 100%;
+            padding: 2rem;
+            box-shadow: var(--shadow-lg);
+            text-align: center;
+            border: 1px solid var(--border-color);
+        }
+
+        .score-circle {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            background-color: var(--accent-light);
+            color: var(--accent-primary);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 1.25rem auto;
+            border: 4px solid var(--accent-primary);
+        }
+
+        .score-value {
+            font-size: 2.25rem;
+            font-weight: 800;
+            line-height: 1;
+        }
+
+        .score-total {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-top: 0.2rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .stat-box {
+            background-color: var(--bg-primary);
+            padding: 0.75rem 0.5rem;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-color);
+        }
+
+        .stat-val {
+            font-size: 1.15rem;
+            font-weight: 800;
+        }
+
+        .stat-lbl {
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+            font-weight: 600;
+            margin-top: 0.2rem;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 0.75rem;
+            margin-top: 1.5rem;
+        }
+
+        .fade-in {
+            animation: fadeIn 0.2s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-title-container">
+            <div>
+                <h1 class="header-title">The Electricity Act, 2003</h1>
+                <div class="header-subtitle">Interactive 50 MCQs Exam Simulator</div>
+            </div>
+            <span class="badge">Official Law Standard</span>
+        </div>
+        <div class="header-actions">
+            <div id="timer" class="timer-box" title="Time Remaining">
+                ⏱️ <span id="timer-display">30:00</span>
+            </div>
+            <button class="icon-btn" id="reshuffle-btn" title="Reshuffle Questions & Restart Quiz">
+                🔄 Reshuffle
+            </button>
+            <button class="icon-btn" id="theme-toggle" title="Toggle Dark/Light Theme">
+                🌙 Theme
+            </button>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Question Section -->
+        <main class="main-card fade-in" id="main-card">
+            <div>
+                <div class="question-header">
+                    <span class="question-number" id="q-number">Question 1 of 50</span>
+                    <button class="bookmark-btn" id="bookmark-btn">
+                        <span id="bookmark-icon">☆</span> Bookmark
+                    </button>
+                </div>
+                
+                <div class="question-text" id="q-text">
+                    Loading Question...
+                </div>
+
+                <div class="options-list" id="options-container">
+                    <!-- Dynamic Choice Options -->
+                </div>
+
+                <div id="explanation-container" style="display: none;">
+                    <!-- Citation and Detailed Legal Reference -->
+                </div>
+            </div>
+
+            <!-- Navigation Controls Bar -->
+            <div class="nav-controls">
+                <div style="display: flex; gap: 0.5rem;">
+                    <button class="btn btn-secondary" id="prev-btn">← Previous</button>
+                    <button class="btn btn-secondary" id="clear-btn">Clear Choice</button>
+                </div>
+                <div style="display: flex; gap: 0.5rem;">
+                    <button class="btn btn-primary" id="next-btn">Next →</button>
+                    <button class="btn btn-danger" id="submit-btn">Submit Quiz</button>
+                </div>
+            </div>
+        </main>
+
+        <!-- Sidebar Matrix Palette -->
+        <aside class="sidebar">
+            <div class="palette-card">
+                <div class="palette-header">
+                    <span>Question Matrix</span>
+                    <select id="palette-filter" class="filter-select">
+                        <option value="all">All (50)</option>
+                        <option value="answered">Answered</option>
+                        <option value="unanswered">Unanswered</option>
+                        <option value="bookmarked">Bookmarked</option>
+                    </select>
+                </div>
+
+                <div class="palette-grid" id="palette-grid">
+                    <!-- Grid Buttons generated dynamically -->
+                </div>
+
+                <div class="legend" id="legend-container">
+                    <div class="legend-item"><div class="legend-color" style="background:var(--accent-primary)"></div> Answered</div>
+                    <div class="legend-item"><div class="legend-color" style="background:var(--bg-primary); border:1px solid var(--border-color)"></div> Unanswered</div>
+                    <div class="legend-item"><div class="legend-color" style="outline:2px solid var(--accent-primary)"></div> Current</div>
+                    <div class="legend-item"><span style="color:var(--warning)">★</span> Bookmarked</div>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Score Results Modal -->
+    <div class="modal-overlay" id="score-modal">
+        <div class="modal-card fade-in">
+            <h2>Exam Results</h2>
+            <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.25rem;">
+                The Electricity Act, 2003 Assessment
+            </p>
+
+            <div class="score-circle">
+                <span class="score-value" id="modal-score">0</span>
+                <span class="score-total">out of 50</span>
+            </div>
+
+            <p id="pass-fail-badge" style="font-weight: 800; font-size: 1.15rem; margin-bottom: 0.5rem;"></p>
+
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <div class="stat-val" id="stat-percentage" style="color: var(--accent-primary);">0%</div>
+                    <div class="stat-lbl">Percentage</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-val" id="stat-correct" style="color: var(--success);">0</div>
+                    <div class="stat-lbl">Correct</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-val" id="stat-incorrect" style="color: var(--danger);">0</div>
+                    <div class="stat-lbl">Incorrect</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-val" id="stat-skipped" style="color: var(--text-muted);">0</div>
+                    <div class="stat-lbl">Skipped</div>
+                </div>
+            </div>
+
+            <div class="modal-actions">
+                <button class="btn btn-secondary" id="restart-modal-btn" style="flex: 1;">Restart Quiz</button>
+                <button class="btn btn-primary" id="review-btn" style="flex: 1;">Review Answers</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Custom Confirmation Modal -->
+    <div class="modal-overlay" id="confirm-modal">
+        <div class="modal-card fade-in" style="max-width: 420px; padding: 1.5rem;">
+            <h3 id="confirm-modal-title" style="margin-bottom: 0.5rem; font-size: 1.15rem;">Are you sure?</h3>
+            <p id="confirm-modal-msg" style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 1.25rem;">
+                Action confirmation message goes here.
+            </p>
+            <div style="display: flex; gap: 0.75rem; justify-content: flex-end;">
+                <button class="btn btn-secondary" id="confirm-cancel-btn">Cancel</button>
+                <button class="btn btn-primary" id="confirm-ok-btn">Confirm</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const rawQuestions = [
+            {
+                id: 1,
+                question: "Which Section of The Electricity Act, 2003 governs the requirement and exemptions regarding Generation delicensing?",
+                options: [
+                    "Section 7",
+                    "Section 12",
+                    "Section 14",
+                    "Section 38"
+                ],
+                answer: 0,
+                explanation: "Section 7 of The Electricity Act, 2003 specifies that any generating company may establish, operate, and maintain a generating station without obtaining a license if it complies with technical standards, except for hydro-electric schemes above capital expenditure thresholds."
+            },
+            {
+                id: 2,
+                question: "Under Section 12 of The Electricity Act, 2003, which activities require a license from the Appropriate Commission?",
+                options: [
+                    "Generation, Transmission, and Distribution",
+                    "Transmission, Distribution, and Electricity Trading",
+                    "Generation, Electricity Trading, and Metering",
+                    "Distribution, Metering, and Equipment Manufacturing"
+                ],
+                answer: 1,
+                explanation: "Section 12 mandates that no person shall transmit electricity, distribute electricity, or undertake trading in electricity unless authorized by a license issued under Section 14, or exempted under Section 13."
+            },
+            {
+                id: 3,
+                question: "Which entity is designated as the Central Transmission Utility (CTU) under Section 38 of the Act?",
+                options: [
+                    "Central Electricity Authority (CEA)",
+                    "Government company specified by the Central Government",
+                    "National Load Despatch Centre (NLDC)",
+                    "State Electricity Regulatory Commission (SERC)"
+                ],
+                answer: 1,
+                explanation: "Under Section 38, the Central Government may notify any Government company to function as the Central Transmission Utility (CTU) responsible for inter-State transmission system planning and development."
+            },
+            {
+                id: 4,
+                question: "What is the primary function of the State Load Despatch Centre (SLDC) as mandated under Section 32?",
+                options: [
+                    "Fixing retail consumer tariffs",
+                    "Real-time operation and grid control of power dispatch within the State",
+                    "Licensing distribution licensees",
+                    "Executing power purchase contracts on behalf of state utilities"
+                ],
+                answer: 1,
+                explanation: "Section 32 stipulates that SLDC shall be the apex body to ensure integrated operation of the power system in a State and shall be responsible for real-time operation for grid control and dispatch of electricity."
+            },
+            {
+                id: 5,
+                question: "Open Access in Distribution under Section 42 of the Act allows open non-discriminatory access to distribution wires. Who determines the cross-subsidy surcharge (CSS)?",
+                options: [
+                    "State Load Despatch Centre (SLDC)",
+                    "Appropriate State Electricity Regulatory Commission (SERC)",
+                    "Central Electricity Authority (CEA)",
+                    "Ministry of Power, Government of India"
+                ],
+                answer: 1,
+                explanation: "Under Section 42(2), the State Commission (SERC) determines the cross-subsidy surcharge payable by consumers opting for open access to compensate the distribution licensee."
+            },
+            {
+                id: 6,
+                question: "Which section deals with the assessment of unauthorized use of electricity (UUE)?",
+                options: [
+                    "Section 126",
+                    "Section 135",
+                    "Section 138",
+                    "Section 142"
+                ],
+                answer: 0,
+                explanation: "Section 126 provides for civil assessment procedure when an assessing officer concludes that a person is indulging in unauthorized use of electricity."
+            },
+            {
+                id: 7,
+                question: "How does the Electricity Act, 2003 distinguish Theft of Electricity (Section 135) from Unauthorized Use of Electricity (Section 126)?",
+                options: [
+                    "Section 135 is a criminal offence with dishonest intention, while Section 126 is a civil regulatory assessment",
+                    "Section 126 carries prison terms while Section 135 carries only monetary fines",
+                    "Section 135 applies only to industrial units, while Section 126 applies only to domestic consumers",
+                    "There is no distinction between the two sections"
+                ],
+                answer: 0,
+                explanation: "Section 135 is a criminal offence involving dishonest abstraction or tampering, tried in Special Courts. Section 126 is a civil/administrative procedure for misuse beyond sanctioned terms."
+            },
+            {
+                id: 8,
+                question: "Under Section 110, which judicial body is established to hear appeals against orders of the Appropriate Commission (CERC/SERC) and Adjudicating Officers?",
+                options: [
+                    "Supreme Court of India",
+                    "Appellate Tribunal for Electricity (APTEL)",
+                    "High Court of the respective State",
+                    "Central Administrative Tribunal (CAT)"
+                ],
+                answer: 1,
+                explanation: "Section 110 provides for the establishment of the Appellate Tribunal for Electricity (APTEL) to exercise jurisdiction over appeals against CERC, SERC, or adjudicating officer decisions."
+            },
+            {
+                id: 9,
+                question: "An appeal against an order passed by the Appellate Tribunal for Electricity (APTEL) under Section 125 lies directly to which authority?",
+                options: [
+                    "Ministry of Power",
+                    "High Court",
+                    "Supreme Court of India",
+                    "Law Commission of India"
+                ],
+                answer: 2,
+                explanation: "Section 125 states that any person aggrieved by any decision or order of the Appellate Tribunal may file an appeal to the Supreme Court on any substantial question of law."
+            },
+            {
+                id: 10,
+                question: "Which section empowers the Central Electricity Authority (CEA) to specify grid standards and technical requirements for safety and metering?",
+                options: [
+                    "Section 73",
+                    "Section 61",
+                    "Section 142",
+                    "Section 178"
+                ],
+                answer: 0,
+                explanation: "Section 73 outlines the functions and duties of the Central Electricity Authority (CEA), including advising the Central Government and formulating grid and safety regulations."
+            },
+            {
+                id: 11,
+                question: "Under Section 62, who determines the tariff for supply of electricity by a generating company to a distribution licensee?",
+                options: [
+                    "Appropriate Electricity Regulatory Commission (CERC/SERC)",
+                    "Central Transmission Utility (CTU)",
+                    "National Load Despatch Centre (NLDC)",
+                    "Ministry of Finance"
+                ],
+                answer: 0,
+                explanation: "Section 62 empowers the Appropriate Commission to determine the tariff for supply of electricity by a generating company to a distribution licensee, as well as transmission and distribution tariffs."
+            },
+            {
+                id: 12,
+                question: "What is the statutory role of the National Load Despatch Centre (NLDC) under Section 26 of the Act?",
+                options: [
+                    "Determining inter-State transmission wheeling charges",
+                    "Optimum scheduling and despatch of electricity among Regional Load Despatch Centres (RLDCs)",
+                    "Issuing trading licenses across states",
+                    "Granting open access approval for intra-state lines"
+                ],
+                answer: 1,
+                explanation: "Section 26 mandates NLDC for optimum scheduling and despatch of electricity among Regional Load Despatch Centres (RLDCs) across the country."
+            },
+            {
+                id: 13,
+                question: "Under Section 14, who can grant a license to two or more persons for distribution of electricity within the same area of supply?",
+                options: [
+                    "Appropriate State Electricity Regulatory Commission (SERC)",
+                    "Central Electricity Authority (CEA)",
+                    "State Government directly",
+                    "District Magistrate"
+                ],
+                answer: 0,
+                explanation: "Section 14 provides for multi-licensing in distribution; SERC may grant a license to two or more persons for distribution of electricity within the same area of supply through their own distribution systems."
+            },
+            {
+                id: 14,
+                question: "Under Section 61, which principle must guide the Appropriate Commission while specifying terms and conditions for tariff determination?",
+                options: [
+                    "Maximizing profit margins for state utilities",
+                    "Encouragement of generation and transmission from renewable sources of energy",
+                    "Prohibiting open access for bulk consumers",
+                    "Determining tariffs based strictly on flat historical cost with zero escalation"
+                ],
+                answer: 1,
+                explanation: "Section 61(h) mandates the Commission to be guided by the encouragement of generation, co-generation, and transmission of energy from renewable sources of energy."
+            },
+            {
+                id: 15,
+                question: "What penalty can be imposed for non-compliance with directions of the Appropriate Commission under Section 142?",
+                options: [
+                    "Penalty not exceeding Rs. 1 lakh for each contravention, plus additional daily fines for continuing failure",
+                    "Mandatory suspension of corporate registration for 5 years",
+                    "Imprisonment up to 10 years without fine option",
+                    "Seizure of all generating assets"
+                ],
+                answer: 0,
+                explanation: "Section 142 provides that any person failing to comply with Commission directions shall be liable to pay a penalty not exceeding Rs. 1 lakh for each contravention and up to Rs. 6,000/day for continuing failure."
+            },
+            {
+                id: 16,
+                question: "According to Section 178, who holds the power to make regulations to carry out the provisions of the Electricity Act, 2003?",
+                options: [
+                    "Central Electricity Regulatory Commission (CERC)",
+                    "Appellate Tribunal for Electricity (APTEL)",
+                    "State Electricity Boards (SEBs)",
+                    "Central Electricity Authority (CEA) only"
+                ],
+                answer: 0,
+                explanation: "Section 178 authorizes the Central Electricity Regulatory Commission (CERC) to make regulations consistent with the Act and rules to execute its statutory duties."
+            },
+            {
+                id: 17,
+                question: "Which section empowers the State Electricity Regulatory Commission (SERC) to make regulations consistent with the Act?",
+                options: [
+                    "Section 181",
+                    "Section 176",
+                    "Section 165",
+                    "Section 120"
+                ],
+                answer: 0,
+                explanation: "Section 181 empowers the State Electricity Regulatory Commission (SERC) to make regulations consistent with the Act by notification in the Official Gazette."
+            },
+            {
+                id: 18,
+                question: "Under Section 11, under what circumstances can the Appropriate Government issue directions to a generating company?",
+                options: [
+                    "During routine maintenance shutdowns",
+                    "In extraordinary circumstances such as threat to security of State, public order, or natural calamity",
+                    "To reduce electricity tariffs for political campaigns",
+                    "To prevent generating plants from earning profits"
+                ],
+                answer: 1,
+                explanation: "Section 11 allows the Appropriate Government to direct generating companies to operate and maintain stations in accordance with directions during extraordinary circumstances (calamity, security of State, public order)."
+            },
+            {
+                id: 19,
+                question: "Under Section 127, what pre-condition must a consumer fulfill before filing an appeal against an assessment order passed under Section 126?",
+                options: [
+                    "Deposit half (50%) of the assessed final amount with the licensee",
+                    "Obtain NOC from the High Court",
+                    "Pay a flat fine of Rs. 50,000 to the Tribunal",
+                    "Deposit 100% of the assessed amount with CERC"
+                ],
+                answer: 0,
+                explanation: "Section 127(2) stipulates that no appeal against an assessment order under Section 126 shall be entertained unless half (50%) of the assessed amount is deposited in cash or by draft."
+            },
+            {
+                id: 20,
+                question: "Under Section 135, what is the maximum punishment for theft of electricity exceeding 10 kW load on second or subsequent conviction?",
+                options: [
+                    "Imprisonment for a term not less than 6 months but extending up to 5 years, plus fine",
+                    "Simple fine of Rs. 1,000",
+                    "Imprisonment up to 10 years with mandatory forfeiture of property",
+                    "Community service for 3 months"
+                ],
+                answer: 0,
+                explanation: "Section 135(1) outlines that upon second/subsequent conviction for load > 10 kW, the punishment is imprisonment for 6 months up to 5 years, along with fine penalties."
+            },
+            {
+                id: 21,
+                question: "Who appoints the Electricity Ombudsman under Section 42(6) of the Act?",
+                options: [
+                    "State Electricity Regulatory Commission (SERC)",
+                    "Central Transmission Utility (CTU)",
+                    "Governor of the State",
+                    "High Court Chief Justice"
+                ],
+                answer: 0,
+                explanation: "Section 42(6) mandates that the SERC shall appoint or designate an authority known as the Ombudsman to settle grievances of consumers not satisfied with the Consumer Grievance Redressal Forum (CGRF)."
+            },
+            {
+                id: 22,
+                question: "Under Section 14, a captive generating plant owner who supplies power through captive lines does NOT require:",
+                options: [
+                    "Technical clearance from CEA",
+                    "A license for transmission or distribution",
+                    "Compliance with grid standards",
+                    "Safety inspection under regulations"
+                ],
+                answer: 1,
+                explanation: "Captive generation and dedicated transmission lines built for captive use do not require a transmission or distribution license under Sections 7 and 9 of the Act."
+            },
+            {
+                id: 23,
+                question: "Which section establishes the Consumer Grievance Redressal Forum (CGRF) by every distribution licensee?",
+                options: [
+                    "Section 42(5)",
+                    "Section 62(1)",
+                    "Section 135(2)",
+                    "Section 86(1)"
+                ],
+                answer: 0,
+                explanation: "Section 42(5) states that every distribution licensee shall, within the time specified by the State Commission, establish a forum for redressal of grievances of consumers."
+            },
+            {
+                id: 24,
+                question: "Under Section 39, which entity acts as the State Transmission Utility (STU)?",
+                options: [
+                    "Any private distribution licensee",
+                    "Government company notified by the State Government",
+                    "Regional Power Committee",
+                    "State Electricity Ombudsman"
+                ],
+                answer: 1,
+                explanation: "Section 39 mandates the State Government to notify a Government company as the State Transmission Utility (STU) responsible for intra-State transmission system planning."
+            },
+            {
+                id: 25,
+                question: "Can an STU or CTU engage in the business of trading in electricity?",
+                options: [
+                    "Yes, up to 25% of grid capacity",
+                    "No, Section 38 and 39 strictly prohibit CTU and STU from engaging in trading in electricity",
+                    "Yes, with prior approval from Ministry of Finance",
+                    "Yes, provided it is inter-state trading only"
+                ],
+                answer: 1,
+                explanation: "Sections 38(2) and 39(2) explicitly mandate that the CTU and STU shall not engage in the business of trading in electricity to maintain neutrality as transmission system operators."
+            },
+            {
+                id: 26,
+                question: "Under Section 76, who appoints the Chairperson and Members of the Central Electricity Regulatory Commission (CERC)?",
+                options: [
+                    "Central Government on the recommendation of a Selection Committee",
+                    "Supreme Court Chief Justice directly",
+                    "Central Electricity Authority Board",
+                    "Parliamentary Standing Committee"
+                ],
+                answer: 0,
+                explanation: "Under Section 76 & 78, the Central Government appoints the Chairperson and Members of CERC based on recommendations of a constitutionally specified Selection Committee."
+            },
+            {
+                id: 27,
+                question: "Under Section 86(1)(a), which primary function belongs to the State Electricity Regulatory Commission (SERC)?",
+                options: [
+                    "Determining tariffs for generation, transmission, and wheeling within the State",
+                    "Regulating safety standards of electrical appliances",
+                    "Managing coal allocation to thermal plants",
+                    "Conducting criminal trials for power theft"
+                ],
+                answer: 0,
+                explanation: "Section 86(1)(a) mandates SERCs to determine the tariff for generation, supply, transmission, and wheeling of electricity, wholesale, bulk or retail within the State."
+            },
+            {
+                id: 28,
+                question: "What is the maximum timeline prescribed for CERC or SERC to give a final order on tariff determination after receiving a complete application?",
+                options: [
+                    "30 days",
+                    "120 days",
+                    "180 days",
+                    "365 days"
+                ],
+                answer: 1,
+                explanation: "Section 64(3) stipulates that the Commission shall, within 120 days from receipt of a complete tariff application, issue a tariff order or reject the application for reasons recorded."
+            },
+            {
+                id: 29,
+                question: "Which section specifies the provisions for establishment of Special Courts for speedy trial of offences under Sections 135 to 140?",
+                options: [
+                    "Section 153",
+                    "Section 126",
+                    "Section 82",
+                    "Section 177"
+                ],
+                answer: 0,
+                explanation: "Section 153 empowers the State Government, with the concurrence of the High Court, to establish Special Courts for trial of offences like theft and tampering under Sections 135-140."
+            },
+            {
+                id: 30,
+                question: "Who presides over a Special Court established under Section 153 of the Electricity Act?",
+                options: [
+                    "A Single Judge who is an Additional District and Sessions Judge prior to appointment",
+                    "An Executive Magistrate",
+                    "The Chairperson of SERC",
+                    "A Senior Superintendent of Police"
+                ],
+                answer: 0,
+                explanation: "Section 153(2) provides that a person shall not be qualified for appointment as a Judge of a Special Court unless he was, immediately before such appointment, an Additional District and Sessions Judge."
+            },
+            {
+                id: 31,
+                question: "Under Section 138, what constitutes an offence regarding interference with meters?",
+                options: [
+                    "Unauthorisedly connecting, disconnecting, or interfering with any meter or service wire",
+                    "Delaying monthly electricity bill payment by 5 days",
+                    "Requesting meter accuracy testing from DDO",
+                    "Replacing old bulbs with LED bulbs"
+                ],
+                answer: 0,
+                explanation: "Section 138 penalizes unauthorized connection, disconnection, or interference with meters, service wires, or electrical works."
+            },
+            {
+                id: 32,
+                question: "What is the period of limitation for recovery of electricity charges due under Section 56(2) unless continuously shown as recoverable arrear?",
+                options: [
+                    "1 year",
+                    "2 years",
+                    "3 years",
+                    "5 years"
+                ],
+                answer: 1,
+                explanation: "Section 56(2) provides that no sum due from any consumer shall be recoverable after the period of 2 years from the date when such sum became first due, unless shown continuously as recoverable arrear."
+            },
+            {
+                id: 33,
+                question: "Under Section 56(1), how many days' clear notice in writing must be given by a licensee before disconnecting supply due to non-payment?",
+                options: [
+                    "Not less than 7 clear days",
+                    "Not less than 15 clear days",
+                    "Not less than 30 clear days",
+                    "No notice is required"
+                ],
+                answer: 1,
+                explanation: "Section 56(1) provides that where a consumer neglects to pay charges, the licensee may cut off supply after giving not less than 15 clear days' notice in writing."
+            },
+            {
+                id: 34,
+                question: "Under Section 161, notice of accidents causing loss of life or serious injury must be sent to which authority?",
+                options: [
+                    "Electrical Inspector and District Magistrate/Notified Authority",
+                    "APTEL Registrar",
+                    "Central Administrative Tribunal",
+                    "National Green Tribunal"
+                ],
+                answer: 0,
+                explanation: "Section 161 mandates that notice of any accident resulting in loss of human life or serious injury must be sent immediately to the Electrical Inspector and designated authorities."
+            },
+            {
+                id: 35,
+                question: "Who appoints the Electrical Inspector under Section 162 of the Act?",
+                options: [
+                    "Appropriate Government (Central or State)",
+                    "Distribution Licensee",
+                    "Generating Company Board",
+                    "Chief Justice of High Court"
+                ],
+                answer: 0,
+                explanation: "Section 162 empowers the Appropriate Government to appoint qualified persons as Electrical Inspectors to inspect electrical works and installations."
+            },
+            {
+                id: 36,
+                question: "Under Section 17, a licensee shall NOT without prior approval of the Appropriate Commission:",
+                options: [
+                    "Acquire by purchase or takeover the utility of any other licensee",
+                    "Hire additional accounting staff",
+                    "Purchase office furniture",
+                    "Conduct employee training seminars"
+                ],
+                answer: 0,
+                explanation: "Section 17 prohibits a licensee from acquiring by purchase or otherwise the utility of any other licensee, or merging utilities without prior Commission approval."
+            },
+            {
+                id: 37,
+                question: "What is the role of Regional Power Committees (RPCs) under Section 29 and Section 2(55)?",
+                options: [
+                    "Facilitating the stability and smooth operation of the regional grid within specified boundaries",
+                    "Fixing municipal electricity taxes",
+                    "Manufacturing smart meters",
+                    "Auditing private power trading accounts"
+                ],
+                answer: 0,
+                explanation: "Regional Power Committees facilitate consensus and smooth operational coordination for stability across regional grid networks."
+            },
+            {
+                id: 38,
+                question: "Under Section 43, what is the duty of a distribution licensee regarding supply of electricity on request?",
+                options: [
+                    "Supply electricity within 1 month after receipt of application requiring supply",
+                    "Supply electricity only when surplus power exceeds 50%",
+                    "Supply power within 1 year without liability",
+                    "Refuse connection to commercial properties"
+                ],
+                answer: 0,
+                explanation: "Section 43 imposes a statutory duty on every distribution licensee to give supply of electricity to premises within 1 month of application receipt."
+            },
+            {
+                id: 39,
+                question: "If a distribution licensee fails to supply electricity within the time frame specified in Section 43, what penalty applies?",
+                options: [
+                    "Penalty up to Rs. 1,000 for each day of default",
+                    "Cancellation of incorporation certificate",
+                    "Compulsory buyout by Central Government",
+                    "Fixed fine of Rs. 10 lakh"
+                ],
+                answer: 0,
+                explanation: "Section 43(3) dictates that default in supplying power within 1 month renders the licensee liable to a penalty which may extend to Rs. 1,000 for each day of default."
+            },
+            {
+                id: 40,
+                question: "Under Section 47, can a distribution licensee require a consumer to provide security deposit?",
+                options: [
+                    "Yes, for payment of charges due and for provision of electric meter/equipment",
+                    "No, security deposits are explicitly banned",
+                    "Only from government departments",
+                    "Only during winter months"
+                ],
+                answer: 0,
+                explanation: "Section 47 authorizes distribution licensees to require reasonable security from consumers for payment of electricity charges and meter provision."
+            },
+            {
+                id: 41,
+                question: "Under Section 53, who specifies safety requirements and technical standards regarding electricity supply?",
+                options: [
+                    "Central Electricity Authority (CEA)",
+                    "State Law Commission",
+                    "District Police Department",
+                    "Bureau of Indian Standards exclusively"
+                ],
+                answer: 0,
+                explanation: "Section 53 mandates the CEA to specify suitable measures for eliminating or reducing risks of personal injury or damage regarding electricity."
+            },
+            {
+                id: 42,
+                question: "Which section deals with 'Deemed Licensees' (e.g., Railways, Port Trusts, SEZ developers)?",
+                options: [
+                    "Provisos under Section 14",
+                    "Section 126",
+                    "Section 61",
+                    "Section 178"
+                ],
+                answer: 0,
+                explanation: "Section 14 provisos classify specific entities like Central Government organizations, Railways, and notified bodies as deemed licensees without separate licensing procedures."
+            },
+            {
+                id: 43,
+                question: "What is the standard term of a license granted under Section 15 of The Electricity Act, 2003?",
+                options: [
+                    "10 years",
+                    "25 years",
+                    "50 years",
+                    "Lifetime perpetual"
+                ],
+                answer: 1,
+                explanation: "Section 15(8) specifies that a license granted under Section 14 shall remain in force for a period of 25 years unless revoked earlier."
+            },
+            {
+                id: 44,
+                question: "Under Section 19, on what grounds can an Appropriate Commission revoke a license?",
+                options: [
+                    "Where the licensee makes willful default in doing anything required by or under the Act",
+                    "Where the licensee changes its company logo",
+                    "Where annual revenue exceeds 100 crores",
+                    "Where consumer numbers exceed 10,000"
+                ],
+                answer: 0,
+                explanation: "Section 19 provides for revocation if the licensee makes willful default, breaches license terms, or fails to comply with orders."
+            },
+            {
+                id: 45,
+                question: "Which section empowers the Central Government to formulate the National Electricity Policy and Tariff Policy?",
+                options: [
+                    "Section 3",
+                    "Section 12",
+                    "Section 62",
+                    "Section 110"
+                ],
+                answer: 0,
+                explanation: "Section 3 mandates the Central Government to prepare and publish National Electricity Policy and Tariff Policy in consultation with State Governments and CEA."
+            },
+            {
+                id: 46,
+                question: "Under Section 152, compounding of offences relating to electricity theft (Section 135) can be allowed:",
+                options: [
+                    "Only up to prescribed maximum frequencies (e.g. limited compounding allowed)",
+                    "Unlimited times for any repeat offender",
+                    "Never allowed under any circumstances",
+                    "Only with prior parliamentary clearance"
+                ],
+                answer: 0,
+                explanation: "Section 152 allows compounding of theft offences upon payment of prescribed sums, restricting repeat compounding for persistent offenders."
+            },
+            {
+                id: 47,
+                question: "Who heads the Central Electricity Authority (CEA) under Section 70?",
+                options: [
+                    "Chairperson appointed by the Central Government from amongst its Members",
+                    "Union Finance Minister",
+                    "Cabinet Secretary",
+                    "CERC Chairman concurrently"
+                ],
+                answer: 0,
+                explanation: "Section 70 specifies that CEA consists of members appointed by the Central Government, one of whom is designated as Chairperson."
+            },
+            {
+                id: 48,
+                question: "Under Section 63, notwithstanding Section 62, the Commission shall adopt tariffs if determined through:",
+                options: [
+                    "Transparent process of competitive bidding in accordance with guidelines issued by the Central Government",
+                    "Bilateral secret negotiation",
+                    "Historical cost index without bids",
+                    "Arbitrary executive order"
+                ],
+                answer: 0,
+                explanation: "Section 63 binds the Appropriate Commission to adopt tariffs determined through transparent competitive bidding following Central Government guidelines."
+            },
+            {
+                id: 49,
+                question: "Section 166 mandates the establishment of which advisory committee at the State level?",
+                options: [
+                    "State Coordination Forum and District Electricity Committee",
+                    "Arbitration Council",
+                    "Tariff Enforcement Tribunal",
+                    "Police Vigilance Taskforce"
+                ],
+                answer: 0,
+                explanation: "Section 166 provides for the constitution of State Coordination Forums and District Committees to coordinate power development and service quality."
+            },
+            {
+                id: 50,
+                question: "Under Section 146, what is the penalty for failing to comply with any order or direction under the Act where no specific penalty is provided?",
+                options: [
+                    "Imprisonment up to 3 months or fine up to Rs. 1 lakh, or both",
+                    "Capital punishment",
+                    "Fine of Rs. 10 per day",
+                    "Suspension of voting rights"
+                ],
+                answer: 0,
+                explanation: "Section 146 specifies general penalties: imprisonment up to 3 months or fine up to Rs. 1 lakh, or both, plus additional daily fines for continuing failure."
+            }
+        ];
+
+        let questions = [];
+        let currentQuestionIdx = 0;
+        let userAnswers = [];
+        let bookmarked = [];
+        let isSubmitted = false;
+        let timerInterval = null;
+        let timeRemaining = 30 * 60; // 30 mins in seconds
+
+        // Custom Modal Promise Handler
+        let confirmResolver = null;
+
+        // DOM Element Caches
+        const mainCard = document.getElementById('main-card');
+        const qNumberEl = document.getElementById('q-number');
+        const qTextEl = document.getElementById('q-text');
+        const optionsContainer = document.getElementById('options-container');
+        const explanationContainer = document.getElementById('explanation-container');
+        const bookmarkBtn = document.getElementById('bookmark-btn');
+        const bookmarkIcon = document.getElementById('bookmark-icon');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const clearBtn = document.getElementById('clear-btn');
+        const submitBtn = document.getElementById('submit-btn');
+        const reshuffleBtn = document.getElementById('reshuffle-btn');
+        const paletteGrid = document.getElementById('palette-grid');
+        const paletteFilter = document.getElementById('palette-filter');
+        const timerDisplay = document.getElementById('timer-display');
+        const timerBox = document.getElementById('timer');
+        const themeToggle = document.getElementById('theme-toggle');
+        const scoreModal = document.getElementById('score-modal');
+        const reviewBtn = document.getElementById('review-btn');
+        const restartModalBtn = document.getElementById('restart-modal-btn');
+        
+        // Confirm Modal DOM
+        const confirmModal = document.getElementById('confirm-modal');
+        const confirmTitle = document.getElementById('confirm-modal-title');
+        const confirmMsg = document.getElementById('confirm-modal-msg');
+        const confirmOkBtn = document.getElementById('confirm-ok-btn');
+        const confirmCancelBtn = document.getElementById('confirm-cancel-btn');
+
+        // Fisher-Yates Shuffle Function
+        function shuffleArray(array) {
+            const arr = [...array];
+            for (let i = arr.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [arr[i], arr[j]] = [arr[j], arr[i]];
+            }
+            return arr;
+        }
+
+        // Initialize / Reshuffle Engine
+        function initEngine() {
+            // Deep clone and shuffle raw questions
+            const shuffledQ = shuffleArray(rawQuestions);
+
+            questions = shuffledQ.map(q => {
+                // Pair options with original indexes to track answer key
+                const indexedOptions = q.options.map((opt, idx) => ({ text: opt, originalIndex: idx }));
+                const shuffledOptions = shuffleArray(indexedOptions);
+                const newAnswerIndex = shuffledOptions.findIndex(o => o.originalIndex === q.answer);
+
+                return {
+                    id: q.id,
+                    question: q.question,
+                    options: shuffledOptions.map(o => o.text),
+                    answer: newAnswerIndex,
+                    explanation: q.explanation
+                };
+            });
+
+            // Reset States
+            userAnswers = new Array(questions.length).fill(null);
+            bookmarked = new Array(questions.length).fill(false);
+            isSubmitted = false;
+            timeRemaining = 30 * 60;
+            currentQuestionIdx = 0;
+
+            // UI Resets
+            submitBtn.style.display = 'inline-flex';
+            clearBtn.style.display = 'inline-flex';
+            scoreModal.classList.remove('active');
+
+            // Reset Legend
+            document.getElementById('legend-container').innerHTML = `
+                <div class="legend-item"><div class="legend-color" style="background:var(--accent-primary)"></div> Answered</div>
+                <div class="legend-item"><div class="legend-color" style="background:var(--bg-primary); border:1px solid var(--border-color)"></div> Unanswered</div>
+                <div class="legend-item"><div class="legend-color" style="outline:2px solid var(--accent-primary)"></div> Current</div>
+                <div class="legend-item"><span style="color:var(--warning)">★</span> Bookmarked</div>
+            `;
+
+            startTimer();
+            renderPalette();
+            loadQuestion(0);
+        }
+
+        function startTimer() {
+            if (timerInterval) clearInterval(timerInterval);
+            updateTimerDisplay();
+
+            timerInterval = setInterval(() => {
+                if (timeRemaining <= 0) {
+                    clearInterval(timerInterval);
+                    autoSubmitQuiz();
+                    return;
+                }
+                timeRemaining--;
+                updateTimerDisplay();
+            }, 1000);
+        }
+
+        function updateTimerDisplay() {
+            const mins = Math.floor(timeRemaining / 60);
+            const secs = timeRemaining % 60;
+            timerDisplay.textContent = `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+
+            if (timeRemaining <= 300 && timeRemaining > 60) {
+                timerBox.className = 'timer-box warning';
+            } else if (timeRemaining <= 60) {
+                timerBox.className = 'timer-box danger';
+            } else {
+                timerBox.className = 'timer-box';
+            }
+        }
+
+        function loadQuestion(idx) {
+            currentQuestionIdx = idx;
+            const q = questions[idx];
+
+            // Animate transition
+            mainCard.classList.remove('fade-in');
+            void mainCard.offsetWidth; // trigger reflow
+            mainCard.classList.add('fade-in');
+
+            qNumberEl.textContent = `Question ${idx + 1} of ${questions.length}`;
+            qTextEl.textContent = q.question;
+
+            // Bookmark Status
+            if (bookmarked[idx]) {
+                bookmarkBtn.classList.add('active');
+                bookmarkIcon.textContent = '★';
+            } else {
+                bookmarkBtn.classList.remove('active');
+                bookmarkIcon.textContent = '☆';
+            }
+
+            // Options Rendering
+            optionsContainer.innerHTML = '';
+            const labels = ['A', 'B', 'C', 'D'];
+
+            q.options.forEach((optText, optIdx) => {
+                const optEl = document.createElement('div');
+                optEl.className = 'option-item';
+
+                if (userAnswers[idx] === optIdx) {
+                    optEl.classList.add('selected');
+                }
+
+                // Review Mode Styling
+                if (isSubmitted) {
+                    if (optIdx === q.answer) {
+                        optEl.classList.add('correct');
+                    }
+                    if (userAnswers[idx] === optIdx && userAnswers[idx] !== q.answer) {
+                        optEl.classList.add('wrong');
+                    }
+                }
+
+                optEl.innerHTML = `
+                    <div class="option-prefix">${labels[optIdx]}</div>
+                    <div style="flex:1;">${optText}</div>
+                `;
+
+                if (!isSubmitted) {
+                    optEl.addEventListener('click', () => selectOption(optIdx));
+                }
+
+                optionsContainer.appendChild(optEl);
+            });
+
+            // Review Mode Explanation
+            if (isSubmitted) {
+                explanationContainer.style.display = 'block';
+                explanationContainer.className = 'explanation-box';
+                explanationContainer.innerHTML = `
+                    <strong>Legal Reference & Explanation:</strong>
+                    ${q.explanation}
+                `;
+            } else {
+                explanationContainer.style.display = 'none';
+            }
+
+            // Controls state
+            prevBtn.disabled = idx === 0;
+            nextBtn.disabled = idx === questions.length - 1;
+
+            updatePaletteCurrent();
+        }
+
+        function selectOption(optIdx) {
+            userAnswers[currentQuestionIdx] = optIdx;
+            loadQuestion(currentQuestionIdx);
+            renderPalette();
+        }
+
+        function clearSelection() {
+            if (isSubmitted) return;
+            userAnswers[currentQuestionIdx] = null;
+            loadQuestion(currentQuestionIdx);
+            renderPalette();
+        }
+
+        function toggleBookmark() {
+            bookmarked[currentQuestionIdx] = !bookmarked[currentQuestionIdx];
+            loadQuestion(currentQuestionIdx);
+            renderPalette();
+        }
+
+        function renderPalette() {
+            paletteGrid.innerHTML = '';
+            const filter = paletteFilter.value;
+
+            questions.forEach((q, idx) => {
+                const isAnswered = userAnswers[idx] !== null;
+                const isBookmarked = bookmarked[idx];
+
+                // Filter Evaluation
+                if (filter === 'answered' && !isAnswered) return;
+                if (filter === 'unanswered' && isAnswered) return;
+                if (filter === 'bookmarked' && !isBookmarked) return;
+
+                const item = document.createElement('button');
+                item.className = 'palette-item';
+                item.textContent = idx + 1;
+
+                if (idx === currentQuestionIdx) {
+                    item.classList.add('current');
+                }
+
+                if (!isSubmitted) {
+                    if (isAnswered) item.classList.add('answered');
+                } else {
+                    // Post-submission statuses
+                    if (userAnswers[idx] === q.answer) {
+                        item.classList.add('status-correct');
+                    } else if (userAnswers[idx] !== null) {
+                        item.classList.add('status-wrong');
+                    } else {
+                        item.classList.add('status-unattempted');
+                    }
+                }
+
+                if (isBookmarked) item.classList.add('bookmarked');
+
+                item.addEventListener('click', () => loadQuestion(idx));
+                paletteGrid.appendChild(item);
+            });
+        }
+
+        function updatePaletteCurrent() {
+            const items = paletteGrid.querySelectorAll('.palette-item');
+            items.forEach(item => {
+                if (parseInt(item.textContent) === currentQuestionIdx + 1) {
+                    item.classList.add('current');
+                } else {
+                    item.classList.remove('current');
+                }
+            });
+        }
+
+        function showConfirmModal(title, message) {
+            confirmTitle.textContent = title;
+            confirmMsg.textContent = message;
+            confirmModal.classList.add('active');
+
+            return new Promise((resolve) => {
+                confirmResolver = resolve;
+            });
+        }
+
+        confirmOkBtn.addEventListener('click', () => {
+            confirmModal.classList.remove('active');
+            if (confirmResolver) confirmResolver(true);
+        });
+
+        confirmCancelBtn.addEventListener('click', () => {
+            confirmModal.classList.remove('active');
+            if (confirmResolver) confirmResolver(false);
+        });
+
+        async function submitQuiz() {
+            const unattempted = userAnswers.filter(a => a === null).length;
+            let msg = "Are you sure you want to submit your exam?";
+            if (unattempted > 0) {
+                msg = `You have ${unattempted} unanswered question(s). Are you sure you want to submit?`;
+            }
+
+            const confirmed = await showConfirmModal("Submit Exam", msg);
+            if (confirmed) {
+                finalizeQuiz();
+            }
+        }
+
+        function autoSubmitQuiz() {
+            finalizeQuiz();
+        }
+
+        function finalizeQuiz() {
+            isSubmitted = true;
+            clearInterval(timerInterval);
+
+            let score = 0;
+            let correctCount = 0;
+            let incorrectCount = 0;
+            let skippedCount = 0;
+
+            questions.forEach((q, idx) => {
+                if (userAnswers[idx] === q.answer) {
+                    score++;
+                    correctCount++;
+                } else if (userAnswers[idx] !== null) {
+                    incorrectCount++;
+                } else {
+                    skippedCount++;
+                }
+            });
+
+            const percentage = ((score / questions.length) * 100).toFixed(1);
+
+            // Populate Score Modal
+            document.getElementById('modal-score').textContent = score;
+            document.getElementById('stat-percentage').textContent = `${percentage}%`;
+            document.getElementById('stat-correct').textContent = correctCount;
+            document.getElementById('stat-incorrect').textContent = incorrectCount;
+            document.getElementById('stat-skipped').textContent = skippedCount;
+
+            const badge = document.getElementById('pass-fail-badge');
+            if (percentage >= 75) {
+                badge.textContent = "EXCELLENT (PASSED)";
+                badge.style.color = "var(--success)";
+            } else if (percentage >= 50) {
+                badge.textContent = "PASSED";
+                badge.style.color = "var(--accent-primary)";
+            } else {
+                badge.textContent = "NEEDS IMPROVEMENT";
+                badge.style.color = "var(--danger)";
+            }
+
+            // Display Results
+            scoreModal.classList.add('active');
+
+            submitBtn.style.display = 'none';
+            clearBtn.style.display = 'none';
+            timerDisplay.textContent = 'Completed';
+
+            // Update Palette Legend for Review Mode
+            document.getElementById('legend-container').innerHTML = `
+                <div class="legend-item"><div class="legend-color" style="background:var(--success)"></div> Correct</div>
+                <div class="legend-item"><div class="legend-color" style="background:var(--danger)"></div> Incorrect</div>
+                <div class="legend-item"><div class="legend-color" style="background:var(--bg-primary); border:1px solid var(--border-color)"></div> Skipped</div>
+            `;
+
+            renderPalette();
+            loadQuestion(currentQuestionIdx);
+        }
+
+        function setupEventListeners() {
+            prevBtn.addEventListener('click', () => {
+                if (currentQuestionIdx > 0) loadQuestion(currentQuestionIdx - 1);
+            });
+
+            nextBtn.addEventListener('click', () => {
+                if (currentQuestionIdx < questions.length - 1) loadQuestion(currentQuestionIdx + 1);
+            });
+
+            clearBtn.addEventListener('click', clearSelection);
+            bookmarkBtn.addEventListener('click', toggleBookmark);
+            submitBtn.addEventListener('click', submitQuiz);
+
+            paletteFilter.addEventListener('change', renderPalette);
+
+            reshuffleBtn.addEventListener('click', async () => {
+                const confirmed = await showConfirmModal("Reshuffle & Restart", "This will reset all your progress, shuffle all questions & options, and restart the timer. Proceed?");
+                if (confirmed) {
+                    initEngine();
+                }
+            });
+
+            restartModalBtn.addEventListener('click', async () => {
+                scoreModal.classList.remove('active');
+                initEngine();
+            });
+
+            reviewBtn.addEventListener('click', () => {
+                scoreModal.classList.remove('active');
+            });
+
+            // Theme Toggle
+            themeToggle.addEventListener('click', () => {
+                const currentTheme = document.documentElement.getAttribute('data-theme');
+                if (currentTheme === 'dark') {
+                    document.documentElement.removeAttribute('data-theme');
+                    themeToggle.textContent = '🌙 Theme';
+                } else {
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                    themeToggle.textContent = '☀️ Theme';
+                }
+            });
+
+            // Keyboard Shortcuts
+            document.addEventListener('keydown', (e) => {
+                if (scoreModal.classList.contains('active') || confirmModal.classList.contains('active')) return;
+
+                if (e.key === 'ArrowRight' && currentQuestionIdx < questions.length - 1) {
+                    loadQuestion(currentQuestionIdx + 1);
+                } else if (e.key === 'ArrowLeft' && currentQuestionIdx > 0) {
+                    loadQuestion(currentQuestionIdx - 1);
+                } else if (!isSubmitted && ['1', '2', '3', '4'].includes(e.key)) {
+                    selectOption(parseInt(e.key) - 1);
+                } else if (!isSubmitted && (e.key === 'a' || e.key === 'A')) {
+                    selectOption(0);
+                } else if (!isSubmitted && (e.key === 'b' || e.key === 'B')) {
+                    selectOption(1);
+                } else if (!isSubmitted && (e.key === 'c' || e.key === 'C')) {
+                    selectOption(2);
+                } else if (!isSubmitted && (e.key === 'd' || e.key === 'D')) {
+                    selectOption(3);
+                }
+            });
+        }
+
+        // Engine Startup on Load
+        window.addEventListener('DOMContentLoaded', () => {
+            initEngine();
+            setupEventListeners();
+        });
+    </script>
+</body>
+</html>
