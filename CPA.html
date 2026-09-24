@@ -1,0 +1,1603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consumer Protection Act, 1986 - Interactive Quiz</title>
+    <style>
+        :root {
+            --bg-primary: #f8fafc;
+            --bg-card: #ffffff;
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --text-muted: #94a3b8;
+            --border-color: #e2e8f0;
+            --accent-primary: #2563eb;
+            --accent-hover: #1d4ed8;
+            --accent-light: #eff6ff;
+            --success: #16a34a;
+            --success-light: #f0fdf4;
+            --danger: #dc2626;
+            --danger-light: #fef2f2;
+            --warning: #d97706;
+            --warning-light: #fffbeb;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            --radius-sm: 0.375rem;
+            --radius-md: 0.5rem;
+            --radius-lg: 0.75rem;
+            --radius-full: 9999px;
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: #0f172a;
+            --bg-card: #1e293b;
+            --text-primary: #f8fafc;
+            --text-secondary: #cbd5e1;
+            --text-muted: #64748b;
+            --border-color: #334155;
+            --accent-primary: #3b82f6;
+            --accent-hover: #60a5fa;
+            --accent-light: #1e3a8a;
+            --success: #22c55e;
+            --success-light: #14532d;
+            --danger: #ef4444;
+            --danger-light: #7f1d1d;
+            --warning: #f59e0b;
+            --warning-light: #78350f;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.5;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background-color: var(--bg-card);
+            border-bottom: 1px solid var(--border-color);
+            box-shadow: var(--shadow-sm);
+            padding: 0.75rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .header-title {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .header-title h1 {
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .badge {
+            background-color: var(--accent-light);
+            color: var(--accent-primary);
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 0.25rem 0.5rem;
+            border-radius: var(--radius-sm);
+            white-space: nowrap;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .timer-box {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background-color: var(--accent-light);
+            color: var(--accent-primary);
+            padding: 0.4rem 0.8rem;
+            border-radius: var(--radius-md);
+            font-weight: 700;
+            font-size: 1rem;
+            font-family: monospace;
+            border: 1px solid var(--border-color);
+        }
+
+        .timer-box.warning {
+            background-color: var(--warning-light);
+            color: var(--warning);
+            animation: pulse 1s infinite;
+        }
+
+        .timer-box.danger {
+            background-color: var(--danger-light);
+            color: var(--danger);
+            animation: pulse 0.5s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
+        }
+
+        .icon-btn {
+            background: none;
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            cursor: pointer;
+            padding: 0.4rem 0.8rem;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            font-weight: 600;
+            gap: 0.4rem;
+        }
+
+        .icon-btn:hover {
+            background-color: var(--border-color);
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            margin: 1.5rem auto;
+            padding: 0 1rem;
+            display: grid;
+            grid-template-columns: 1fr 320px;
+            gap: 1.5rem;
+            flex: 1;
+        }
+
+        @media (max-width: 900px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .main-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 480px;
+        }
+
+        .question-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .question-number {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+
+        .bookmark-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--text-muted);
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            font-weight: 600;
+        }
+
+        .bookmark-btn.active {
+            color: var(--warning);
+        }
+
+        .question-text {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 1.25rem;
+            line-height: 1.6;
+        }
+
+        .options-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .option-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            padding: 0.875rem 1rem;
+            border: 1.5px solid var(--border-color);
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            background-color: var(--bg-card);
+            font-size: 0.95rem;
+            color: var(--text-primary);
+            position: relative;
+        }
+
+        .option-item:hover {
+            border-color: var(--accent-primary);
+            background-color: var(--accent-light);
+        }
+
+        .option-item.selected {
+            border-color: var(--accent-primary);
+            background-color: var(--accent-light);
+            font-weight: 500;
+        }
+
+        .option-prefix {
+            width: 1.5rem;
+            height: 1.5rem;
+            border-radius: 50%;
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 700;
+            flex-shrink: 0;
+            background-color: var(--bg-primary);
+        }
+
+        .option-item.selected .option-prefix {
+            background-color: var(--accent-primary);
+            color: #ffffff;
+            border-color: var(--accent-primary);
+        }
+
+        .option-item.correct {
+            border-color: var(--success) !important;
+            background-color: var(--success-light) !important;
+            color: var(--text-primary);
+        }
+
+        .option-item.correct .option-prefix {
+            background-color: var(--success);
+            color: #ffffff;
+            border-color: var(--success);
+        }
+
+        .option-item.wrong {
+            border-color: var(--danger) !important;
+            background-color: var(--danger-light) !important;
+            color: var(--text-primary);
+        }
+
+        .option-item.wrong .option-prefix {
+            background-color: var(--danger);
+            color: #ffffff;
+            border-color: var(--danger);
+        }
+
+        .explanation-box {
+            margin-top: 1rem;
+            padding: 1rem;
+            background-color: var(--accent-light);
+            border-left: 4px solid var(--accent-primary);
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .explanation-box strong {
+            color: var(--text-primary);
+            display: block;
+            margin-bottom: 0.25rem;
+        }
+
+        .nav-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-color);
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.6rem 1.2rem;
+            border-radius: var(--radius-md);
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            border: 1px solid transparent;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4rem;
+        }
+
+        .btn-secondary {
+            background-color: var(--bg-primary);
+            border-color: var(--border-color);
+            color: var(--text-primary);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--border-color);
+        }
+
+        .btn-primary {
+            background-color: var(--accent-primary);
+            color: #ffffff;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--accent-hover);
+        }
+
+        .btn-danger {
+            background-color: var(--danger);
+            color: #ffffff;
+        }
+
+        .btn-danger:hover {
+            opacity: 0.9;
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .palette-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 1.25rem;
+            box-shadow: var(--shadow-md);
+        }
+
+        .palette-header {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .filter-select {
+            padding: 0.25rem 0.5rem;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border-color);
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            font-size: 0.8rem;
+        }
+
+        .palette-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 0.5rem;
+            max-height: 360px;
+            overflow-y: auto;
+            padding-right: 0.25rem;
+        }
+
+        .palette-item {
+            aspect-ratio: 1;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-color);
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .palette-item:hover {
+            border-color: var(--accent-primary);
+        }
+
+        .palette-item.current {
+            outline: 2px solid var(--accent-primary);
+            outline-offset: 1px;
+        }
+
+        .palette-item.answered {
+            background-color: var(--accent-primary);
+            color: #ffffff;
+            border-color: var(--accent-primary);
+        }
+
+        .palette-item.bookmarked::after {
+            content: '★';
+            position: absolute;
+            top: 1px;
+            right: 2px;
+            font-size: 0.6rem;
+            color: var(--warning);
+        }
+
+        .palette-item.status-correct {
+            background-color: var(--success) !important;
+            color: #ffffff !important;
+            border-color: var(--success) !important;
+        }
+
+        .palette-item.status-wrong {
+            background-color: var(--danger) !important;
+            color: #ffffff !important;
+            border-color: var(--danger) !important;
+        }
+
+        .palette-item.status-unattempted {
+            background-color: var(--bg-primary) !important;
+            color: var(--text-muted) !important;
+        }
+
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-top: 1rem;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+        }
+
+        .legend-color {
+            width: 0.75rem;
+            height: 0.75rem;
+            border-radius: 2px;
+        }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.6);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-card {
+            background-color: var(--bg-card);
+            border-radius: var(--radius-lg);
+            max-width: 500px;
+            width: 100%;
+            padding: 2rem;
+            box-shadow: var(--shadow-lg);
+            text-align: center;
+        }
+
+        .score-circle {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background-color: var(--accent-light);
+            color: var(--accent-primary);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 1rem auto;
+            border: 4px solid var(--accent-primary);
+        }
+
+        .score-value {
+            font-size: 2rem;
+            font-weight: 800;
+            line-height: 1;
+        }
+
+        .score-total {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.75rem;
+            margin: 1.5rem 0;
+        }
+
+        .stat-box {
+            background-color: var(--bg-primary);
+            padding: 0.75rem;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-color);
+        }
+
+        .stat-val {
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+
+        .stat-lbl {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 0.75rem;
+            justify-content: center;
+            margin-top: 1.25rem;
+        }
+
+        .fade-in {
+            animation: fadeIn 0.25s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-title">
+            <h1>Consumer Protection Act, 1986</h1>
+            <span class="badge">50 MCQ Mastery Quiz</span>
+        </div>
+        <div class="header-actions">
+            <div id="timer" class="timer-box">
+                ⏱️ <span id="timer-display">30:00</span>
+            </div>
+            <button class="icon-btn" id="reshuffle-btn" title="Reshuffle & Restart Quiz">🔀 Restart</button>
+            <button class="icon-btn" id="theme-toggle" title="Toggle Dark/Light Mode">🌙 Mode</button>
+        </div>
+    </header>
+
+    <div class="container">
+        <main class="main-card fade-in" id="main-card">
+            <div>
+                <div class="question-header">
+                    <span class="question-number" id="q-number">Question 1 of 50</span>
+                    <button class="bookmark-btn" id="bookmark-btn" title="Bookmark Question">
+                        <span id="bookmark-icon">☆</span> Bookmark
+                    </button>
+                </div>
+                
+                <div class="question-text" id="q-text">
+                    Loading Question...
+                </div>
+
+                <div class="options-list" id="options-container">
+                    <!-- Dynamic Options -->
+                </div>
+
+                <div id="explanation-container" style="display: none;">
+                    <!-- Detailed Explanation in Review Mode -->
+                </div>
+            </div>
+
+            <div class="nav-controls">
+                <div>
+                    <button class="btn btn-secondary" id="prev-btn">← Previous</button>
+                    <button class="btn btn-secondary" id="clear-btn">Clear Choice</button>
+                </div>
+                <div>
+                    <button class="btn btn-primary" id="next-btn">Next →</button>
+                    <button class="btn btn-danger" id="submit-btn">Submit Quiz</button>
+                </div>
+            </div>
+        </main>
+
+        <aside class="sidebar">
+            <div class="palette-card">
+                <div class="palette-header">
+                    <span>Question Palette</span>
+                    <select id="palette-filter" class="filter-select">
+                        <option value="all">All (50)</option>
+                        <option value="answered">Answered</option>
+                        <option value="unanswered">Unanswered</option>
+                        <option value="bookmarked">Bookmarked</option>
+                    </select>
+                </div>
+
+                <div class="palette-grid" id="palette-grid">
+                    <!-- Dynamic Palette Items -->
+                </div>
+
+                <div class="legend" id="legend-container">
+                    <div class="legend-item"><div class="legend-color" style="background:var(--accent-primary)"></div> Answered</div>
+                    <div class="legend-item"><div class="legend-color" style="background:var(--bg-primary); border:1px solid var(--border-color)"></div> Unanswered</div>
+                    <div class="legend-item"><div class="legend-color" style="outline:2px solid var(--accent-primary)"></div> Current</div>
+                    <div class="legend-item"><span style="color:var(--warning)">★</span> Bookmarked</div>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Score Modal -->
+    <div class="modal-overlay" id="score-modal">
+        <div class="modal-card fade-in">
+            <h2>Quiz Results</h2>
+            <p style="font-size: 0.875rem; color: var(--text-secondary); margin-top: 0.25rem;">Consumer Protection Act, 1986 Assessment</p>
+
+            <div class="score-circle">
+                <span class="score-value" id="modal-score">0</span>
+                <span class="score-total">out of 50</span>
+            </div>
+
+            <p id="pass-fail-badge" style="font-weight: 700; font-size: 1.1rem; margin-bottom: 0.5rem;"></p>
+
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <div class="stat-val" id="stat-percentage" style="color: var(--accent-primary);">0%</div>
+                    <div class="stat-lbl">Percentage</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-val" id="stat-correct" style="color: var(--success);">0</div>
+                    <div class="stat-lbl">Correct</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-val" id="stat-incorrect" style="color: var(--danger);">0</div>
+                    <div class="stat-lbl">Incorrect</div>
+                </div>
+            </div>
+
+            <div class="modal-actions">
+                <button class="btn btn-primary" id="review-btn">Review Answers</button>
+                <button class="btn btn-secondary" id="restart-from-modal-btn">Restart Quiz</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Custom Confirmation Modal -->
+    <div class="modal-overlay" id="confirm-modal">
+        <div class="modal-card fade-in" style="max-width: 400px;">
+            <h3 id="confirm-title" style="margin-bottom: 0.5rem;">Confirm Action</h3>
+            <p id="confirm-message" style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 1.25rem;">Are you sure you want to proceed?</p>
+            <div class="modal-actions">
+                <button class="btn btn-secondary" id="confirm-cancel-btn">Cancel</button>
+                <button class="btn btn-primary" id="confirm-ok-btn">Confirm</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const rawQuestions = [
+            {
+                id: 1,
+                question: "What was the pecuniary jurisdiction limit of the District Forum under the original Consumer Protection Act, 1986 (prior to the 2002 amendment)?",
+                options: ["Up to ₹ 5 Lakhs", "Up to ₹ 20 Lakhs", "Up to ₹ 50 Lakhs", "Up to ₹ 1 Crore"],
+                answer: "Up to ₹ 5 Lakhs",
+                explanation: "Under the COPRA 1986 as enacted initially, Section 11(1) fixed the pecuniary jurisdiction of the District Forum for claims up to ₹ 5 Lakhs. It was later increased to ₹ 20 Lakhs in 2002."
+            },
+            {
+                id: 2,
+                question: "Following the 2002 Amendment to the Consumer Protection Act, 1986, what became the revised pecuniary limit for filing a complaint in the District Forum?",
+                options: ["Up to ₹ 10 Lakhs", "Up to ₹ 20 Lakhs", "Up to ₹ 50 Lakhs", "Up to ₹ 1 Crore"],
+                answer: "Up to ₹ 20 Lakhs",
+                explanation: "Section 11(1) amended in 2002 specified that the District Forum shall have jurisdiction to entertain complaints where the value of goods/services and compensation claimed does not exceed ₹ 20 Lakhs."
+            },
+            {
+                id: 3,
+                question: "What was the pecuniary jurisdiction of the State Consumer Disputes Redressal Commission under the Consumer Protection Act, 1986 (as amended in 2002)?",
+                options: ["Exceeding ₹ 5 Lakhs up to ₹ 20 Lakhs", "Exceeding ₹ 20 Lakhs up to ₹ 1 Crore", "Exceeding ₹ 50 Lakhs up to ₹ 2 Crores", "Exceeding ₹ 1 Crore without upper limit"],
+                answer: "Exceeding ₹ 20 Lakhs up to ₹ 1 Crore",
+                explanation: "Section 17(1)(a) of COPRA 1986 prescribed that the State Commission had jurisdiction for claims exceeding ₹ 20 Lakhs but not exceeding ₹ 1 Crore."
+            },
+            {
+                id: 4,
+                question: "Under Section 21 of the Consumer Protection Act, 1986, the National Consumer Disputes Redressal Commission had original jurisdiction over claims exceeding:",
+                options: ["₹ 50 Lakhs", "₹ 1 Crore", "₹ 2 Crores", "₹ 5 Crores"],
+                answer: "₹ 1 Crore",
+                explanation: "Section 21(a)(i) of COPRA 1986 empowered the National Commission to entertain original complaints where the value of goods or services and compensation claimed exceeded ₹ 1 Crore."
+            },
+            {
+                id: 5,
+                question: "What is the statutory limitation period under Section 24A of the Consumer Protection Act, 1986 for filing a complaint from the date on which the cause of action arises?",
+                options: ["6 Months", "1 Year", "2 Years", "3 Years"],
+                answer: "2 Years",
+                explanation: "Section 24A(1) provides that the District Forum, State Commission, or National Commission shall not admit a complaint unless it is filed within two years from the date on which the cause of action arose."
+            },
+            {
+                id: 6,
+                question: "Under COPRA 1986, within how many days must an appeal against an order of the District Forum be filed before the State Commission?",
+                options: ["15 days", "30 days", "45 days", "60 days"],
+                answer: "30 days",
+                explanation: "Section 15 of COPRA 1986 states that any person aggrieved by an order made by the District Forum may prefer an appeal to the State Commission within 30 days from the date of the order."
+            },
+            {
+                id: 7,
+                question: "To prefer an appeal to the State Commission against a District Forum order awarding a monetary claim, what deposit amount was required under Section 15 of COPRA 1986?",
+                options: ["50% of amount or ₹ 25,000, whichever is less", "25% of amount or ₹ 10,000, whichever is less", "50% of amount or ₹ 35,000, whichever is less", "100% of amount awarded"],
+                answer: "50% of amount or ₹ 25,000, whichever is less",
+                explanation: "Section 15 proviso mandates that no appeal by an appellant required to pay money shall be entertained unless 50% of the amount or ₹ 25,000 (whichever is less) is deposited."
+            },
+            {
+                id: 8,
+                question: "An appeal against an order passed by the State Commission in exercise of its original power under Section 17 lies to which authority under Section 19 of COPRA 1986?",
+                options: ["High Court of the State", "Supreme Court of India", "National Consumer Disputes Redressal Commission", "Ministry of Consumer Affairs"],
+                answer: "National Consumer Disputes Redressal Commission",
+                explanation: "Section 19 provides that any person aggrieved by an order of the State Commission may file an appeal to the National Commission within 30 days."
+            },
+            {
+                id: 9,
+                question: "What mandatory deposit is required under Section 19 for filing an appeal before the National Commission against a State Commission order?",
+                options: ["50% of amount or ₹ 25,000, whichever is less", "50% of amount or ₹ 35,000, whichever is less", "50% of amount or ₹ 50,000, whichever is less", "Flat ₹ 10,000"],
+                answer: "50% of amount or ₹ 35,000, whichever is less",
+                explanation: "Section 19 proviso requires an appellant liable to pay an amount under the State Commission order to deposit 50% of that amount or ₹ 35,000, whichever is less."
+            },
+            {
+                id: 10,
+                question: "Under Section 23 of the Consumer Protection Act, 1986, an appeal against an original order of the National Commission lies directly to:",
+                options: ["Full Bench of National Commission", "High Court of Delhi", "Supreme Court of India", "Law Commission of India"],
+                answer: "Supreme Court of India",
+                explanation: "Section 23 lays down that any person aggrieved by an order made by the National Commission under Section 21(a)(i) may prefer an appeal to the Supreme Court within 30 days."
+            },
+            {
+                id: 11,
+                question: "What is the statutory deposit requirement for appealing an original order of the National Commission to the Supreme Court under Section 23 of COPRA 1986?",
+                options: ["50% of amount or ₹ 25,000, whichever is less", "50% of amount or ₹ 35,000, whichever is less", "50% of amount or ₹ 50,000, whichever is less", "50% of amount or ₹ 1 Lakh, whichever is less"],
+                answer: "50% of amount or ₹ 50,000, whichever is less",
+                explanation: "Under Section 23 proviso, no appeal shall be entertained by the Supreme Court unless the appellant deposits 50% of the awarded amount or ₹ 50,000, whichever is less."
+            },
+            {
+                id: 12,
+                question: "According to Section 2(1)(d) of COPRA 1986, which of the following is EXCLUDED from the definition of a 'Consumer'?",
+                options: [
+                    "A person buying goods for self-employment livelihood",
+                    "A person who obtains goods for commercial purpose",
+                    "A user of goods with approval of the purchaser",
+                    "A beneficiary of services hired for personal use"
+                ],
+                answer: "A person who obtains goods for commercial purpose",
+                explanation: "Section 2(1)(d)(i) explicitly excludes a person who obtains goods for resale or for any 'commercial purpose' (unless used exclusively for earning livelihood by self-employment)."
+            },
+            {
+                id: 13,
+                question: "Under COPRA 1986, how is 'defect' legally distinguished from 'deficiency'?",
+                options: [
+                    "'Defect' applies to services, 'Deficiency' applies to goods",
+                    "'Defect' applies to goods, 'Deficiency' applies to services",
+                    "Both terms are interchangeable in all legal claims",
+                    "'Defect' applies only to prices, 'Deficiency' applies to quantities"
+                ],
+                answer: "'Defect' applies to goods, 'Deficiency' applies to services",
+                explanation: "Under Section 2(1)(f), 'Defect' means fault/imperfection in quality, quantity, purity of GOODS. Under Section 2(1)(g), 'Deficiency' means fault/shortcoming in quality or standard of SERVICES."
+            },
+            {
+                id: 14,
+                question: "Which of the following is specifically EXCLUDED from the definition of 'Service' under Section 2(1)(o) of the Consumer Protection Act, 1986?",
+                options: [
+                    "Banking and Financing",
+                    "Transport and Lodging",
+                    "Free service or service under a contract of personal service",
+                    "Entertainment and Housing Construction"
+                ],
+                answer: "Free service or service under a contract of personal service",
+                explanation: "Section 2(1)(o) excludes rendering of any service free of charge or under a 'contract of personal service'."
+            },
+            {
+                id: 15,
+                question: "Who heads the Central Consumer Protection Council established under Section 4 of the Consumer Protection Act, 1986?",
+                options: [
+                    "Prime Minister of India",
+                    "Chief Justice of India",
+                    "Minister in charge of Consumer Affairs in Central Government",
+                    "Cabinet Secretary"
+                ],
+                answer: "Minister in charge of Consumer Affairs in Central Government",
+                explanation: "Section 4(2)(a) specifies that the Central Council shall consist of the Minister in charge of Consumer Affairs in the Central Government as its Chairman."
+            },
+            {
+                id: 16,
+                question: "How many times at minimum must the Central Consumer Protection Council meet every year under Section 5 of COPRA 1986?",
+                options: ["At least once a year", "At least twice a year", "At least thrice a year", "At least four times a year"],
+                answer: "At least once a year",
+                explanation: "Section 5(1) provides that the Central Council shall meet as and when necessary, but at least one meeting of the Council shall be held every year."
+            },
+            {
+                id: 17,
+                question: "Who acts as the Chairman of the State Consumer Protection Council under Section 7 of COPRA 1986?",
+                options: [
+                    "Governor of the State",
+                    "Chief Minister of the State",
+                    "Minister in charge of Consumer Affairs in the State Government",
+                    "Chief Secretary of the State"
+                ],
+                answer: "Minister in charge of Consumer Affairs in the State Government",
+                explanation: "Section 7(2)(a) mandates that the State Council shall consist of the Minister in charge of Consumer Affairs in the State Government as Chairman."
+            },
+            {
+                id: 18,
+                question: "What is the statutory minimum frequency of meetings for a State Consumer Protection Council under Section 8 of COPRA 1986?",
+                options: ["At least once a year", "At least two meetings every year", "At least quarterly", "Monthly"],
+                answer: "At least two meetings every year",
+                explanation: "Section 8(1) states that the State Council shall meet as and when necessary, but at least two meetings shall be held every year."
+            },
+            {
+                id: 19,
+                question: "Who is eligible to be appointed as the President of a District Forum under Section 10(1)(a) of COPRA 1986?",
+                options: [
+                    "A person who is, or has been, or is qualified to be a District Judge",
+                    "A retired High Court Judge only",
+                    "An Advocate with 5 years experience",
+                    "A District Magistrate"
+                ],
+                answer: "A person who is, or has been, or is qualified to be a District Judge",
+                explanation: "Section 10(1)(a) states that each District Forum shall consist of a person who is, or has been, or is qualified to be a District Judge, as its President."
+            },
+            {
+                id: 20,
+                question: "How many members (excluding the President) comprise a District Forum under Section 10(1)(b) of COPRA 1986, and what is the gender requirement?",
+                options: [
+                    "2 members, of whom one must be a woman",
+                    "3 members, with no gender restriction",
+                    "4 members, of whom two must be women",
+                    "5 members, of whom one must be a woman"
+                ],
+                answer: "2 members, of whom one must be a woman",
+                explanation: "Section 10(1)(b) provides for two other members, one of whom shall be a woman, possessing a bachelor's degree and ability/experience in relevant fields."
+            },
+            {
+                id: 21,
+                question: "What was the term of office for a member of the District Forum under Section 10(2) of the Consumer Protection Act, 1986?",
+                options: [
+                    "3 years or up to age 60",
+                    "5 years or up to age 65, whichever is earlier",
+                    "6 years or up to age 65",
+                    "5 years with mandatory re-appointment"
+                ],
+                answer: "5 years or up to age 65, whichever is earlier",
+                explanation: "Section 10(2) specifies that every member of the District Forum shall hold office for a term of 5 years or up to the age of 65 years, whichever is earlier."
+            },
+            {
+                id: 22,
+                question: "Who qualifies to be appointed as the President of a State Commission under Section 16(1)(a) of COPRA 1986?",
+                options: [
+                    "A person who is or has been a Judge of a High Court",
+                    "A retired District Judge with 10 years standing",
+                    "A Senior Advocate of the Supreme Court",
+                    "The Chief Secretary of the State"
+                ],
+                answer: "A person who is or has been a Judge of a High Court",
+                explanation: "Section 16(1)(a) requires that the President of a State Commission shall be a person who is or has been a Judge of a High Court, appointed after consultation with the Chief Justice of the High Court."
+            },
+            {
+                id: 23,
+                question: "Under Section 16(1)(b) of COPRA 1986, what was the minimum composition of other members in a State Commission?",
+                options: [
+                    "Not less than 2 members (one woman)",
+                    "Not less than 3 members",
+                    "Not less than 5 members",
+                    "Exactly 1 member"
+                ],
+                answer: "Not less than 2 members (one woman)",
+                explanation: "Section 16(1)(b) specifies that the State Commission shall consist of not less than two, and not more than such number of members as prescribed, one of whom shall be a woman."
+            },
+            {
+                id: 24,
+                question: "What was the age limit for members of the State Commission under Section 16(3) of COPRA 1986?",
+                options: ["60 years", "65 years", "67 years", "70 years"],
+                answer: "67 years",
+                explanation: "Section 16(3) provided that every member of the State Commission shall hold office for a term of 5 years or up to the age of 67 years, whichever is earlier."
+            },
+            {
+                id: 25,
+                question: "Who heads the National Consumer Disputes Redressal Commission as its President under Section 20(1)(a) of COPRA 1986?",
+                options: [
+                    "A person who is or has been a Judge of the Supreme Court",
+                    "The Attorney General of India",
+                    "A retired Chief Justice of a High Court only",
+                    "The Union Law Secretary"
+                ],
+                answer: "A person who is or has been a Judge of the Supreme Court",
+                explanation: "Section 20(1)(a) mandates that the President of the National Commission shall be a person who is or has been a Judge of the Supreme Court, appointed in consultation with the CJI."
+            },
+            {
+                id: 26,
+                question: "What was the upper age limit for members of the National Commission under Section 20(3) of COPRA 1986?",
+                options: ["65 years", "67 years", "70 years", "75 years"],
+                answer: "70 years",
+                explanation: "Under Section 20(3) of COPRA 1986, a member of the National Commission held office for a term of 5 years or up to the age of 70 years, whichever was earlier."
+            },
+            {
+                id: 27,
+                question: "Which landmark case established that medical services provided by doctors and hospitals fall within 'service' under Section 2(1)(o) of COPRA 1986 (unless rendered free to all)?",
+                options: [
+                    "Indian Medical Association v. V.P. Shantha (1995)",
+                    "Lucknow Development Authority v. M.K. Gupta (1994)",
+                    "Morgan Stanley v. Kartick Das (1994)",
+                    "Bhupendra Jang Bahadur v. Chandigarh Administration"
+                ],
+                answer: "Indian Medical Association v. V.P. Shantha (1995)",
+                explanation: "In IMA v. V.P. Shantha (1995), a 3-judge bench of the Supreme Court held that medical service rendered for consideration falls within the scope of Section 2(1)(o) of COPRA 1986."
+            },
+            {
+                id: 28,
+                question: "In which landmark decision did the Supreme Court hold that statutory housing authorities (like Development Authorities) render 'service' and can be sued under COPRA 1986 for administrative delay/deficiency?",
+                options: [
+                    "Lucknow Development Authority v. M.K. Gupta (1994)",
+                    "Spring Meadows Hospital v. Harjol Ahluwalia",
+                    "Martin F. D'Souza v. Mohd. Ishfaq",
+                    "S.P. Goel v. Collector of U.P."
+                ],
+                answer: "Lucknow Development Authority v. M.K. Gupta (1994)",
+                explanation: "In LDA v. M.K. Gupta (1994), the Supreme Court ruled that statutory bodies providing housing plots/flats render a 'service' under Section 2(1)(o)."
+            },
+            {
+                id: 29,
+                question: "Under Section 13(1)(a) of COPRA 1986, within how many days must a District Forum refer a copy of the admitted complaint to the opposite party?",
+                options: ["10 days", "21 days", "30 days", "45 days"],
+                answer: "30 days",
+                explanation: "Section 13(1)(a) provides that the District Forum shall refer a copy of the complaint to the opposite party, directing them to give their version within 30 days (extendable by up to 15 days)."
+            },
+            {
+                id: 30,
+                question: "What is the maximum period (including extension) allowed under Section 13(1)(a) for the opposite party to submit their response to a complaint?",
+                options: ["30 days total", "45 days total", "60 days total", "90 days total"],
+                answer: "45 days total",
+                explanation: "Section 13(1)(a) stipulates 30 days initially, which can be extended by the District Forum by a further period not exceeding 15 days (total 45 days max)."
+            },
+            {
+                id: 31,
+                question: "If a complaint requires laboratory testing of defect in goods under Section 13(1)(c), what is the statutory target period for deciding the complaint?",
+                options: ["3 months", "5 months", "6 months", "12 months"],
+                answer: "5 months",
+                explanation: "Section 13(3A) mandates that every complaint shall be heard as expeditiously as possible and endeavor made to decide within 3 months, or within 5 months if analysis/testing is required."
+            },
+            {
+                id: 32,
+                question: "Where testing of goods is required under Section 13(1)(c), to which entity does the District Forum send the sample?",
+                options: [
+                    "Local Police Forensic Laboratory",
+                    "Appropriate Laboratory recognized by Central/State Government",
+                    "Manufacturer's Quality Control Cell",
+                    "District Collector's Office"
+                ],
+                answer: "Appropriate Laboratory recognized by Central/State Government",
+                explanation: "Section 13(1)(c) specifies sending the sample to an 'appropriate laboratory' established by or recognized by the Central or State Government."
+            },
+            {
+                id: 33,
+                question: "Which of the following describes an 'Unfair Trade Practice' (UTP) under Section 2(1)(r) of COPRA 1986?",
+                options: [
+                    "Falsely representing that goods are of a particular standard or grade",
+                    "Making misleading statements regarding price or warranty",
+                    "Conducting deceptive prize contests or lotteries",
+                    "All of the above"
+                ],
+                answer: "All of the above",
+                explanation: "Section 2(1)(r) includes false representation of standard/quality, misleading price warranties, and deceptive contest schemes under Unfair Trade Practices."
+            },
+            {
+                id: 34,
+                question: "What section of COPRA 1986 defines 'Restrictive Trade Practice' (RTP)?",
+                options: ["Section 2(1)(nn)", "Section 2(1)(r)", "Section 2(1)(o)", "Section 12"],
+                answer: "Section 2(1)(nn)",
+                explanation: "Section 2(1)(nn) defines Restrictive Trade Practice as a trade practice which tends to bring about manipulation of price or conditions of delivery affect flow of supplies."
+            },
+            {
+                id: 35,
+                question: "Under Section 14(1) of COPRA 1986, which relief can a District Forum grant upon finding a defect in goods or deficiency in service?",
+                options: [
+                    "Removal of defects or replacement of goods",
+                    "Refund of price or charges paid",
+                    "Compensation for loss/injury and punitive damages",
+                    "All of the above"
+                ],
+                answer: "All of the above",
+                explanation: "Section 14(1) empowers the Consumer Forum to order removal of defects, replacement, refund, award compensation, discontinue unfair trade practices, or pay punitive damages."
+            },
+            {
+                id: 36,
+                question: "What power does Section 26 of the Consumer Protection Act, 1986 grant to consumer forums regarding frivolous or vexatious complaints?",
+                options: [
+                    "Dismiss complaint and award costs up to ₹ 10,000 to opposite party",
+                    "Imprison complainant for 1 year",
+                    "Impose fine of ₹ 1 Lakh payable to Govt Treasury",
+                    "Refer complainant for criminal prosecution in High Court"
+                ],
+                answer: "Dismiss complaint and award costs up to ₹ 10,000 to opposite party",
+                explanation: "Section 26 provides that where a complaint is found to be frivolous or vexatious, the forum shall dismiss it and order the complainant to pay costs up to ₹ 10,000."
+            },
+            {
+                id: 37,
+                question: "Under Section 27 of COPRA 1986, what penalty can be imposed for non-compliance with an order passed by a Consumer Forum?",
+                options: [
+                    "Imprisonment from 1 month to 3 years, or fine from ₹ 2,000 to ₹ 10,000, or both",
+                    "Imprisonment up to 7 years and fine of ₹ 1 Lakh",
+                    "Cancellation of trade license only",
+                    "Attachment of personal property only"
+                ],
+                answer: "Imprisonment from 1 month to 3 years, or fine from ₹ 2,000 to ₹ 10,000, or both",
+                explanation: "Section 27 penalties for failure to comply with order specify imprisonment for a term not less than 1 month up to 3 years, or fine between ₹ 2,000 and ₹ 10,000, or both."
+            },
+            {
+                id: 38,
+                question: "Under Section 25 of COPRA 1986, how is an order of interim or final compensation enforced if a party fails to pay?",
+                options: [
+                    "By issuing a recovery certificate to the District Collector as arrears of land revenue",
+                    "By filing a fresh civil suit in High Court",
+                    "By declaring the party bankrupt automatically",
+                    "By impounding the passport of the party"
+                ],
+                answer: "By issuing a recovery certificate to the District Collector as arrears of land revenue",
+                explanation: "Section 25(3) provides that if any amount is due under an order, the Forum may issue a certificate to the Collector who recovers it as arrears of land revenue."
+            },
+            {
+                id: 39,
+                question: "Can a Consumer Forum condone delay in filing a complaint after the 2-year limitation period under Section 24A?",
+                options: [
+                    "No, limitation period is absolute with zero exceptions",
+                    "Yes, if complainant satisfies the Forum that there was sufficient cause for not filing within period",
+                    "Yes, but only with prior permission of the High Court",
+                    "Yes, automatically upon payment of ₹ 1,000 penalty fee"
+                ],
+                answer: "Yes, if complainant satisfies the Forum that there was sufficient cause for not filing within period",
+                explanation: "Section 24A(2) allows the forum to entertain a complaint after 2 years if the complainant shows 'sufficient cause' for not filing within time, recording reasons."
+            },
+            {
+                id: 40,
+                question: "Where can a complaint be instituted under Section 11(2) of COPRA 1986 based on territorial jurisdiction?",
+                options: [
+                    "Where the opposite party resides or carries on business",
+                    "Where the cause of action, wholly or in part, arises",
+                    "Where any of the opposite parties resides (with permission or acquiescence)",
+                    "All of the above"
+                ],
+                answer: "All of the above",
+                explanation: "Section 11(2) outlines territorial jurisdiction based on residence/business location of opposite party or where the cause of action arises."
+            },
+            {
+                id: 41,
+                question: "Under Section 12 of COPRA 1986, who among the following CANNOT file a consumer complaint?",
+                options: [
+                    "The consumer to whom goods sold or service provided",
+                    "Any recognized consumer association",
+                    "One or more consumers having same interest (class action)",
+                    "An unregistered group of political activists having no personal interest"
+                ],
+                answer: "An unregistered group of political activists having no personal interest",
+                explanation: "Section 12 details locus standi: consumers, recognized consumer associations, central/state govts, or representative consumers. Unrelated political groups lack standing."
+            },
+            {
+                id: 42,
+                question: "Under COPRA 1986, does a Consumer Forum have the power to issue an interim injunction during pendency of proceedings?",
+                options: [
+                    "No, consumer forums cannot grant interim relief under any circumstances",
+                    "Yes, Section 13(3B) empowers the Forum to pass interim orders as deemed just and proper",
+                    "Only the High Court can grant interim injunctions",
+                    "Only the Supreme Court has such power"
+                ],
+                answer: "Yes, Section 13(3B) empowers the Forum to pass interim orders as deemed just and proper",
+                explanation: "Section 13(3B) inserted by amendment explicitly grants consumer forums the power to pass suitable interim orders during pendency of a complaint."
+            },
+            {
+                id: 43,
+                question: "Are proceedings before Consumer Forums governed strictly by the formal technicalities of the Indian Evidence Act, 1872?",
+                options: [
+                    "Yes, technical rules of Evidence Act apply strictly",
+                    "No, Consumer Forums follow principles of natural justice and summary procedures",
+                    "Governed by Indian Penal Code rules",
+                    "Governed by Admiralty Law rules"
+                ],
+                answer: "No, Consumer Forums follow principles of natural justice and summary procedures",
+                explanation: "Consumer forums are quasi-judicial bodies designed for speedy, simple summary justice and are not bound by rigid technical provisions of the Evidence Act."
+            },
+            {
+                id: 44,
+                question: "What is the nature of powers vested in Consumer Forums under Section 13(4) of COPRA 1986 regarding trial procedures?",
+                options: [
+                    "Same powers as a Civil Court under Code of Civil Procedure (CPC) for summoning, discovery, and evidence",
+                    "Powers of Criminal Magistrate for issuing arrest warrants",
+                    "Advisory powers only",
+                    "Arbitral powers governed by Arbitration Act"
+                ],
+                answer: "Same powers as a Civil Court under Code of Civil Procedure (CPC) for summoning, discovery, and evidence",
+                explanation: "Section 13(4) confers Civil Court powers under CPC regarding summoning witnesses, discovery/production of documents, and receiving evidence on affidavits."
+            },
+            {
+                id: 45,
+                question: "Which section of the Consumer Protection Act, 1986 provides for administrative control of the National Commission over State Commissions?",
+                options: ["Section 10", "Section 21(b)", "Section 24B", "Section 27A"],
+                answer: "Section 24B",
+                explanation: "Section 24B vests administrative control in the National Commission over State Commissions, and State Commissions over District Forums."
+            },
+            {
+                id: 46,
+                question: "Under Section 22 of COPRA 1986, what power was explicitly conferred upon the National Commission to review its own orders?",
+                options: [
+                    "Power to review any order passed by it when there is an error apparent on the face of record",
+                    "Power to overrule Supreme Court decisions",
+                    "Power to rewrite state laws",
+                    "No power of review existed under COPRA 1986"
+                ],
+                answer: "Power to review any order passed by it when there is an error apparent on the face of record",
+                explanation: "Section 22(2) enabled the National Commission to review any order passed by it if there was an error apparent on the face of the record."
+            },
+            {
+                id: 47,
+                question: "Under COPRA 1986, if a consumer dies during the pendency of a complaint, who can continue the litigation?",
+                options: [
+                    "The proceedings abate immediately",
+                    "Legal heir or representative of the deceased consumer under Section 2(1)(b)(v)",
+                    "Any member of the public",
+                    "The District Collector automatically"
+                ],
+                answer: "Legal heir or representative of the deceased consumer under Section 2(1)(b)(v)",
+                explanation: "Section 2(1)(b)(v) added 'in the case of death of a consumer, his legal heir or representative' under the definition of complainant."
+            },
+            {
+                id: 48,
+                question: "What protection is granted to officers and members of Consumer Forums under Section 28 of COPRA 1986?",
+                options: [
+                    "Immunity from all taxes",
+                    "Protection for actions done in good faith under the Act",
+                    "Lifetime diplomatic immunity",
+                    "Exemption from court appearances forever"
+                ],
+                answer: "Protection for actions done in good faith under the Act",
+                explanation: "Section 28 provides that no suit or legal proceeding shall lie against members/officers for anything done or intended to be done in good faith under the Act."
+            },
+            {
+                id: 49,
+                question: "Does the Consumer Protection Act, 1986 apply to all goods and services unless specifically exempted by the Central Government?",
+                options: [
+                    "No, applies only to government companies",
+                    "Yes, under Section 1(4), it applies to all goods and services unless expressly exempted",
+                    "Applies only to imported goods",
+                    "Applies only to manufacturing sector"
+                ],
+                answer: "Yes, under Section 1(4), it applies to all goods and services unless expressly exempted",
+                explanation: "Section 1(4) states that the Act applies to all goods and services unless otherwise expressly provided by the Central Government by notification."
+            },
+            {
+                id: 50,
+                question: "Under Section 27A of COPRA 1986, an appeal against an order passed under Section 27 (penalties) by a District Forum lies to:",
+                options: ["High Court", "State Commission", "Sessions Court", "District Magistrate"],
+                answer: "State Commission",
+                explanation: "Section 27A(1)(a) provides that an appeal against an order passed under Section 27 by a District Forum lies to the State Commission."
+            }
+        ];
+
+        let questions = [];
+        let currentQuestionIdx = 0;
+        let userAnswers = [];
+        let bookmarked = [];
+        let isSubmitted = false;
+        let timerInterval = null;
+        let timeRemaining = 30 * 60; // 30 minutes
+
+        // Fisher-Yates Shuffle Algorithm
+        function fisherYatesShuffle(array) {
+            const arr = [...array];
+            for (let i = arr.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [arr[i], arr[j]] = [arr[j], arr[i]];
+            }
+            return arr;
+        }
+
+        // Initialize / Shuffle Data
+        function prepareShuffledQuiz() {
+            const shuffledRaw = fisherYatesShuffle(rawQuestions);
+            questions = shuffledRaw.map((q, idx) => {
+                const shuffledOpts = fisherYatesShuffle(q.options);
+                return {
+                    id: idx + 1,
+                    question: q.question,
+                    options: shuffledOpts,
+                    answer: q.answer,
+                    explanation: q.explanation
+                };
+            });
+
+            userAnswers = new Array(questions.length).fill(null);
+            bookmarked = new Array(questions.length).fill(false);
+            isSubmitted = false;
+            timeRemaining = 30 * 60;
+        }
+
+        // DOM Elements
+        const mainCard = document.getElementById('main-card');
+        const qNumberEl = document.getElementById('q-number');
+        const qTextEl = document.getElementById('q-text');
+        const optionsContainer = document.getElementById('options-container');
+        const explanationContainer = document.getElementById('explanation-container');
+        const bookmarkBtn = document.getElementById('bookmark-btn');
+        const bookmarkIcon = document.getElementById('bookmark-icon');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const clearBtn = document.getElementById('clear-btn');
+        const submitBtn = document.getElementById('submit-btn');
+        const paletteGrid = document.getElementById('palette-grid');
+        const paletteFilter = document.getElementById('palette-filter');
+        const timerDisplay = document.getElementById('timer-display');
+        const timerBox = document.getElementById('timer');
+        const themeToggle = document.getElementById('theme-toggle');
+        const reshuffleBtn = document.getElementById('reshuffle-btn');
+        const scoreModal = document.getElementById('score-modal');
+        const reviewBtn = document.getElementById('review-btn');
+        const restartModalBtn = document.getElementById('restart-from-modal-btn');
+
+        // Confirm Modal Elements
+        const confirmModal = document.getElementById('confirm-modal');
+        const confirmTitle = document.getElementById('confirm-title');
+        const confirmMessage = document.getElementById('confirm-message');
+        const confirmOkBtn = document.getElementById('confirm-ok-btn');
+        const confirmCancelBtn = document.getElementById('confirm-cancel-btn');
+        let pendingConfirmAction = null;
+
+        window.addEventListener('DOMContentLoaded', () => {
+            initQuiz();
+            setupEventListeners();
+        });
+
+        function initQuiz() {
+            prepareShuffledQuiz();
+            resetTimer();
+            startTimer();
+            renderPalette();
+            loadQuestion(0);
+
+            // Restore elements visibility if re-initialising
+            submitBtn.style.display = 'inline-flex';
+            clearBtn.style.display = 'inline-flex';
+            document.getElementById('legend-container').innerHTML = `
+                <div class="legend-item"><div class="legend-color" style="background:var(--accent-primary)"></div> Answered</div>
+                <div class="legend-item"><div class="legend-color" style="background:var(--bg-primary); border:1px solid var(--border-color)"></div> Unanswered</div>
+                <div class="legend-item"><div class="legend-color" style="outline:2px solid var(--accent-primary)"></div> Current</div>
+                <div class="legend-item"><span style="color:var(--warning)">★</span> Bookmarked</div>
+            `;
+        }
+
+        function resetTimer() {
+            if (timerInterval) clearInterval(timerInterval);
+            timerBox.className = 'timer-box';
+            updateTimerDisplay();
+        }
+
+        function startTimer() {
+            timerInterval = setInterval(() => {
+                if (timeRemaining <= 0) {
+                    clearInterval(timerInterval);
+                    autoSubmitQuiz();
+                    return;
+                }
+                timeRemaining--;
+                updateTimerDisplay();
+            }, 1000);
+        }
+
+        function updateTimerDisplay() {
+            const mins = Math.floor(timeRemaining / 60);
+            const secs = timeRemaining % 60;
+            timerDisplay.textContent = `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+
+            if (timeRemaining <= 300 && timeRemaining > 60) {
+                timerBox.className = 'timer-box warning';
+            } else if (timeRemaining <= 60) {
+                timerBox.className = 'timer-box danger';
+            }
+        }
+
+        function loadQuestion(idx) {
+            currentQuestionIdx = idx;
+            const q = questions[idx];
+
+            mainCard.classList.remove('fade-in');
+            void mainCard.offsetWidth; // trigger reflow
+            mainCard.classList.add('fade-in');
+
+            qNumberEl.textContent = `Question ${idx + 1} of ${questions.length}`;
+            qTextEl.textContent = q.question;
+
+            if (bookmarked[idx]) {
+                bookmarkBtn.classList.add('active');
+                bookmarkIcon.textContent = '★';
+            } else {
+                bookmarkBtn.classList.remove('active');
+                bookmarkIcon.textContent = '☆';
+            }
+
+            optionsContainer.innerHTML = '';
+            const labels = ['A', 'B', 'C', 'D'];
+
+            q.options.forEach((opt, optIdx) => {
+                const optEl = document.createElement('div');
+                optEl.className = 'option-item';
+                
+                if (userAnswers[idx] === optIdx) {
+                    optEl.classList.add('selected');
+                }
+
+                if (isSubmitted) {
+                    if (opt === q.answer) {
+                        optEl.classList.add('correct');
+                    }
+                    if (userAnswers[idx] === optIdx && opt !== q.answer) {
+                        optEl.classList.add('wrong');
+                    }
+                }
+
+                optEl.innerHTML = `
+                    <div class="option-prefix">${labels[optIdx]}</div>
+                    <div style="flex:1;">${opt}</div>
+                `;
+
+                if (!isSubmitted) {
+                    optEl.addEventListener('click', () => selectOption(optIdx));
+                }
+
+                optionsContainer.appendChild(optEl);
+            });
+
+            if (isSubmitted) {
+                explanationContainer.style.display = 'block';
+                explanationContainer.className = 'explanation-box';
+                explanationContainer.innerHTML = `
+                    <strong>Explanation / Section Citation:</strong>
+                    ${q.explanation}
+                `;
+            } else {
+                explanationContainer.style.display = 'none';
+            }
+
+            prevBtn.disabled = idx === 0;
+            nextBtn.disabled = idx === questions.length - 1;
+
+            updatePaletteCurrent();
+        }
+
+        function selectOption(optIdx) {
+            userAnswers[currentQuestionIdx] = optIdx;
+            loadQuestion(currentQuestionIdx);
+            renderPalette();
+        }
+
+        function clearSelection() {
+            if (isSubmitted) return;
+            userAnswers[currentQuestionIdx] = null;
+            loadQuestion(currentQuestionIdx);
+            renderPalette();
+        }
+
+        function toggleBookmark() {
+            bookmarked[currentQuestionIdx] = !bookmarked[currentQuestionIdx];
+            loadQuestion(currentQuestionIdx);
+            renderPalette();
+        }
+
+        function renderPalette() {
+            paletteGrid.innerHTML = '';
+            const filter = paletteFilter.value;
+
+            questions.forEach((q, idx) => {
+                const isAnswered = userAnswers[idx] !== null;
+                const isBookmarked = bookmarked[idx];
+
+                if (filter === 'answered' && !isAnswered) return;
+                if (filter === 'unanswered' && isAnswered) return;
+                if (filter === 'bookmarked' && !isBookmarked) return;
+
+                const item = document.createElement('button');
+                item.className = 'palette-item';
+                item.textContent = idx + 1;
+
+                if (idx === currentQuestionIdx) {
+                    item.classList.add('current');
+                }
+
+                if (!isSubmitted) {
+                    if (isAnswered) item.classList.add('answered');
+                } else {
+                    const selectedOptText = userAnswers[idx] !== null ? q.options[userAnswers[idx]] : null;
+                    if (selectedOptText === q.answer) {
+                        item.classList.add('status-correct');
+                    } else if (userAnswers[idx] !== null) {
+                        item.classList.add('status-wrong');
+                    } else {
+                        item.classList.add('status-unattempted');
+                    }
+                }
+
+                if (isBookmarked) item.classList.add('bookmarked');
+
+                item.addEventListener('click', () => loadQuestion(idx));
+                paletteGrid.appendChild(item);
+            });
+        }
+
+        function updatePaletteCurrent() {
+            const items = paletteGrid.querySelectorAll('.palette-item');
+            items.forEach(item => {
+                if (parseInt(item.textContent) === currentQuestionIdx + 1) {
+                    item.classList.add('current');
+                } else {
+                    item.classList.remove('current');
+                }
+            });
+        }
+
+        function promptConfirm(title, message, onConfirm) {
+            confirmTitle.textContent = title;
+            confirmMessage.textContent = message;
+            pendingConfirmAction = onConfirm;
+            confirmModal.classList.add('active');
+        }
+
+        function closeConfirmModal() {
+            confirmModal.classList.remove('active');
+            pendingConfirmAction = null;
+        }
+
+        function submitQuiz() {
+            promptConfirm(
+                "Submit Quiz",
+                "Are you sure you want to finish and submit your quiz answers?",
+                () => finalizeQuiz()
+            );
+        }
+
+        function autoSubmitQuiz() {
+            finalizeQuiz();
+        }
+
+        function finalizeQuiz() {
+            isSubmitted = true;
+            clearInterval(timerInterval);
+
+            let score = 0;
+            let correctCount = 0;
+            let incorrectCount = 0;
+
+            questions.forEach((q, idx) => {
+                if (userAnswers[idx] !== null) {
+                    if (q.options[userAnswers[idx]] === q.answer) {
+                        score++;
+                        correctCount++;
+                    } else {
+                        incorrectCount++;
+                    }
+                }
+            });
+
+            const percentage = ((score / questions.length) * 100).toFixed(1);
+
+            document.getElementById('modal-score').textContent = score;
+            document.getElementById('stat-percentage').textContent = `${percentage}%`;
+            document.getElementById('stat-correct').textContent = correctCount;
+            document.getElementById('stat-incorrect').textContent = incorrectCount;
+
+            const badge = document.getElementById('pass-fail-badge');
+            if (percentage >= 60) {
+                badge.textContent = "PASSED";
+                badge.style.color = "var(--success)";
+            } else {
+                badge.textContent = "NEEDS IMPROVEMENT";
+                badge.style.color = "var(--danger)";
+            }
+
+            scoreModal.classList.add('active');
+
+            submitBtn.style.display = 'none';
+            clearBtn.style.display = 'none';
+            timerDisplay.textContent = 'Completed';
+
+            document.getElementById('legend-container').innerHTML = `
+                <div class="legend-item"><div class="legend-color" style="background:var(--success)"></div> Correct</div>
+                <div class="legend-item"><div class="legend-color" style="background:var(--danger)"></div> Incorrect</div>
+                <div class="legend-item"><div class="legend-color" style="background:var(--bg-primary); border:1px solid var(--border-color)"></div> Unattempted</div>
+            `;
+
+            renderPalette();
+            loadQuestion(currentQuestionIdx);
+        }
+
+        function setupEventListeners() {
+            prevBtn.addEventListener('click', () => {
+                if (currentQuestionIdx > 0) loadQuestion(currentQuestionIdx - 1);
+            });
+
+            nextBtn.addEventListener('click', () => {
+                if (currentQuestionIdx < questions.length - 1) loadQuestion(currentQuestionIdx + 1);
+            });
+
+            clearBtn.addEventListener('click', clearSelection);
+            bookmarkBtn.addEventListener('click', toggleBookmark);
+            submitBtn.addEventListener('click', submitQuiz);
+
+            paletteFilter.addEventListener('change', renderPalette);
+
+            reviewBtn.addEventListener('click', () => {
+                scoreModal.classList.remove('active');
+            });
+
+            restartModalBtn.addEventListener('click', () => {
+                scoreModal.classList.remove('active');
+                initQuiz();
+            });
+
+            reshuffleBtn.addEventListener('click', () => {
+                promptConfirm(
+                    "Reshuffle & Restart",
+                    "This will reshuffle all questions and choices and reset your progress. Proceed?",
+                    () => initQuiz()
+                );
+            });
+
+            confirmOkBtn.addEventListener('click', () => {
+                if (pendingConfirmAction) pendingConfirmAction();
+                closeConfirmModal();
+            });
+
+            confirmCancelBtn.addEventListener('click', closeConfirmModal);
+
+            themeToggle.addEventListener('click', () => {
+                const currentTheme = document.documentElement.getAttribute('data-theme');
+                if (currentTheme === 'dark') {
+                    document.documentElement.removeAttribute('data-theme');
+                    themeToggle.textContent = '🌙 Mode';
+                } else {
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                    themeToggle.textContent = '☀️ Mode';
+                }
+            });
+        }
+    </script>
+</body>
+</html>
