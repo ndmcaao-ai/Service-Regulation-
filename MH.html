@@ -1,0 +1,1665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List of Major, Minor & Detailed Heads of Account - Interactive Quiz</title>
+    <style>
+        :root {
+            --bg-primary: #f8fafc;
+            --bg-card: #ffffff;
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --text-muted: #94a3b8;
+            --border-color: #e2e8f0;
+            --accent-primary: #0284c7;
+            --accent-hover: #0369a1;
+            --accent-light: #e0f2fe;
+            --success: #16a34a;
+            --success-light: #dcfce7;
+            --danger: #dc2626;
+            --danger-light: #fee2e2;
+            --warning: #d97706;
+            --warning-light: #fef3c7;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            --radius-sm: 0.375rem;
+            --radius-md: 0.5rem;
+            --radius-lg: 0.75rem;
+            --radius-full: 9999px;
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: #0f172a;
+            --bg-card: #1e293b;
+            --text-primary: #f8fafc;
+            --text-secondary: #cbd5e1;
+            --text-muted: #64748b;
+            --border-color: #334155;
+            --accent-primary: #38bdf8;
+            --accent-hover: #0284c7;
+            --accent-light: #075985;
+            --success: #22c55e;
+            --success-light: #14532d;
+            --danger: #ef4444;
+            --danger-light: #7f1d1d;
+            --warning: #f59e0b;
+            --warning-light: #78350f;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.5;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Sticky Header */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background-color: var(--bg-card);
+            border-bottom: 1px solid var(--border-color);
+            box-shadow: var(--shadow-sm);
+            padding: 0.75rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .header-title {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .header-title h1 {
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .badge {
+            background-color: var(--accent-light);
+            color: var(--accent-primary);
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 0.25rem 0.5rem;
+            border-radius: var(--radius-sm);
+            white-space: nowrap;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        /* Timer Widget */
+        .timer-box {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background-color: var(--accent-light);
+            color: var(--accent-primary);
+            padding: 0.4rem 0.8rem;
+            border-radius: var(--radius-md);
+            font-weight: 700;
+            font-size: 1rem;
+            font-family: monospace;
+            border: 1px solid var(--border-color);
+        }
+
+        .timer-box.warning {
+            background-color: var(--warning-light);
+            color: var(--warning);
+            animation: pulse 1s infinite;
+        }
+
+        .timer-box.danger {
+            background-color: var(--danger-light);
+            color: var(--danger);
+            animation: pulse 0.5s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
+        }
+
+        /* Action Buttons */
+        .icon-btn {
+            background: none;
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            cursor: pointer;
+            padding: 0.4rem 0.75rem;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.875rem;
+            font-weight: 600;
+            gap: 0.4rem;
+        }
+
+        .icon-btn:hover {
+            background-color: var(--border-color);
+        }
+
+        /* Main Container Layout */
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            margin: 1.5rem auto;
+            padding: 0 1rem;
+            display: grid;
+            grid-template-columns: 1fr 320px;
+            gap: 1.5rem;
+            flex: 1;
+        }
+
+        @media (max-width: 900px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Question Section */
+        .main-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 480px;
+        }
+
+        .question-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .question-number {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+
+        .bookmark-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--text-muted);
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            font-weight: 600;
+        }
+
+        .bookmark-btn.active {
+            color: var(--warning);
+        }
+
+        .question-text {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 1.25rem;
+            line-height: 1.6;
+        }
+
+        /* Options */
+        .options-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .option-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            padding: 0.875rem 1rem;
+            border: 1.5px solid var(--border-color);
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            background-color: var(--bg-card);
+            font-size: 0.95rem;
+            color: var(--text-primary);
+            position: relative;
+        }
+
+        .option-item:hover {
+            border-color: var(--accent-primary);
+            background-color: var(--accent-light);
+        }
+
+        .option-item.selected {
+            border-color: var(--accent-primary);
+            background-color: var(--accent-light);
+            font-weight: 500;
+        }
+
+        .option-prefix {
+            width: 1.5rem;
+            height: 1.5rem;
+            border-radius: 50%;
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 700;
+            flex-shrink: 0;
+            background-color: var(--bg-primary);
+        }
+
+        .option-item.selected .option-prefix {
+            background-color: var(--accent-primary);
+            color: #ffffff;
+            border-color: var(--accent-primary);
+        }
+
+        /* Review Mode Option Styles */
+        .option-item.correct {
+            border-color: var(--success) !important;
+            background-color: var(--success-light) !important;
+            color: var(--text-primary);
+        }
+
+        .option-item.correct .option-prefix {
+            background-color: var(--success);
+            color: #ffffff;
+            border-color: var(--success);
+        }
+
+        .option-item.wrong {
+            border-color: var(--danger) !important;
+            background-color: var(--danger-light) !important;
+            color: var(--text-primary);
+        }
+
+        .option-item.wrong .option-prefix {
+            background-color: var(--danger);
+            color: #ffffff;
+            border-color: var(--danger);
+        }
+
+        /* Explanation Box */
+        .explanation-box {
+            margin-top: 1rem;
+            padding: 1rem;
+            background-color: var(--accent-light);
+            border-left: 4px solid var(--accent-primary);
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .explanation-box strong {
+            color: var(--text-primary);
+            display: block;
+            margin-bottom: 0.25rem;
+        }
+
+        /* Navigation Bar */
+        .nav-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-color);
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.6rem 1.2rem;
+            border-radius: var(--radius-md);
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            border: 1px solid transparent;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4rem;
+        }
+
+        .btn-secondary {
+            background-color: var(--bg-primary);
+            border-color: var(--border-color);
+            color: var(--text-primary);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--border-color);
+        }
+
+        .btn-primary {
+            background-color: var(--accent-primary);
+            color: #ffffff;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--accent-hover);
+        }
+
+        .btn-danger {
+            background-color: var(--danger);
+            color: #ffffff;
+        }
+
+        .btn-danger:hover {
+            opacity: 0.9;
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* Sidebar Palette */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .palette-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 1.25rem;
+            box-shadow: var(--shadow-md);
+        }
+
+        .palette-header {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .filter-select {
+            padding: 0.25rem 0.5rem;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border-color);
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            font-size: 0.8rem;
+        }
+
+        .palette-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 0.5rem;
+            max-height: 360px;
+            overflow-y: auto;
+            padding-right: 0.25rem;
+        }
+
+        .palette-item {
+            aspect-ratio: 1;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-color);
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .palette-item:hover {
+            border-color: var(--accent-primary);
+        }
+
+        .palette-item.current {
+            outline: 2px solid var(--accent-primary);
+            outline-offset: 1px;
+        }
+
+        .palette-item.answered {
+            background-color: var(--accent-primary);
+            color: #ffffff;
+            border-color: var(--accent-primary);
+        }
+
+        .palette-item.bookmarked::after {
+            content: '★';
+            position: absolute;
+            top: 1px;
+            right: 2px;
+            font-size: 0.6rem;
+            color: var(--warning);
+        }
+
+        /* Review Mode Palette Status */
+        .palette-item.status-correct {
+            background-color: var(--success) !important;
+            color: #ffffff !important;
+            border-color: var(--success) !important;
+        }
+
+        .palette-item.status-wrong {
+            background-color: var(--danger) !important;
+            color: #ffffff !important;
+            border-color: var(--danger) !important;
+        }
+
+        .palette-item.status-unattempted {
+            background-color: var(--bg-primary) !important;
+            color: var(--text-muted) !important;
+        }
+
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-top: 1rem;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+        }
+
+        .legend-color {
+            width: 0.75rem;
+            height: 0.75rem;
+            border-radius: 2px;
+        }
+
+        /* Modal Score Card */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.6);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-card {
+            background-color: var(--bg-card);
+            border-radius: var(--radius-lg);
+            max-width: 500px;
+            width: 100%;
+            padding: 2rem;
+            box-shadow: var(--shadow-lg);
+            text-align: center;
+        }
+
+        .score-circle {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background-color: var(--accent-light);
+            color: var(--accent-primary);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 1rem auto;
+            border: 4px solid var(--accent-primary);
+        }
+
+        .score-value {
+            font-size: 2rem;
+            font-weight: 800;
+            line-height: 1;
+        }
+
+        .score-total {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.75rem;
+            margin: 1.5rem 0;
+        }
+
+        .stat-box {
+            background-color: var(--bg-primary);
+            padding: 0.75rem;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-color);
+        }
+
+        .stat-val {
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+
+        .stat-lbl {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        /* Custom Notification Toast */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background-color: var(--text-primary);
+            color: var(--bg-primary);
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--radius-md);
+            font-size: 0.9rem;
+            font-weight: 600;
+            box-shadow: var(--shadow-lg);
+            transition: transform 0.3s ease;
+            z-index: 2000;
+        }
+
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+        }
+
+        /* Transitions */
+        .fade-in {
+            animation: fadeIn 0.25s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-title">
+            <h1>List of Major, Minor & Detailed Heads of Account</h1>
+            <span class="badge">Official Accounting Quiz</span>
+        </div>
+        <div class="header-actions">
+            <div id="timer" class="timer-box">
+                ⏱️ <span id="timer-display">30:00</span>
+            </div>
+            <button class="icon-btn" id="restart-btn" title="Reshuffle and Restart">🔀 Restart</button>
+            <button class="icon-btn" id="theme-toggle" title="Toggle Dark/Light Mode">🌙 Theme</button>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Main Quiz Section -->
+        <main class="main-card fade-in" id="main-card">
+            <div>
+                <div class="question-header">
+                    <span class="question-number" id="q-number">Question 1 of 50</span>
+                    <button class="bookmark-btn" id="bookmark-btn" title="Bookmark Question">
+                        <span id="bookmark-icon">☆</span> Bookmark
+                    </button>
+                </div>
+                
+                <div class="question-text" id="q-text">
+                    Loading Question...
+                </div>
+
+                <div class="options-list" id="options-container">
+                    <!-- Dynamic Options -->
+                </div>
+
+                <div id="explanation-container" style="display: none;">
+                    <!-- Explanation shown post-submission -->
+                </div>
+            </div>
+
+            <!-- Navigation Bar -->
+            <div class="nav-controls">
+                <div>
+                    <button class="btn btn-secondary" id="prev-btn">← Previous</button>
+                    <button class="btn btn-secondary" id="clear-btn">Clear Answer</button>
+                </div>
+                <div>
+                    <button class="btn btn-primary" id="next-btn">Next →</button>
+                    <button class="btn btn-danger" id="submit-btn">Submit Quiz</button>
+                </div>
+            </div>
+        </main>
+
+        <!-- Sidebar / Palette -->
+        <aside class="sidebar">
+            <div class="palette-card">
+                <div class="palette-header">
+                    <span>Question Palette</span>
+                    <select id="palette-filter" class="filter-select">
+                        <option value="all">All (50)</option>
+                        <option value="answered">Answered</option>
+                        <option value="unanswered">Unanswered</option>
+                        <option value="bookmarked">Bookmarked</option>
+                    </select>
+                </div>
+
+                <div class="palette-grid" id="palette-grid">
+                    <!-- Grid Buttons generated dynamically -->
+                </div>
+
+                <div class="legend" id="legend-container">
+                    <div class="legend-item"><div class="legend-color" style="background:var(--accent-primary)"></div> Answered</div>
+                    <div class="legend-item"><div class="legend-color" style="background:var(--bg-primary); border:1px solid var(--border-color)"></div> Unanswered</div>
+                    <div class="legend-item"><div class="legend-color" style="outline:2px solid var(--accent-primary)"></div> Current</div>
+                    <div class="legend-item"><span style="color:var(--warning)">★</span> Bookmarked</div>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Score Card Modal -->
+    <div class="modal-overlay" id="score-modal">
+        <div class="modal-card fade-in">
+            <h2>Quiz Results</h2>
+            <p style="font-size: 0.875rem; color: var(--text-secondary); margin-top: 0.25rem;">List of Major, Minor & Detailed Heads of Account</p>
+
+            <div class="score-circle">
+                <span class="score-value" id="modal-score">0</span>
+                <span class="score-total">out of 50</span>
+            </div>
+
+            <p id="pass-fail-badge" style="font-weight: 700; font-size: 1.1rem; margin-bottom: 0.5rem;"></p>
+
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <div class="stat-val" id="stat-percentage" style="color: var(--accent-primary);">0%</div>
+                    <div class="stat-lbl">Percentage</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-val" id="stat-correct" style="color: var(--success);">0</div>
+                    <div class="stat-lbl">Correct</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-val" id="stat-incorrect" style="color: var(--danger);">0</div>
+                    <div class="stat-lbl">Incorrect</div>
+                </div>
+            </div>
+
+            <button class="btn btn-primary" id="review-btn" style="width: 100%;">Review Answers</button>
+        </div>
+    </div>
+
+    <div class="toast" id="toast-msg">Notification Message</div>
+
+    <script>
+        // Official 50 MCQs Data Bank based on LMMH & CGA Guidelines
+        const rawQuestions = [
+            {
+                question: "In the 4-digit Major Head coding convention of Central Government accounts, which number range is strictly assigned to 'Revenue Receipts'?",
+                options: [
+                    "0020 to 1999",
+                    "2011 to 3999",
+                    "4046 to 5999",
+                    "6001 to 7999"
+                ],
+                answer: 0,
+                explanation: "Under the List of Major and Minor Heads of Account (LMMH), 4-digit Major Heads from 0020 to 1999 represent Revenue Receipts (Tax & Non-Tax Revenue)."
+            },
+            {
+                question: "Which 4-digit Major Head range signifies 'Revenue Expenditure' in the standard accounting classification structure?",
+                options: [
+                    "0020 to 1999",
+                    "2011 to 3999",
+                    "4046 to 5999",
+                    "8001 to 8999"
+                ],
+                answer: 1,
+                explanation: "Major Heads ranging from 2011 to 3999 denote Revenue Expenditure across General, Social, and Economic Services."
+            },
+            {
+                question: "Major Heads from '4046 to 5999' represent which section of the Government Accounts?",
+                options: [
+                    "Revenue Receipts",
+                    "Capital Outlay / Capital Receipts",
+                    "Public Debt and Loans",
+                    "Public Account"
+                ],
+                answer: 1,
+                explanation: "Major Heads in the 4000 series (4046-5999) represent Capital Outlay (Capital Expenditure) and Capital Receipts."
+            },
+            {
+                question: "Under which 4-digit Major Head range are Public Debt and Loans & Advances accounted for in the Consolidated Fund?",
+                options: [
+                    "2011 to 3999",
+                    "4046 to 5999",
+                    "6001 to 7999",
+                    "8001 to 8999"
+                ],
+                answer: 2,
+                explanation: "Major Heads 6001 to 7999 are reserved for Public Debt, Loans & Advances, and Inter-State Settlement."
+            },
+            {
+                question: "What is the designated 4-digit Major Head code for the 'Contingency Fund of India'?",
+                options: [
+                    "8000",
+                    "8001",
+                    "7999",
+                    "9000"
+                ],
+                answer: 0,
+                explanation: "Major Head '8000' is exclusively assigned to the Contingency Fund of India established under Article 267 of the Constitution."
+            },
+            {
+                question: "Which numeric range of Major Heads covers the 'Public Account of India' (Small Savings, Provident Funds, Deposits, Remittances, etc.)?",
+                options: [
+                    "0020 to 1999",
+                    "4046 to 5999",
+                    "6001 to 7999",
+                    "8001 to 8999"
+                ],
+                answer: 3,
+                explanation: "Major Heads 8001 to 8999 represent Sector I to Sector L covering Public Account transactions."
+            },
+            {
+                question: "In the 15-digit standard chart of accounts code, what level of classification is represented by the 2-digit Object Head (e.g., 01, 11, 13)?",
+                options: [
+                    "Sub-Major Head",
+                    "Minor Head",
+                    "Detailed Head / Object Head",
+                    "Major Head"
+                ],
+                answer: 2,
+                explanation: "The last 2 digits of the 15-digit / 17-digit budget code represent the Object Head which describes the exact nature or object of expenditure (e.g., Salaries, Travel)."
+            },
+            {
+                question: "Under the standard Object Head classification, which code is universally assigned to 'Salaries'?",
+                options: [
+                    "01",
+                    "02",
+                    "11",
+                    "13"
+                ],
+                answer: 0,
+                explanation: "Object Head '01' is designated for Salaries across all government Ministries and Departments."
+            },
+            {
+                question: "Object Head code '11' in Central Government accounts represents which object of expenditure?",
+                options: [
+                    "Wages",
+                    "Domestic Travel Expenses / Travel Expenses",
+                    "Office Expenses",
+                    "Rent, Rates and Taxes"
+                ],
+                answer: 1,
+                explanation: "Object Head '11' is assigned to Domestic Travel Expenses / Travel Expenses."
+            },
+            {
+                question: "Which Object Head code is used for 'Office Expenses' (OE)?",
+                options: [
+                    "01",
+                    "06",
+                    "13",
+                    "20"
+                ],
+                answer: 2,
+                explanation: "Object Head '13' represents Office Expenses (OE) which includes general administrative expenses."
+            },
+            {
+                question: "Object Head code '20' is allocated for which of the following expenditure heads?",
+                options: [
+                    "Publications",
+                    "Other Administrative Expenses",
+                    "Rent, Rates and Taxes",
+                    "Overtime Allowance"
+                ],
+                answer: 2,
+                explanation: "Object Head '20' stands for 'Rent, Rates and Taxes'."
+            },
+            {
+                question: "In the 6-tier accounting structure of Government accounts, what is the correct hierarchical order from top to bottom?",
+                options: [
+                    "Sector -> Major Head -> Sub-Major Head -> Minor Head -> Sub-Head -> Detailed/Object Head",
+                    "Major Head -> Sector -> Minor Head -> Sub-Head -> Object Head -> Detailed Head",
+                    "Minor Head -> Major Head -> Sub-Major Head -> Sub-Head -> Object Head",
+                    "Detailed Head -> Sub-Head -> Minor Head -> Sub-Major Head -> Major Head"
+                ],
+                answer: 0,
+                explanation: "The official hierarchy is Sector, Major Head (4 digits), Sub-Major Head (2 digits), Minor Head (3 digits), Sub-Head (2 digits), and Detailed/Object Head (2 digits)."
+            },
+            {
+                question: "Who is the sole competent authority to open a new Major Head or Sub-Major Head in the List of Major and Minor Heads of Account?",
+                options: [
+                    "Financial Adviser of the Ministry concerned",
+                    "Controller General of Accounts (CGA) on the advice of Comptroller and Auditor General (C&AG)",
+                    "Secretary (Expenditure) independently",
+                    "Governor of the Reserve Bank of India"
+                ],
+                answer: 1,
+                explanation: "Under Article 150 of the Constitution and CGA guidelines, opening a new Major Head or Sub-Major Head requires approval of CGA on the advice of C&AG."
+            },
+            {
+                question: "Which 3-digit Minor Head code is reserved across all Major Heads for 'Other Expenditure'?",
+                options: [
+                    "001",
+                    "101",
+                    "800",
+                    "900"
+                ],
+                answer: 2,
+                explanation: "Minor Head '800' is universally designated as 'Other Expenditure' under various Major Heads when specific minor heads do not cover the item."
+            },
+            {
+                question: "Minor Head code '101' under functional Major Heads usually represents which standard activity?",
+                options: [
+                    "Direction and Administration",
+                    "Special Component Plan for Scheduled Castes",
+                    "Deduct Recoveries",
+                    "Tribal Sub-Plan"
+                ],
+                answer: 0,
+                explanation: "Minor Head '101' is standardized across functional Major Heads to represent 'Direction and Administration'."
+            },
+            {
+                question: "What does Minor Head code '900' signify when used under expenditure Major Heads?",
+                options: [
+                    "Secret Service Expenditure",
+                    "Deduct - Refunds / Recoveries of Overpayments",
+                    "Other Receipts",
+                    "Capital Outlay"
+                ],
+                answer: 1,
+                explanation: "Minor Head '900' is used for 'Deduct - Deduct Recoveries / Refunds' or adjusting receipts in reduction of expenditure."
+            },
+            {
+                question: "How many digits make up a standard Major Head code in the Government Account classification?",
+                options: [
+                    "2 digits",
+                    "3 digits",
+                    "4 digits",
+                    "6 digits"
+                ],
+                answer: 2,
+                explanation: "A Major Head is always represented by a 4-digit numeric code."
+            },
+            {
+                question: "How many digits represent a Sub-Major Head in the standard 15-digit budget classification code?",
+                options: [
+                    "2 digits",
+                    "3 digits",
+                    "4 digits",
+                    "5 digits"
+                ],
+                answer: 0,
+                explanation: "Sub-Major Head is represented by 2 digits immediately following the 4-digit Major Head."
+            },
+            {
+                question: "How many digits represent a Minor Head in the classification structure?",
+                options: [
+                    "2 digits",
+                    "3 digits",
+                    "4 digits",
+                    "6 digits"
+                ],
+                answer: 1,
+                explanation: "Minor Heads are represented by a 3-digit code."
+            },
+            {
+                question: "What is the numeric relationship between a Revenue Receipt Major Head and its corresponding Revenue Expenditure Major Head for a functional service?",
+                options: [
+                    "Revenue Expenditure Major Head is usually obtained by adding 2000 to the Revenue Receipt Major Head",
+                    "Revenue Receipt Major Head is obtained by adding 1000 to Expenditure",
+                    "There is no numeric correlation between them",
+                    "Expenditure Head is double the Receipt Head code"
+                ],
+                answer: 0,
+                explanation: "Generally, adding '2000' to the 4-digit Revenue Receipt Major Head gives the corresponding Revenue Expenditure Major Head (e.g., 0029 Land Revenue -> 2029 Land Revenue)."
+            },
+            {
+                question: "Adding '2000' to a Revenue Expenditure Major Head code generally yields which corresponding Major Head?",
+                options: [
+                    "Revenue Receipt Major Head",
+                    "Capital Expenditure / Outlay Major Head",
+                    "Public Debt Major Head",
+                    "Loans and Advances Major Head"
+                ],
+                answer: 1,
+                explanation: "Adding 2000 to a Revenue Expenditure Major Head (2000 series) typically gives the corresponding Capital Outlay Major Head in the 4000 series (e.g., 2210 Medical & Public Health -> 4210 Capital Outlay on Medical & Public Health)."
+            },
+            {
+                question: "Object Head '31' is designated for which type of payment?",
+                options: [
+                    "Grants-in-aid - General",
+                    "Grants for Creation of Capital Assets",
+                    "Salaries",
+                    "Major Works"
+                ],
+                answer: 0,
+                explanation: "Object Head '31' represents 'Grants-in-aid - General'."
+            },
+            {
+                question: "Which Object Head code is used specifically for 'Grants for Creation of Capital Assets'?",
+                options: [
+                    "31",
+                    "32",
+                    "35",
+                    "36"
+                ],
+                answer: 2,
+                explanation: "Object Head '35' is assigned to 'Grants for Creation of Capital Assets'."
+            },
+            {
+                question: "Object Head '53' is reserved for expenditure on which item?",
+                options: [
+                    "Major Works",
+                    "Minor Works",
+                    "Motor Vehicles",
+                    "Machinery and Equipment"
+                ],
+                answer: 0,
+                explanation: "Object Head '53' is assigned to 'Major Works'."
+            },
+            {
+                question: "Which Object Head code represents expenditure incurred on 'Motor Vehicles'?",
+                options: [
+                    "50",
+                    "51",
+                    "52",
+                    "53"
+                ],
+                answer: 1,
+                explanation: "Object Head '51' represents expenditure on 'Motor Vehicles'."
+            },
+            {
+                question: "Object Head code '27' is allocated for which category of expenditure?",
+                options: [
+                    "Minor Works",
+                    "Supplies and Materials",
+                    "Professional Services",
+                    "Advertising and Publicity"
+                ],
+                answer: 0,
+                explanation: "Object Head '27' stands for 'Minor Works'."
+            },
+            {
+                question: "Object Head code '28' is allocated for which category of expenditure?",
+                options: [
+                    "Professional Services",
+                    "Supplies and Materials",
+                    "Other Administrative Expenses",
+                    "Scholarships/Stipends"
+                ],
+                answer: 0,
+                explanation: "Object Head '28' stands for 'Professional Services'."
+            },
+            {
+                question: "In the 15-digit chart of accounts, what does the 2-digit Sub-Head code primarily identify?",
+                options: [
+                    "The object of payment",
+                    "The Scheme / Non-Scheme programme under a Minor Head",
+                    "The Constitutional Sector",
+                    "The Pay and Accounts Office number"
+                ],
+                answer: 1,
+                explanation: "Sub-Head identifies the specific scheme or programme operated under a Minor Head."
+            },
+            {
+                question: "Under the standard object head framework, '06' represents which head?",
+                options: [
+                    "Medical Treatment",
+                    "Overtime Allowance (OTA)",
+                    "Wages",
+                    "Rewards"
+                ],
+                answer: 1,
+                explanation: "Object Head '06' is designated for 'Overtime Allowance (OTA)'."
+            },
+            {
+                question: "Object Head code '02' is allocated for which personal claim type?",
+                options: [
+                    "Salaries",
+                    "Wages",
+                    "Dearness Allowance",
+                    "Leave Travel Concession"
+                ],
+                answer: 1,
+                explanation: "Object Head '02' stands for 'Wages'."
+            },
+            {
+                question: "Under Major Head 2055 (Police), which Minor Head code normally represents 'Central Reserve Police' (CRPF)?",
+                options: [
+                    "101",
+                    "104",
+                    "109",
+                    "111"
+                ],
+                answer: 1,
+                explanation: "Minor Head '104' under Major Head 2055 represents Civil Armed Police / Central Reserve Police."
+            },
+            {
+                question: "Major Head '2071' in Union accounts deals with which critical expenditure?",
+                options: [
+                    "Administration of Justice",
+                    "Pensions and Other Retirement Benefits",
+                    "Public Works",
+                    "Interest Payments"
+                ],
+                answer: 1,
+                explanation: "Major Head 2071 is dedicated to 'Pensions and Other Retirement Benefits'."
+            },
+            {
+                question: "Which 4-digit Major Head code is assigned to 'Interest Payments' on Public Debt and obligations?",
+                options: [
+                    "2048",
+                    "2049",
+                    "2050",
+                    "2070"
+                ],
+                answer: 1,
+                explanation: "Major Head '2049' represents 'Interest Payments'."
+            },
+            {
+                question: "Major Head '2014' accounts for expenditure under which head?",
+                options: [
+                    "Elections",
+                    "Administration of Justice",
+                    "State Legislature",
+                    "Audit"
+                ],
+                answer: 1,
+                explanation: "Major Head '2014' represents 'Administration of Justice'."
+            },
+            {
+                question: "Expenditure on 'Elections' is accounted for under which 4-digit Major Head?",
+                options: [
+                    "2015",
+                    "2014",
+                    "2070",
+                    "2055"
+                ],
+                answer: 0,
+                explanation: "Major Head '2015' is assigned to 'Elections'."
+            },
+            {
+                question: "Which Major Head code handles 'Tax on Income Other than Corporation Tax' (Personal Income Tax receipts)?",
+                options: [
+                    "0020",
+                    "0021",
+                    "0037",
+                    "0044"
+                ],
+                answer: 1,
+                explanation: "Major Head '0021' is assigned to 'Taxes on Income Other than Corporation Tax'."
+            },
+            {
+                question: "Corporation Tax receipts are credited under which 4-digit Revenue Receipt Major Head?",
+                options: [
+                    "0020",
+                    "0021",
+                    "0032",
+                    "0037"
+                ],
+                answer: 0,
+                explanation: "Major Head '0020' represents 'Corporation Tax'."
+            },
+            {
+                question: "Receipts under Central Goods and Services Tax (CGST) are classified under which Major Head?",
+                options: [
+                    "0005",
+                    "0037",
+                    "0006",
+                    "0038"
+                ],
+                answer: 0,
+                explanation: "Major Head '0005' is assigned to 'Central Goods and Services Tax (CGST)'."
+            },
+            {
+                question: "Integrated Goods and Services Tax (IGST) is credited under which Major Head code?",
+                options: [
+                    "0005",
+                    "0006",
+                    "0007",
+                    "0008"
+                ],
+                answer: 1,
+                explanation: "Major Head '0006' represents 'Integrated Goods and Services Tax (IGST)'."
+            },
+            {
+                question: "Which Major Head in Sector C of Revenue Receipts accounts for 'Customs Duty' collections?",
+                options: [
+                    "0037",
+                    "0038",
+                    "0039",
+                    "0044"
+                ],
+                answer: 0,
+                explanation: "Major Head '0037' represents 'Customs'."
+            },
+            {
+                question: "Union Excise Duties receipts are classified under which 4-digit Major Head?",
+                options: [
+                    "0037",
+                    "0038",
+                    "0044",
+                    "0045"
+                ],
+                answer: 1,
+                explanation: "Major Head '0038' represents 'Union Excise Duties'."
+            },
+            {
+                question: "Major Head '8009' in Public Account represents which fund/account?",
+                options: [
+                    "State Provident Funds",
+                    "Special Deposits",
+                    "Central Road Fund",
+                    "General Reserve Funds"
+                ],
+                answer: 0,
+                explanation: "Major Head '8009' represents 'State Provident Funds' (e.g., GPF/CPF)."
+            },
+            {
+                question: "Under Public Account, Major Head '8222' is used for which purpose?",
+                options: [
+                    "Sinking Funds",
+                    "Civil Deposits",
+                    "Postal Receipts",
+                    "Cash Balance Investment Account"
+                ],
+                answer: 0,
+                explanation: "Major Head '8222' represents 'Sinking Funds'."
+            },
+            {
+                question: "Under Sector K of Public Account (Deposits and Advances), which Major Head represents 'Civil Deposits'?",
+                options: [
+                    "8443",
+                    "8448",
+                    "8009",
+                    "8658"
+                ],
+                answer: 0,
+                explanation: "Major Head '8443' is assigned to 'Civil Deposits' (including security deposits, earnest money, etc.)."
+            },
+            {
+                question: "Which Major Head under Sector L (Suspense and Miscellaneous) is used for 'Suspense Accounts' in PAOs?",
+                options: [
+                    "8658",
+                    "8670",
+                    "8675",
+                    "8782"
+                ],
+                answer: 0,
+                explanation: "Major Head '8658' is titled 'Suspense Accounts' covering Pay and Accounts Office Suspense, Cheques and Bills, etc."
+            },
+            {
+                question: "Major Head '8675' in Central Accounts is designated for which account maintained with RBI?",
+                options: [
+                    "Reserve Bank Deposits",
+                    "Cheques and Bills",
+                    "Departmental Balances",
+                    "Coinage Accounts"
+                ],
+                answer: 0,
+                explanation: "Major Head '8675' represents 'Reserve Bank Deposits'."
+            },
+            {
+                question: "Which Object Head code represents 'Secret Service Expenditure'?",
+                options: [
+                    "22",
+                    "23",
+                    "24",
+                    "25"
+                ],
+                answer: 2,
+                explanation: "Object Head '24' represents 'Secret Service Expenditure'."
+            },
+            {
+                question: "Who approves the opening of new Minor Heads under an existing Major/Sub-Major Head in Union Accounts?",
+                options: [
+                    "Controller General of Accounts (CGA) in consultation with C&AG",
+                    "Head of Department concerned",
+                    "Pay and Accounts Officer",
+                    "Budget Division, Ministry of Finance unilaterally"
+                ],
+                answer: 0,
+                explanation: "New Minor Heads can be opened only by the Controller General of Accounts in consultation with the C&AG."
+            },
+            {
+                question: "Who has delegated powers to open new Sub-Heads and Detailed Heads under established Minor Heads?",
+                options: [
+                    "Administrative Ministries / Chief Controller of Accounts (CCA) in consultation with Budget Division",
+                    "District Treasury Officer",
+                    "Reserve Bank Manager",
+                    "Statutory Audit Officer only"
+                ],
+                answer: 0,
+                explanation: "Administrative Ministries / CCAs / Financial Advisers in consultation with Ministry of Finance (Budget Division) can open new Sub-Heads/Detailed Heads."
+            },
+            {
+                question: "Which Sector letter prefix represents 'General Services' under Revenue Expenditure in accounting classification?",
+                options: [
+                    "Sector A",
+                    "Sector B",
+                    "Sector C",
+                    "Sector D"
+                ],
+                answer: 0,
+                explanation: "Sector A covers 'General Services' under Revenue Expenditure (MH 2011 to 2075)."
+            }
+        ];
+
+        let questions = [];
+        let currentQuestionIdx = 0;
+        let userAnswers = [];
+        let bookmarked = [];
+        let isSubmitted = false;
+        let timerInterval = null;
+        let timeRemaining = 30 * 60; // 30 minutes in seconds
+
+        // DOM Element Caches
+        const mainCard = document.getElementById('main-card');
+        const qNumberEl = document.getElementById('q-number');
+        const qTextEl = document.getElementById('q-text');
+        const optionsContainer = document.getElementById('options-container');
+        const explanationContainer = document.getElementById('explanation-container');
+        const bookmarkBtn = document.getElementById('bookmark-btn');
+        const bookmarkIcon = document.getElementById('bookmark-icon');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const clearBtn = document.getElementById('clear-btn');
+        const submitBtn = document.getElementById('submit-btn');
+        const restartBtn = document.getElementById('restart-btn');
+        const paletteGrid = document.getElementById('palette-grid');
+        const paletteFilter = document.getElementById('palette-filter');
+        const timerDisplay = document.getElementById('timer-display');
+        const timerBox = document.getElementById('timer');
+        const themeToggle = document.getElementById('theme-toggle');
+        const scoreModal = document.getElementById('score-modal');
+        const reviewBtn = document.getElementById('review-btn');
+        const toastMsg = document.getElementById('toast-msg');
+
+        // Fisher-Yates Shuffle Algorithm
+        function shuffleArray(array) {
+            const arr = [...array];
+            for (let i = arr.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [arr[i], arr[j]] = [arr[j], arr[i]];
+            }
+            return arr;
+        }
+
+        // Initialize / Reshuffle Quiz Data
+        function setupQuizData() {
+            // Shuffle question sequence
+            const shuffledQuestions = shuffleArray(rawQuestions);
+            
+            questions = shuffledQuestions.map((q, idx) => {
+                // Shuffle options for each question while maintaining correct answer index
+                const originalOptions = q.options.map((opt, i) => ({ text: opt, isCorrect: i === q.answer }));
+                const shuffledOpts = shuffleArray(originalOptions);
+                const newCorrectIdx = shuffledOpts.findIndex(opt => opt.isCorrect);
+
+                return {
+                    id: idx + 1,
+                    question: q.question,
+                    options: shuffledOpts.map(o => o.text),
+                    answer: newCorrectIdx,
+                    explanation: q.explanation
+                };
+            });
+
+            userAnswers = new Array(questions.length).fill(null);
+            bookmarked = new Array(questions.length).fill(false);
+            isSubmitted = false;
+            currentQuestionIdx = 0;
+            timeRemaining = 30 * 60;
+
+            // Reset UI
+            submitBtn.style.display = 'inline-flex';
+            clearBtn.style.display = 'inline-flex';
+            timerBox.className = 'timer-box';
+            document.getElementById('legend-container').innerHTML = `
+                <div class="legend-item"><div class="legend-color" style="background:var(--accent-primary)"></div> Answered</div>
+                <div class="legend-item"><div class="legend-color" style="background:var(--bg-primary); border:1px solid var(--border-color)"></div> Unanswered</div>
+                <div class="legend-item"><div class="legend-color" style="outline:2px solid var(--accent-primary)"></div> Current</div>
+                <div class="legend-item"><span style="color:var(--warning)">★</span> Bookmarked</div>
+            `;
+
+            if (timerInterval) clearInterval(timerInterval);
+            initTimer();
+            renderPalette();
+            loadQuestion(0);
+        }
+
+        function showToast(text) {
+            toastMsg.textContent = text;
+            toastMsg.classList.add('show');
+            setTimeout(() => {
+                toastMsg.classList.remove('show');
+            }, 2500);
+        }
+
+        function initTimer() {
+            updateTimerDisplay();
+            timerInterval = setInterval(() => {
+                if (timeRemaining <= 0) {
+                    clearInterval(timerInterval);
+                    autoSubmitQuiz();
+                    return;
+                }
+                timeRemaining--;
+                updateTimerDisplay();
+            }, 1000);
+        }
+
+        function updateTimerDisplay() {
+            const mins = Math.floor(timeRemaining / 60);
+            const secs = timeRemaining % 60;
+            timerDisplay.textContent = `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+
+            if (timeRemaining <= 300 && timeRemaining > 60) {
+                timerBox.className = 'timer-box warning';
+            } else if (timeRemaining <= 60) {
+                timerBox.className = 'timer-box danger';
+            }
+        }
+
+        function loadQuestion(idx) {
+            currentQuestionIdx = idx;
+            const q = questions[idx];
+
+            // Animate transition
+            mainCard.classList.remove('fade-in');
+            void mainCard.offsetWidth;
+            mainCard.classList.add('fade-in');
+
+            qNumberEl.textContent = `Question ${idx + 1} of ${questions.length}`;
+            qTextEl.textContent = q.question;
+
+            // Bookmark Status
+            if (bookmarked[idx]) {
+                bookmarkBtn.classList.add('active');
+                bookmarkIcon.textContent = '★';
+            } else {
+                bookmarkBtn.classList.remove('active');
+                bookmarkIcon.textContent = '☆';
+            }
+
+            // Render Options
+            optionsContainer.innerHTML = '';
+            const labels = ['A', 'B', 'C', 'D'];
+
+            q.options.forEach((opt, optIdx) => {
+                const optEl = document.createElement('div');
+                optEl.className = 'option-item';
+                
+                if (userAnswers[idx] === optIdx) {
+                    optEl.classList.add('selected');
+                }
+
+                // Post-submission styling
+                if (isSubmitted) {
+                    if (optIdx === q.answer) {
+                        optEl.classList.add('correct');
+                    }
+                    if (userAnswers[idx] === optIdx && userAnswers[idx] !== q.answer) {
+                        optEl.classList.add('wrong');
+                    }
+                }
+
+                optEl.innerHTML = `
+                    <div class="option-prefix">${labels[optIdx]}</div>
+                    <div style="flex:1;">${opt}</div>
+                `;
+
+                if (!isSubmitted) {
+                    optEl.addEventListener('click', () => selectOption(optIdx));
+                }
+
+                optionsContainer.appendChild(optEl);
+            });
+
+            // Explanation Card
+            if (isSubmitted) {
+                explanationContainer.style.display = 'block';
+                explanationContainer.className = 'explanation-box';
+                explanationContainer.innerHTML = `
+                    <strong>Official LMMH / CGA Rule Reference:</strong>
+                    ${q.explanation}
+                `;
+            } else {
+                explanationContainer.style.display = 'none';
+            }
+
+            // Controls
+            prevBtn.disabled = idx === 0;
+            nextBtn.disabled = idx === questions.length - 1;
+
+            updatePaletteCurrent();
+        }
+
+        function selectOption(optIdx) {
+            userAnswers[currentQuestionIdx] = optIdx;
+            loadQuestion(currentQuestionIdx);
+            renderPalette();
+        }
+
+        function clearSelection() {
+            if (isSubmitted) return;
+            userAnswers[currentQuestionIdx] = null;
+            loadQuestion(currentQuestionIdx);
+            renderPalette();
+            showToast("Answer cleared for this question.");
+        }
+
+        function toggleBookmark() {
+            bookmarked[currentQuestionIdx] = !bookmarked[currentQuestionIdx];
+            loadQuestion(currentQuestionIdx);
+            renderPalette();
+            showToast(bookmarked[currentQuestionIdx] ? "Question bookmarked" : "Bookmark removed");
+        }
+
+        function renderPalette() {
+            paletteGrid.innerHTML = '';
+            const filter = paletteFilter.value;
+
+            questions.forEach((q, idx) => {
+                const isAnswered = userAnswers[idx] !== null;
+                const isBookmarked = bookmarked[idx];
+
+                if (filter === 'answered' && !isAnswered) return;
+                if (filter === 'unanswered' && isAnswered) return;
+                if (filter === 'bookmarked' && !isBookmarked) return;
+
+                const item = document.createElement('button');
+                item.className = 'palette-item';
+                item.textContent = idx + 1;
+
+                if (idx === currentQuestionIdx) {
+                    item.classList.add('current');
+                }
+
+                if (!isSubmitted) {
+                    if (isAnswered) item.classList.add('answered');
+                } else {
+                    if (userAnswers[idx] === q.answer) {
+                        item.classList.add('status-correct');
+                    } else if (userAnswers[idx] !== null) {
+                        item.classList.add('status-wrong');
+                    } else {
+                        item.classList.add('status-unattempted');
+                    }
+                }
+
+                if (isBookmarked) item.classList.add('bookmarked');
+
+                item.addEventListener('click', () => loadQuestion(idx));
+                paletteGrid.appendChild(item);
+            });
+        }
+
+        function updatePaletteCurrent() {
+            const items = paletteGrid.querySelectorAll('.palette-item');
+            items.forEach(item => {
+                if (parseInt(item.textContent) === currentQuestionIdx + 1) {
+                    item.classList.add('current');
+                } else {
+                    item.classList.remove('current');
+                }
+            });
+        }
+
+        function submitQuiz() {
+            const unansweredCount = userAnswers.filter(a => a === null).length;
+            let confirmMsg = "Are you sure you want to submit the quiz?";
+            if (unansweredCount > 0) {
+                confirmMsg = `You have ${unansweredCount} unanswered question(s). Are you sure you want to submit?`;
+            }
+
+            if (confirm(confirmMsg)) {
+                finalizeQuiz();
+            }
+        }
+
+        function autoSubmitQuiz() {
+            showToast("Time expired! Submitting automatically...");
+            finalizeQuiz();
+        }
+
+        function finalizeQuiz() {
+            isSubmitted = true;
+            clearInterval(timerInterval);
+
+            let score = 0;
+            let correctCount = 0;
+            let incorrectCount = 0;
+
+            questions.forEach((q, idx) => {
+                if (userAnswers[idx] === q.answer) {
+                    score++;
+                    correctCount++;
+                } else if (userAnswers[idx] !== null) {
+                    incorrectCount++;
+                }
+            });
+
+            const percentage = ((score / questions.length) * 100).toFixed(1);
+
+            // Populate Modal Results
+            document.getElementById('modal-score').textContent = score;
+            document.getElementById('stat-percentage').textContent = `${percentage}%`;
+            document.getElementById('stat-correct').textContent = correctCount;
+            document.getElementById('stat-incorrect').textContent = incorrectCount;
+
+            const badge = document.getElementById('pass-fail-badge');
+            if (percentage >= 60) {
+                badge.textContent = "PASSED - Excellent Proficiency!";
+                badge.style.color = "var(--success)";
+            } else {
+                badge.textContent = "NEEDS IMPROVEMENT - Review Accounting Rules";
+                badge.style.color = "var(--danger)";
+            }
+
+            scoreModal.classList.add('active');
+
+            // Post-submission UI updates
+            submitBtn.style.display = 'none';
+            clearBtn.style.display = 'none';
+            timerDisplay.textContent = 'Submitted';
+
+            document.getElementById('legend-container').innerHTML = `
+                <div class="legend-item"><div class="legend-color" style="background:var(--success)"></div> Correct</div>
+                <div class="legend-item"><div class="legend-color" style="background:var(--danger)"></div> Incorrect</div>
+                <div class="legend-item"><div class="legend-color" style="background:var(--bg-primary); border:1px solid var(--border-color)"></div> Unattempted</div>
+            `;
+
+            renderPalette();
+            loadQuestion(currentQuestionIdx);
+        }
+
+        // Event Listeners Setup
+        function setupEventListeners() {
+            prevBtn.addEventListener('click', () => {
+                if (currentQuestionIdx > 0) loadQuestion(currentQuestionIdx - 1);
+            });
+
+            nextBtn.addEventListener('click', () => {
+                if (currentQuestionIdx < questions.length - 1) loadQuestion(currentQuestionIdx + 1);
+            });
+
+            clearBtn.addEventListener('click', clearSelection);
+            bookmarkBtn.addEventListener('click', toggleBookmark);
+            submitBtn.addEventListener('click', submitQuiz);
+
+            restartBtn.addEventListener('click', () => {
+                if (confirm("Restart quiz? This will reshuffle all questions and reset your answers.")) {
+                    setupQuizData();
+                    showToast("Quiz reshuffled and restarted!");
+                }
+            });
+
+            paletteFilter.addEventListener('change', renderPalette);
+
+            reviewBtn.addEventListener('click', () => {
+                scoreModal.classList.remove('active');
+            });
+
+            // Theme Toggle
+            themeToggle.addEventListener('click', () => {
+                const currentTheme = document.documentElement.getAttribute('data-theme');
+                if (currentTheme === 'dark') {
+                    document.documentElement.removeAttribute('data-theme');
+                    themeToggle.textContent = '🌙 Theme';
+                } else {
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                    themeToggle.textContent = '☀️ Theme';
+                }
+            });
+        }
+
+        // Start Application on Load
+        window.addEventListener('DOMContentLoaded', () => {
+            setupQuizData();
+            setupEventListeners();
+        });
+    </script>
+</body>
+</html>
