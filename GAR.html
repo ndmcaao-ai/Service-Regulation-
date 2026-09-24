@@ -1,0 +1,1625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Government Accounting Rules, 1990 - Interactive Quiz</title>
+    <style>
+        :root {
+            --bg-primary: #f8fafc;
+            --bg-card: #ffffff;
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --text-muted: #94a3b8;
+            --border-color: #cbd5e1;
+            --accent-primary: #1e40af;
+            --accent-hover: #1e3a8a;
+            --accent-light: #eff6ff;
+            --success: #15803d;
+            --success-light: #f0fdf4;
+            --danger: #b91c1c;
+            --danger-light: #fef2f2;
+            --warning: #b45309;
+            --warning-light: #fffbeb;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+            --radius-sm: 0.375rem;
+            --radius-md: 0.5rem;
+            --radius-lg: 0.75rem;
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: #0f172a;
+            --bg-card: #1e293b;
+            --text-primary: #f8fafc;
+            --text-secondary: #cbd5e1;
+            --text-muted: #64748b;
+            --border-color: #334155;
+            --accent-primary: #3b82f6;
+            --accent-hover: #60a5fa;
+            --accent-light: #1e3a8a;
+            --success: #22c55e;
+            --success-light: #14532d;
+            --danger: #ef4444;
+            --danger-light: #7f1d1d;
+            --warning: #f59e0b;
+            --warning-light: #78350f;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.5;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background-color: var(--bg-card);
+            border-bottom: 2px solid var(--border-color);
+            box-shadow: var(--shadow-sm);
+            padding: 0.75rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .header-title h1 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .header-title .subtitle {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            font-weight: 600;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .timer-box {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            background-color: var(--accent-light);
+            color: var(--accent-primary);
+            padding: 0.4rem 0.8rem;
+            border-radius: var(--radius-md);
+            font-weight: 700;
+            font-size: 1rem;
+            font-family: monospace;
+            border: 1px solid var(--border-color);
+        }
+
+        .timer-box.warning {
+            background-color: var(--danger-light);
+            color: var(--danger);
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            margin: 1.5rem auto;
+            padding: 0 1rem;
+            display: grid;
+            grid-template-columns: 1fr 320px;
+            gap: 1.5rem;
+            flex: 1;
+        }
+
+        @media (max-width: 900px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .main-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 500px;
+        }
+
+        .question-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .question-number {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--text-secondary);
+        }
+
+        .bookmark-btn {
+            background: none;
+            border: 1px solid var(--border-color);
+            padding: 0.3rem 0.6rem;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            font-weight: 600;
+        }
+
+        .bookmark-btn.active {
+            background-color: var(--warning-light);
+            color: var(--warning);
+            border-color: var(--warning);
+        }
+
+        .question-text {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 1.25rem;
+            line-height: 1.6;
+        }
+
+        .options-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .option-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            padding: 0.85rem 1rem;
+            border: 1.5px solid var(--border-color);
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            background-color: var(--bg-card);
+            font-size: 0.95rem;
+            color: var(--text-primary);
+        }
+
+        .option-item:hover {
+            border-color: var(--accent-primary);
+            background-color: var(--accent-light);
+        }
+
+        .option-item.selected {
+            border-color: var(--accent-primary);
+            background-color: var(--accent-light);
+            font-weight: 600;
+        }
+
+        .option-prefix {
+            width: 1.5rem;
+            height: 1.5rem;
+            border-radius: 50%;
+            border: 1.5px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 700;
+            flex-shrink: 0;
+            background-color: var(--bg-primary);
+        }
+
+        .option-item.selected .option-prefix {
+            background-color: var(--accent-primary);
+            color: #ffffff;
+            border-color: var(--accent-primary);
+        }
+
+        .option-item.correct {
+            border-color: var(--success) !important;
+            background-color: var(--success-light) !important;
+        }
+
+        .option-item.correct .option-prefix {
+            background-color: var(--success);
+            color: #ffffff;
+            border-color: var(--success);
+        }
+
+        .option-item.wrong {
+            border-color: var(--danger) !important;
+            background-color: var(--danger-light) !important;
+        }
+
+        .option-item.wrong .option-prefix {
+            background-color: var(--danger);
+            color: #ffffff;
+            border-color: var(--danger);
+        }
+
+        .explanation-box {
+            margin-top: 1rem;
+            padding: 1rem;
+            background-color: var(--accent-light);
+            border-left: 4px solid var(--accent-primary);
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .explanation-box strong {
+            color: var(--text-primary);
+            display: block;
+            margin-bottom: 0.25rem;
+        }
+
+        .nav-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-color);
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.55rem 1.1rem;
+            border-radius: var(--radius-md);
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            border: 1px solid transparent;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4rem;
+        }
+
+        .btn-secondary {
+            background-color: var(--bg-primary);
+            border-color: var(--border-color);
+            color: var(--text-primary);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--border-color);
+        }
+
+        .btn-primary {
+            background-color: var(--accent-primary);
+            color: #ffffff;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--accent-hover);
+        }
+
+        .btn-danger {
+            background-color: var(--danger);
+            color: #ffffff;
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .palette-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 1.25rem;
+            box-shadow: var(--shadow-md);
+        }
+
+        .palette-header {
+            font-size: 0.95rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .filter-select {
+            padding: 0.25rem 0.5rem;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border-color);
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .palette-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 0.5rem;
+            max-height: 360px;
+            overflow-y: auto;
+            padding-right: 0.25rem;
+        }
+
+        .palette-item {
+            aspect-ratio: 1;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-color);
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            font-size: 0.85rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .palette-item.current {
+            outline: 2px solid var(--accent-primary);
+            outline-offset: 1px;
+        }
+
+        .palette-item.answered {
+            background-color: var(--accent-primary);
+            color: #ffffff;
+            border-color: var(--accent-primary);
+        }
+
+        .palette-item.bookmarked::after {
+            content: '★';
+            position: absolute;
+            top: 0px;
+            right: 2px;
+            font-size: 0.65rem;
+            color: var(--warning);
+        }
+
+        .palette-item.status-correct {
+            background-color: var(--success) !important;
+            color: #ffffff !important;
+            border-color: var(--success) !important;
+        }
+
+        .palette-item.status-wrong {
+            background-color: var(--danger) !important;
+            color: #ffffff !important;
+            border-color: var(--danger) !important;
+        }
+
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-top: 1rem;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            font-weight: 600;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+        }
+
+        .legend-color {
+            width: 0.75rem;
+            height: 0.75rem;
+            border-radius: 2px;
+        }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.65);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-card {
+            background-color: var(--bg-card);
+            border-radius: var(--radius-lg);
+            max-width: 480px;
+            width: 100%;
+            padding: 2rem;
+            box-shadow: var(--shadow-lg);
+            text-align: center;
+        }
+
+        .score-circle {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            background-color: var(--accent-light);
+            color: var(--accent-primary);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 1rem auto;
+            border: 4px solid var(--accent-primary);
+        }
+
+        .score-value {
+            font-size: 2rem;
+            font-weight: 800;
+            line-height: 1;
+        }
+
+        .score-total {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.75rem;
+            margin: 1.5rem 0;
+        }
+
+        .stat-box {
+            background-color: var(--bg-primary);
+            padding: 0.75rem;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-color);
+        }
+
+        .stat-val {
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+
+        .stat-lbl {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 0.75rem;
+            justify-content: center;
+        }
+
+        .fade-in {
+            animation: fadeIn 0.25s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-title">
+            <h1>Government Accounting Rules, 1990</h1>
+            <div class="subtitle">Controller General of Accounts (CGA) - Official Examination Quiz</div>
+        </div>
+        <div class="header-actions">
+            <div id="timer" class="timer-box">
+                ⏱️ <span id="timer-display">30:00</span>
+            </div>
+            <button class="btn btn-secondary" id="restart-btn" title="Reshuffle Questions and Restart">🔄 Reshuffle & Restart</button>
+            <button class="btn btn-secondary" id="theme-toggle" title="Toggle Dark/Light Mode">🌙</button>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Main Question Section -->
+        <main class="main-card fade-in" id="main-card">
+            <div>
+                <div class="question-header">
+                    <span class="question-number" id="q-number">Question 1 of 50</span>
+                    <button class="bookmark-btn" id="bookmark-btn">
+                        <span id="bookmark-icon">☆</span> Bookmark
+                    </button>
+                </div>
+                
+                <div class="question-text" id="q-text">
+                    Loading Question...
+                </div>
+
+                <div class="options-list" id="options-container">
+                    <!-- Dynamic Options -->
+                </div>
+
+                <div id="explanation-container" style="display: none;">
+                    <!-- Explanation shown post-submission -->
+                </div>
+            </div>
+
+            <!-- Navigation Bar -->
+            <div class="nav-controls">
+                <div>
+                    <button class="btn btn-secondary" id="prev-btn">← Previous</button>
+                    <button class="btn btn-secondary" id="clear-btn">Clear Selection</button>
+                </div>
+                <div>
+                    <button class="btn btn-primary" id="next-btn">Next →</button>
+                    <button class="btn btn-danger" id="submit-btn">Submit Quiz</button>
+                </div>
+            </div>
+        </main>
+
+        <!-- Sidebar / Palette -->
+        <aside class="sidebar">
+            <div class="palette-card">
+                <div class="palette-header">
+                    <span>Question Palette</span>
+                    <select id="palette-filter" class="filter-select">
+                        <option value="all">All (50)</option>
+                        <option value="answered">Answered</option>
+                        <option value="unanswered">Unanswered</option>
+                        <option value="bookmarked">Bookmarked</option>
+                    </select>
+                </div>
+
+                <div class="palette-grid" id="palette-grid">
+                    <!-- Grid Matrix Buttons -->
+                </div>
+
+                <div class="legend" id="legend-container">
+                    <div class="legend-item"><div class="legend-color" style="background:var(--accent-primary)"></div> Answered</div>
+                    <div class="legend-item"><div class="legend-color" style="background:var(--bg-primary); border:1px solid var(--border-color)"></div> Unanswered</div>
+                    <div class="legend-item"><div class="legend-color" style="outline:2px solid var(--accent-primary)"></div> Current</div>
+                    <div class="legend-item"><span style="color:var(--warning)">★</span> Bookmarked</div>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Score Card Modal -->
+    <div class="modal-overlay" id="score-modal">
+        <div class="modal-card fade-in">
+            <h2>Quiz Performance Summary</h2>
+            <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.25rem;">Government Accounting Rules, 1990</p>
+
+            <div class="score-circle">
+                <span class="score-value" id="modal-score">0</span>
+                <span class="score-total">out of 50</span>
+            </div>
+
+            <p id="pass-fail-badge" style="font-weight: 700; font-size: 1.1rem; margin-bottom: 0.5rem;"></p>
+
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <div class="stat-val" id="stat-percentage" style="color: var(--accent-primary);">0%</div>
+                    <div class="stat-lbl">Percentage</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-val" id="stat-correct" style="color: var(--success);">0</div>
+                    <div class="stat-lbl">Correct</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-val" id="stat-incorrect" style="color: var(--danger);">0</div>
+                    <div class="stat-lbl">Incorrect</div>
+                </div>
+            </div>
+
+            <div class="modal-actions">
+                <button class="btn btn-primary" id="review-btn">Review Detailed Answers</button>
+                <button class="btn btn-secondary" id="modal-restart-btn">Restart Quiz</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const rawQuestions = [
+            {
+                id: 1,
+                question: "Which Constitutional Provision empowers the President of India to prescribe the form of Union and State accounts on the advice of the Comptroller and Auditor General of India (C&AG)?",
+                options: [
+                    "Article 149",
+                    "Article 150",
+                    "Article 283",
+                    "Article 266"
+                ],
+                correctIndex: 1,
+                explanation: "Rule 3 of GAR 1990 & Article 150 of the Constitution: Accounts of the Union and of the States shall be kept in such form as the President may, on the advice of the C&AG, prescribe."
+            },
+            {
+                id: 2,
+                question: "Under GAR 1990, what is the standard 5-tier classification hierarchy of Government Accounts in India?",
+                options: [
+                    "Sector -> Major Head -> Sub-Major Head -> Minor Head -> Sub-Head / Object Head",
+                    "Major Head -> Minor Head -> Sub-Head -> Detailed Head -> Primary Unit",
+                    "Function -> Program -> Activity -> Sub-Activity -> Object",
+                    "General Head -> Specific Head -> Detailed Head -> Voucher Head -> Sub-Voucher"
+                ],
+                correctIndex: 0,
+                explanation: "Rule 26 of GAR 1990: Main unit of classification is Sector -> Major Head -> Sub-Major Head -> Minor Head -> Sub-Head / Detailed Head (Object Head)."
+            },
+            {
+                id: 3,
+                question: "Which classification level in Government Accounts represents the target scheme or program of the Government?",
+                options: [
+                    "Major Head",
+                    "Minor Head",
+                    "Sub-Head",
+                    "Detailed / Object Head"
+                ],
+                correctIndex: 2,
+                explanation: "Rule 26(4) of GAR 1990: Sub-Heads denote specific schemes/programs implemented by the Government within a Minor Head."
+            },
+            {
+                id: 4,
+                question: "A 4-digit numeric code for a Major Head beginning with the digits '2' or '3' indicates which category of account?",
+                options: [
+                    "Revenue Receipts",
+                    "Revenue Expenditure",
+                    "Capital Expenditure",
+                    "Public Debt & Loans"
+                ],
+                correctIndex: 1,
+                explanation: "Rule 25 of GAR 1990: Major Heads in the 2000 and 3000 series represent Revenue Expenditure of the Government."
+            },
+            {
+                id: 5,
+                question: "Major Heads starting with digit '0' or '1' represent which of the following?",
+                options: [
+                    "Capital Receipts",
+                    "Revenue Receipts",
+                    "Public Account Deposits",
+                    "Contingency Fund"
+                ],
+                correctIndex: 1,
+                explanation: "Rule 25 of GAR 1990: Major Heads under '0020' to '1606' (0 and 1 series) denote Revenue Receipts."
+            },
+            {
+                id: 6,
+                question: "Capital Expenditure Major Heads are represented by which numeric code range?",
+                options: [
+                    "0020 to 1999",
+                    "2011 to 3999",
+                    "4046 to 5999",
+                    "6001 to 7999"
+                ],
+                correctIndex: 2,
+                explanation: "Rule 25 of GAR 1990: Major Heads in the 4000 and 5000 series denote Capital Outlay / Capital Expenditure."
+            },
+            {
+                id: 7,
+                question: "Major Heads in the 6001 to 7999 series represent which type of transactions?",
+                options: [
+                    "Public Debt, Loans and Advances",
+                    "Contingency Fund receipts",
+                    "Small Savings and Provident Funds",
+                    "Inter-State Settlements"
+                ],
+                correctIndex: 0,
+                explanation: "Rule 25 of GAR 1990: 6001 to 7999 series covers Public Debt, Loans and Advances, and recoveries thereof."
+            },
+            {
+                id: 8,
+                question: "Under GAR 1990 Rule 30, which basic principle distinguishes Capital Expenditure from Revenue Expenditure?",
+                options: [
+                    "Expenditure exceeding Rs. 1 Crore is always Capital",
+                    "Expenditure incurred with the object of creating concrete assets of a material and permanent character or reducing recurring liabilities",
+                    "All construction expenses under Rs. 10 Lakhs are treated as Capital",
+                    "Any expenditure paid out of loans is Revenue Expenditure"
+                ],
+                correctIndex: 1,
+                explanation: "Rule 30(1) of GAR 1990: Capital Expenditure is defined as expenditure incurred with the object of creating concrete assets of permanent character or reducing recurring liabilities."
+            },
+            {
+                id: 9,
+                question: "Under Rule 31, how should charges for heavy repairs and renewals that extend the economic life of an asset be classified?",
+                options: [
+                    "Revenue Expenditure always",
+                    "Capital Expenditure if it enhances capacity/life substantially as per prescribed thresholds",
+                    "Credited to Public Account",
+                    "Debited to Contingency Fund"
+                ],
+                correctIndex: 1,
+                explanation: "Rule 31 of GAR 1990: Renewal/replacement expenditure that significantly enhances life/capacity is chargeable to Capital."
+            },
+            {
+                id: 10,
+                question: "Which Article of the Constitution governs the operation and custody of the Contingency Fund of India?",
+                options: [
+                    "Article 266(1)",
+                    "Article 266(2)",
+                    "Article 267(1)",
+                    "Article 283(1)"
+                ],
+                correctIndex: 2,
+                explanation: "Article 267(1) of the Constitution and Rule 6 of GAR 1990 govern the establishment and operation of the Contingency Fund of India."
+            },
+            {
+                id: 11,
+                question: "Under whose custody is the Contingency Fund of India held on behalf of the President?",
+                options: [
+                    "Controller General of Accounts",
+                    "Secretary to the Government of India, Ministry of Finance (Department of Economic Affairs)",
+                    "Comptroller and Auditor General of India",
+                    "Governor of the Reserve Bank of India"
+                ],
+                correctIndex: 1,
+                explanation: "Rule 6 of GAR 1990: Held by the Secretary, Ministry of Finance, Department of Economic Affairs, on behalf of the President."
+            },
+            {
+                id: 12,
+                question: "Moneys received by or deposited with any court or public officer in trust belong to which Constitutional Account?",
+                options: [
+                    "Consolidated Fund of India",
+                    "Contingency Fund of India",
+                    "Public Account of India",
+                    "Reserve Bank Deposit Account"
+                ],
+                correctIndex: 2,
+                explanation: "Article 266(2) and Rule 7 of GAR 1990: Public Account of India contains all other public moneys received by or on behalf of the Government."
+            },
+            {
+                id: 13,
+                question: "What is the primary function of the 'Minor Head' in government functional classification?",
+                options: [
+                    "Identifies the Ministry/Department",
+                    "Identifies the specific program / scheme or sub-function under a Major Head",
+                    "Identifies the object of expenditure like Salary",
+                    "Identifies the geographical state"
+                ],
+                correctIndex: 1,
+                explanation: "Rule 26 of GAR 1990: Minor Head corresponds to specific programs/sub-functions under a Major Head."
+            },
+            {
+                id: 14,
+                question: "How are recoveries of overpayments made in the same financial year accounted for under GAR 1990?",
+                options: [
+                    "Treated as Revenue Receipts",
+                    "Deduction from expenditure under the concerned service head",
+                    "Credited to Public Account",
+                    "Debited to Contingency Fund"
+                ],
+                correctIndex: 1,
+                explanation: "Rule 52 of GAR 1990: Recoveries of overpayments pertaining to the current financial year are taken as reduction of expenditure under the relevant service head."
+            },
+            {
+                id: 15,
+                question: "Recoveries of overpayments pertaining to previous financial years are classified as what?",
+                options: [
+                    "Reduction of current year's expenditure",
+                    "Miscellaneous Revenue Receipts",
+                    "Capital Receipts",
+                    "Public Account credit"
+                ],
+                correctIndex: 1,
+                explanation: "Rule 53 of GAR 1990: Recoveries of overpayments relating to previous years are accounted for as Revenue Receipts under relevant Minor Head."
+            },
+            {
+                id: 16,
+                question: "Under Rule 38 of GAR 1990, whose prior sanction or concurrence is required for the write-off of irrecoverable balances under Suspense/Advance heads?",
+                options: [
+                    "Controller General of Accounts / Ministry of Finance as per delegated powers",
+                    "Drawing and Disbursing Officer",
+                    "State Bank of India",
+                    "Pay and Accounts Officer independently"
+                ],
+                correctIndex: 0,
+                explanation: "Rule 38 of GAR 1990: Write-off of irrecoverable balances under Suspense, Advance, or Remittance heads requires approval from Ministry of Finance/CGA."
+            },
+            {
+                id: 17,
+                question: "When a government department undertakes work for another department, how are the inter-departmental adjustments processed under GAR 1990?",
+                options: [
+                    "By physical cash payment",
+                    "Through book transfer / advice via PAO / RBI adjusting cell",
+                    "By private commercial cheques",
+                    "No accounting adjustment is made"
+                ],
+                correctIndex: 1,
+                explanation: "Rule 42-45 of GAR 1990: Inter-departmental transactions are settled by book transfer entries through Pay and Accounts Offices."
+            },
+            {
+                id: 18,
+                question: "Under GAR 1990, what is a 'Suspense Head' used for?",
+                options: [
+                    "To hide undisclosed liabilities permanently",
+                    "To temporarily hold transactions that cannot be allocated immediately to a final head of account for want of details",
+                    "To record foreign aid receipts only",
+                    "To store surplus budget grants at the end of the year"
+                ],
+                correctIndex: 1,
+                explanation: "Rule 107/108 of GAR 1990: Suspense heads are clearing heads used to record transactions temporarily pending final classification."
+            },
+            {
+                id: 19,
+                question: "Which Sector in the Public Account handles 'Small Savings, Provident Funds, etc.'?",
+                options: [
+                    "Sector I",
+                    "Sector J",
+                    "Sector K",
+                    "Sector L"
+                ],
+                correctIndex: 0,
+                explanation: "Rule 25 & Sector Classification: Sector I of Public Account handles Small Savings, Provident Funds, etc."
+            },
+            {
+                id: 20,
+                question: "What does Sector 'L' in the Public Account structure represent?",
+                options: [
+                    "Reserve Funds",
+                    "Deposits and Advances",
+                    "Remittances",
+                    "Suspense and Miscellaneous"
+                ],
+                correctIndex: 2,
+                explanation: "Rule 25 of GAR 1990: Sector L in Public Account represents 'Remittances' (Inter-governmental and Money Transfers)."
+            },
+            {
+                id: 21,
+                question: "Under GAR 1990 Rule 57, loss of public money due to fraud, embezzlement, or negligence must be promptly reported to whom?",
+                options: [
+                    "Next higher administrative authority, Principal Accounts Office, and Statutory Audit (C&AG)",
+                    "Local Police Station only",
+                    "Reserve Bank of India Main Branch",
+                    "Ministry of External Affairs"
+                ],
+                correctIndex: 0,
+                explanation: "Rule 57 of GAR 1990: Losses must be reported immediately to the higher administrative authority, Pr. AO, and Statutory Audit."
+            },
+            {
+                id: 22,
+                question: "What is the rule regarding the period of limitation for writing off losses of stores under GAR 1990?",
+                options: [
+                    "Written off automatically after 1 year",
+                    "Sanctioned by competent authority after proper enquiry and fix of responsibility as per delegated powers",
+                    "Losses cannot be written off under any circumstances",
+                    "Requires approval of Parliament for every rupee"
+                ],
+                correctIndex: 1,
+                explanation: "Rule 58-61 of GAR 1990: Write-off requires formal enquiry, fixing responsibility, and sanction by competent authority under delegated powers."
+            },
+            {
+                id: 23,
+                question: "Under GAR 1990, pay and allowances of government servants are classified under which object head standard?",
+                options: [
+                    "Object Head 01 (Salaries)",
+                    "Object Head 02 (Wages)",
+                    "Object Head 06 (Medical Treatment)",
+                    "Object Head 11 (Domestic Travel)"
+                ],
+                correctIndex: 0,
+                explanation: "Standard Object Head Classification: Object Head '01' represents Salaries."
+            },
+            {
+                id: 24,
+                question: "How are traveling allowance claims of non-official members attending government committees classified under GAR 1990?",
+                options: [
+                    "Salaries",
+                    "Professional Services",
+                    "Other Administrative Expenses / Travel Expenses",
+                    "Grants-in-aid"
+                ],
+                correctIndex: 2,
+                explanation: "GAR 1990 Object Classification: TA to non-officials is booked under Travel Expenses / Office Contingencies as prescribed."
+            },
+            {
+                id: 25,
+                question: "What is the primary role of the Controller General of Accounts (CGA) under GAR 1990 framework?",
+                options: [
+                    "Conducting external statutory audit of Parliament",
+                    "Administering the Civil Accounting organization and prescribing accounting rules/standards for the Union Government",
+                    "Fixing income tax rates",
+                    "Managing interest rates for commercial banks"
+                ],
+                correctIndex: 1,
+                explanation: "GAR 1990 & Preamble: CGA is the apex accounting authority administering civil accounts and maintaining accounting standards."
+            },
+            {
+                id: 26,
+                question: "Which of the following is NOT part of the Consolidated Fund of India?",
+                options: [
+                    "Revenues received by the Government of India",
+                    "Loans raised by the Government by issue of Treasury Bills",
+                    "Moneys received in repayment of loans",
+                    "Provident Fund deposits of government employees"
+                ],
+                correctIndex: 3,
+                explanation: "Article 266 & Rule 5-7: Provident Fund deposits belong to the Public Account of India, not Consolidated Fund."
+            },
+            {
+                id: 27,
+                question: "Under Rule 13 of GAR 1990, in what currency must all accounts of the Central Government be maintained?",
+                options: [
+                    "US Dollars",
+                    "Indian Rupees",
+                    "Special Drawing Rights (SDR)",
+                    "Euro"
+                ],
+                correctIndex: 1,
+                explanation: "Rule 13 of GAR 1990: The main accounts of the Union Government shall be maintained in Indian Rupees."
+            },
+            {
+                id: 28,
+                question: "What is the procedure for rounding off transactions in Government Accounts under GAR 1990?",
+                options: [
+                    "Rounded to nearest 100 rupees",
+                    "Individual payments/receipts are rounded off to the nearest rupee (50 paise and above rounded up)",
+                    "No rounding off is permitted",
+                    "Rounded off to nearest 10 rupees"
+                ],
+                correctIndex: 1,
+                explanation: "Rule 14 of GAR 1990: Government transactions are rounded off to the nearest whole rupee."
+            },
+            {
+                id: 29,
+                question: "Which Major Head is used to record 'Interest Payments' made by the Central Government?",
+                options: [
+                    "Major Head 2049",
+                    "Major Head 2011",
+                    "Major Head 0049",
+                    "Major Head 6001"
+                ],
+                correctIndex: 0,
+                explanation: "Standard List of Major Heads: Major Head 2049 represents Interest Payments."
+            },
+            {
+                id: 30,
+                question: "Interest Receipts of the Central Government are booked under which Major Head?",
+                options: [
+                    "Major Head 2049",
+                    "Major Head 0049",
+                    "Major Head 0020",
+                    "Major Head 8005"
+                ],
+                correctIndex: 1,
+                explanation: "Standard List of Major Heads: Major Head 0049 represents Interest Receipts."
+            },
+            {
+                id: 31,
+                question: "Under GAR 1990, transactions relating to Foreign Government loans and aid are accounted under which Sector?",
+                options: [
+                    "Sector C - Economic Services",
+                    "Sector E - Public Debt",
+                    "Sector F - Loans and Advances",
+                    "Sector G - Inter-State Settlement"
+                ],
+                correctIndex: 1,
+                explanation: "Rule 25: Public Debt Sector (Major Head 6002 - External Debt) handles foreign loans."
+            },
+            {
+                id: 32,
+                question: "Under Rule 67 of GAR 1990, how are refunds of revenue accounted for in government books?",
+                options: [
+                    "Deduction from Revenue Receipts under the relevant receipt head",
+                    "Revenue Expenditure under General Services",
+                    "Capital Outlay",
+                    "Debited to Suspense Account permanently"
+                ],
+                correctIndex: 0,
+                explanation: "Rule 67 of GAR 1990: Refunds of revenue are treated as reductions of revenue receipts under the matching receipt head."
+            },
+            {
+                id: 33,
+                question: "What is the standard accounting treatment for proceeds from sale of government land or buildings?",
+                options: [
+                    "Credited as Revenue Receipts or Capital Receipts depending on statutory classification rules",
+                    "Credited directly to DDO's personal bank account",
+                    "Debited to Contingency Fund",
+                    "Credited to Provident Fund"
+                ],
+                correctIndex: 0,
+                explanation: "Rule 33-35 of GAR 1990: Proceeds from disposal of major land/capital assets are credited under Capital Receipts or relevant capital/revenue heads."
+            },
+            {
+                id: 34,
+                question: "Under GAR 1990, which accounting head handles transactions between Civil Ministries and Defence/Railways/Posts?",
+                options: [
+                    "PAO Suspense / Settlement Accounts",
+                    "Contingency Fund",
+                    "Reserve Fund",
+                    "Local Fund Deposit"
+                ],
+                correctIndex: 0,
+                explanation: "Rule 109-111 of GAR 1990: Inter-departmental/inter-ministry settlements pass through PAO Suspense / Settlement Accounts."
+            },
+            {
+                id: 35,
+                question: "What does 'Lapsed Deposit' mean under Government Accounting rules?",
+                options: [
+                    "Security deposits or public deposits remaining unclaimed for over 3 financial years, credited to Government Revenue",
+                    "A bank deposit whose interest rate expired",
+                    "A budget grant that expired at midnight on 31st March",
+                    "A cheque that was damaged by rain"
+                ],
+                correctIndex: 0,
+                explanation: "Rule 70-74 of GAR 1990: Unclaimed deposits exceeding statutory tenure (3 years) lapse to Government as Revenue Receipts."
+            },
+            {
+                id: 36,
+                question: "Can a Lapsed Deposit be refunded to a verified claimant after being credited to Revenue?",
+                options: [
+                    "No, lapsed deposits are forfeited forever",
+                    "Yes, upon sanction of competent authority following proper verification and debiting refunds head",
+                    "Only with Parliament's approval through supplementary grant",
+                    "Only via Supreme Court order"
+                ],
+                correctIndex: 1,
+                explanation: "Rule 74 of GAR 1990: Lapsed deposits can be refunded to rightful claimants after verification and sanction by competent authority."
+            },
+            {
+                id: 37,
+                question: "Which of the following is classified under 'Public Account' Sector K?",
+                options: [
+                    "Small Savings",
+                    "Deposits and Advances",
+                    "Reserve Funds",
+                    "Remittances"
+                ],
+                correctIndex: 1,
+                explanation: "Rule 25 Structure: Sector K in Public Account denotes Deposits and Advances."
+            },
+            {
+                id: 38,
+                question: "Under GAR 1990, what is a 'Detailed Head' primarily used for?",
+                options: [
+                    "To indicate the object of expenditure (e.g. Salaries, Travel Expenses, Office Expenses)",
+                    "To identify the Ministry",
+                    "To identify the Union Territory",
+                    "To record international loans"
+                ],
+                correctIndex: 0,
+                explanation: "Rule 26(5) of GAR 1990: Detailed Head / Object Head indicates the exact nature/object of expenditure."
+            },
+            {
+                id: 39,
+                question: "What is the financial year duration for Government Accounts in India?",
+                options: [
+                    "1st January to 31st December",
+                    "1st April to 31st March of the following calendar year",
+                    "1st July to 30th June",
+                    "1st October to 30th September"
+                ],
+                correctIndex: 1,
+                explanation: "Rule 11 of GAR 1990: The financial year of Government accounts commences on 1st April and ends on 31st March."
+            },
+            {
+                id: 40,
+                question: "Under Rule 20 of GAR 1990, all transactions in Government accounts must be recorded on what accounting basis?",
+                options: [
+                    "Accrual Accounting Basis",
+                    "Cash Basis (actual receipts and actual disbursements)",
+                    "Hybrid Commercial Basis",
+                    "Commitment Basis only"
+                ],
+                correctIndex: 1,
+                explanation: "Rule 20 of GAR 1990: Government Accounts are primarily maintained on Cash Basis recording actual receipts and payments."
+            },
+            {
+                id: 41,
+                question: "When expenditure is authorized by Parliament under an Appropriation Act, it is drawn from which account?",
+                options: [
+                    "Consolidated Fund of India",
+                    "Public Account of India",
+                    "Contingency Fund of India",
+                    "PM Cares Fund"
+                ],
+                correctIndex: 0,
+                explanation: "Article 266(3) & GAR Rule 5: No money shall be withdrawn from Consolidated Fund except under Parliamentary Appropriation."
+            },
+            {
+                id: 42,
+                question: "Under GAR 1990, grants-in-aid paid by the Union Government to State Governments or institutions are categorized as what type of expenditure?",
+                options: [
+                    "Capital Expenditure always",
+                    "Revenue Expenditure",
+                    "Public Debt",
+                    "Suspense Advance"
+                ],
+                correctIndex: 1,
+                explanation: "Rule 30(2) of GAR 1990: Grants-in-aid are treated as Revenue Expenditure in the accounts of the disbursing government."
+            },
+            {
+                id: 43,
+                question: "What is the accounting head for recording 'Cheques and Bills' issued by PAOs pending bank clearance?",
+                options: [
+                    "Major Head 8670 - Cheques and Bills",
+                    "Major Head 8005 - Provident Funds",
+                    "Major Head 2055 - Police",
+                    "Major Head 0021 - Taxes on Income"
+                ],
+                correctIndex: 0,
+                explanation: "Rule 108 List of Heads: Major Head 8670 'Cheques and Bills' handles uncashed cheques under Suspense/Public Account."
+            },
+            {
+                id: 44,
+                question: "Under GAR 1990, which functional Sector code range handles 'General Services' under Revenue Expenditure?",
+                options: [
+                    "Major Heads 2011 to 2075",
+                    "Major Heads 2202 to 2251",
+                    "Major Heads 2401 to 2515",
+                    "Major Heads 4000 to 4059"
+                ],
+                correctIndex: 0,
+                explanation: "Sector A - General Services covers Major Heads 2011 to 2075."
+            },
+            {
+                id: 45,
+                question: "Sector B of Revenue Expenditure in Government accounts covers which service category?",
+                options: [
+                    "General Services",
+                    "Social Services (Education, Health, etc.)",
+                    "Economic Services (Agriculture, Industry, etc.)",
+                    "Grants-in-aid & Contributions"
+                ],
+                correctIndex: 1,
+                explanation: "GAR Classification Structure: Sector B covers Social Services (Major Heads 2202 to 2251)."
+            },
+            {
+                id: 46,
+                question: "Sector C of Revenue Expenditure in Government accounts covers which service category?",
+                options: [
+                    "General Services",
+                    "Social Services",
+                    "Economic Services",
+                    "Public Debt"
+                ],
+                correctIndex: 2,
+                explanation: "GAR Classification Structure: Sector C covers Economic Services (Major Heads 2401 to 2885)."
+            },
+            {
+                id: 47,
+                question: "Under GAR 1990, who is authorized to open new Sub-Heads under Minor Heads in Union Government Accounts?",
+                options: [
+                    "Administrative Ministry independently",
+                    "Controller General of Accounts on the advice/concurrence of C&AG as per delegated powers",
+                    "Local DDO",
+                    "Branch Manager of SBI"
+                ],
+                correctIndex: 1,
+                explanation: "Rule 27 of GAR 1990: Opening of new Sub-Heads requires CGA / C&AG authorization."
+            },
+            {
+                id: 48,
+                question: "How are initial advances drawn from the Contingency Fund of India recouped under GAR 1990?",
+                options: [
+                    "By debiting the relevant expenditure head in Consolidated Fund through Parliamentary Supplementary Appropriation",
+                    "By taking a loan from commercial banks",
+                    "By deducting from employee salaries",
+                    "By selling government assets"
+                ],
+                correctIndex: 0,
+                explanation: "Rule 6 & Contingency Fund Rules: Advances from Contingency Fund are recouped by obtaining Parliamentary approval and debiting Consolidated Fund."
+            },
+            {
+                id: 49,
+                question: "Which of the following is an example of 'Reserve Fund' under Public Account Sector J?",
+                options: [
+                    "General Provident Fund",
+                    "National Calamity Contingency Fund / Depreciation Reserve Fund",
+                    "Central Road Fund",
+                    "Both B and C"
+                ],
+                correctIndex: 3,
+                explanation: "Sector J of Public Account handles Reserve Funds (bearing interest or non-interest bearing) like Depreciation Funds, Road Funds, etc."
+            },
+            {
+                id: 50,
+                question: "Under GAR 1990, what is the accounting treatment for earnest money deposits received from contractors?",
+                options: [
+                    "Credited to Revenue Receipts immediately",
+                    "Credited to Public Account under 'Civil Deposits' (Major Head 8443)",
+                    "Debited to Capital Outlay",
+                    "Recorded in personal notebook only"
+                ],
+                correctIndex: 1,
+                explanation: "Rule 70 & Major Head 8443: Earnest Money Deposits are held under Public Account 'Civil Deposits'."
+            }
+        ];
+
+        let shuffledQuestions = [];
+        let currentQuestionIdx = 0;
+        let userAnswers = {}; // questionIndex -> selectedOptionIndex
+        let bookmarks = new Set();
+        let isSubmitted = false;
+        let timerInterval = null;
+        let timeRemaining = 30 * 60; // 30 mins in seconds
+
+        // DOM Element Cache
+        const mainCard = document.getElementById('main-card');
+        const qNumberEl = document.getElementById('q-number');
+        const qTextEl = document.getElementById('q-text');
+        const optionsContainer = document.getElementById('options-container');
+        const explanationContainer = document.getElementById('explanation-container');
+        const bookmarkBtn = document.getElementById('bookmark-btn');
+        const bookmarkIcon = document.getElementById('bookmark-icon');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const clearBtn = document.getElementById('clear-btn');
+        const submitBtn = document.getElementById('submit-btn');
+        const paletteGrid = document.getElementById('palette-grid');
+        const paletteFilter = document.getElementById('palette-filter');
+        const timerDisplay = document.getElementById('timer-display');
+        const timerBox = document.getElementById('timer');
+        const themeToggle = document.getElementById('theme-toggle');
+        const restartBtn = document.getElementById('restart-btn');
+        const modalRestartBtn = document.getElementById('modal-restart-btn');
+        const scoreModal = document.getElementById('score-modal');
+        const reviewBtn = document.getElementById('review-btn');
+
+        // Fisher-Yates Array Shuffle Algorithm
+        function fisherYatesShuffle(array) {
+            const arr = [...array];
+            for (let i = arr.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [arr[i], arr[j]] = [arr[j], arr[i]];
+            }
+            return arr;
+        }
+
+        // Initialize / Reshuffle Data Engine
+        function initDataEngine() {
+            // Shuffle question order
+            const qShuffled = fisherYatesShuffle(rawQuestions);
+            
+            // For every question, shuffle options while maintaining correct answer mapping
+            shuffledQuestions = qShuffled.map((qItem, idx) => {
+                const optionsWithMeta = qItem.options.map((optText, origIdx) => ({
+                    text: optText,
+                    isCorrect: origIdx === qItem.correctIndex
+                }));
+
+                const shuffledOptsMeta = fisherYatesShuffle(optionsWithMeta);
+                const newCorrectIdx = shuffledOptsMeta.findIndex(o => o.isCorrect);
+
+                return {
+                    id: idx + 1,
+                    question: qItem.question,
+                    options: shuffledOptsMeta.map(o => o.text),
+                    correctIndex: newCorrectIdx,
+                    explanation: qItem.explanation
+                };
+            });
+        }
+
+        function restartQuiz() {
+            clearInterval(timerInterval);
+            timeRemaining = 30 * 60;
+            isSubmitted = false;
+            userAnswers = {};
+            bookmarks.clear();
+            currentQuestionIdx = 0;
+
+            initDataEngine();
+
+            // Reset UI components
+            scoreModal.classList.remove('active');
+            submitBtn.style.display = 'inline-flex';
+            clearBtn.style.display = 'inline-flex';
+            timerBox.className = 'timer-box';
+
+            document.getElementById('legend-container').innerHTML = `
+                <div class="legend-item"><div class="legend-color" style="background:var(--accent-primary)"></div> Answered</div>
+                <div class="legend-item"><div class="legend-color" style="background:var(--bg-primary); border:1px solid var(--border-color)"></div> Unanswered</div>
+                <div class="legend-item"><div class="legend-color" style="outline:2px solid var(--accent-primary)"></div> Current</div>
+                <div class="legend-item"><span style="color:var(--warning)">★</span> Bookmarked</div>
+            `;
+
+            initTimer();
+            renderPalette();
+            loadQuestion(0);
+        }
+
+        function initTimer() {
+            updateTimerDisplay();
+            timerInterval = setInterval(() => {
+                if (timeRemaining <= 0) {
+                    clearInterval(timerInterval);
+                    autoSubmitQuiz();
+                    return;
+                }
+                timeRemaining--;
+                updateTimerDisplay();
+            }, 1000);
+        }
+
+        function updateTimerDisplay() {
+            const mins = Math.floor(timeRemaining / 60);
+            const secs = timeRemaining % 60;
+            timerDisplay.textContent = `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+
+            if (timeRemaining <= 300) {
+                timerBox.className = 'timer-box warning';
+            }
+        }
+
+        function loadQuestion(idx) {
+            currentQuestionIdx = idx;
+            const q = shuffledQuestions[idx];
+
+            mainCard.classList.remove('fade-in');
+            void mainCard.offsetWidth;
+            mainCard.classList.add('fade-in');
+
+            qNumberEl.textContent = `Question ${idx + 1} of ${shuffledQuestions.length}`;
+            qTextEl.textContent = q.question;
+
+            // Bookmark Status
+            if (bookmarks.has(idx)) {
+                bookmarkBtn.classList.add('active');
+                bookmarkIcon.textContent = '★';
+            } else {
+                bookmarkBtn.classList.remove('active');
+                bookmarkIcon.textContent = '☆';
+            }
+
+            // Render Options
+            optionsContainer.innerHTML = '';
+            const labels = ['A', 'B', 'C', 'D'];
+
+            q.options.forEach((optText, optIdx) => {
+                const optEl = document.createElement('div');
+                optEl.className = 'option-item';
+
+                if (userAnswers[idx] === optIdx) {
+                    optEl.classList.add('selected');
+                }
+
+                if (isSubmitted) {
+                    if (optIdx === q.correctIndex) {
+                        optEl.classList.add('correct');
+                    }
+                    if (userAnswers[idx] === optIdx && userAnswers[idx] !== q.correctIndex) {
+                        optEl.classList.add('wrong');
+                    }
+                }
+
+                optEl.innerHTML = `
+                    <div class="option-prefix">${labels[optIdx]}</div>
+                    <div style="flex:1;">${optText}</div>
+                `;
+
+                if (!isSubmitted) {
+                    optEl.addEventListener('click', () => selectOption(optIdx));
+                }
+
+                optionsContainer.appendChild(optEl);
+            });
+
+            // Explanation box in review mode
+            if (isSubmitted) {
+                explanationContainer.style.display = 'block';
+                explanationContainer.className = 'explanation-box';
+                explanationContainer.innerHTML = `
+                    <strong>Rule Reference / Explanation:</strong>
+                    ${q.explanation}
+                `;
+            } else {
+                explanationContainer.style.display = 'none';
+            }
+
+            prevBtn.disabled = idx === 0;
+            nextBtn.disabled = idx === shuffledQuestions.length - 1;
+
+            updatePaletteCurrent();
+        }
+
+        function selectOption(optIdx) {
+            userAnswers[currentQuestionIdx] = optIdx;
+            loadQuestion(currentQuestionIdx);
+            renderPalette();
+        }
+
+        function clearSelection() {
+            if (isSubmitted) return;
+            delete userAnswers[currentQuestionIdx];
+            loadQuestion(currentQuestionIdx);
+            renderPalette();
+        }
+
+        function toggleBookmark() {
+            if (bookmarks.has(currentQuestionIdx)) {
+                bookmarks.delete(currentQuestionIdx);
+            } else {
+                bookmarks.add(currentQuestionIdx);
+            }
+            loadQuestion(currentQuestionIdx);
+            renderPalette();
+        }
+
+        function renderPalette() {
+            paletteGrid.innerHTML = '';
+            const filter = paletteFilter.value;
+
+            shuffledQuestions.forEach((q, idx) => {
+                const isAnswered = userAnswers.hasOwnProperty(idx);
+                const isBookmarked = bookmarks.has(idx);
+
+                if (filter === 'answered' && !isAnswered) return;
+                if (filter === 'unanswered' && isAnswered) return;
+                if (filter === 'bookmarked' && !isBookmarked) return;
+
+                const item = document.createElement('button');
+                item.className = 'palette-item';
+                item.textContent = idx + 1;
+
+                if (idx === currentQuestionIdx) {
+                    item.classList.add('current');
+                }
+
+                if (!isSubmitted) {
+                    if (isAnswered) item.classList.add('answered');
+                } else {
+                    if (userAnswers[idx] === q.correctIndex) {
+                        item.classList.add('status-correct');
+                    } else if (isAnswered) {
+                        item.classList.add('status-wrong');
+                    }
+                }
+
+                if (isBookmarked) item.classList.add('bookmarked');
+
+                item.addEventListener('click', () => loadQuestion(idx));
+                paletteGrid.appendChild(item);
+            });
+        }
+
+        function updatePaletteCurrent() {
+            const items = paletteGrid.querySelectorAll('.palette-item');
+            items.forEach(item => {
+                if (parseInt(item.textContent) === currentQuestionIdx + 1) {
+                    item.classList.add('current');
+                } else {
+                    item.classList.remove('current');
+                }
+            });
+        }
+
+        function submitQuiz() {
+            if (confirm("Are you sure you want to submit your quiz?")) {
+                finalizeQuiz();
+            }
+        }
+
+        function autoSubmitQuiz() {
+            alert("Time limit (30:00) reached! Your quiz will now be submitted automatically.");
+            finalizeQuiz();
+        }
+
+        function finalizeQuiz() {
+            isSubmitted = true;
+            clearInterval(timerInterval);
+
+            let score = 0;
+            let correctCount = 0;
+            let incorrectCount = 0;
+
+            shuffledQuestions.forEach((q, idx) => {
+                if (userAnswers[idx] === q.correctIndex) {
+                    score++;
+                    correctCount++;
+                } else if (userAnswers.hasOwnProperty(idx)) {
+                    incorrectCount++;
+                }
+            });
+
+            const percentage = ((score / shuffledQuestions.length) * 100).toFixed(1);
+
+            document.getElementById('modal-score').textContent = score;
+            document.getElementById('stat-percentage').textContent = `${percentage}%`;
+            document.getElementById('stat-correct').textContent = correctCount;
+            document.getElementById('stat-incorrect').textContent = incorrectCount;
+
+            const badge = document.getElementById('pass-fail-badge');
+            if (percentage >= 75) {
+                badge.textContent = "EXCELLENT - PASSED";
+                badge.style.color = "var(--success)";
+            } else if (percentage >= 60) {
+                badge.textContent = "PASSED";
+                badge.style.color = "var(--accent-primary)";
+            } else {
+                badge.textContent = "NEEDS IMPROVEMENT";
+                badge.style.color = "var(--danger)";
+            }
+
+            scoreModal.classList.add('active');
+
+            submitBtn.style.display = 'none';
+            clearBtn.style.display = 'none';
+            timerDisplay.textContent = 'Completed';
+
+            document.getElementById('legend-container').innerHTML = `
+                <div class="legend-item"><div class="legend-color" style="background:var(--success)"></div> Correct</div>
+                <div class="legend-item"><div class="legend-color" style="background:var(--danger)"></div> Incorrect</div>
+                <div class="legend-item"><div class="legend-color" style="background:var(--bg-primary); border:1px solid var(--border-color)"></div> Unattempted</div>
+            `;
+
+            renderPalette();
+            loadQuestion(currentQuestionIdx);
+        }
+
+        function setupEventListeners() {
+            prevBtn.addEventListener('click', () => {
+                if (currentQuestionIdx > 0) loadQuestion(currentQuestionIdx - 1);
+            });
+
+            nextBtn.addEventListener('click', () => {
+                if (currentQuestionIdx < shuffledQuestions.length - 1) loadQuestion(currentQuestionIdx + 1);
+            });
+
+            clearBtn.addEventListener('click', clearSelection);
+            bookmarkBtn.addEventListener('click', toggleBookmark);
+            submitBtn.addEventListener('click', submitQuiz);
+            restartBtn.addEventListener('click', restartQuiz);
+            modalRestartBtn.addEventListener('click', restartQuiz);
+
+            paletteFilter.addEventListener('change', renderPalette);
+
+            reviewBtn.addEventListener('click', () => {
+                scoreModal.classList.remove('active');
+            });
+
+            themeToggle.addEventListener('click', () => {
+                const currentTheme = document.documentElement.getAttribute('data-theme');
+                if (currentTheme === 'dark') {
+                    document.documentElement.removeAttribute('data-theme');
+                    themeToggle.textContent = '🌙';
+                } else {
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                    themeToggle.textContent = '☀️';
+                }
+            });
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            restartQuiz();
+            setupEventListeners();
+        });
+    </script>
+</body>
+</html>
