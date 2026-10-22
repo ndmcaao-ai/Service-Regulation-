@@ -1,0 +1,1499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Income Tax Act Master Quiz (TDS Chapter & Exemptions) - 75 Questions</title>
+  <style>
+    :root {
+      --bg-primary: #f4f6f9;
+      --bg-card: #ffffff;
+      --text-main: #1f2937;
+      --text-muted: #6b7280;
+      --border-color: #e5e7eb;
+      --primary-color: #0d9488;
+      --primary-hover: #0f766e;
+      --secondary-bg: #f3f4f6;
+      --success-color: #059669;
+      --success-bg: #d1fae5;
+      --danger-color: #dc2626;
+      --danger-bg: #fee2e2;
+      --warning-color: #d97706;
+      --warning-bg: #fef3c7;
+      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      --palette-unvisited: #e5e7eb;
+      --palette-unvisited-text: #374151;
+      --palette-answered: #0d9488;
+      --palette-answered-text: #ffffff;
+    }
+
+    body.dark-mode {
+      --bg-primary: #0f172a;
+      --bg-card: #1e293b;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --border-color: #334155;
+      --primary-color: #14b8a6;
+      --primary-hover: #2dd4bf;
+      --secondary-bg: #334155;
+      --success-color: #10b981;
+      --success-bg: #064e3b;
+      --danger-color: #f87171;
+      --danger-bg: #7f1d1d;
+      --warning-color: #fbbf24;
+      --warning-bg: #78350f;
+      --palette-unvisited: #334155;
+      --palette-unvisited-text: #cbd5e1;
+      --palette-answered: #14b8a6;
+      --palette-answered-text: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    /* Sticky Header */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background-color: var(--bg-card);
+      border-bottom: 1px solid var(--border-color);
+      padding: 0.75rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .header-titles h1 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--primary-color);
+    }
+
+    .header-titles p {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .header-controls {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .timer-badge {
+      font-family: monospace;
+      font-size: 1.15rem;
+      font-weight: 700;
+      padding: 0.4rem 0.8rem;
+      border-radius: 6px;
+      background-color: var(--secondary-bg);
+      color: var(--text-main);
+      border: 1px solid var(--border-color);
+    }
+
+    .timer-badge.warning {
+      background-color: var(--danger-bg);
+      color: var(--danger-color);
+      border-color: var(--danger-color);
+      animation: pulse 1s infinite alternate;
+    }
+
+    @keyframes pulse {
+      from { opacity: 1; }
+      to { opacity: 0.7; }
+    }
+
+    .btn {
+      padding: 0.5rem 1rem;
+      font-size: 0.875rem;
+      font-weight: 600;
+      border-radius: 6px;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+    }
+
+    .btn-primary {
+      background-color: var(--primary-color);
+      color: #ffffff;
+    }
+
+    .btn-primary:hover {
+      background-color: var(--primary-hover);
+    }
+
+    .btn-secondary {
+      background-color: var(--secondary-bg);
+      color: var(--text-main);
+      border-color: var(--border-color);
+    }
+
+    .btn-secondary:hover {
+      filter: brightness(0.95);
+    }
+
+    .btn-danger {
+      background-color: var(--danger-color);
+      color: #ffffff;
+    }
+
+    .btn-danger:hover {
+      filter: brightness(0.9);
+    }
+
+    /* Main Container Grid */
+    .container {
+      max-width: 1280px;
+      width: 100%;
+      margin: 1.5rem auto;
+      padding: 0 1rem;
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: 1.5rem;
+      flex: 1;
+    }
+
+    @media (max-width: 900px) {
+      .container {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Question Card */
+    .card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 1.5rem;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .question-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .question-index {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+
+    .bookmark-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1.25rem;
+      color: var(--text-muted);
+      transition: color 0.2s;
+    }
+
+    .bookmark-btn.active {
+      color: var(--warning-color);
+    }
+
+    .question-text {
+      font-size: 1.1rem;
+      font-weight: 600;
+      line-height: 1.5;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Options List */
+    .options-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-bottom: 2rem;
+    }
+
+    .option-card {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 1rem;
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s;
+      background-color: var(--bg-card);
+    }
+
+    .option-card:hover {
+      border-color: var(--primary-color);
+      background-color: var(--secondary-bg);
+    }
+
+    .option-card.selected {
+      border-color: var(--primary-color);
+      background-color: var(--secondary-bg);
+      box-shadow: 0 0 0 1px var(--primary-color);
+    }
+
+    .option-card.correct-review {
+      border-color: var(--success-color);
+      background-color: var(--success-bg);
+      color: var(--text-main);
+    }
+
+    .option-card.incorrect-review {
+      border-color: var(--danger-color);
+      background-color: var(--danger-bg);
+      color: var(--text-main);
+    }
+
+    .radio-custom {
+      width: 18px;
+      height: 18px;
+      border: 2px solid var(--border-color);
+      border-radius: 50%;
+      margin-top: 2px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .option-card.selected .radio-custom {
+      border-color: var(--primary-color);
+    }
+
+    .option-card.selected .radio-custom::after {
+      content: "";
+      width: 10px;
+      height: 10px;
+      background-color: var(--primary-color);
+      border-radius: 50%;
+    }
+
+    .option-label {
+      font-size: 0.95rem;
+      line-height: 1.4;
+      flex: 1;
+    }
+
+    /* Bottom Action Bar */
+    .card-actions {
+      margin-top: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.5rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border-color);
+      flex-wrap: wrap;
+    }
+
+    .action-group {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    /* Explanation Box */
+    .explanation-box {
+      margin-top: 1.5rem;
+      padding: 1rem;
+      border-radius: 6px;
+      background-color: var(--secondary-bg);
+      border-left: 4px solid var(--primary-color);
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    .explanation-title {
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+      color: var(--primary-color);
+    }
+
+    /* Sidebar / Palette */
+    .sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .filter-tabs {
+      display: flex;
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      overflow: hidden;
+      background-color: var(--bg-card);
+    }
+
+    .tab-btn {
+      flex: 1;
+      padding: 0.5rem 0.2rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      border: none;
+      background: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      text-align: center;
+      transition: background-color 0.2s, color 0.2s;
+    }
+
+    .tab-btn.active {
+      background-color: var(--primary-color);
+      color: #ffffff;
+    }
+
+    .palette-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 0.5rem;
+      max-height: 400px;
+      overflow-y: auto;
+      padding: 0.25rem;
+    }
+
+    .palette-item {
+      aspect-ratio: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      font-weight: 700;
+      border-radius: 6px;
+      border: 1px solid var(--border-color);
+      cursor: pointer;
+      background-color: var(--palette-unvisited);
+      color: var(--palette-unvisited-text);
+      position: relative;
+      transition: all 0.2s;
+    }
+
+    .palette-item.active-current {
+      outline: 2px solid var(--primary-color);
+      outline-offset: 2px;
+    }
+
+    .palette-item.answered {
+      background-color: var(--palette-answered);
+      color: var(--palette-answered-text);
+      border-color: var(--palette-answered);
+    }
+
+    .palette-item.bookmarked::after {
+      content: "★";
+      position: absolute;
+      top: 1px;
+      right: 3px;
+      font-size: 0.65rem;
+      color: var(--warning-color);
+    }
+
+    .palette-item.correct-post {
+      background-color: var(--success-color);
+      color: #ffffff;
+      border-color: var(--success-color);
+    }
+
+    .palette-item.incorrect-post {
+      background-color: var(--danger-color);
+      color: #ffffff;
+      border-color: var(--danger-color);
+    }
+
+    .legend-box {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.5rem;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      padding: 0.75rem;
+      border-top: 1px solid var(--border-color);
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .legend-color {
+      width: 12px;
+      height: 12px;
+      border-radius: 3px;
+    }
+
+    /* Modal Overlay */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .modal-overlay.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-card {
+      background-color: var(--bg-card);
+      border-radius: 8px;
+      max-width: 500px;
+      width: 90%;
+      padding: 2rem;
+      box-shadow: var(--shadow-md);
+      text-align: center;
+    }
+
+    .modal-score {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--primary-color);
+      margin: 1rem 0;
+    }
+
+    .performance-badge {
+      display: inline-block;
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      font-weight: 700;
+      font-size: 0.85rem;
+      margin-bottom: 1.5rem;
+      text-transform: uppercase;
+    }
+
+    .badge-excellent { background-color: var(--success-bg); color: var(--success-color); }
+    .badge-passed { background-color: var(--warning-bg); color: var(--warning-color); }
+    .badge-failed { background-color: var(--danger-bg); color: var(--danger-color); }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+      text-align: left;
+      font-size: 0.9rem;
+    }
+
+    .summary-item {
+      padding: 0.5rem;
+      background-color: var(--secondary-bg);
+      border-radius: 4px;
+    }
+
+    .summary-item span {
+      font-weight: 700;
+      float: right;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sticky Header -->
+  <header>
+    <div class="header-titles">
+      <h1>Income Tax Act (Focus: TDS Chapter & Exemptions)</h1>
+      <p>Interactive Statutory Assessment Engine - 75 Comprehensive Questions</p>
+    </div>
+    <div class="header-controls">
+      <div id="timerDisplay" class="timer-badge">45:00</div>
+      <button id="restartBtn" class="btn btn-secondary" title="Reshuffle & Restart">🔄 Restart</button>
+      <button id="themeToggleBtn" class="btn btn-secondary" title="Toggle Light/Dark Mode">🌙</button>
+    </div>
+  </header>
+
+  <!-- Main Content Layout -->
+  <div class="container">
+    <!-- Left Column: Active Question -->
+    <main class="card">
+      <div class="question-header">
+        <span id="questionIndexDisplay" class="question-index">Question 1 of 75</span>
+        <button id="bookmarkToggleBtn" class="bookmark-btn" title="Bookmark Question">★</button>
+      </div>
+      <div id="questionTextDisplay" class="question-text">Loading question...</div>
+      
+      <div id="optionsContainer" class="options-list"></div>
+
+      <div id="explanationContainer"></div>
+
+      <div class="card-actions">
+        <div class="action-group">
+          <button id="prevBtn" class="btn btn-secondary">Previous</button>
+          <button id="nextBtn" class="btn btn-secondary">Next</button>
+        </div>
+        <div class="action-group">
+          <button id="clearBtn" class="btn btn-secondary">Clear Selection</button>
+          <button id="submitBtn" class="btn btn-danger">Submit Quiz</button>
+        </div>
+      </div>
+    </main>
+
+    <!-- Right Column: Palette & Filters -->
+    <aside class="sidebar">
+      <div class="card">
+        <div class="filter-tabs">
+          <button class="tab-btn active" data-filter="all">All</button>
+          <button class="tab-btn" data-filter="answered">Answered</button>
+          <button class="tab-btn" data-filter="unanswered">Unanswered</button>
+          <button class="tab-btn" data-filter="bookmarked">Bookmarked</button>
+        </div>
+        <div id="paletteGrid" class="palette-grid" style="margin-top: 1rem;"></div>
+        <div class="legend-box">
+          <div class="legend-item"><div class="legend-color" style="background: var(--palette-unvisited);"></div> Unanswered</div>
+          <div class="legend-item"><div class="legend-color" style="background: var(--palette-answered);"></div> Answered</div>
+          <div class="legend-item"><div class="legend-color" style="background: var(--success-color);"></div> Correct</div>
+          <div class="legend-item"><div class="legend-color" style="background: var(--danger-color);"></div> Incorrect</div>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <!-- Results Modal -->
+  <div id="resultsModal" class="modal-overlay">
+    <div class="modal-card">
+      <h2>Assessment Complete</h2>
+      <div id="modalScoreDisplay" class="modal-score">0 / 75</div>
+      <div id="modalBadge" class="performance-badge">Passed</div>
+      
+      <div class="summary-grid">
+        <div class="summary-item">Total Answered <span id="summaryAnswered">0</span></div>
+        <div class="summary-item">Correct <span id="summaryCorrect">0</span></div>
+        <div class="summary-item">Incorrect <span id="summaryIncorrect">0</span></div>
+        <div class="summary-item">Skipped <span id="summarySkipped">0</span></div>
+      </div>
+
+      <div style="display: flex; gap: 0.5rem; justify-content: center;">
+        <button id="reviewModeBtn" class="btn btn-primary">Review Detailed Answers</button>
+        <button id="modalRestartBtn" class="btn btn-secondary">Restart Quiz</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // 75 High-Quality Questions focusing on TDS Chapter and Exemptions under Income Tax framework
+    const rawQuestionsData = [
+      {
+        id: 1,
+        question: "What is the primary legal objective of Tax Deduction at Source (TDS) under the Income Tax statutory framework?",
+        options: ["To collect tax at the very source of income generation, ensuring regular revenue flow and curbing tax evasion", "To impose penalties on taxpayers before filing returns", "To replace all forms of direct corporate tax liabilities", "To levy municipal tolls on commercial entities"],
+        correctIndex: 0,
+        explanation: "TDS ensures regular collection of tax at the source of income generation, widening the tax net and curbing evasion."
+      },
+      {
+        id: 2,
+        question: "Under which chapter of the Income Tax Act are provisions relating to Tax Deduction at Source (TDS) primarily housed?",
+        options: ["Chapter XVII-B", "Chapter VI-A", "Chapter IV-D", "Chapter XII-A"],
+        correctIndex: 0,
+        explanation: "Chapter XVII-B (Sections 192 to 206V) contains the statutory provisions governing TDS."
+      },
+      {
+        id: 3,
+        question: "Which section mandates tax deduction at source on 'Salaries'?",
+        options: ["Section 192", "Section 194C", "Section 194J", "Section 194A"],
+        correctIndex: 0,
+        explanation: "Section 192 governs tax deduction at source on salaries paid by an employer to an employee."
+      },
+      {
+        id: 4,
+        question: "Under Section 192, who is responsible for deducting tax from salary payments?",
+        options: ["The employer making payment of salary", "The employee receiving salary", "The local bank branch manager", "The Income Tax Commissioner"],
+        correctIndex: 0,
+        explanation: "Section 192 requires any person responsible for paying 'Salary' to deduct income tax at the time of payment based on estimated average income tax rates."
+      },
+      {
+        id: 5,
+        question: "Which section governs tax deduction on interest other than interest on securities (such as bank fixed deposits)?",
+        options: ["Section 194A", "Section 194B", "Section 194H", "Section 194I"],
+        correctIndex: 0,
+        explanation: "Section 194A covers TDS on interest other than interest on securities."
+      },
+      {
+        id: 6,
+        question: "Under Section 194A, are banks required to deduct TDS on interest paid on time deposits if total interest does not exceed the threshold limit (e.g., Rs. 40,000 for general citizens / Rs. 50,000 for senior citizens)?",
+        options: ["No, TDS is not required if interest does not exceed the prescribed threshold limit", "Yes, TDS must be deducted from the very first rupee", "Only if depositor submits a passport", "Only on Sundays"],
+        correctIndex: 0,
+        explanation: "Section 194A provides threshold exemptions (Rs. 40,000 for general / Rs. 50,000 for senior citizens) below which banks need not deduct TDS."
+      },
+      {
+        id: 7,
+        question: "Which section deals with TDS on winnings from lotteries, crossword puzzles, card games, or other games of any sort?",
+        options: ["Section 194B", "Section 194C", "Section 194EE", "Section 194G"],
+        correctIndex: 0,
+        explanation: "Section 194B mandates tax deduction on winnings from lotteries, crossword puzzles, or games exceeding prescribed limits."
+      },
+      {
+        id: 8,
+        question: "Which section governs TDS on payments made to contractors and sub-contractors for carrying out any work (including supply of labour for carrying out work)?",
+        options: ["Section 194C", "Section 194J", "Section 194I", "Section 194EE"],
+        correctIndex: 0,
+        explanation: "Section 194C governs tax deduction on payments to contractors and sub-contractors."
+      },
+      {
+        id: 9,
+        question: "Under Section 194C, what is the threshold for single contract payment and aggregate payments during a financial year?",
+        options: ["Single payment exceeding Rs. 30,000 or aggregate payments exceeding Rs. 1,00,000 in a financial year", "Rs. 5,000 single payment", "Rs. 10,000 aggregate", "No threshold exists"],
+        correctIndex: 0,
+        explanation: "Section 194C triggers TDS if single contract payment exceeds Rs. 30,000 or aggregate payments exceed Rs. 1,00,000 in a financial year."
+      },
+      {
+        id: 10,
+        question: "Which section governs tax deduction on insurance commission paid to agents?",
+        options: ["Section 194D", "Section 194G", "Section 194H", "Section 194EE"],
+        correctIndex: 0,
+        explanation: "Section 194D mandates TDS on insurance commission."
+      },
+      {
+        id: 11,
+        question: "Which section covers TDS on commission or brokerage (other than insurance commission)?",
+        options: ["Section 194H", "Section 194D", "Section 194C", "Section 194I"],
+        correctIndex: 0,
+        explanation: "Section 194H governs TDS on commission or brokerage payments."
+      },
+      {
+        id: 12,
+        question: "Which section governs TDS on rent payments (land, building, or furniture)?",
+        options: ["Section 194I", "Section 194C", "Section 194A", "Section 194J"],
+        correctIndex: 0,
+        explanation: "Section 194I mandates tax deduction on rent paid for land, building, or furniture/fixtures."
+      },
+      {
+        id: 13,
+        question: "Which section covers TDS on payment of fees for professional or technical services (FTS), royalty, or non-executive director remuneration?",
+        options: ["Section 194J", "Section 194C", "Section 194H", "Section 194A"],
+        correctIndex: 0,
+        explanation: "Section 194J governs TDS on professional or technical services and royalty."
+      },
+      {
+        id: 14,
+        question: "Which section mandates tax deduction on the transfer of certain immovable property (other than agricultural land) where consideration exceeds Rs. 50 lakhs?",
+        options: ["Section 194-IA", "Section 194C", "Section 194I", "Section 194-IC"],
+        correctIndex: 0,
+        explanation: "Section 194-IA requires the buyer of immovable property (exceeding Rs. 50 lakhs) to deduct TDS at 1%."
+      },
+      {
+        id: 15,
+        question: "Which section governs TDS on rent by certain individuals or Hindu Undivided Families (HUF) not covered under regular tax audit, where monthly rent exceeds Rs. 50,000?",
+        options: ["Section 194-IB", "Section 194I", "Section 194C", "Section 194J"],
+        correctIndex: 0,
+        explanation: "Section 194-IB requires individuals/HUFs not subject to tax audit to deduct TDS at 5% on monthly rent exceeding Rs. 50,000."
+      },
+      {
+        id: 16,
+        question: "Which section mandates TDS on payments made by individuals/HUFs (not under tax audit) to contractors or professionals for contractual or professional services exceeding Rs. 50,000 in a year?",
+        options: ["Section 194M", "Section 194C", "Section 194J", "Section 194-IA"],
+        correctIndex: 0,
+        explanation: "Section 194M covers TDS by individuals and HUFs not covered under 194C/194J audit on contractual/professional payments exceeding Rs. 50,000 in a year."
+      },
+      {
+        id: 17,
+        question: "Which section governs TDS on cash withdrawals exceeding Rs. 1 crore from a bank account in a financial year?",
+        options: ["Section 194N", "Section 194A", "Section 194B", "Section 194EE"],
+        correctIndex: 0,
+        explanation: "Section 194N mandates TDS on cash withdrawals exceeding Rs. 1 crore (or Rs. 20 lakhs for non-filers) from banking companies, cooperatives, or post offices."
+      },
+      {
+        id: 18,
+        question: "Which section covers TDS on purchase of goods exceeding Rs. 50 lakhs in value by a buyer whose turnover exceeds Rs. 10 crores in the preceding financial year?",
+        options: ["Section 194Q", "Section 194C", "Section 194J", "Section 194-IA"],
+        correctIndex: 0,
+        explanation: "Section 194Q requires a buyer (with turnover > Rs. 10 crores) to deduct TDS on purchase of goods exceeding Rs. 50 lakhs from a resident seller."
+      },
+      {
+        id: 19,
+        question: "Which section mandates TDS on benefit or perk arising from business or profession (such as free gifts or foreign trips provided to business clients/doctors)?",
+        options: ["Section 194R", "Section 194H", "Section 194J", "Section 194B"],
+        correctIndex: 0,
+        explanation: "Section 194R requires deduction of tax on perquisites or benefits arising from business or profession exceeding Rs. 20,000 in a financial year."
+      },
+      {
+        id: 20,
+        question: "Which section mandates TDS on net winnings from online games?",
+        options: ["Section 194BA", "Section 194B", "Section 194C", "Section 194BB"],
+        correctIndex: 0,
+        explanation: "Section 194BA governs TDS on net winnings from online games from the very first rupee or threshold as specified."
+      },
+      {
+        id: 21,
+        question: "What is the consequence under Section 206AB if a deductor makes payments to a 'specified person' (non-filer of income tax returns who has not filed returns for previous years and TDS/TCS aggregate is Rs. 50,000 or more)?",
+        options: ["Tax must be deducted at higher rates (twice the statutory rate or 5%, whichever is higher)", "No tax deduction is required", "Tax is deducted at 0.1%", "The payment is confiscated by police"],
+        correctIndex: 0,
+        explanation: "Section 206AB penalizes non-filers of tax returns by prescribing higher TDS rates (double the normal rate or 5%, whichever is higher)."
+      },
+      {
+        id: 22,
+        question: "Under Section 206AA, what higher TDS rate applies if a deductee fails to furnish their Permanent Account Number (PAN) to the deductor?",
+        options: ["20% (or the applicable statutory rate, whichever is higher)", "5% flat", "10% flat", "50% flat"],
+        correctIndex: 0,
+        explanation: "Section 206AA mandates deduction at 20% if PAN is not provided by the deductee."
+      },
+      {
+        id: 23,
+        question: "Within what statutory timeline must a deductor deposit deducted TDS into the Central Government account (e.g., for deductions made in months other than March)?",
+        options: ["On or before the 7th day of the next month", "By the end of the same month", "Within 3 months", "Within 1 year"],
+        correctIndex: 0,
+        explanation: "TDS deducted during any month must be deposited on or before the 7th day of the following month."
+      },
+      {
+        id: 24,
+        question: "What quarterly statement form must a deductor file to report TDS deductions on non-salary payments?",
+        options: ["Form 26Q", "Form 24Q", "Form 27EQ", "Form 10E"],
+        correctIndex: 0,
+        explanation: "Form 26Q is the quarterly statement for TDS on payments other than salary."
+      },
+      {
+        id: 25,
+        question: "What quarterly statement form must an employer file to report TDS deductions on salary?",
+        options: ["Form 24Q", "Form 26Q", "Form 27Q", "Form 16A"],
+        correctIndex: 0,
+        explanation: "Form 24Q is the quarterly statement for TDS deducted from salaries."
+      },
+      {
+        id: 26,
+        question: "What certificate is issued by an employer to an employee detailing salary paid and TDS deducted?",
+        options: ["Form 16", "Form 16A", "Form 26AS", "Form 15G"],
+        correctIndex: 0,
+        explanation: "Form 16 is the annual certificate issued to employees for salary TDS."
+      },
+      {
+        id: 27,
+        question: "What certificate is issued by a deductor for TDS deducted on non-salary payments (like interest, rent, professional fees)?",
+        options: ["Form 16A", "Form 16", "Form 27D", "Form 10BB"],
+        correctIndex: 0,
+        explanation: "Form 16A is the certificate issued for TDS on non-salary payments."
+      },
+      {
+        id: 28,
+        question: "What is the consequence under Section 40(a)(ia) if an assessee (business/profession) fails to deduct TDS or fails to deposit it after deduction on payments like rent, professional fees, or contractor payments?",
+        options: ["30% of such expenditure is disallowed as deduction in computing business income", "100% of expenditure is disallowed", "No disallowance, only a warning letter", "Imprisonment for 7 years"],
+        correctIndex: 0,
+        explanation: "Section 40(a)(ia) disallows 30% of expenses if TDS is not deducted or deposited as required."
+      },
+      {
+        id: 29,
+        question: "Under Section 201(1), if a person fails to deduct or pay TDS, what liability is imposed besides the tax amount?",
+        options: ["Interest for delayed deduction (1% per month) and delayed payment (1.5% per month), plus treating the person as an assessee in default", "Only a warning notice", "Forfeiture of all business assets", "Fine of exactly Rs. 100"],
+        correctIndex: 0,
+        explanation: "Section 201 treats the deductor as an assessee in default, levying interest and penalties."
+      },
+      {
+        id: 30,
+        question: "Which section of the Income Tax Act contains provisions relating to incomes which do NOT form part of Total Income (Exempt Incomes)?",
+        options: ["Section 10", "Section 80C", "Section 54", "Section 115BAC"],
+        correctIndex: 0,
+        explanation: "Section 10 is the core chapter/section housing various incomes that are completely exempt from tax."
+      },
+      {
+        id: 31,
+        question: "Under Section 10(1), how is agricultural income treated under the Income Tax Act?",
+        options: ["Completely exempt from income tax (subject to integration rules for tax rate calculation in certain cases)", "Taxed at flat 30%", "Taxed at corporate tax rates", "Exempt only for political parties"],
+        correctIndex: 0,
+        explanation: "Section 10(1) exempts agricultural income from income tax."
+      },
+      {
+        id: 32,
+        question: "Under Section 10(2), is any sum received by an individual as a member of a Hindu Undivided Family (HUF) from the estate of the HUF exempt?",
+        options: ["Yes, completely exempt if paid out of family income or family estate", "No, fully taxable as salary", "Taxed at capital gains rate", "Taxable if exceeding Rs. 10 lakhs"],
+        correctIndex: 0,
+        explanation: "Section 10(2) exempts sums received by a member of an HUF from the HUF estate."
+      },
+      {
+        id: 33,
+        question: "Under Section 10(10), is gratuity received by government employees upon retirement or death exempt?",
+        options: ["Yes, death-cum-retirement gratuity received by government employees is 100% exempt", "Exempt only up to Rs. 20 lakhs", "Fully taxable", "Exempt up to Rs. 10,000"],
+        correctIndex: 0,
+        explanation: "Section 10(10)(i) grants 100% exemption on death-cum-retirement gratuity received by government employees."
+      },
+      {
+        id: 34,
+        question: "Under Section 10(10AA), how is leave encashment received upon retirement by non-government salaried employees treated?",
+        options: ["Exempt up to the least of statutory limits (e.g., Rs. 3 lakhs, 10 months average salary, actual leave encashment, or government-notified limit)", "Fully taxable", "100% exempt for all employees", "Exempt up to Rs. 50 lakhs"],
+        correctIndex: 0,
+        explanation: "Section 10(10AA) provides calculated statutory exemption limits for leave encashment for non-government employees."
+      },
+      {
+        id: 35,
+        question: "Under Section 10(10C), what is the maximum statutory exemption limit for compensation received upon voluntary retirement (VRS) from specified undertakings?",
+        options: ["Rs. 5,00,000", "Rs. 2,00,000", "Rs. 20,00,000", "Rs. 50,00,000"],
+        correctIndex: 0,
+        explanation: "Section 10(10C) prescribes an exemption up to Rs. 5,00,000 for qualifying voluntary retirement schemes."
+      },
+      {
+        id: 36,
+        question: "Under Section 10(16), are scholarships granted to meet the cost of education exempt from income tax?",
+        options: ["Yes, scholarships granted to meet the cost of education are 100% exempt", "Exempt only if granted by foreign universities", "Fully taxable", "Exempt up to Rs. 25,000 only"],
+        correctIndex: 0,
+        explanation: "Section 10(16) exempts scholarships granted to meet the cost of education."
+      },
+      {
+        id: 37,
+        question: "Under Section 10(17), are daily allowances received by Members of Parliament (MPs) and Members of Legislative Assemblies (MLAs) exempt?",
+        options: ["Yes, daily allowances received by MPs and MLAs are fully exempt", "Fully taxable", "Exempt up to Rs. 10,000 per month", "Taxed under capital gains"],
+        correctIndex: 0,
+        explanation: "Section 10(17) exempts daily allowances received by MPs and MLAs."
+      },
+      {
+        id: 38,
+        question: "Under Section 10(26), are members of Scheduled Tribes residing in specified Northeastern states or Ladakh exempt from income tax on income from sources in those areas or dividend/interest on securities?",
+        options: ["Yes, fully exempt", "No exemption exists", "Taxed at 10%", "Exempt only if annual income is below Rs. 5 lakhs"],
+        correctIndex: 0,
+        explanation: "Section 10(26) provides tax exemption for specified Scheduled Tribe members residing in notified areas."
+      },
+      {
+        id: 39,
+        question: "Under Section 10(32), in case of clubbing of minor's income with a parent, what is the tax exemption limit per minor child whose income is clubbed?",
+        options: ["Up to Rs. 1,500 per minor child", "Up to Rs. 10,000", "No exemption", "Up to Rs. 50,000"],
+        correctIndex: 0,
+        explanation: "Section 10(32) provides an exemption of up to Rs. 1,500 per minor child when minor's income is clubbed with the parent."
+      },
+      {
+        id: 40,
+        question: "Under Section 10(34) / 10(35), how is dividend income from domestic companies treated under current tax regimes?",
+        options: ["Taxable in the hands of the shareholder at applicable slab rates (dividend distribution tax was abolished in 2020)", "100% exempt", "Taxed at flat 10%", "Taxed at flat 40%"],
+        correctIndex: 0,
+        explanation: "Following the abolition of DDT, dividend income is taxable in the hands of shareholders under normal slab rates."
+      },
+      {
+        id: 41,
+        question: "Under Section 10(38) / Section 112A, what tax treatment applies to long-term capital gains (LTCG) exceeding Rs. 1 lakh on transfer of equity shares or equity-oriented mutual funds subject to STT?",
+        options: ["Taxed at concessional rate of 10% (or updated Finance Act rates) without indexation", "Taxed at 30%", "100% exempt", "Taxed as ordinary business income"],
+        correctIndex: 0,
+        explanation: "LTCG on listed equity/mutual funds exceeding Rs. 1 lakh is taxable at concessional rates (e.g., 10% / 12.5% depending on budget amendments) under Section 112A."
+      },
+      {
+        id: 42,
+        question: "Under Section 10(43), any amount received by an individual as a loan under a notified Reverse Mortgage Scheme is treated as:",
+        options: ["Tax-free capital receipt (exempt from income tax)", "Taxable salary income", "Taxable business profit", "Capital gains"],
+        correctIndex: 0,
+        explanation: "Section 10(43) exempts amounts received under a notified reverse mortgage scheme."
+      },
+      {
+        id: 43,
+        question: "Are life insurance policy maturity proceeds exempt under Section 10(10D), subject to conditions regarding the annual premium relative to the sum assured?",
+        options: ["Yes, if premium does not exceed specified percentages (e.g., 10% or 15% of sum assured depending on policy date/disability)", "No, maturity proceeds are always 100% taxable", "Taxable at flat 20%", "Exempt only for senior citizens"],
+        correctIndex: 0,
+        explanation: "Section 10(10D) exempts life insurance proceeds provided annual premium limits relative to sum assured are met."
+      },
+      {
+        id: 44,
+        question: "Under Section 10(13A), how is House Rent Allowance (HRA) exemption calculated for a salaried employee?",
+        options: ["Least of actual HRA received, rent paid minus 10% of salary, or 50% (metro) / 40% (non-metro) of salary", "100% of HRA received", "Fixed Rs. 50,000", "Actual rent paid without limits"],
+        correctIndex: 0,
+        explanation: "Section 10(13A) and Rule 2A set out the three-way calculation formula for HRA exemption."
+      },
+      {
+        id: 45,
+        question: "Under Section 10(14), are uniform allowances or academic/research allowances granted to employees exempt?",
+        options: ["Yes, to the extent of actual expenses incurred for official purposes as prescribed under rules", "Fully taxable without exception", "Exempt up to Rs. 1 crore", "Exempt only for government ministers"],
+        correctIndex: 0,
+        explanation: "Section 10(14) exempts special allowances granted to meet official expenses to the extent spent."
+      },
+      {
+        id: 46,
+        question: "Are Provident Fund (EPF) withdrawals exempt under Section 10(11) / 10(12) upon meeting continuous service requirements (e.g., 5 years)?",
+        options: ["Yes, accumulated balance due and receivable from recognized provident funds is exempt", "Fully taxable as salary", "Taxed at capital gains rate", "Exempt only upon retirement at age 75"],
+        correctIndex: 0,
+        explanation: "Sections 10(11) and 10(12) exempt recognized provident fund balances upon qualifying conditions."
+      },
+      {
+        id: 47,
+        question: "Under Section 10(12A), is withdrawal from the National Pension System (NPS) account upon closure or opting out exempt up to what percentage of total accumulated corpus?",
+        options: ["Up to 60% of total corpus received is tax-free", "100% tax-free", "Only 20% tax-free", "Fully taxable"],
+        correctIndex: 0,
+        explanation: "Section 10(12A) exempts up to 60% of the NPS corpus withdrawn on lump sum closure."
+      },
+      {
+        id: 48,
+        question: "Under Section 10(23C), are incomes of notified educational institutions, universities, hospitals, or philanthropic funds exempt?",
+        options: ["Yes, subject to satisfying statutory accumulation, object, and approval conditions", "No, all educational and medical entities pay 30% tax", "Exempt only if foreign-owned", "Taxed at flat Rs. 10,000"],
+        correctIndex: 0,
+        explanation: "Section 10(23C) provides tax exemptions for approved educational and medical institutions meeting statutory criteria."
+      },
+      {
+        id: 49,
+        question: "Under Section 11 and Section 12, how is income derived from property held under trust wholly for charitable or religious purposes treated?",
+        options: ["Exempt from tax to the extent income is applied or accumulated for such purposes in accordance with statutory conditions (e.g., application of 85%)", "Fully taxable at 40%", "Taxed as capital gains", "Exempt only for political trusts"],
+        correctIndex: 0,
+        explanation: "Sections 11 and 12 govern charitable/religious trusts, granting exemption on income applied to charitable objects (minimum 85%)."
+      },
+      {
+        id: 50,
+        question: "Under Section 13A, is income of a Political Party chargeable to income tax?",
+        options: ["Exempt from tax on income from house property, capital gains, income from other sources, or voluntary contributions, subject to maintaining books of accounts and keeping record of contributions above Rs. 20,000", "Fully taxable at maximum marginal rate", "Taxed at corporate rate of 25%", "Exempt only if registered abroad"],
+        correctIndex: 0,
+        explanation: "Section 13A exempts political party income from house property, capital gains, and voluntary contributions upon maintaining proper accounts."
+      },
+      {
+        id: 51,
+        question: "What is the primary purpose of Tax Deduction and Collection Account Number (TAN) under Section 203A?",
+        options: ["Mandatory quoting in all TDS/TCS returns, challans, and certificates issued by deductors", "Filing individual income tax returns", "Opening personal savings accounts", "Applying for a driver's licence"],
+        correctIndex: 0,
+        explanation: "Section 203A mandates obtaining and quoting TAN for all TDS/TCS transactions."
+      },
+      {
+        id: 52,
+        question: "Under Section 206C, when is Tax Collected at Source (TCS) mandated?",
+        options: ["By sellers of specified goods (like alcoholic liquor, scrap, tendu leaves, motor vehicles exceeding Rs. 10 lakhs, or foreign remittance under LRS exceeding Rs. 7 lakhs) at the time of debit/receipt", "Only on export sales", "Only on residential rent", "Only on salary payments"],
+        correctIndex: 0,
+        explanation: "Section 206C governs Tax Collected at Source (TCS) by sellers on specified goods and remittances."
+      },
+      {
+        id: 53,
+        question: "What is the consequence if a deductor deducts tax under Chapter XVII-B but fails to deposit it with the Central Government?",
+        options: ["Prosecution proceedings under Section 276B, attracting rigorous imprisonment ranging from 3 months to 7 years with fine", "Only a formal written apology", "Forfeiture of driver's licence", "Mandatory community service"],
+        correctIndex: 0,
+        explanation: "Section 276B criminalizes failure to deposit deducted TDS, leading to prosecution and imprisonment."
+      },
+      {
+        id: 54,
+        question: "Under Section 197, can a taxpayer obtain a certificate for lower TDS or nil TDS deduction from the Assessing Officer?",
+        options: ["Yes, if the taxpayer's estimated total income justifies lower or nil deduction, they can apply for a certificate under Section 197", "No, TDS rates are absolute and can never be reduced", "Only cabinet ministers can obtain lower TDS certificates", "Only foreign companies qualify"],
+        correctIndex: 0,
+        explanation: "Section 197 allows taxpayers to obtain a certificate for lower or nil tax deduction if their estimated income warrants it."
+      },
+      {
+        id: 55,
+        question: "What is the statutory purpose of Form 15G / Form 15H submitted under Section 197A?",
+        options: ["Declaration by individuals/senior citizens that their total income is below the taxable limit, requesting deductors not to deduct TDS on interest/dividends", "Applying for passport renewal", "Filing corporate GST returns", "Claiming agricultural subsidies"],
+        correctIndex: 0,
+        explanation: "Form 15G (general) and Form 15H (senior citizens) are declarations to prevent TDS when total income is below taxable limits."
+      },
+      {
+        id: 56,
+        question: "Under Section 194-I, what is the differential TDS rate for renting of land/building versus plant, machinery, or equipment?",
+        options: ["10% for plant, machinery, and equipment; 2% for land, building, or furniture", "20% for land and 2% for machinery", "1% for all rent payments", "18% flat"],
+        correctIndex: 0,
+        explanation: "Section 194-I specifies 2% TDS for rent on land, building, or furniture, and 10% for rent on plant, machinery, or equipment."
+      },
+      {
+        id: 57,
+        question: "Under Section 194J, what is the standard TDS rate on fees for professional services, technical services, royalty, or non-executive directors?",
+        options: ["10% (with 2% rate for technical services/call centers/royalty in specific categories)", "1% flat", "25% flat", "50% flat"],
+        correctIndex: 0,
+        explanation: "Section 194J prescribes 10% TDS (or 2% for specified technical services/royalty)."
+      },
+      {
+        id: 58,
+        question: "Under Section 194H, what is the statutory TDS rate on commission or brokerage payments?",
+        options: ["5% (or as amended by Finance Acts)", "1% flat", "20% flat", "30% flat"],
+        correctIndex: 0,
+        explanation: "Section 194H specifies TDS on commission or brokerage at 5%."
+      },
+      {
+        id: 59,
+        question: "Under Section 194C, what are the distinct TDS rates for payments made to individual/HUF contractors versus other contractor entities (companies/firms)?",
+        options: ["1% for individual/HUF contractors and 2% for other contractors", "10% for individuals and 20% for companies", "Equal rate of 5% for all", "0.1% for all"],
+        correctIndex: 0,
+        explanation: "Section 194C distinguishes between individual/HUF contractors (1%) and other entities like companies/firms (2%)."
+      },
+      {
+        id: 60,
+        question: "Are capital gains arising from transfer of agricultural land situated in rural areas (outside municipal limits / specified distance) taxable under the Income Tax Act?",
+        options: ["No, rural agricultural land is not considered a 'capital asset' under Section 2(14), hence gains are tax-exempt", "Fully taxable as short-term capital gains", "Taxable at flat 30%", "Taxed as business income"],
+        correctIndex: 0,
+        explanation: "Rural agricultural land is excluded from the definition of capital asset under Section 2(14), making gains tax-exempt."
+      },
+      {
+        id: 61,
+        question: "Under Section 10(4B), is interest received by a non-resident Indian (NRI) on notified savings certificates (such as Non-Resident External accounts) exempt from tax?",
+        options: ["Yes, subject to prescribed residency and notification conditions", "No, fully taxable at slab rates", "Taxed at 40%", "Exempt only if deposited in foreign currency abroad"],
+        correctIndex: 0,
+        explanation: "Section 10(4B) exempts interest on notified savings certificates for NRIs meeting conditions."
+      },
+      {
+        id: 62,
+        question: "Under Section 10(6), are remuneration received by foreign diplomats, embassy staff, or foreign nationals working in India under approved technical assistance programs exempt?",
+        options: ["Yes, subject to reciprocal diplomatic exemptions and government approval", "No, all foreign nationals pay 30% tax", "Taxed at municipal rates", "Exempt only for tourists"],
+        correctIndex: 0,
+        explanation: "Section 10(6) provides tax exemptions for foreign diplomats and approved technical assistance personnel."
+      },
+      {
+        id: 63,
+        question: "Under Section 195, who is responsible for deducting tax at source when making payments of taxable sum (other than salary) to a Non-Resident or Foreign Company?",
+        options: ["Any person responsible for paying to a non-resident", "Only the Reserve Bank of India", "Only the Prime Minister's Office", "The non-resident recipient themselves"],
+        correctIndex: 0,
+        explanation: "Section 195 mandates TDS on any payment made to a non-resident or foreign company that is chargeable to tax under the Act."
+      },
+      {
+        id: 64,
+        question: "What is Form 27Q used for under Chapter XVII-B?",
+        options: ["Quarterly TDS statement for tax deducted on payments made to non-residents (foreign entities/NRIs)", "Quarterly statement for salary deductions", "Annual tax return of companies", "TDS refund application"],
+        correctIndex: 0,
+        explanation: "Form 27Q is the quarterly statement for TDS deducted on payments made to non-residents."
+      },
+      {
+        id: 65,
+        question: "Under Section 206C(1H), what TCS rate applies to the sale of goods exceeding Rs. 50 lakhs by a seller whose turnover exceeds Rs. 10 crores?",
+        options: ["0.1% of sale consideration exceeding Rs. 50 lakhs", "1% flat", "5% flat", "20% flat"],
+        correctIndex: 0,
+        explanation: "Section 206C(1H) mandates TCS at 0.1% on sale of goods exceeding Rs. 50 lakhs by high-turnover sellers."
+      },
+      {
+        id: 66,
+        question: "Under Section 10(2A), is the share of profit received by a partner from a Partnership Firm taxable in the hands of the partner?",
+        options: ["No, share of profit received by a partner from a firm is 100% exempt (since the firm pays tax on its profits)", "Fully taxable at slab rates", "Taxed at capital gains rates", "Exempt only up to Rs. 1 lakh"],
+        correctIndex: 0,
+        explanation: "Section 10(2A) exempts partner's share of profit from a partnership firm to avoid double taxation."
+      },
+      {
+        id: 67,
+        question: "Under Section 10(11A), is interest earned on Public Provident Fund (PPF) accounts exempt?",
+        options: ["Yes, any payment from a Public Provident Fund account is 100% exempt from tax", "Taxable at 10%", "Taxable if interest exceeds Rs. 10,000", "Taxed under income from other sources"],
+        correctIndex: 0,
+        explanation: "Section 10(11) / 10(11A) exempts PPF balances and interest earned thereon."
+      },
+      {
+        id: 68,
+        question: "Under Section 10(15)(iv)(i), is interest received by non-residents on notified bonds or securities issued by the Central Government exempt?",
+        options: ["Yes, subject to notification and residency conditions", "No, fully taxable", "Taxed at 30%", "Exempt only for domestic residents"],
+        correctIndex: 0,
+        explanation: "Section 10(15) exempts specified interest incomes on government bonds and securities for non-residents."
+      },
+      {
+        id: 69,
+        question: "What is the penalty under Section 271H for failure to file quarterly TDS/TCS statements within the stipulated time or furnishing incorrect information?",
+        options: ["A penalty ranging from Rs. 10,000 to Rs. 1,00,000 (in addition to late filing fees under Section 234E)", "A flat fine of Rs. 100", "Imprisonment for 10 years without fine", "Cancellation of corporate charter"],
+        correctIndex: 0,
+        explanation: "Section 271H imposes penalties between Rs. 10,000 and Rs. 1,00,000 for failure or incorrect filing of TDS statements."
+      },
+      {
+        id: 70,
+        question: "Under Section 234E, what late fee is levied for every day during which failure to furnish TDS/TCS statements continues?",
+        options: ["Rs. 200 for every day during which failure continues (capped at the total TDS amount deductible)", "Rs. 1,000 per day without cap", "Rs. 10 per day", "No fee"],
+        correctIndex: 0,
+        explanation: "Section 234E prescribes a late fee of Rs. 200 per day for delayed TDS/TCS statement filings, capped at the TDS amount."
+      },
+      {
+        id: 71,
+        question: "Under Section 10(23FB), is any income of a Venture Capital Company or Venture Capital Fund set up from investment in venture capital undertakings exempt?",
+        options: ["Yes, specified venture capital incomes are exempt under Section 10(23FB)", "No, fully taxable at corporate tax rates", "Taxed under capital gains", "Exempt only if invested in foreign real estate"],
+        correctIndex: 0,
+        explanation: "Section 10(23FB) exempts specified income of venture capital funds/companies."
+      },
+      {
+        id: 72,
+        question: "Under Section 10(23D), are incomes of Mutual Funds registered under the Securities and Exchange Board of India (SEBI) exempt from income tax?",
+        options: ["Yes, income of mutual funds registered under SEBI is tax-exempt", "Taxed at flat 25%", "Taxed at corporate tax rates", "Exempt only for equity funds"],
+        correctIndex: 0,
+        explanation: "Section 10(23D) exempts income of SEBI-registered mutual funds."
+      },
+      {
+        id: 73,
+        question: "Under Section 10(25), is income of statutory bodies like the Employees' Provident Fund Organisation (EPFO) or recognized provident funds exempt?",
+        options: ["Yes, income of provident funds and approved statutory authorities is exempt", "No, fully taxable", "Taxed under business income", "Exempt only upon court order"],
+        correctIndex: 0,
+        explanation: "Section 10(25) exempts income of specified statutory bodies and provident funds."
+      },
+      {
+        id: 74,
+        question: "Under Section 194-O, who is mandated to deduct TDS at 1% on gross amount of sale of goods or provision of service facilitated through their digital facility?",
+        options: ["E-commerce Operator (ECO)", "The retail buyer directly", "The postal courier service", "The Reserve Bank of India"],
+        correctIndex: 0,
+        explanation: "Section 194-O mandates E-commerce Operators to deduct TDS at 1% on e-commerce transactions."
+      },
+      {
+        id: 75,
+        question: "What is the overarching policy balance achieved by Chapter XVII-B (TDS) and Chapter III (Exemptions) in the Indian Income Tax architecture?",
+        options: ["Balancing robust revenue mobilization and tax compliance at source with targeted socio-economic incentives and exemptions for agriculture, charities, provident funds, and capital growth", "Abolishing all direct taxes entirely", "Replacing income tax with municipal property tolls", "Mandating foreign currency transactions for all citizens"],
+        correctIndex: 0,
+        explanation: "TDS ensures steady revenue collection and compliance, while exemptions under Chapter III foster social welfare, agricultural growth, and institutional philanthropy."
+      }
+    ];
+
+    // State Variables
+    let shuffledQuestions = [];
+    let currentQuestionIndex = 0;
+    let userAnswers = {}; // { questionIndex: selectedOptionIndex }
+    let bookmarks = new Set();
+    let isSubmitted = false;
+    let activeFilter = 'all';
+
+    // Timer Variables
+    const TOTAL_TIME_SECONDS = 45 * 60; // 45 mins
+    let timeRemaining = TOTAL_TIME_SECONDS;
+    let timerInterval = null;
+
+    // DOM Elements
+    const questionIndexDisplay = document.getElementById('questionIndexDisplay');
+    const bookmarkToggleBtn = document.getElementById('bookmarkToggleBtn');
+    const questionTextDisplay = document.getElementById('questionTextDisplay');
+    const optionsContainer = document.getElementById('optionsContainer');
+    const explanationContainer = document.getElementById('explanationContainer');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const clearBtn = document.getElementById('clearBtn');
+    const submitBtn = document.getElementById('submitBtn');
+    const paletteGrid = document.getElementById('paletteGrid');
+    const timerDisplay = document.getElementById('timerDisplay');
+    const themeToggleBtn = document.getElementById('themeToggleBtn');
+    const restartBtn = document.getElementById('restartBtn');
+    const resultsModal = document.getElementById('resultsModal');
+
+    // Fisher-Yates Shuffle Algorithm
+    function fisherYatesShuffle(array) {
+      const arr = [...array];
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+      return arr;
+    }
+
+    // Initialize/Reset Quiz Data Engine
+    function initQuizData() {
+      // Deep copy and shuffle questions
+      shuffledQuestions = fisherYatesShuffle(rawQuestionsData).map(q => {
+        // Prepare options array with original indices tracked
+        const optionsObj = q.options.map((optText, index) => ({
+          text: optText,
+          originalIndex: index
+        }));
+        
+        // Shuffle options
+        const shuffledOptions = fisherYatesShuffle(optionsObj);
+        
+        // Find new correct index
+        const newCorrectIndex = shuffledOptions.findIndex(o => o.originalIndex === q.correctIndex);
+
+        return {
+          id: q.id,
+          question: q.question,
+          options: shuffledOptions,
+          correctIndex: newCorrectIndex,
+          explanation: q.explanation
+        };
+      });
+
+      // Reset runtime state
+      currentQuestionIndex = 0;
+      userAnswers = {};
+      bookmarks.clear();
+      isSubmitted = false;
+      activeFilter = 'all';
+
+      // Reset Timer
+      clearInterval(timerInterval);
+      timeRemaining = TOTAL_TIME_SECONDS;
+      updateTimerUI();
+      startTimer();
+
+      // Reset UI Controls
+      submitBtn.disabled = false;
+      clearBtn.disabled = false;
+      resultsModal.classList.remove('open');
+
+      renderFilterTabs();
+      renderCurrentQuestion();
+      renderPalette();
+    }
+
+    // Timer Logic
+    function startTimer() {
+      timerInterval = setInterval(() => {
+        timeRemaining--;
+        updateTimerUI();
+
+        if (timeRemaining <= 0) {
+          clearInterval(timerInterval);
+          autoSubmitQuiz();
+        }
+      }, 1000);
+    }
+
+    function updateTimerUI() {
+      const minutes = Math.floor(timeRemaining / 60);
+      const seconds = timeRemaining % 60;
+      const formatted = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+      timerDisplay.textContent = formatted;
+
+      if (timeRemaining < 300) { // < 5 mins
+        timerDisplay.classList.add('warning');
+      } else {
+        timerDisplay.classList.remove('warning');
+      }
+    }
+
+    // Render Question Card
+    function renderCurrentQuestion() {
+      const q = shuffledQuestions[currentQuestionIndex];
+      
+      questionIndexDisplay.textContent = `Question ${currentQuestionIndex + 1} of ${shuffledQuestions.length}`;
+      questionTextDisplay.textContent = q.question;
+
+      // Bookmark state
+      if (bookmarks.has(currentQuestionIndex)) {
+        bookmarkToggleBtn.classList.add('active');
+      } else {
+        bookmarkToggleBtn.classList.remove('active');
+      }
+
+      // Render Options
+      optionsContainer.innerHTML = '';
+      const selectedOption = userAnswers[currentQuestionIndex];
+
+      q.options.forEach((opt, idx) => {
+        const optionCard = document.createElement('div');
+        optionCard.className = 'option-card';
+
+        // Apply review styling if submitted
+        if (isSubmitted) {
+          if (idx === q.correctIndex) {
+            optionCard.classList.add('correct-review');
+          } else if (selectedOption === idx && selectedOption !== q.correctIndex) {
+            optionCard.classList.add('incorrect-review');
+          }
+        } else if (selectedOption === idx) {
+          optionCard.classList.add('selected');
+        }
+
+        optionCard.innerHTML = `
+          <div class="radio-custom"></div>
+          <div class="option-label">${opt.text}</div>
+        `;
+
+        if (!isSubmitted) {
+          optionCard.addEventListener('click', () => selectOption(idx));
+        }
+
+        optionsContainer.appendChild(optionCard);
+      });
+
+      // Render Explanation in Review Mode
+      explanationContainer.innerHTML = '';
+      if (isSubmitted) {
+        const expBox = document.createElement('div');
+        expBox.className = 'explanation-box';
+        expBox.innerHTML = `
+          <div class="explanation-title">Statutory Clause & Reference:</div>
+          <div>${q.explanation}</div>
+        `;
+        explanationContainer.appendChild(expBox);
+      }
+
+      // Update Navigation Buttons
+      prevBtn.disabled = currentQuestionIndex === 0;
+      nextBtn.disabled = currentQuestionIndex === shuffledQuestions.length - 1;
+
+      renderPalette();
+    }
+
+    // Select Option
+    function selectOption(optionIndex) {
+      if (isSubmitted) return;
+      userAnswers[currentQuestionIndex] = optionIndex;
+      renderCurrentQuestion();
+    }
+
+    // Clear Selection
+    clearBtn.addEventListener('click', () => {
+      if (isSubmitted) return;
+      delete userAnswers[currentQuestionIndex];
+      renderCurrentQuestion();
+    });
+
+    // Bookmark Toggle
+    bookmarkToggleBtn.addEventListener('click', () => {
+      if (bookmarks.has(currentQuestionIndex)) {
+        bookmarks.delete(currentQuestionIndex);
+      } else {
+        bookmarks.add(currentQuestionIndex);
+      }
+      renderCurrentQuestion();
+    });
+
+    // Navigation Events
+    prevBtn.addEventListener('click', () => {
+      if (currentQuestionIndex > 0) {
+        currentQuestionIndex--;
+        renderCurrentQuestion();
+      }
+    });
+
+    nextBtn.addEventListener('click', () => {
+      if (currentQuestionIndex < shuffledQuestions.length - 1) {
+        currentQuestionIndex++;
+        renderCurrentQuestion();
+      }
+    });
+
+    // Palette Rendering & Filter Logic
+    function renderPalette() {
+      paletteGrid.innerHTML = '';
+
+      shuffledQuestions.forEach((q, idx) => {
+        const isAnswered = userAnswers.hasOwnProperty(idx);
+        const isBookmarked = bookmarks.has(idx);
+
+        // Filter Evaluation
+        if (activeFilter === 'answered' && !isAnswered) return;
+        if (activeFilter === 'unanswered' && isAnswered) return;
+        if (activeFilter === 'bookmarked' && !isBookmarked) return;
+
+        const item = document.createElement('div');
+        item.className = 'palette-item';
+        item.textContent = idx + 1;
+
+        if (idx === currentQuestionIndex) {
+          item.classList.add('active-current');
+        }
+
+        if (isBookmarked) {
+          item.classList.add('bookmarked');
+        }
+
+        if (isSubmitted) {
+          const userAns = userAnswers[idx];
+          if (userAns === q.correctIndex) {
+            item.classList.add('correct-post');
+          } else if (userAns !== undefined) {
+            item.classList.add('incorrect-post');
+          }
+        } else if (isAnswered) {
+          item.classList.add('answered');
+        }
+
+        item.addEventListener('click', () => {
+          currentQuestionIndex = idx;
+          renderCurrentQuestion();
+        });
+
+        paletteGrid.appendChild(item);
+      });
+    }
+
+    // Filter Tab Buttons
+    function renderFilterTabs() {
+      const tabs = document.querySelectorAll('.tab-btn');
+      tabs.forEach(tab => {
+        tab.addEventListener('click', (e) => {
+          tabs.forEach(t => t.classList.remove('active'));
+          e.target.classList.add('active');
+          activeFilter = e.target.getAttribute('data-filter');
+          renderPalette();
+        });
+      });
+    }
+
+    // Submit Quiz & Show Results
+    function submitQuiz() {
+      if (isSubmitted) return;
+      isSubmitted = true;
+      clearInterval(timerInterval);
+
+      // Score Calculation
+      let correctCount = 0;
+      let incorrectCount = 0;
+      let answeredCount = 0;
+
+      shuffledQuestions.forEach((q, idx) => {
+        if (userAnswers.hasOwnProperty(idx)) {
+          answeredCount++;
+          if (userAnswers[idx] === q.correctIndex) {
+            correctCount++;
+          } else {
+            incorrectCount++;
+          }
+        }
+      });
+
+      const totalCount = shuffledQuestions.length;
+      const skippedCount = totalCount - answeredCount;
+      const percentage = Math.round((correctCount / totalCount) * 100);
+
+      // Modal Elements
+      document.getElementById('modalScoreDisplay').textContent = `${correctCount} / ${totalCount} (${percentage}%)`;
+      document.getElementById('summaryAnswered').textContent = answeredCount;
+      document.getElementById('summaryCorrect').textContent = correctCount;
+      document.getElementById('summaryIncorrect').textContent = incorrectCount;
+      document.getElementById('summarySkipped').textContent = skippedCount;
+
+      const badge = document.getElementById('modalBadge');
+      if (percentage >= 80) {
+        badge.textContent = "Excellent";
+        badge.className = "performance-badge badge-excellent";
+      } else if (percentage >= 50) {
+        badge.textContent = "Passed";
+        badge.className = "performance-badge badge-passed";
+      } else {
+        badge.textContent = "Failed";
+        badge.className = "performance-badge badge-failed";
+      }
+
+      resultsModal.classList.add('open');
+      renderCurrentQuestion();
+    }
+
+    function autoSubmitQuiz() {
+      alert("Time has expired! Automatically submitting your quiz.");
+      submitQuiz();
+    }
+
+    submitBtn.addEventListener('click', () => {
+      if (confirm("Are you sure you want to submit your quiz?")) {
+        submitQuiz();
+      }
+    });
+
+    // Review & Restart Handlers
+    document.getElementById('reviewModeBtn').addEventListener('click', () => {
+      resultsModal.classList.remove('open');
+    });
+
+    document.getElementById('modalRestartBtn').addEventListener('click', () => {
+      initQuizData();
+    });
+
+    restartBtn.addEventListener('click', () => {
+      if (confirm("Restarting will shuffle all questions and clear active progress. Proceed?")) {
+        initQuizData();
+      }
+    });
+
+    // Dark/Light Theme Switcher
+    themeToggleBtn.addEventListener('click', () => {
+      document.body.classList.toggle('dark-mode');
+      if (document.body.classList.contains('dark-mode')) {
+        themeToggleBtn.textContent = '☀️';
+      } else {
+        themeToggleBtn.textContent = '🌙';
+      }
+    });
+
+    // Initialize Engine On Load
+    window.addEventListener('DOMContentLoaded', () => {
+      initQuizData();
+    });
+  </script>
+</body>
+</html>
