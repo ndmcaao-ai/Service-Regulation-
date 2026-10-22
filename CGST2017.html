@@ -1,0 +1,1499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CGST Act, 2017 (As applicable to Local Bodies) Master Quiz - 75 Questions</title>
+  <style>
+    :root {
+      --bg-primary: #f4f6f9;
+      --bg-card: #ffffff;
+      --text-main: #1f2937;
+      --text-muted: #6b7280;
+      --border-color: #e5e7eb;
+      --primary-color: #0284c7;
+      --primary-hover: #0369a1;
+      --secondary-bg: #f3f4f6;
+      --success-color: #059669;
+      --success-bg: #d1fae5;
+      --danger-color: #dc2626;
+      --danger-bg: #fee2e2;
+      --warning-color: #d97706;
+      --warning-bg: #fef3c7;
+      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      --palette-unvisited: #e5e7eb;
+      --palette-unvisited-text: #374151;
+      --palette-answered: #0284c7;
+      --palette-answered-text: #ffffff;
+    }
+
+    body.dark-mode {
+      --bg-primary: #0f172a;
+      --bg-card: #1e293b;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --border-color: #334155;
+      --primary-color: #38bdf8;
+      --primary-hover: #7dd3fc;
+      --secondary-bg: #334155;
+      --success-color: #10b981;
+      --success-bg: #064e3b;
+      --danger-color: #f87171;
+      --danger-bg: #7f1d1d;
+      --warning-color: #fbbf24;
+      --warning-bg: #78350f;
+      --palette-unvisited: #334155;
+      --palette-unvisited-text: #cbd5e1;
+      --palette-answered: #38bdf8;
+      --palette-answered-text: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    /* Sticky Header */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background-color: var(--bg-card);
+      border-bottom: 1px solid var(--border-color);
+      padding: 0.75rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .header-titles h1 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--primary-color);
+    }
+
+    .header-titles p {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .header-controls {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .timer-badge {
+      font-family: monospace;
+      font-size: 1.15rem;
+      font-weight: 700;
+      padding: 0.4rem 0.8rem;
+      border-radius: 6px;
+      background-color: var(--secondary-bg);
+      color: var(--text-main);
+      border: 1px solid var(--border-color);
+    }
+
+    .timer-badge.warning {
+      background-color: var(--danger-bg);
+      color: var(--danger-color);
+      border-color: var(--danger-color);
+      animation: pulse 1s infinite alternate;
+    }
+
+    @keyframes pulse {
+      from { opacity: 1; }
+      to { opacity: 0.7; }
+    }
+
+    .btn {
+      padding: 0.5rem 1rem;
+      font-size: 0.875rem;
+      font-weight: 600;
+      border-radius: 6px;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+    }
+
+    .btn-primary {
+      background-color: var(--primary-color);
+      color: #ffffff;
+    }
+
+    .btn-primary:hover {
+      background-color: var(--primary-hover);
+    }
+
+    .btn-secondary {
+      background-color: var(--secondary-bg);
+      color: var(--text-main);
+      border-color: var(--border-color);
+    }
+
+    .btn-secondary:hover {
+      filter: brightness(0.95);
+    }
+
+    .btn-danger {
+      background-color: var(--danger-color);
+      color: #ffffff;
+    }
+
+    .btn-danger:hover {
+      filter: brightness(0.9);
+    }
+
+    /* Main Container Grid */
+    .container {
+      max-width: 1280px;
+      width: 100%;
+      margin: 1.5rem auto;
+      padding: 0 1rem;
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: 1.5rem;
+      flex: 1;
+    }
+
+    @media (max-width: 900px) {
+      .container {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Question Card */
+    .card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 1.5rem;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .question-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .question-index {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+
+    .bookmark-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1.25rem;
+      color: var(--text-muted);
+      transition: color 0.2s;
+    }
+
+    .bookmark-btn.active {
+      color: var(--warning-color);
+    }
+
+    .question-text {
+      font-size: 1.1rem;
+      font-weight: 600;
+      line-height: 1.5;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Options List */
+    .options-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-bottom: 2rem;
+    }
+
+    .option-card {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 1rem;
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s;
+      background-color: var(--bg-card);
+    }
+
+    .option-card:hover {
+      border-color: var(--primary-color);
+      background-color: var(--secondary-bg);
+    }
+
+    .option-card.selected {
+      border-color: var(--primary-color);
+      background-color: var(--secondary-bg);
+      box-shadow: 0 0 0 1px var(--primary-color);
+    }
+
+    .option-card.correct-review {
+      border-color: var(--success-color);
+      background-color: var(--success-bg);
+      color: var(--text-main);
+    }
+
+    .option-card.incorrect-review {
+      border-color: var(--danger-color);
+      background-color: var(--danger-bg);
+      color: var(--text-main);
+    }
+
+    .radio-custom {
+      width: 18px;
+      height: 18px;
+      border: 2px solid var(--border-color);
+      border-radius: 50%;
+      margin-top: 2px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .option-card.selected .radio-custom {
+      border-color: var(--primary-color);
+    }
+
+    .option-card.selected .radio-custom::after {
+      content: "";
+      width: 10px;
+      height: 10px;
+      background-color: var(--primary-color);
+      border-radius: 50%;
+    }
+
+    .option-label {
+      font-size: 0.95rem;
+      line-height: 1.4;
+      flex: 1;
+    }
+
+    /* Bottom Action Bar */
+    .card-actions {
+      margin-top: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.5rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border-color);
+      flex-wrap: wrap;
+    }
+
+    .action-group {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    /* Explanation Box */
+    .explanation-box {
+      margin-top: 1.5rem;
+      padding: 1rem;
+      border-radius: 6px;
+      background-color: var(--secondary-bg);
+      border-left: 4px solid var(--primary-color);
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    .explanation-title {
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+      color: var(--primary-color);
+    }
+
+    /* Sidebar / Palette */
+    .sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .filter-tabs {
+      display: flex;
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      overflow: hidden;
+      background-color: var(--bg-card);
+    }
+
+    .tab-btn {
+      flex: 1;
+      padding: 0.5rem 0.2rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      border: none;
+      background: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      text-align: center;
+      transition: background-color 0.2s, color 0.2s;
+    }
+
+    .tab-btn.active {
+      background-color: var(--primary-color);
+      color: #ffffff;
+    }
+
+    .palette-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 0.5rem;
+      max-height: 400px;
+      overflow-y: auto;
+      padding: 0.25rem;
+    }
+
+    .palette-item {
+      aspect-ratio: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      font-weight: 700;
+      border-radius: 6px;
+      border: 1px solid var(--border-color);
+      cursor: pointer;
+      background-color: var(--palette-unvisited);
+      color: var(--palette-unvisited-text);
+      position: relative;
+      transition: all 0.2s;
+    }
+
+    .palette-item.active-current {
+      outline: 2px solid var(--primary-color);
+      outline-offset: 2px;
+    }
+
+    .palette-item.answered {
+      background-color: var(--palette-answered);
+      color: var(--palette-answered-text);
+      border-color: var(--palette-answered);
+    }
+
+    .palette-item.bookmarked::after {
+      content: "★";
+      position: absolute;
+      top: 1px;
+      right: 3px;
+      font-size: 0.65rem;
+      color: var(--warning-color);
+    }
+
+    .palette-item.correct-post {
+      background-color: var(--success-color);
+      color: #ffffff;
+      border-color: var(--success-color);
+    }
+
+    .palette-item.incorrect-post {
+      background-color: var(--danger-color);
+      color: #ffffff;
+      border-color: var(--danger-color);
+    }
+
+    .legend-box {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.5rem;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      padding: 0.75rem;
+      border-top: 1px solid var(--border-color);
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .legend-color {
+      width: 12px;
+      height: 12px;
+      border-radius: 3px;
+    }
+
+    /* Modal Overlay */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .modal-overlay.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-card {
+      background-color: var(--bg-card);
+      border-radius: 8px;
+      max-width: 500px;
+      width: 90%;
+      padding: 2rem;
+      box-shadow: var(--shadow-md);
+      text-align: center;
+    }
+
+    .modal-score {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--primary-color);
+      margin: 1rem 0;
+    }
+
+    .performance-badge {
+      display: inline-block;
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      font-weight: 700;
+      font-size: 0.85rem;
+      margin-bottom: 1.5rem;
+      text-transform: uppercase;
+    }
+
+    .badge-excellent { background-color: var(--success-bg); color: var(--success-color); }
+    .badge-passed { background-color: var(--warning-bg); color: var(--warning-color); }
+    .badge-failed { background-color: var(--danger-bg); color: var(--danger-color); }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+      text-align: left;
+      font-size: 0.9rem;
+    }
+
+    .summary-item {
+      padding: 0.5rem;
+      background-color: var(--secondary-bg);
+      border-radius: 4px;
+    }
+
+    .summary-item span {
+      font-weight: 700;
+      float: right;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sticky Header -->
+  <header>
+    <div class="header-titles">
+      <h1>CGST Act, 2017 (As applicable to Local Bodies)</h1>
+      <p>Interactive Statutory Assessment Engine - 75 Comprehensive Questions</p>
+    </div>
+    <div class="header-controls">
+      <div id="timerDisplay" class="timer-badge">45:00</div>
+      <button id="restartBtn" class="btn btn-secondary" title="Reshuffle & Restart">🔄 Restart</button>
+      <button id="themeToggleBtn" class="btn btn-secondary" title="Toggle Light/Dark Mode">🌙</button>
+    </div>
+  </header>
+
+  <!-- Main Content Layout -->
+  <div class="container">
+    <!-- Left Column: Active Question -->
+    <main class="card">
+      <div class="question-header">
+        <span id="questionIndexDisplay" class="question-index">Question 1 of 75</span>
+        <button id="bookmarkToggleBtn" class="bookmark-btn" title="Bookmark Question">★</button>
+      </div>
+      <div id="questionTextDisplay" class="question-text">Loading question...</div>
+      
+      <div id="optionsContainer" class="options-list"></div>
+
+      <div id="explanationContainer"></div>
+
+      <div class="card-actions">
+        <div class="action-group">
+          <button id="prevBtn" class="btn btn-secondary">Previous</button>
+          <button id="nextBtn" class="btn btn-secondary">Next</button>
+        </div>
+        <div class="action-group">
+          <button id="clearBtn" class="btn btn-secondary">Clear Selection</button>
+          <button id="submitBtn" class="btn btn-danger">Submit Quiz</button>
+        </div>
+      </div>
+    </main>
+
+    <!-- Right Column: Palette & Filters -->
+    <aside class="sidebar">
+      <div class="card">
+        <div class="filter-tabs">
+          <button class="tab-btn active" data-filter="all">All</button>
+          <button class="tab-btn" data-filter="answered">Answered</button>
+          <button class="tab-btn" data-filter="unanswered">Unanswered</button>
+          <button class="tab-btn" data-filter="bookmarked">Bookmarked</button>
+        </div>
+        <div id="paletteGrid" class="palette-grid" style="margin-top: 1rem;"></div>
+        <div class="legend-box">
+          <div class="legend-item"><div class="legend-color" style="background: var(--palette-unvisited);"></div> Unanswered</div>
+          <div class="legend-item"><div class="legend-color" style="background: var(--palette-answered);"></div> Answered</div>
+          <div class="legend-item"><div class="legend-color" style="background: var(--success-color);"></div> Correct</div>
+          <div class="legend-item"><div class="legend-color" style="background: var(--danger-color);"></div> Incorrect</div>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <!-- Results Modal -->
+  <div id="resultsModal" class="modal-overlay">
+    <div class="modal-card">
+      <h2>Assessment Complete</h2>
+      <div id="modalScoreDisplay" class="modal-score">0 / 75</div>
+      <div id="modalBadge" class="performance-badge">Passed</div>
+      
+      <div class="summary-grid">
+        <div class="summary-item">Total Answered <span id="summaryAnswered">0</span></div>
+        <div class="summary-item">Correct <span id="summaryCorrect">0</span></div>
+        <div class="summary-item">Incorrect <span id="summaryIncorrect">0</span></div>
+        <div class="summary-item">Skipped <span id="summarySkipped">0</span></div>
+      </div>
+
+      <div style="display: flex; gap: 0.5rem; justify-content: center;">
+        <button id="reviewModeBtn" class="btn btn-primary">Review Detailed Answers</button>
+        <button id="modalRestartBtn" class="btn btn-secondary">Restart Quiz</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // 75 High-Quality Questions on CGST Act, 2017 with specific focus on Local Bodies (Municipalities, Panchyats, Local Authorities)
+    const rawQuestionsData = [
+      {
+        id: 1,
+        question: "When did the Central Goods and Services Tax (CGST) Act, 2017 receive Presidential assent and come into force?",
+        options: ["Assented on 12th April 2017; Enforced broadly from 1st July 2017", "Assented on 1st January 2017; Enforced from 1st April 2017", "Assented on 28th December 2016; Enforced from 1st January 2017", "Assented on 1st July 2017; Enforced from 1st September 2017"],
+        correctIndex: 0,
+        explanation: "The CGST Act, 2017 (Act No. 12 of 2017) received Presidential assent on 12th April 2017 and came into force generally from 1st July 2017."
+      },
+      {
+        id: 2,
+        question: "Under Section 2(69) of the CGST Act, 2017, how is a 'local authority' defined?",
+        options: ["Only municipal corporations located in state capitals", "A Panchayat, a Municipality, a Municipal Committee, a Zilla Parishad, a District Board, and any authority legally entitled to or entrusted with control/management of a municipal or local fund", "Any private residents' welfare association", "Any corporate entity operating commercial markets"],
+        correctIndex: 1,
+        explanation: "Section 2(69) defines 'local authority' to include Panchayats, Municipalities, Municipal Committees, Zilla Parishads, District Boards, and authorities managing municipal/local funds."
+      },
+      {
+        id: 3,
+        question: "How are 'Panchayat' and 'Municipality' defined for the purposes of Section 2(69) of the CGST Act?",
+        options: ["By state police manuals", "As defined in clause (d) of Article 243 and clause (e) of Article 243P of the Constitution of India respectively", "Under the Companies Act, 2013", "Under the Cantonments Act, 2006"],
+        correctIndex: 1,
+        explanation: "Section 2(69) cross-references Article 243(d) for Panchayats and Article 243P(e) for Municipalities under the Constitution."
+      },
+      {
+        id: 4,
+        question: "Under Section 2(17), does the definition of 'business' include any trade, commerce, manufacture, profession, or adventure whether or not it is for pecuniary benefit carried on by a local authority?",
+        options: ["No, local authorities are entirely excluded from the definition of business", "Yes, any trade, commerce, manufacture, or similar activity undertaken by a local authority in public utility or other capacity is treated as 'business'", "Only if profits exceed Rs. 50 lakhs", "Only commercial construction activities"],
+        correctIndex: 1,
+        explanation: "Section 2(17) includes any trade, commerce, manufacture, etc., carried on by a local authority or other public authority in the definition of business."
+      },
+      {
+        id: 5,
+        question: "Under Section 2(107), how is 'taxable person' defined in relation to local bodies?",
+        options: ["Only state government departments", "A person who is registered or liable to be registered under Section 22 or Section 24 of the Act", "Every citizen residing within municipal limits", "Only private contractors"],
+        correctIndex: 1,
+        explanation: "Section 2(107) defines a taxable person as a person who is registered or liable to be registered under Section 22 or Section 24."
+      },
+      {
+        id: 6,
+        question: "Under Section 7(1)(a), for an activity by a local body to qualify as a 'supply', it must be made for a consideration and:",
+        options: ["Must be in the course or furtherance of business", "Must be approved by the Governor", "Must be charitable", "Must be free of cost"],
+        correctIndex: 0,
+        explanation: "Section 7(1)(a) requires that supply must involve goods or services made for a consideration in the course or furtherance of business."
+      },
+      {
+        id: 7,
+        question: "Are statutory sovereign functions performed by local authorities (such as municipal garbage collection, sanitation, or statutory licensing) treated as 'supply of services' under GST?",
+        options: ["Yes, all statutory functions attract highest GST rates", "No, specific sovereign or public functions notified under recommendations of the GST Council (or statutory functions of local authorities) may be exempt or outside the taxable scope", "Only if outsourced to private contractors", "Subject to 18% tax universally"],
+        correctIndex: 1,
+        explanation: "Pure sovereign/statutory functions performed by governmental authorities and local bodies as per law are generally exempt or outside the purview of supply."
+      },
+      {
+        id: 8,
+        question: "Under Section 9(1) of the CGST Act, what is levied on all intra-state supplies of goods or services made by or to taxable entities including local bodies?",
+        options: ["Central Goods and Services Tax (CGST)", "Customs Duty", "Agricultural Cess", "Professional Tax"],
+        correctIndex: 0,
+        explanation: "Section 9(1) is the charging section for Central Tax (CGST) on intra-state supplies."
+      },
+      {
+        id: 9,
+        question: "What is the maximum statutory rate of CGST that can be levied under Section 9(1)?",
+        options: ["10%", "14%", "20% (making total CGST + SGST up to 40%)", "50%"],
+        correctIndex: 2,
+        explanation: "Section 9(1) stipulates that CGST shall be levied at such rates not exceeding twenty percent."
+      },
+      {
+        id: 10,
+        question: "Under Section 9(3), what mechanism applies when a local body receives certain specified services (like legal services or renting of immovable property from government)?",
+        options: ["Forward charge where supplier pays tax", "Reverse Charge Mechanism (RCM) where the recipient local body pays tax directly to the Government", "Total tax exemption", "Tax deduction at source of 10%"],
+        correctIndex: 1,
+        explanation: "Section 9(3) enables the Reverse Charge Mechanism (RCM), making the recipient (such as a local body) liable to pay tax directly."
+      },
+      {
+        id: 11,
+        question: "Under Section 10, are local bodies eligible to opt for the Composition Levy?",
+        options: ["Yes, all local bodies automatically qualify for 1% composition rate", "No, local authorities are statutory bodies/governmental entities and do not fit standard composition trader categories under Section 10", "Only municipal canteens", "Only district boards"],
+        correctIndex: 1,
+        explanation: "Local authorities are public/statutory bodies and are not eligible for composition levy which is structured for small traders and manufacturers."
+      },
+      {
+        id: 12,
+        question: "Under Section 22(1), when is a business entity or supplier (interacting with local bodies) liable to take GST registration?",
+        options: ["When aggregate turnover in a financial year exceeds the threshold limit (typically Rs. 20 lakhs or Rs. 10 lakhs as applicable)", "Only after earning 1 crore profit", "Voluntarily at any time without limit", "Registration is never required for local suppliers"],
+        correctIndex: 0,
+        explanation: "Section 22 sets the aggregate turnover threshold (Rs. 20 lakhs/10 lakhs) for mandatory registration."
+      },
+      {
+        id: 13,
+        question: "Under Section 24, which persons/entities are mandatorily required to register under CGST regardless of turnover threshold?",
+        options: ["Persons making inter-state taxable supplies", "Casual taxable persons and persons required to pay tax under reverse charge", "Non-resident taxable persons and e-commerce operators", "All of the above"],
+        correctIndex: 3,
+        explanation: "Section 24 mandates compulsory registration for inter-state suppliers, casual taxable persons, RCM payees, e-commerce operators, etc.."
+      },
+      {
+        id: 14,
+        question: "Are local authorities themselves required to obtain GST registration if they make taxable outward supplies (such as renting commercial shops or advertisement spaces)?",
+        options: ["No, local bodies have blanket immunity from registration", "Yes, if they make taxable supplies exceeding the threshold or engage in specific taxable activities, registration (or TDS registration) is required", "Only if registered under Companies Act", "Registration is optional forever"],
+        correctIndex: 1,
+        explanation: "Local authorities making taxable supplies or acting as deductors must obtain appropriate GST registration."
+      },
+      {
+        id: 15,
+        question: "Under Section 51, who is mandated to deduct Tax Deducted at Source (TDS) from payments made or credited to suppliers of goods or services?",
+        options: ["A department or establishment of the Central/State Government, Local Authority, or Governmental agencies", "Private individual taxpayers", "Foreign tourists", "Retail shopkeepers"],
+        correctIndex: 0,
+        explanation: "Section 51 mandates TDS deduction by government departments, local authorities, and governmental agencies."
+      },
+      {
+        id: 16,
+        question: "What is the statutory rate of TDS to be deducted under Section 51(1) of the CGST Act?",
+        options: ["1% CGST and 1% SGST (Total 2%)", "5% CGST", "10% IGST", "18% total tax"],
+        correctIndex: 0,
+        explanation: "Section 51 specifies TDS at the rate of 1% under CGST and 1% under SGST/UTGST (total 2%)."
+      },
+      {
+        id: 17,
+        question: "Under Section 51(2), within what timeframe must the local authority or deductor deposit the TDS deducted to the Government account?",
+        options: ["Within 5 days from month end", "Within 10 days after the end of the month in which deduction was made", "Within 30 days", "End of the financial year"],
+        correctIndex: 1,
+        explanation: "Section 51(2) (read with rules) requires TDS deductors to deposit tax within 10 days from the end of the month."
+      },
+      {
+        id: 18,
+        question: "What return form must a local authority file as a TDS deductor under Section 51 read with rules?",
+        options: ["GSTR-1", "GSTR-3B", "GSTR-7", "GSTR-9"],
+        correctIndex: 2,
+        explanation: "TDS deductors file monthly returns in Form GSTR-7 within 10 days from the end of the month."
+      },
+      {
+        id: 19,
+        question: "Under Section 16(1), what condition must a registered person (or a local body acting as a taxable entity) satisfy to claim Input Tax Credit (ITC)?",
+        options: ["Possession of tax invoice/debit note, receipt of goods/services, tax actually paid to government, and filing of returns", "Verbal agreement with supplier", "Approval by district collector", "Payment in foreign currency"],
+        correctIndex: 0,
+        explanation: "Section 16(1) and (2) outline core conditions for claiming ITC including invoices, receipt of goods/services, and tax deposit."
+      },
+      {
+        id: 20,
+        question: "Under Section 16(4), what is the time limit for claiming Input Tax Credit in respect of any invoice or debit note for a financial year?",
+        options: ["Up to 30th November following the end of financial year or furnishing of annual return, whichever is earlier", "Anytime within 5 years", "Before the end of the same month", "Within 60 days"],
+        correctIndex: 0,
+        explanation: "Section 16(4) restricts ITC claim beyond 30th November following the end of the financial year or furnishing of the annual return, whichever is earlier."
+      },
+      {
+        id: 21,
+        question: "Under Section 17(1) & (2), if goods or services are used by a local body partly for taxable supplies (including exempt supplies) or non-business purposes, how is ITC treated?",
+        options: ["Full ITC can be claimed without restriction", "ITC is restricted proportionately to the taxable supplies used in the course or furtherance of business", "ITC is completely forfeited", "Double ITC is granted"],
+        correctIndex: 1,
+        explanation: "Section 17 mandates proportional reversal or restriction of ITC when inputs are used for exempt, non-business, or non-taxable purposes."
+      },
+      {
+        id: 22,
+        question: "Under Section 17(5) (Blocked Credits), is ITC available on goods or services used for personal consumption or free samples distributed by a local entity?",
+        options: ["Yes, fully allowed", "No, blocked under Section 17(5)", "Allowed only during festivals", "Allowed upon municipal commissioner approval"],
+        correctIndex: 1,
+        explanation: "Section 17(5) blocks ITC on personal consumption, free samples, gifts, etc."
+      },
+      {
+        id: 23,
+        question: "Under Section 35, what accounts and records must a registered local entity maintain at its principal place of business?",
+        options: ["Production, inward/outward supplies, stock of goods, input tax credit availed, output tax payable/paid, and other prescribed records", "Only bank passbooks", "Personal diaries of officials", "Voter registration rolls"],
+        correctIndex: 0,
+        explanation: "Section 35 requires maintaining detailed books of accounts and records regarding production, supplies, stock, ITC, etc."
+      },
+      {
+        id: 24,
+        question: "Under Section 37 and Section 39, what standard outward supply and summary return forms are filed by registered taxable persons?",
+        options: ["GSTR-1 (Outward supplies) and GSTR-3B (Summary return)", "GSTR-4 and GSTR-9C", "GSTR-10 and GSTR-11", "Annual return only"],
+        correctIndex: 0,
+        explanation: "GSTR-1 is filed for outward supplies and GSTR-3B is the monthly summary return."
+      },
+      {
+        id: 25,
+        question: "Under Section 44, what is the annual return requirement for registered persons under the CGST Act?",
+        options: ["Filing of Annual Return in Form GSTR-9 (and GSTR-9C reconciliation audit if applicable)", "Filing a handwritten letter", "No annual return needed", "Filing audit report with High Court"],
+        correctIndex: 0,
+        explanation: "Section 44 mandates filing an annual return in Form GSTR-9."
+      },
+      {
+        id: 26,
+        question: "Under Section 54, within what time period must a person claim a refund of tax, interest, or any other amount paid under the CGST Act?",
+        options: ["Within two years from the relevant date", "Within six months", "Within five years", "No time limit"],
+        correctIndex: 0,
+        explanation: "Section 54(1) prescribes a limitation period of two years from the relevant date for claiming refunds."
+      },
+      {
+        id: 27,
+        question: "Under Section 67, who is empowered to authorize inspection, search, and seizure of goods, documents, or books in any place of business of a taxable entity?",
+        options: ["The Commissioner (or officer not below rank of Joint Commissioner upon authorization)", "Local police constable", "Sarpanch of a village", "Municipal health inspector"],
+        correctIndex: 0,
+        explanation: "Section 67 empowers proper officers not below the rank of Joint Commissioner (under Commissioner's authorization) to conduct search and seizure."
+      },
+      {
+        id: 28,
+        question: "Under Section 73, what is the procedure for demanding tax in cases NOT involving fraud, willful misstatement, or suppression of facts?",
+        options: ["Issuance of show cause notice and adjudication order within specified limitation windows without punitive penalty of fraud", "Immediate arrest of municipal officials", "Sealing of entire municipal headquarters", "Direct civil court execution"],
+        correctIndex: 0,
+        explanation: "Section 73 governs demand and recovery of tax in normal cases without fraud or suppression."
+      },
+      {
+        id: 29,
+        question: "Under Section 74, what stricter consequences apply when tax has not been paid or short-paid by reason of fraud, willful misstatement, or suppression of facts?",
+        options: ["Heavy penalties equal to tax evaded plus interest and extended period show cause notices", "Only a formal warning letter", "Waiving of all interest", "Mandatory promotion"],
+        correctIndex: 0,
+        explanation: "Section 74 deals with demand, recovery, and heavy penalties in cases involving fraud, willful misstatement, or suppression."
+      },
+      {
+        id: 30,
+        question: "Under Section 79, what modes of recovery are available to the proper officer to recover government dues from a defaulter?",
+        options: ["Deduction from money owed under government control, detaining/selling goods, third-party recovery, attaching movable/immovable property, or recovery with assistance of Collector", "Filing defamation suit", "Community service", "Warning via public loudspeaker"],
+        correctIndex: 0,
+        explanation: "Section 79 lists comprehensive recovery mechanisms including attachment of property, third-party recovery, and recovery through District Collector."
+      },
+      {
+        id: 31,
+        question: "Under Section 95, how is the 'Authority for Advance Ruling' (AAR) constituted under the CGST Act?",
+        options: ["To give binding advance rulings on taxability, classification, or valuation of supply undertaken or proposed by an applicant", "To sentence tax evaders to prison", "To audit municipal budgets", "To set municipal property tax rates"],
+        correctIndex: 0,
+        explanation: "Section 95 & 97 establish AAR to provide advance rulings on tax questions for applicants."
+      },
+      {
+        id: 32,
+        question: "Under Section 107, an appeal against an adjudicating authority's order can be filed before the Appellate Authority within how many days from communication of the order?",
+        options: ["30 days (with a condonable further period of 30 days)", "90 days", "180 days", "One year"],
+        correctIndex: 0,
+        explanation: "Section 107 provides for filing appeals within three months (30 days + 30 days extension) from communication of the order."
+      },
+      {
+        id: 33,
+        question: "Under Section 112, appeals against orders of the Appellate Authority lie before which tribunal?",
+        options: ["The Goods and Services Tax Appellate Tribunal (GSTAT)", "The Supreme Court directly", "The National Green Tribunal", "The District Consumer Forum"],
+        correctIndex: 0,
+        explanation: "Section 112 provides for appeals to the Appellate Tribunal (GSTAT)."
+      },
+      {
+        id: 34,
+        question: "Under Section 122, what penalty is attracted for offenses such as supplying goods/services without issuing an invoice or issuing false invoices?",
+        options: ["Penalty of Rs. 10,000 or an amount equivalent to the tax evaded or tax short deducted, whichever is higher", "A fixed fine of Rs. 100", "Public apology", "Suspension of municipal elections"],
+        correctIndex: 0,
+        explanation: "Section 122 prescribes major monetary penalties for issuing false invoices or evading tax."
+      },
+      {
+        id: 35,
+        question: "Under Section 129, under what conditions can a conveyance transporting goods in contravention of the Act be detained or seized?",
+        options: ["Detention of goods and conveyance upon interception without proper documents, released upon payment of applicable tax and heavy penalty or security", "Permanent confiscation without option of release", "Immediate auctioning within 1 hour", "Imprisonment of truck driver for 7 years"],
+        correctIndex: 0,
+        explanation: "Section 129 governs detention, seizure, and release of goods and conveyances in transit upon payment of tax and penalty."
+      },
+      {
+        id: 36,
+        question: "Under Section 130, when can goods or conveyances be CONFISCATED by the department?",
+        options: ["When supplied/transported with intent to evade tax (e.g., fake invoices, clandestine removal)", "Whenever transported on weekends", "If vehicle color is non-standard", "If driver lacks a passport"],
+        correctIndex: 0,
+        explanation: "Section 130 sets out grounds for confiscation of goods or conveyances upon tax evasion intent."
+      },
+      {
+        id: 37,
+        question: "Under Section 132, what criminal offenses attract prosecution and imprisonment up to 5 years (with fine) for tax evasion exceeding specified monetary limits?",
+        options: ["Issuing invoice without supply, fraudulent ITC availure, or evading tax exceeding Rs. 5 crores", "Failing to sweep streets on time", "Delaying municipal budget submission", "Failing to plant trees"],
+        correctIndex: 0,
+        explanation: "Section 132 defines major cognizable and non-bailable offenses subject to imprisonment thresholds."
+      },
+      {
+        id: 38,
+        question: "Under Section 138, can offenses under the CGST Act be compounded by the Commissioner?",
+        options: ["Yes, either before or after the institution of prosecution, on payment of compounding amount", "No, compounding is strictly barred", "Only by order of the Supreme Court", "Only after serving half the prison sentence"],
+        correctIndex: 0,
+        explanation: "Section 138 permits compounding of offenses by the Commissioner upon payment of compounding fees."
+      },
+      {
+        id: 39,
+        question: "Under Section 155, in any proceedings under the Act, if a person claims eligibility to Input Tax Credit, upon whom rests the burden of proving such claim?",
+        options: ["Upon the person claiming such credit (taxpayer/local entity)", "Upon the tax inspector", "Upon the Comptroller and Auditor General", "Upon the High Court registry"],
+        correctIndex: 0,
+        explanation: "Section 155 explicitly states that the burden of proving admissibility of input tax credit lies upon the person claiming it."
+      },
+      {
+        id: 40,
+        question: "Under Section 168, who is empowered to issue orders, instructions, or directions to officers for uniformity in administration of the CGST Act?",
+        options: ["The Central Board of Indirect Taxes and Customs (CBIC)", "Local municipal commissioners", "District superintendents of police", "State governors"],
+        correctIndex: 0,
+        explanation: "Section 168 empowers CBIC to issue orders, instructions, and directions for administrative uniformity."
+      },
+      {
+        id: 41,
+        question: "Are services supplied by a local authority by way of any activity in relation to any function entrusted to a Panchayat under Article 243G of the Constitution exempt from GST?",
+        options: ["Yes, services by local authorities in relation to Article 243G constitutional functions are generally exempt vide notification entries", "No, taxed at highest rate of 28%", "Taxed at 18%", "Subject to state professional tax only"],
+        correctIndex: 0,
+        explanation: "Services provided by local authorities in relation to functions entrusted to Panchayats under Article 243G or Municipalities under Article 243W enjoy specific exemptions under GST exemption notifications."
+      },
+      {
+        id: 42,
+        question: "Under GST tariff notifications, what is the tax treatment of services provided by way of public conveniences (such as running public lavatories, bath rooms, urinal facilities) by local authorities?",
+        options: ["Exempt from GST", "Taxed at 18%", "Taxed at 28% plus cess", "Subject to luxury tax"],
+        correctIndex: 0,
+        explanation: "Services by way of public conveniences (bathrooms, lavatories, washrooms, urinals) provided by local authorities are typically exempt from GST."
+      },
+      {
+        id: 43,
+        question: "What is the GST rate on renting of immovable property (such as community halls, shops, marriage lawns) owned or rented out by a local authority to registered business entities?",
+        options: ["Taxable under forward charge or reverse charge depending on registration status of recipient (e.g., 18% under RCM if supplied to registered business)", "Always fully exempt", "Taxed at 5% without ITC", "Exempt up to Rs. 10 crores"],
+        correctIndex: 0,
+        explanation: "Renting of immovable property by government or local authorities to registered business entities attracts GST under Reverse Charge Mechanism (RCM) or forward charge at standard rates (usually 18%)."
+      },
+      {
+        id: 44,
+        question: "Are services provided by a local authority to a business entity whose aggregate turnover in the preceding financial year was up to Rs. 20 lakhs (or Rs. 10 lakhs) exempt from GST?",
+        options: ["Yes, services supplied by a local authority to small business entities with aggregate turnover up to the threshold limit are exempt", "No, business turnover has no relevance", "Taxed at 12%", "Taxed at 28%"],
+        correctIndex: 0,
+        explanation: "Exemption notifications exempt services provided by a local authority to a business entity having aggregate turnover up to the threshold limit in the preceding financial year."
+      },
+      {
+        id: 45,
+        question: "How are municipal solid waste management services (garbage collection and disposal) contracted out by a local body treated under GST?",
+        options: ["Pure services provided to government/local authority by way of public utility/sanitation are generally exempt (e.g., garbage collection)", "Taxed at 28%", "Taxed at luxury rates", "Subject to excise duty"],
+        correctIndex: 0,
+        explanation: "Pure services provided to government or local authorities by way of public health, sanitation, or solid waste management are exempt under specific exemption entries."
+      },
+      {
+        id: 46,
+        question: "When a local authority awards a works contract (e.g., road construction, water supply infrastructure) to an external contractor, what GST rate applies to the composite supply of works contract to a governmental authority/local body?",
+        options: ["Concessional rate (typically 12% with 6% CGST + 6% SGST as notified for government/local authority projects)", "Standard 18%", "Exempt fully", "28%"],
+        correctIndex: 0,
+        explanation: "Works contracts supplied to the Central Government, State Government, local authority, or governmental authority for historical or public infrastructure projects often attract concessional GST rates (12%)."
+      },
+      {
+        id: 47,
+        question: "Under the CGST Act, is a local authority required to obtain separate registrations for each state or distinct place of business if it operates across multiple states?",
+        options: ["Yes, obtaining distinct registrations for business verticals or separate state operations is mandatory", "One single registration covers the entire universe without state limits", "Registration is optional", "Exempt from all registrations"],
+        correctIndex: 0,
+        explanation: "Section 22 and 25 require separate registration for business places or establishments located in different states (distinct persons)."
+      },
+      {
+        id: 48,
+        question: "What is the consequence under Section 29 if a registered local entity or its contractor discontinues business or undergoes amalgamation/transfer?",
+        options: ["Application for cancellation of registration within prescribed time and settling all tax liabilities", "Automatic transfer of assets without tax file closure", "Lifetime freezing of bank accounts", "Immediate dissolution of municipal council"],
+        correctIndex: 0,
+        explanation: "Section 29 governs cancellation of registration upon transfer, amalgamation, or discontinuation of business."
+      },
+      {
+        id: 49,
+        question: "Under Section 33, what does the 'Principle of Compulsory Display of Prices' require on invoices issued by taxable suppliers dealing with local bodies?",
+        options: ["Prices must clearly indicate tax components separately", "Prices must be hidden", "Prices expressed in foreign currency only", "Prices without any mention of goods description"],
+        correctIndex: 0,
+        explanation: "Section 33 requires prices on tax invoices to clearly indicate tax components and specifics."
+      },
+      {
+        id: 50,
+        question: "Under Section 49 of the CGST Act, how are the Electronic Cash Ledger, Electronic Credit Ledger, and Electronic Liability Register maintained?",
+        options: ["Electronically on the common portal (GSTN) for recording deposits, ITC utilization, and tax liabilities", "In physical paper registers kept at police stations", "In sealed bank vaults", "Maintained exclusively by the RBI Governor"],
+        correctIndex: 0,
+        explanation: "Section 49 mandates electronic ledgers (cash, credit, and liability register) on the common GST portal."
+      },
+      {
+        id: 51,
+        question: "In what order must Input Tax Credit available in the Electronic Credit Ledger be utilized under Section 49 read with rules for paying CGST, SGST, and IGST?",
+        options: ["IGST credit first set off against IGST, then CGST/SGST; CGST credit against CGST/IGST; SGST credit against SGST/IGST", "SGST credit set off against CGST first", "Cash ledger must be emptied before any credit utilization", "Random utilization"],
+        correctIndex: 0,
+        explanation: "Statutory ITC utilization rules dictate strict sequencing: IGST credit exhausted first against IGST, then CGST/SGST; followed by respective intra-tax credits."
+      },
+      {
+        id: 52,
+        question: "Under Section 50, what rate of interest is payable by a registered person (or local entity/contractor) for delayed payment of tax?",
+        options: ["Not exceeding 18% per annum (or 24% in case of undue/wrong availment of ITC)", "Fixed at 5% per annum", "1% per month flat without limit", "No interest for government bodies"],
+        correctIndex: 0,
+        explanation: "Section 50 prescribes interest for delayed tax payment at 18% (and 24% for wrongful ITC claims)."
+      },
+      {
+        id: 53,
+        question: "Under Section 52, who is mandated to collect Tax at Source (TCS) on net value of taxable supplies made through their portal?",
+        options: ["Electronic Commerce Operators (ECO)", "Local municipal commissioners", "District postmasters", "High court registrars"],
+        correctIndex: 0,
+        explanation: "Section 52 mandates Electronic Commerce Operators to collect TCS."
+      },
+      {
+        id: 54,
+        question: "Under Section 61, what is 'Scrutiny of Returns' conducted by proper tax officers?",
+        options: ["Checking returns for correctness and issuing notices for discrepancies requiring explanation", "Physical demolition of non-compliant buildings", "Auditing municipal school textbooks", "Counting municipal vehicle fleets"],
+        correctIndex: 0,
+        explanation: "Section 61 provides for scrutiny of returns by proper officers to verify correctness and seek explanations for discrepancies."
+      },
+      {
+        id: 65,
+        question: "Under Section 62, what action can a proper officer take if a registered person fails to furnish returns under Section 39 or Section 45 (Best Judgment Assessment)?",
+        options: ["Issue a best judgment assessment order based on available material", "Impose life imprisonment instantly", "Seize all municipal roads", "Dissolve the local municipal council"],
+        correctIndex: 0,
+        explanation: "Section 62 empowers proper officers to complete best judgment assessment for non-filers of returns."
+      },
+      {
+        id: 56,
+        question: "Under Section 65, what is an 'Audit by Tax Authorities'?",
+        options: ["Audit of records of a registered person conducted by Commissioner or authorized officers at place of business or office", "Audit of municipal drainage systems by civil engineers", "Audit of public parks by horticulturists", "Audit of police armories"],
+        correctIndex: 0,
+        explanation: "Section 65 authorizes tax authorities to conduct departmental audit of registered taxpayers' books and records."
+      },
+      {
+        id: 57,
+        question: "Under Section 66, when can a 'Special Audit' be ordered by an officer not below the rank of Assistant Commissioner?",
+        options: ["During scrutiny/investigation if accounts are complex or revenue cannot be readily ascertained, requiring a CA/Cost Accountant audit", "Whenever the mayor requests it", "During municipal elections", "Annually for all local bodies automatically"],
+        correctIndex: 0,
+        explanation: "Section 66 allows special audit by a nominated Chartered Accountant or Cost Accountant in complex cases."
+      },
+      {
+        id: 58,
+        question: "Under Section 70, does a proper officer have powers to summon persons to give evidence and produce documents in inquiries under the CGST Act?",
+        options: ["Yes, equivalent to civil courts under Code of Civil Procedure, 1908", "No, summoning powers rest solely with criminal sessions courts", "Only with written sanction from the Prime Minister", "Summons can only be issued via email"],
+        correctIndex: 0,
+        explanation: "Section 70 grants proper officers power to summon persons to give evidence and produce documents, enforceable under CPC."
+      },
+      {
+        id: 59,
+        question: "Under Section 75, what procedural safeguard applies to adjudication proceedings regarding opportunity of being heard?",
+        options: ["Opportunity of being heard must be given if a adverse decision is contemplated or requested", "No hearings are necessary in tax matters", "Hearings are conducted via public loudspeakers", "Only written affidavits are permitted without hearing"],
+        correctIndex: 0,
+        explanation: "Section 75 mandates providing an opportunity of being heard (personal hearing) before passing adverse adjudication orders."
+      },
+      {
+        id: 60,
+        question: "Under Section 83, when can provisional attachment of property (including bank accounts) be ordered by the Commissioner to protect government revenue?",
+        options: ["During pendency of proceedings under Section 62, 63, 64, 67, 73, or 74 if necessary to protect revenue", "Whenever a local body delays garbage collection", "In civil land disputes between private citizens", "During routine annual audits"],
+        correctIndex: 0,
+        explanation: "Section 83 allows provisional attachment of property during pendency of specified assessment/investigation proceedings to safeguard revenue."
+      },
+      {
+        id: 61,
+        question: "Under Section 84, what happens to recovery proceedings if an appellate authority or tribunal reduces the tax demand?",
+        options: ["Continuation/modification of recovery proceedings for the reduced amount and notifying the taxpayer", "All recovery proceedings are permanently cancelled without exception", "Tax demand is doubled", "Taxpayer must file a fresh lawsuit"],
+        correctIndex: 0,
+        explanation: "Section 84 governs continuation or initiation of recovery proceedings in relation to modified/reduced demands following appeals."
+      },
+      {
+        id: 62,
+        question: "Under Section 89, what liability attaches to partners of a firm, directors of a company, or members of an association in respect of tax dues?",
+        options: ["Joint and several liability for tax dues unless proved otherwise", "Total immunity from tax liabilities", "Liability restricted to Rs. 100", "Liability transferred to municipal voters"],
+        correctIndex: 0,
+        explanation: "Section 89 deals with liability of directors, partners, or members for payment of tax dues of companies/firms."
+      },
+      {
+        id: 63,
+        question: "Under Section 92, what is the liability of the guardian, trustee, or agent of a incapacitated person or local representative managing a property?",
+        options: ["Deemed to be a taxable person and subject to same liabilities and duties as the principal", "Exempt from all tax filings", "Personally liable for all municipal debts of citizens", "Immune from prosecution"],
+        correctIndex: 0,
+        explanation: "Section 92 establishes tax liability and representation duties for guardians, trustees, and agents."
+      },
+      {
+        id: 64,
+        question: "Under Section 117, an appeal against an order passed by the State Bench or Area Bench of the Appellate Tribunal (GSTAT) lies before which court on a substantial question of law?",
+        options: ["The High Court", "The Supreme Court of India directly", "The District Sessions Court", "The Chief Judicial Magistrate"],
+        correctIndex: 0,
+        explanation: "Section 117 provides for appeals from Tribunal orders to the High Court on substantial questions of law."
+      },
+      {
+        id: 65,
+        question: "Under Section 118, appeals from orders of the High Court or National Bench of the Tribunal lie before:",
+        options: ["The Supreme Court of India", "The President of India", "The Parliament", "The NITI Aayog"],
+        correctIndex: 0,
+        explanation: "Section 118 specifies appeals to the Supreme Court from High Court or National Tribunal Bench judgments."
+      },
+      {
+        id: 66,
+        question: "Under Section 125 (General Penalty), what maximum penalty can be imposed for contravening any provision of the CGST Act or rules for which no specific penalty is provided elsewhere?",
+        options: ["Up to twenty-five thousand rupees (Rs. 25,000)", "Fixed fine of Rs. 100", "Imprisonment up to 10 years", "Confiscation of municipal buildings"],
+        correctIndex: 0,
+        explanation: "Section 125 provides a general penalty extending up to twenty-five thousand rupees for violations without specific penalty provisions."
+      },
+      {
+        id: 67,
+        question: "Under Section 134, is the previous sanction of the Commissioner required for launching prosecution against an offender under Section 132?",
+        options: ["Yes, previous sanction of the Commissioner is mandatory", "No sanction needed", "Sanction must be obtained from municipal councillors", "Sanction must be issued by RBI"],
+        correctIndex: 0,
+        explanation: "Section 134 mandates prior sanction of the Commissioner to institute prosecution proceedings."
+      },
+      {
+        id: 68,
+        question: "Under Section 159, under what circumstances can the Commissioner publish details of persons convicted or penalized under the CGST Act?",
+        options: ["If deemed fit in public interest, publishing name, address, tax evaded, and penalty details", "Publication is strictly prohibited under privacy laws", "Only in local daily newspapers on Sundays", "Only upon written consent of the offender"],
+        correctIndex: 0,
+        explanation: "Section 159 empowers the Commissioner to publish details of convicted or penalized tax offenders in public interest."
+      },
+      {
+        id: 69,
+        question: "Under Section 161, within what timeframe can clerical or arithmetical mistakes in any decision, order, or notice be rectified by the tax authority?",
+        options: ["Within three months from the date of such decision or order (or suo motu / upon pointing out)", "Within 10 years", "Within 24 hours", "Never once issued"],
+        correctIndex: 0,
+        explanation: "Section 161 allows rectification of mistakes apparent from record within three months."
+      },
+      {
+        id: 70,
+        question: "Under Section 171, what is the 'Anti-Profiteering' measure under the CGST Act?",
+        options: ["Ensuring that reduction in rate of tax or benefit of input tax credit is passed on to the recipient by way of commensurate reduction in prices", "Prohibiting companies from making commercial profits", "Taxing corporate dividends at 50%", "Fixing maximum retail prices of vegetables"],
+        correctIndex: 0,
+        explanation: "Section 171 mandates anti-profiteering measures to ensure tax rate cuts or ITC benefits translate into lower prices for consumers."
+      },
+      {
+        id: 71,
+        question: "How does the CGST Act treat supplies of goods or services between distinct persons (such as a local municipal corporation's headquarters and its separate registered zonal offices within or outside the state)?",
+        options: ["Treated as 'supply' even if made without consideration, requiring inter-unit or intra-unit GST accounting", "Ignored as internal correspondence", "Exempt from all tax tracking", "Treated as export of goods"],
+        correctIndex: 0,
+        explanation: "Schedule I read with Section 7 treats supplies between distinct persons (different GSTINs of same entity) as supply even without consideration."
+      },
+      {
+        id: 72,
+        question: "What is the tax implication under CGST when a local authority issues licences (such as trade licences, building permits, or parking space auction rights)?",
+        options: ["Certain statutory license fees backed by sovereign authority may be outside GST or exempt, whereas commercial licensing/auction of exclusive rights (like parking or toll collection) may attract GST under reverse charge or forward charge", "All licences are universally subject to 28% GST", "Licences are entirely illegal under GST", "Subject to customs duty"],
+        correctIndex: 0,
+        explanation: "Statutory fees levied for mandatory sovereign permissions are generally exempt, whereas commercial auction of rights (parking contracts, toll collection) attracts GST."
+      },
+      {
+        id: 73,
+        question: "Under the CGST Act, what is the statutory status of public sector undertakings and municipal corporations engaged in commercial business activities?",
+        options: ["They are treated as taxable persons subject to standard registration, supply, ITC, and return filing provisions", "Exempt from all commercial taxes", "Subject only to municipal property tax", "Required to file income tax returns only"],
+        correctIndex: 0,
+        explanation: "Municipal corporations and public bodies engaged in commercial supplies are taxable persons under CGST."
+      },
+      {
+        id: 74,
+        question: "Under Section 54(8)(a), in what situation is a refund of tax paid under CGST granted directly in cash to the claimant rather than credited to the Consumer Welfare Fund?",
+        options: ["When the tax has been paid on zero-rated supplies of goods or services or on inputs/input services used in making such zero-rated supplies (or inverted duty structure)", "Refunds are never paid in cash", "Refunds are credited to municipal electricity bills", "Refunds are distributed as lottery prizes"],
+        correctIndex: 0,
+        explanation: "Section 54(8)(a) permits cash refunds for zero-rated supplies (exports/SEZ) and inverted duty structures without applying the unjust enrichment doctrine."
+      },
+      {
+        id: 75,
+        question: "What overarching objective does the CGST Act, 2017 achieve in the context of local bodies and government authorities across India?",
+        options: ["Streamlining indirect taxation by subsuming multiple cascading levies, ensuring unified compliance, TDS deduction mechanisms, and seamless input tax credit for public infrastructural works", "Replacing municipal property taxes completely", "Abolishing all local bodies", "Transferring municipal management to the Reserve Bank"],
+        correctIndex: 0,
+        explanation: "The CGST Act modernizes indirect taxation across federal, state, and local tiers by unifying levies, establishing TDS frameworks (Section 51), and streamlining compliance for public works."
+      }
+    ];
+
+    // State Variables
+    let shuffledQuestions = [];
+    let currentQuestionIndex = 0;
+    let userAnswers = {}; // { questionIndex: selectedOptionIndex }
+    let bookmarks = new Set();
+    let isSubmitted = false;
+    let activeFilter = 'all';
+
+    // Timer Variables
+    const TOTAL_TIME_SECONDS = 45 * 60; // 45 mins
+    let timeRemaining = TOTAL_TIME_SECONDS;
+    let timerInterval = null;
+
+    // DOM Elements
+    const questionIndexDisplay = document.getElementById('questionIndexDisplay');
+    const bookmarkToggleBtn = document.getElementById('bookmarkToggleBtn');
+    const questionTextDisplay = document.getElementById('questionTextDisplay');
+    const optionsContainer = document.getElementById('optionsContainer');
+    const explanationContainer = document.getElementById('explanationContainer');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const clearBtn = document.getElementById('clearBtn');
+    const submitBtn = document.getElementById('submitBtn');
+    const paletteGrid = document.getElementById('paletteGrid');
+    const timerDisplay = document.getElementById('timerDisplay');
+    const themeToggleBtn = document.getElementById('themeToggleBtn');
+    const restartBtn = document.getElementById('restartBtn');
+    const resultsModal = document.getElementById('resultsModal');
+
+    // Fisher-Yates Shuffle Algorithm
+    function fisherYatesShuffle(array) {
+      const arr = [...array];
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+      return arr;
+    }
+
+    // Initialize/Reset Quiz Data Engine
+    function initQuizData() {
+      // Deep copy and shuffle questions
+      shuffledQuestions = fisherYatesShuffle(rawQuestionsData).map(q => {
+        // Prepare options array with original indices tracked
+        const optionsObj = q.options.map((optText, index) => ({
+          text: optText,
+          originalIndex: index
+        }));
+        
+        // Shuffle options
+        const shuffledOptions = fisherYatesShuffle(optionsObj);
+        
+        // Find new correct index
+        const newCorrectIndex = shuffledOptions.findIndex(o => o.originalIndex === q.correctIndex);
+
+        return {
+          id: q.id,
+          question: q.question,
+          options: shuffledOptions,
+          correctIndex: newCorrectIndex,
+          explanation: q.explanation
+        };
+      });
+
+      // Reset runtime state
+      currentQuestionIndex = 0;
+      userAnswers = {};
+      bookmarks.clear();
+      isSubmitted = false;
+      activeFilter = 'all';
+
+      // Reset Timer
+      clearInterval(timerInterval);
+      timeRemaining = TOTAL_TIME_SECONDS;
+      updateTimerUI();
+      startTimer();
+
+      // Reset UI Controls
+      submitBtn.disabled = false;
+      clearBtn.disabled = false;
+      resultsModal.classList.remove('open');
+
+      renderFilterTabs();
+      renderCurrentQuestion();
+      renderPalette();
+    }
+
+    // Timer Logic
+    function startTimer() {
+      timerInterval = setInterval(() => {
+        timeRemaining--;
+        updateTimerUI();
+
+        if (timeRemaining <= 0) {
+          clearInterval(timerInterval);
+          autoSubmitQuiz();
+        }
+      }, 1000);
+    }
+
+    function updateTimerUI() {
+      const minutes = Math.floor(timeRemaining / 60);
+      const seconds = timeRemaining % 60;
+      const formatted = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+      timerDisplay.textContent = formatted;
+
+      if (timeRemaining < 300) { // < 5 mins
+        timerDisplay.classList.add('warning');
+      } else {
+        timerDisplay.classList.remove('warning');
+      }
+    }
+
+    // Render Question Card
+    function renderCurrentQuestion() {
+      const q = shuffledQuestions[currentQuestionIndex];
+      
+      questionIndexDisplay.textContent = `Question ${currentQuestionIndex + 1} of ${shuffledQuestions.length}`;
+      questionTextDisplay.textContent = q.question;
+
+      // Bookmark state
+      if (bookmarks.has(currentQuestionIndex)) {
+        bookmarkToggleBtn.classList.add('active');
+      } else {
+        bookmarkToggleBtn.classList.remove('active');
+      }
+
+      // Render Options
+      optionsContainer.innerHTML = '';
+      const selectedOption = userAnswers[currentQuestionIndex];
+
+      q.options.forEach((opt, idx) => {
+        const optionCard = document.createElement('div');
+        optionCard.className = 'option-card';
+
+        // Apply review styling if submitted
+        if (isSubmitted) {
+          if (idx === q.correctIndex) {
+            optionCard.classList.add('correct-review');
+          } else if (selectedOption === idx && selectedOption !== q.correctIndex) {
+            optionCard.classList.add('incorrect-review');
+          }
+        } else if (selectedOption === idx) {
+          optionCard.classList.add('selected');
+        }
+
+        optionCard.innerHTML = `
+          <div class="radio-custom"></div>
+          <div class="option-label">${opt.text}</div>
+        `;
+
+        if (!isSubmitted) {
+          optionCard.addEventListener('click', () => selectOption(idx));
+        }
+
+        optionsContainer.appendChild(optionCard);
+      });
+
+      // Render Explanation in Review Mode
+      explanationContainer.innerHTML = '';
+      if (isSubmitted) {
+        const expBox = document.createElement('div');
+        expBox.className = 'explanation-box';
+        expBox.innerHTML = `
+          <div class="explanation-title">Statutory Clause & Reference:</div>
+          <div>${q.explanation}</div>
+        `;
+        explanationContainer.appendChild(expBox);
+      }
+
+      // Update Navigation Buttons
+      prevBtn.disabled = currentQuestionIndex === 0;
+      nextBtn.disabled = currentQuestionIndex === shuffledQuestions.length - 1;
+
+      renderPalette();
+    }
+
+    // Select Option
+    function selectOption(optionIndex) {
+      if (isSubmitted) return;
+      userAnswers[currentQuestionIndex] = optionIndex;
+      renderCurrentQuestion();
+    }
+
+    // Clear Selection
+    clearBtn.addEventListener('click', () => {
+      if (isSubmitted) return;
+      delete userAnswers[currentQuestionIndex];
+      renderCurrentQuestion();
+    });
+
+    // Bookmark Toggle
+    bookmarkToggleBtn.addEventListener('click', () => {
+      if (bookmarks.has(currentQuestionIndex)) {
+        bookmarks.delete(currentQuestionIndex);
+      } else {
+        bookmarks.add(currentQuestionIndex);
+      }
+      renderCurrentQuestion();
+    });
+
+    // Navigation Events
+    prevBtn.addEventListener('click', () => {
+      if (currentQuestionIndex > 0) {
+        currentQuestionIndex--;
+        renderCurrentQuestion();
+      }
+    });
+
+    nextBtn.addEventListener('click', () => {
+      if (currentQuestionIndex < shuffledQuestions.length - 1) {
+        currentQuestionIndex++;
+        renderCurrentQuestion();
+      }
+    });
+
+    // Palette Rendering & Filter Logic
+    function renderPalette() {
+      paletteGrid.innerHTML = '';
+
+      shuffledQuestions.forEach((q, idx) => {
+        const isAnswered = userAnswers.hasOwnProperty(idx);
+        const isBookmarked = bookmarks.has(idx);
+
+        // Filter Evaluation
+        if (activeFilter === 'answered' && !isAnswered) return;
+        if (activeFilter === 'unanswered' && isAnswered) return;
+        if (activeFilter === 'bookmarked' && !isBookmarked) return;
+
+        const item = document.createElement('div');
+        item.className = 'palette-item';
+        item.textContent = idx + 1;
+
+        if (idx === currentQuestionIndex) {
+          item.classList.add('active-current');
+        }
+
+        if (isBookmarked) {
+          item.classList.add('bookmarked');
+        }
+
+        if (isSubmitted) {
+          const userAns = userAnswers[idx];
+          if (userAns === q.correctIndex) {
+            item.classList.add('correct-post');
+          } else if (userAns !== undefined) {
+            item.classList.add('incorrect-post');
+          }
+        } else if (isAnswered) {
+          item.classList.add('answered');
+        }
+
+        item.addEventListener('click', () => {
+          currentQuestionIndex = idx;
+          renderCurrentQuestion();
+        });
+
+        paletteGrid.appendChild(item);
+      });
+    }
+
+    // Filter Tab Buttons
+    function renderFilterTabs() {
+      const tabs = document.querySelectorAll('.tab-btn');
+      tabs.forEach(tab => {
+        tab.addEventListener('click', (e) => {
+          tabs.forEach(t => t.classList.remove('active'));
+          e.target.classList.add('active');
+          activeFilter = e.target.getAttribute('data-filter');
+          renderPalette();
+        });
+      });
+    }
+
+    // Submit Quiz & Show Results
+    function submitQuiz() {
+      if (isSubmitted) return;
+      isSubmitted = true;
+      clearInterval(timerInterval);
+
+      // Score Calculation
+      let correctCount = 0;
+      let incorrectCount = 0;
+      let answeredCount = 0;
+
+      shuffledQuestions.forEach((q, idx) => {
+        if (userAnswers.hasOwnProperty(idx)) {
+          answeredCount++;
+          if (userAnswers[idx] === q.correctIndex) {
+            correctCount++;
+          } else {
+            incorrectCount++;
+          }
+        }
+      });
+
+      const totalCount = shuffledQuestions.length;
+      const skippedCount = totalCount - answeredCount;
+      const percentage = Math.round((correctCount / totalCount) * 100);
+
+      // Modal Elements
+      document.getElementById('modalScoreDisplay').textContent = `${correctCount} / ${totalCount} (${percentage}%)`;
+      document.getElementById('summaryAnswered').textContent = answeredCount;
+      document.getElementById('summaryCorrect').textContent = correctCount;
+      document.getElementById('summaryIncorrect').textContent = incorrectCount;
+      document.getElementById('summarySkipped').textContent = skippedCount;
+
+      const badge = document.getElementById('modalBadge');
+      if (percentage >= 80) {
+        badge.textContent = "Excellent";
+        badge.className = "performance-badge badge-excellent";
+      } else if (percentage >= 50) {
+        badge.textContent = "Passed";
+        badge.className = "performance-badge badge-passed";
+      } else {
+        badge.textContent = "Failed";
+        badge.className = "performance-badge badge-failed";
+      }
+
+      resultsModal.classList.add('open');
+      renderCurrentQuestion();
+    }
+
+    function autoSubmitQuiz() {
+      alert("Time has expired! Automatically submitting your quiz.");
+      submitQuiz();
+    }
+
+    submitBtn.addEventListener('click', () => {
+      if (confirm("Are you sure you want to submit your quiz?")) {
+        submitQuiz();
+      }
+    });
+
+    // Review & Restart Handlers
+    document.getElementById('reviewModeBtn').addEventListener('click', () => {
+      resultsModal.classList.remove('open');
+    });
+
+    document.getElementById('modalRestartBtn').addEventListener('click', () => {
+      initQuizData();
+    });
+
+    restartBtn.addEventListener('click', () => {
+      if (confirm("Restarting will shuffle all questions and clear active progress. Proceed?")) {
+        initQuizData();
+      }
+    });
+
+    // Dark/Light Theme Switcher
+    themeToggleBtn.addEventListener('click', () => {
+      document.body.classList.toggle('dark-mode');
+      if (document.body.classList.contains('dark-mode')) {
+        themeToggleBtn.textContent = '☀️';
+      } else {
+        themeToggleBtn.textContent = '🌙';
+      }
+    });
+
+    // Initialize Engine On Load
+    window.addEventListener('DOMContentLoaded', () => {
+      initQuizData();
+    });
+  </script>
+</body>
+</html>
