@@ -1,0 +1,1499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GNCTD Act, 1991 & Amendments Master Quiz - 75 Questions</title>
+  <style>
+    :root {
+      --bg-primary: #f4f6f9;
+      --bg-card: #ffffff;
+      --text-main: #1f2937;
+      --text-muted: #6b7280;
+      --border-color: #e5e7eb;
+      --primary-color: #2563eb;
+      --primary-hover: #1d4ed8;
+      --secondary-bg: #f3f4f6;
+      --success-color: #059669;
+      --success-bg: #d1fae5;
+      --danger-color: #dc2626;
+      --danger-bg: #fee2e2;
+      --warning-color: #d97706;
+      --warning-bg: #fef3c7;
+      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      --palette-unvisited: #e5e7eb;
+      --palette-unvisited-text: #374151;
+      --palette-answered: #2563eb;
+      --palette-answered-text: #ffffff;
+    }
+
+    body.dark-mode {
+      --bg-primary: #0f172a;
+      --bg-card: #1e293b;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --border-color: #334155;
+      --primary-color: #3b82f6;
+      --primary-hover: #60a5fa;
+      --secondary-bg: #334155;
+      --success-color: #10b981;
+      --success-bg: #064e3b;
+      --danger-color: #f87171;
+      --danger-bg: #7f1d1d;
+      --warning-color: #fbbf24;
+      --warning-bg: #78350f;
+      --palette-unvisited: #334155;
+      --palette-unvisited-text: #cbd5e1;
+      --palette-answered: #3b82f6;
+      --palette-answered-text: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    /* Sticky Header */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background-color: var(--bg-card);
+      border-bottom: 1px solid var(--border-color);
+      padding: 0.75rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .header-titles h1 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--primary-color);
+    }
+
+    .header-titles p {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .header-controls {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .timer-badge {
+      font-family: monospace;
+      font-size: 1.15rem;
+      font-weight: 700;
+      padding: 0.4rem 0.8rem;
+      border-radius: 6px;
+      background-color: var(--secondary-bg);
+      color: var(--text-main);
+      border: 1px solid var(--border-color);
+    }
+
+    .timer-badge.warning {
+      background-color: var(--danger-bg);
+      color: var(--danger-color);
+      border-color: var(--danger-color);
+      animation: pulse 1s infinite alternate;
+    }
+
+    @keyframes pulse {
+      from { opacity: 1; }
+      to { opacity: 0.7; }
+    }
+
+    .btn {
+      padding: 0.5rem 1rem;
+      font-size: 0.875rem;
+      font-weight: 600;
+      border-radius: 6px;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+    }
+
+    .btn-primary {
+      background-color: var(--primary-color);
+      color: #ffffff;
+    }
+
+    .btn-primary:hover {
+      background-color: var(--primary-hover);
+    }
+
+    .btn-secondary {
+      background-color: var(--secondary-bg);
+      color: var(--text-main);
+      border-color: var(--border-color);
+    }
+
+    .btn-secondary:hover {
+      filter: brightness(0.95);
+    }
+
+    .btn-danger {
+      background-color: var(--danger-color);
+      color: #ffffff;
+    }
+
+    .btn-danger:hover {
+      filter: brightness(0.9);
+    }
+
+    /* Main Container Grid */
+    .container {
+      max-width: 1280px;
+      width: 100%;
+      margin: 1.5rem auto;
+      padding: 0 1rem;
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: 1.5rem;
+      flex: 1;
+    }
+
+    @media (max-width: 900px) {
+      .container {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Question Card */
+    .card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 1.5rem;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .question-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .question-index {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+
+    .bookmark-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1.25rem;
+      color: var(--text-muted);
+      transition: color 0.2s;
+    }
+
+    .bookmark-btn.active {
+      color: var(--warning-color);
+    }
+
+    .question-text {
+      font-size: 1.1rem;
+      font-weight: 600;
+      line-height: 1.5;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Options List */
+    .options-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-bottom: 2rem;
+    }
+
+    .option-card {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 1rem;
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s;
+      background-color: var(--bg-card);
+    }
+
+    .option-card:hover {
+      border-color: var(--primary-color);
+      background-color: var(--secondary-bg);
+    }
+
+    .option-card.selected {
+      border-color: var(--primary-color);
+      background-color: var(--secondary-bg);
+      box-shadow: 0 0 0 1px var(--primary-color);
+    }
+
+    .option-card.correct-review {
+      border-color: var(--success-color);
+      background-color: var(--success-bg);
+      color: var(--text-main);
+    }
+
+    .option-card.incorrect-review {
+      border-color: var(--danger-color);
+      background-color: var(--danger-bg);
+      color: var(--text-main);
+    }
+
+    .radio-custom {
+      width: 18px;
+      height: 18px;
+      border: 2px solid var(--border-color);
+      border-radius: 50%;
+      margin-top: 2px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .option-card.selected .radio-custom {
+      border-color: var(--primary-color);
+    }
+
+    .option-card.selected .radio-custom::after {
+      content: "";
+      width: 10px;
+      height: 10px;
+      background-color: var(--primary-color);
+      border-radius: 50%;
+    }
+
+    .option-label {
+      font-size: 0.95rem;
+      line-height: 1.4;
+      flex: 1;
+    }
+
+    /* Bottom Action Bar */
+    .card-actions {
+      margin-top: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.5rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border-color);
+      flex-wrap: wrap;
+    }
+
+    .action-group {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    /* Explanation Box */
+    .explanation-box {
+      margin-top: 1.5rem;
+      padding: 1rem;
+      border-radius: 6px;
+      background-color: var(--secondary-bg);
+      border-left: 4px solid var(--primary-color);
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    .explanation-title {
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+      color: var(--primary-color);
+    }
+
+    /* Sidebar / Palette */
+    .sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .filter-tabs {
+      display: flex;
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      overflow: hidden;
+      background-color: var(--bg-card);
+    }
+
+    .tab-btn {
+      flex: 1;
+      padding: 0.5rem 0.2rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      border: none;
+      background: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      text-align: center;
+      transition: background-color 0.2s, color 0.2s;
+    }
+
+    .tab-btn.active {
+      background-color: var(--primary-color);
+      color: #ffffff;
+    }
+
+    .palette-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 0.5rem;
+      max-height: 400px;
+      overflow-y: auto;
+      padding: 0.25rem;
+    }
+
+    .palette-item {
+      aspect-ratio: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      font-weight: 700;
+      border-radius: 6px;
+      border: 1px solid var(--border-color);
+      cursor: pointer;
+      background-color: var(--palette-unvisited);
+      color: var(--palette-unvisited-text);
+      position: relative;
+      transition: all 0.2s;
+    }
+
+    .palette-item.active-current {
+      outline: 2px solid var(--primary-color);
+      outline-offset: 2px;
+    }
+
+    .palette-item.answered {
+      background-color: var(--palette-answered);
+      color: var(--palette-answered-text);
+      border-color: var(--palette-answered);
+    }
+
+    .palette-item.bookmarked::after {
+      content: "★";
+      position: absolute;
+      top: 1px;
+      right: 3px;
+      font-size: 0.65rem;
+      color: var(--warning-color);
+    }
+
+    .palette-item.correct-post {
+      background-color: var(--success-color);
+      color: #ffffff;
+      border-color: var(--success-color);
+    }
+
+    .palette-item.incorrect-post {
+      background-color: var(--danger-color);
+      color: #ffffff;
+      border-color: var(--danger-color);
+    }
+
+    .legend-box {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.5rem;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      padding: 0.75rem;
+      border-top: 1px solid var(--border-color);
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .legend-color {
+      width: 12px;
+      height: 12px;
+      border-radius: 3px;
+    }
+
+    /* Modal Overlay */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .modal-overlay.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-card {
+      background-color: var(--bg-card);
+      border-radius: 8px;
+      max-width: 500px;
+      width: 90%;
+      padding: 2rem;
+      box-shadow: var(--shadow-md);
+      text-align: center;
+    }
+
+    .modal-score {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--primary-color);
+      margin: 1rem 0;
+    }
+
+    .performance-badge {
+      display: inline-block;
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      font-weight: 700;
+      font-size: 0.85rem;
+      margin-bottom: 1.5rem;
+      text-transform: uppercase;
+    }
+
+    .badge-excellent { background-color: var(--success-bg); color: var(--success-color); }
+    .badge-passed { background-color: var(--warning-bg); color: var(--warning-color); }
+    .badge-failed { background-color: var(--danger-bg); color: var(--danger-color); }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+      text-align: left;
+      font-size: 0.9rem;
+    }
+
+    .summary-item {
+      padding: 0.5rem;
+      background-color: var(--secondary-bg);
+      border-radius: 4px;
+    }
+
+    .summary-item span {
+      font-weight: 700;
+      float: right;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sticky Header -->
+  <header>
+    <div class="header-titles">
+      <h1>GNCTD Act, 1991 (Act No. 1 of 1992)</h1>
+      <p>Interactive Statutory Assessment Engine - 75 Comprehensive Questions</p>
+    </div>
+    <div class="header-controls">
+      <div id="timerDisplay" class="timer-badge">45:00</div>
+      <button id="restartBtn" class="btn btn-secondary" title="Reshuffle & Restart">🔄 Restart</button>
+      <button id="themeToggleBtn" class="btn btn-secondary" title="Toggle Light/Dark Mode">🌙</button>
+    </div>
+  </header>
+
+  <!-- Main Content Layout -->
+  <div class="container">
+    <!-- Left Column: Active Question -->
+    <main class="card">
+      <div class="question-header">
+        <span id="questionIndexDisplay" class="question-index">Question 1 of 75</span>
+        <button id="bookmarkToggleBtn" class="bookmark-btn" title="Bookmark Question">★</button>
+      </div>
+      <div id="questionTextDisplay" class="question-text">Loading question...</div>
+      
+      <div id="optionsContainer" class="options-list"></div>
+
+      <div id="explanationContainer"></div>
+
+      <div class="card-actions">
+        <div class="action-group">
+          <button id="prevBtn" class="btn btn-secondary">Previous</button>
+          <button id="nextBtn" class="btn btn-secondary">Next</button>
+        </div>
+        <div class="action-group">
+          <button id="clearBtn" class="btn btn-secondary">Clear Selection</button>
+          <button id="submitBtn" class="btn btn-danger">Submit Quiz</button>
+        </div>
+      </div>
+    </main>
+
+    <!-- Right Column: Palette & Filters -->
+    <aside class="sidebar">
+      <div class="card">
+        <div class="filter-tabs">
+          <button class="tab-btn active" data-filter="all">All</button>
+          <button class="tab-btn" data-filter="answered">Answered</button>
+          <button class="tab-btn" data-filter="unanswered">Unanswered</button>
+          <button class="tab-btn" data-filter="bookmarked">Bookmarked</button>
+        </div>
+        <div id="paletteGrid" class="palette-grid" style="margin-top: 1rem;"></div>
+        <div class="legend-box">
+          <div class="legend-item"><div class="legend-color" style="background: var(--palette-unvisited);"></div> Unanswered</div>
+          <div class="legend-item"><div class="legend-color" style="background: var(--palette-answered);"></div> Answered</div>
+          <div class="legend-item"><div class="legend-color" style="background: var(--success-color);"></div> Correct</div>
+          <div class="legend-item"><div class="legend-color" style="background: var(--danger-color);"></div> Incorrect</div>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <!-- Results Modal -->
+  <div id="resultsModal" class="modal-overlay">
+    <div class="modal-card">
+      <h2>Assessment Complete</h2>
+      <div id="modalScoreDisplay" class="modal-score">0 / 75</div>
+      <div id="modalBadge" class="performance-badge">Passed</div>
+      
+      <div class="summary-grid">
+        <div class="summary-item">Total Answered <span id="summaryAnswered">0</span></div>
+        <div class="summary-item">Correct <span id="summaryCorrect">0</span></div>
+        <div class="summary-item">Incorrect <span id="summaryIncorrect">0</span></div>
+        <div class="summary-item">Skipped <span id="summarySkipped">0</span></div>
+      </div>
+
+      <div style="display: flex; gap: 0.5rem; justify-content: center;">
+        <button id="reviewModeBtn" class="btn btn-primary">Review Detailed Answers</button>
+        <button id="modalRestartBtn" class="btn btn-secondary">Restart Quiz</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // 75 High-Quality Questions on Government of National Capital Territory of Delhi Act, 1991 (with 2021 & 2023 Amendments)
+    const rawQuestionsData = [
+      {
+        id: 1,
+        question: "What is the official Act number and year of enactment of the Government of National Capital Territory of Delhi Act?",
+        options: ["Act No. 1 of 1992", "Act No. 19 of 1966", "Act No. 43 of 1951", "Act No. 15 of 2021"],
+        correctIndex: 0,
+        explanation: "The preamble states: 'THE GOVERNMENT OF NATIONAL CAPITAL TERRITORY OF DELHI ACT, 1991 (ACT NO. 1 OF 1992)'."
+      },
+      {
+        id: 2,
+        question: "Under Section 2(ea), as inserted by Act 19 of 2023, how is 'Lieutenant Governor' defined?",
+        options: ["The Chief Minister appointed by the President", "The Administrator appointed under article 239 of the Constitution for the NCT of Delhi and designated as Lieutenant Governor by the President", "The Governor of Haryana designated as administrator", "The Home Secretary to the Government of India"],
+        correctIndex: 1,
+        explanation: "Section 2(ea) defines 'Lieutenant Governor' as the administrator appointed under article 239 of the Constitution for the National Capital Territory of Delhi and designated as Lieutenant Governor by the President."
+      },
+      {
+        id: 3,
+        question: "According to Section 3(1), what is the total number of seats in the Legislative Assembly of Delhi to be filled by direct election?",
+        options: ["60 seats", "70 seats", "250 seats", "545 seats"],
+        correctIndex: 1,
+        explanation: "Section 3(1) states: 'The total number of seats in the Legislative Assembly to be filled by persons chosen by direct election from territorial constituencies shall be seventy.'"
+      },
+      {
+        id: 4,
+        question: "Under Section 3(3), how is the reservation of seats for the Scheduled Castes in the Legislative Assembly determined?",
+        options: ["Fixed strictly at 10 seats", "In proportion to the population of Scheduled Castes in the Capital to the total population", "Decided annually by the Lieutenant Governor", "Equal to the number of parliamentary constituencies"],
+        correctIndex: 1,
+        explanation: "Section 3(3) provides that seats reserved for SCs shall bear, as nearly as may be, the same proportion to total seats as the SC population bears to total population of the Capital."
+      },
+      {
+        id: 5,
+        question: "Until figures for the first census taken after which year are published, the 'population' for assembly constituencies refers to the 2001 census?",
+        options: ["Year 2011", "Year 2021", "Year 2026", "Year 2031"],
+        correctIndex: 2,
+        explanation: "The proviso to Explanation in Section 3 states: 'until the relevant figures for the first census taken after the year 2026 have been published, be construed as a reference to the 2001 census.'"
+      },
+      {
+        id: 6,
+        question: "What is the minimum age required for a person to be qualified for membership of the Legislative Assembly under Section 4(b)?",
+        options: ["18 years", "21 years", "25 years", "30 years"],
+        correctIndex: 2,
+        explanation: "Section 4(b) requires that a person must be 'not less than twenty-five years of age'."
+      },
+      {
+        id: 7,
+        question: "Under Section 5, what is the normal duration of the Legislative Assembly from the date appointed for its first meeting?",
+        options: ["3 years", "4 years", "5 years", "6 years"],
+        correctIndex: 2,
+        explanation: "Section 5 specifies: 'The Legislative Assembly, unless sooner dissolved, shall continue for five years from the date appointed for its first meeting and no longer...'"
+      },
+      {
+        id: 8,
+        question: "During an operation of a Proclamation of Emergency under article 352(1), by how much can the President extend the duration of the Legislative Assembly at a time?",
+        options: ["6 months at a time", "Not exceeding one year at a time", "2 years at a time", "Indefinitely without limit"],
+        correctIndex: 1,
+        explanation: "Section 5 proviso allows extension by the President by order for a period not exceeding one year at a time and not extending beyond six months after the Proclamation ceases to operate."
+      },
+      {
+        id: 9,
+        question: "Under Section 6(1), what maximum period is permitted to intervene between the last sitting of the Legislative Assembly in one session and its first sitting in the next session?",
+        options: ["Three months", "Six months", "Nine months", "One year"],
+        correctIndex: 1,
+        explanation: "Section 6(1) provides that 'six months shall not intervene between its last sitting in one session and the date appointed for its first sitting in the next session.'"
+      },
+      {
+        id: 10,
+        question: "Under Section 6(2), who is empowered to prorogue or dissolve the Legislative Assembly?",
+        options: ["The Speaker", "The Chief Minister", "The Lieutenant Governor", "The President"],
+        correctIndex: 2,
+        explanation: "Section 6(2) explicitly states: 'The Lieutenant Governor may, from time to time,— (a) prorogue the Assembly; (b) dissolve the Assembly.'"
+      },
+      {
+        id: 11,
+        question: "According to Section 7(2)(c) proviso, how many days' notice is required before moving a resolution to remove the Speaker or Deputy Speaker?",
+        options: ["7 days' notice", "14 days' notice", "30 days' notice", "60 days' notice"],
+        correctIndex: 1,
+        explanation: "Section 7(2)(c) first proviso states: 'Provided that no resolution for the purpose of clause (c) shall be moved unless at least fourteen days' notice has been given of the intention to move the resolution.'"
+      },
+      {
+        id: 12,
+        question: "When the Legislative Assembly is dissolved, when does the Speaker vacate his office under Section 7(2)?",
+        options: ["Immediately on dissolution", "14 days after dissolution", "Immediately before the first meeting of the Assembly after dissolution", "Upon the declaration of election results"],
+        correctIndex: 2,
+        explanation: "Section 7(2) second proviso states: 'whenever the Assembly is dissolved, the Speaker shall not vacate his office until immediately before the first meeting of the Assembly after the dissolution.'"
+      },
+      {
+        id: 13,
+        question: "Under Section 8(2), while a resolution for his removal is under consideration, on what occasions can the Speaker vote?",
+        options: ["Only in the case of equality of votes (casting vote)", "Only in the first instance on such resolution or matter, but not in the case of an equality of votes", "He cannot vote on any matter", "He can vote in both first instance and casting vote"],
+        correctIndex: 1,
+        explanation: "Section 8(2) specifies that the Speaker 'shall... be entitled to vote only in the first instance on such resolution or on any other matter during such proceedings but not in the case of an equality of votes.'"
+      },
+      {
+        id: 14,
+        question: "Under Section 10(1), when does the Lieutenant Governor deliver a Special Address to inform the Legislative Assembly of the causes of its summons?",
+        options: ["At every monthly session", "At the commencement of the first session after each general election and the first session of each year", "Only upon a request by the Speaker", "Prior to passing the annual budget"],
+        correctIndex: 1,
+        explanation: "Section 10(1) states: 'At the commencement of the first session after each general election to the Legislative Assembly and at the commencement of the first session of each year, the Lieutenant Governor shall address...'"
+      },
+      {
+        id: 15,
+        question: "Under Section 11, what right does a Minister have regarding the proceedings of the Legislative Assembly or its committees?",
+        options: ["Right to speak, take part, and vote in all proceedings", "Right to speak and take part in proceedings, but NOT entitled to vote by virtue of this section", "Right to preside over committee meetings only", "No right to participate unless elected as Speaker"],
+        correctIndex: 1,
+        explanation: "Section 11 grants every Minister the right to speak in and take part in proceedings of the Assembly or its committees, 'but shall not by virtue of this section be entitled to vote.'"
+      },
+      {
+        id: 16,
+        question: "Under Section 13(2), what type of vote does the Speaker (or person acting as such) exercise during voting in the Assembly?",
+        options: ["A vote in the first instance on all bills", "No vote under any circumstances", "A casting vote only in the case of an equality of votes", "A veto vote against financial bills"],
+        correctIndex: 2,
+        explanation: "Section 13(2) states: 'The Speaker or person acting as such shall not vote in the first instance, but shall have and exercise a casting vote in the case of an equality of votes.'"
+      },
+      {
+        id: 17,
+        question: "What is the statutory quorum required to constitute a meeting of the Legislative Assembly under Section 13(4)?",
+        options: ["One-tenth of total members", "One-fourth of total members", "One-third of total members", "Half of total members"],
+        correctIndex: 2,
+        explanation: "Section 13(4) specifies: 'The quorum to constitute a meeting of the Legislative Assembly shall be one-third of the total number of members of the Assembly.'"
+      },
+      {
+        id: 18,
+        question: "Under Section 14(3), if a member is absent from all meetings without permission for how many days may the Assembly declare his seat vacant?",
+        options: ["30 days", "45 days", "60 days", "90 days"],
+        correctIndex: 2,
+        explanation: "Section 14(3) provides: 'If for a period of sixty days a member of the Legislative Assembly is without permission of the Assembly absent from all meetings thereof, the Assembly may declare his seat vacant.'"
+      },
+      {
+        id: 19,
+        question: "In computing the 60-day absence period under Section 14(3), which of the following is EXCLUDED?",
+        options: ["Periods when the member is out of India", "Periods during which the Assembly is prorogued or adjourned for more than 4 consecutive days", "National holidays and weekends", "Periods when committee meetings are held"],
+        correctIndex: 1,
+        explanation: "Section 14(3) proviso states: 'no account shall be taken of any period during which the Assembly is prorogued or is adjourned for more than four consecutive days.'"
+      },
+      {
+        id: 20,
+        question: "Under Section 15(3) & (4), if any question arises as to whether a member has become disqualified, whose decision is final, and whose opinion must be obtained first?",
+        options: ["Decision of Speaker based on Supreme Court opinion", "Decision of President based on Election Commission opinion", "Decision of Lieutenant Governor based on High Court opinion", "Decision of Chief Justice of Delhi High Court"],
+        correctIndex: 1,
+        explanation: "Section 15(3) & (4) mandate that the question shall be referred for the decision of the President (which shall be final), and the President shall obtain the opinion of the Election Commission and act according to it."
+      },
+      {
+        id: 21,
+        question: "Under Section 16, disqualification on the ground of defection is governed by the provisions of which Schedule of the Constitution?",
+        options: ["Seventh Schedule", "Eighth Schedule", "Ninth Schedule", "Tenth Schedule"],
+        correctIndex: 3,
+        explanation: "Section 16 states: 'The provisions of the Tenth Schedule to the Constitution shall, subject to the necessary modifications... apply to and in relation to the members of the Legislative Assembly...'"
+      },
+      {
+        id: 22,
+        question: "Under Section 17, what daily penalty is recoverable as a debt due to the Union if a person sits or votes as a member when disqualified or before making an oath?",
+        options: ["One hundred rupees", "Two hundred and fifty rupees", "Five hundred rupees", "One thousand rupees"],
+        correctIndex: 2,
+        explanation: "Section 17 prescribes that such person 'shall be liable in respect of each day on which he so sits or votes to a penalty of five hundred rupees to be recovered as a debt due to the Union.'"
+      },
+      {
+        id: 23,
+        question: "Under Section 18(3), the powers, privileges, and immunities of the Legislative Assembly and its members/committees are equivalent to those enjoyed by:",
+        options: ["The House of Commons of the UK", "The House of the People (Lok Sabha) and its members/committees", "The Council of States (Rajya Sabha)", "The Legislative Assembly of Uttar Pradesh"],
+        correctIndex: 1,
+        explanation: "Section 18(3) states: 'In other respects, the powers, privileges and immunities of the Legislative Assembly... shall be such as are for the time being enjoyed by the House of the People...'"
+      },
+      {
+        id: 24,
+        question: "Under Section 20, property of the Union is exempt from all taxes imposed by the Legislative Assembly EXCEPT:",
+        options: ["Taxes on luxury goods", "Taxes that were levied immediately before the commencement of the Constitution, until Parliament otherwise provides", "Taxes on private commercial leases", "Vehicular toll taxes"],
+        correctIndex: 1,
+        explanation: "Section 20 proviso saves any tax on Union property to which such property was immediately before the commencement of the Constitution liable or treated as liable, until Parliament by law provides."
+      },
+      {
+        id: 25,
+        question: "As amended by the GNCTD (Amendment) Act, 2021, Section 21(3) explicitly declares that the expression 'Government' referred to in any law made by the Legislative Assembly shall mean:",
+        options: ["The Council of Ministers", "The Chief Minister", "The Lieutenant Governor", "The President of India"],
+        correctIndex: 2,
+        explanation: "Section 21(3), inserted by Act 15 of 2021, states: 'The expression \"Government\" referred to in any law to be made by the Legislative Assembly shall mean the Lieutenant Governor.'"
+      },
+      {
+        id: 26,
+        question: "Under Section 22(1), a Financial Bill or amendment cannot be introduced or moved in the Assembly EXCEPT on the recommendation of:",
+        options: ["The Chief Minister", "The Finance Minister of Delhi", "The Lieutenant Governor", "The Comptroller and Auditor-General"],
+        correctIndex: 2,
+        explanation: "Section 22(1) stipulates: 'A Bill or amendment shall not be introduced into, or moved in, the Legislative Assembly except on the recommendation of the Lieutenant Governor...'"
+      },
+      {
+        id: 27,
+        question: "Under Section 22(1) proviso, whose recommendation is NOT required for moving an amendment in the Assembly?",
+        options: ["An amendment introducing a new service fee", "An amendment making provision for the reduction or abolition of any tax", "An amendment increasing expenditure charged on Consolidated Fund", "An amendment altering audit custody"],
+        correctIndex: 1,
+        explanation: "Section 22(1) proviso states: 'Provided that no recommendation shall be required under this sub-section for the moving of an amendment making provision for the reduction or abolition of any tax.'"
+      },
+      {
+        id: 28,
+        question: "According to Section 23, what is the effect of prorogation and dissolution of the Assembly on pending Bills?",
+        options: ["Bills lapse on prorogation; Bills do not lapse on dissolution", "Bills do NOT lapse on prorogation; Bills LAPSE on dissolution", "Bills lapse in both prorogation and dissolution", "Bills do not lapse in either case"],
+        correctIndex: 1,
+        explanation: "Section 23 states: '(1) A Bill pending in the Legislative Assembly shall not lapse by reason of the prorogation of the Assembly. (2) A Bill which is pending in the Legislative Assembly shall lapse on a dissolution of the Assembly.'"
+      },
+      {
+        id: 29,
+        question: "Under Section 24, as amended in 2021, the Lieutenant Governor MUST reserve for the consideration of the President any Bill which:",
+        options: ["Relates to local street lighting", "Incidentally covers any of the matters which falls outside the purview of the powers conferred on the Legislative Assembly", "Is passed unanimously by the Assembly", "Contains less than ten sections"],
+        correctIndex: 1,
+        explanation: "Section 24 second proviso clause (d), inserted by Act 15 of 2021, mandates reserving any Bill which 'incidentally covers any of the matters which falls outside the purview of the powers conferred on the Legislative Assembly.'"
+      },
+      {
+        id: 30,
+        question: "Under Section 25, when a non-Money Bill is returned by the President to the Assembly for reconsideration, within what period must the Assembly reconsider it?",
+        options: ["Within 30 days", "Within three months", "Within six months", "Within one year"],
+        correctIndex: 2,
+        explanation: "Section 25 proviso provides that 'the Assembly shall reconsider it accordingly within a period of six months from the date of receipt of such message...'"
+      },
+      {
+        id: 31,
+        question: "Under Section 26, an Act of the Legislative Assembly cannot be invalidated merely because previous sanction/recommendation was not given, IF assent was subsequently given by:",
+        options: ["The Speaker", "The Chief Minister", "The Lieutenant Governor or the President", "The Supreme Court"],
+        correctIndex: 2,
+        explanation: "Section 26 provides that no Act shall be invalid... 'if assent to that Act was given by the Lieutenant Governor, or, on being reserved by the Lieutenant Governor for the consideration of the President, by the President.'"
+      },
+      {
+        id: 32,
+        question: "Under Section 27(1), the Annual Financial Statement (Budget) is caused to be laid before the Legislative Assembly by the Lieutenant Governor with the previous sanction of:",
+        options: ["The Chief Minister", "The President", "The Union Finance Minister", "The Comptroller and Auditor-General"],
+        correctIndex: 1,
+        explanation: "Section 27(1) states: 'The Lieutenant Governor shall in respect of every financial year cause to be laid before the Legislative Assembly, with the previous sanction of the President, a statement...'"
+      },
+      {
+        id: 33,
+        question: "Which of the following expenditure is specifically declared under Section 27(3) as expenditure charged on the Consolidated Fund of the Capital?",
+        options: ["Salaries of all high school teachers in Delhi", "Emoluments and allowances of the Lieutenant Governor and expenditure relating to his office", "Pensions of all retired Group C municipal staff", "Costs of public bus transport subsidies"],
+        correctIndex: 1,
+        explanation: "Section 27(3)(a) lists 'the emoluments and allowances of the Lieutenant Governor and other expenditure relating to his office as determined by the President...' as expenditure charged on the Consolidated Fund."
+      },
+      {
+        id: 34,
+        question: "Under Section 28(1), how are estimates relating to expenditure charged upon the Consolidated Fund handled in the Legislative Assembly?",
+        options: ["Submitted to the vote of the Assembly", "NOT submitted to the vote of the Assembly, but open to discussion", "Prohibited from being discussed or voted on", "Referred directly to the High Court"],
+        correctIndex: 1,
+        explanation: "Section 28(1) states: 'So much of the estimates as relates to expenditure charged upon the Consolidated Fund... shall not be submitted to the vote of the Legislative Assembly, but nothing... shall be construed as preventing the discussion...'"
+      },
+      {
+        id: 35,
+        question: "Under Section 28(3), no demand for a grant shall be made in the Legislative Assembly EXCEPT on the recommendation of:",
+        options: ["The Speaker", "The Chief Minister", "The Lieutenant Governor", "The Finance Committee Chairman"],
+        correctIndex: 2,
+        explanation: "Section 28(3) explicitly states: 'No demand for a grant shall be made except on the recommendation of the Lieutenant Governor.'"
+      },
+      {
+        id: 36,
+        question: "Under Section 29(2), can an amendment be proposed to an Appropriation Bill in the Legislative Assembly to vary the amount or alter the destination of a grant?",
+        options: ["Yes, if supported by a two-thirds majority", "No amendment shall be proposed which will vary the amount or alter destination", "Yes, upon oral motion by the Chief Minister", "Yes, with permission of the Finance Secretary"],
+        correctIndex: 1,
+        explanation: "Section 29(2) dictates: 'No amendment shall be proposed to any such Bill in the Legislative Assembly which will have the effect of varying the amount or altering the destination of any grant so made...'"
+      },
+      {
+        id: 37,
+        question: "Under Section 31(1), what power does the Legislative Assembly have regarding 'Votes on account'?",
+        options: ["To pass permanent tax levies", "To make any grant in advance for estimated expenditure for a part of any financial year pending voting of demands", "To dissolve the Council of Ministers during budget delays", "To transfer funds to private accounts"],
+        correctIndex: 1,
+        explanation: "Section 31(1) empowers the Assembly 'to make any grant in advance in respect of the estimated expenditure for a part of any financial year pending the completion of the procedure prescribed in section 28...'"
+      },
+      {
+        id: 38,
+        question: "Under Section 32, pending sanction by the Legislative Assembly, for what maximum period may the Lieutenant Governor authorize expenditure from the Consolidated Fund after its constitution?",
+        options: ["Not more than three months", "Not more than six months", "Not more than one year", "Not more than two years"],
+        correctIndex: 1,
+        explanation: "Section 32 provides that the Lieutenant Governor may authorize expenditure 'for a period of not more than six months beginning with the date of the constitution of the Consolidated Fund of the Capital...'"
+      },
+      {
+        id: 39,
+        question: "As amended by the GNCTD (Amendment) Act, 2021, what major restriction is placed on the rulemaking power of the Legislative Assembly under Section 33(1)?",
+        options: ["Rules must be approved by the Supreme Court", "The Assembly shall NOT make any rule to enable itself or its committees to consider day-to-day administration or conduct inquiries into administrative decisions", "Rules cannot be published in Hindi", "Rules must be revised every six months"],
+        correctIndex: 1,
+        explanation: "Section 33(1) first proviso (inserted in 2021) states: 'Provided that the Legislative Assembly shall not make any rule to enable itself or its committees to consider the matters of day-to-day administration of the Capital or conduct inquiries in relation to the administrative decisions...'"
+      },
+      {
+        id: 40,
+        question: "Under Section 33(2), until rules are made by the Assembly, the rules of procedure of which State Legislative Assembly applied with modifications?",
+        options: ["State of Punjab", "State of Haryana", "State of Uttar Pradesh", "State of Maharashtra"],
+        correctIndex: 2,
+        explanation: "Section 33(2) specifies that 'the rules of procedure and standing orders with respect to the Legislative Assembly of the State of Uttar Pradesh in force immediately before the commencement of this Act shall have effect...'"
+      },
+      {
+        id: 41,
+        question: "Under Section 35, until Parliament by law otherwise provides, in what language must the authoritative texts of all Bills, Acts, orders, and rules be published?",
+        options: ["Hindi language only", "English language", "Both Hindi and Urdu", "Any official language chosen by Speaker"],
+        correctIndex: 1,
+        explanation: "Section 35 states: 'until Parliament by law otherwise provides, the authoritative texts— (a) of all Bills... (b) of all Acts... and (c) of all orders, rules... shall be in the English language.'"
+      },
+      {
+        id: 42,
+        question: "Under Section 36, discussion in the Legislative Assembly is strictly restricted with respect to:",
+        options: ["The conduct of any Minister", "The conduct of any Judge of the Supreme Court or of a High Court in the discharge of his duties", "The financial audit reports of CAG", "The tenure policies of civil servants"],
+        correctIndex: 1,
+        explanation: "Section 36 explicitly enacts: 'No discussion shall take place in the Legislative Assembly with respect to the conduct of any Judge of the Supreme Court or of a High Court in the discharge of his duties.'"
+      },
+      {
+        id: 43,
+        question: "Under Section 37(1), on what ground CANNOT the validity of any proceedings in the Legislative Assembly be called in question in a court?",
+        options: ["Ground of unconstitutionality", "Ground of any alleged irregularity of procedure", "Ground of lack of quorum", "Ground of voting by non-members"],
+        correctIndex: 1,
+        explanation: "Section 37(1) mandates: 'The validity of any proceedings in the Legislative Assembly shall not be called in question on the ground of any alleged irregularity of procedure.'"
+      },
+      {
+        id: 44,
+        question: "Under Section 38(1), how does the Election Commission delimit territorial assembly constituencies in the Capital?",
+        options: ["Based on land area size exclusively", "Ensuring ratio between constituency population and total population is the same so far as practicable, and SC seats located in areas with comparatively large SC population", "By dividing the city into equal geographical squares", "According to municipal ward numbers"],
+        correctIndex: 1,
+        explanation: "Section 38(1) requires delimitation such that the population ratio is uniform as far as practicable, and SC seats are located where SC population proportion is comparatively large."
+      },
+      {
+        id: 45,
+        question: "Under Section 40(2), who issues notifications in the Official Gazette calling upon assembly constituencies to elect members for general elections?",
+        options: ["The Chief Election Commissioner", "The Lieutenant Governor", "The President of India", "The Chief Electoral Officer of Delhi"],
+        correctIndex: 1,
+        explanation: "Section 40(2) states: 'the Lieutenant Governor shall, by one or more notifications published in the Official Gazette, call upon all the said assembly constituencies to elect members...'"
+      },
+      {
+        id: 46,
+        question: "Under Section 41(1), as amended by Act 19 of 2023, in which of the following matters is the Lieutenant Governor required to act in his SOLE DISCRETION?",
+        options: ["Matters falling outside purview of Assembly but entrusted/delegated by President", "Matters in which he is required by law to act in discretion or exercise judicial/quasi-judicial functions", "Discharge of functions under Part IV-A of the Act", "All of the above"],
+        correctIndex: 3,
+        explanation: "Section 41(1) lists all three clauses (i), (ii), and (iii) [inserted in 2023] as matters where the LG acts in his sole discretion."
+      },
+      {
+        id: 47,
+        question: "Under Section 41(2), if any question arises whether a matter is one where the Lieutenant Governor is required to act in his discretion, whose decision is final?",
+        options: ["Decision of the Council of Ministers", "Decision of the High Court of Delhi", "Decision of the Lieutenant Governor thereon", "Decision of the Speaker"],
+        correctIndex: 2,
+        explanation: "Section 41(2) specifies: 'the decision of the Lieutenant Governor thereon shall be final.'"
+      },
+      {
+        id: 48,
+        question: "Under Section 42, can a court inquire into whether any, and if so what, advice was tendered by Ministers to the Lieutenant Governor?",
+        options: ["Yes, open to judicial review by High Court", "No, the question shall not be inquired into in any court", "Yes, upon permission of the Supreme Court", "Yes, during PIL proceedings"],
+        correctIndex: 1,
+        explanation: "Section 42 explicitly states: 'The question whether any, and if so what, advice was tendered by Ministers to the Lieutenant Governor shall not be inquired into in any court.'"
+      },
+      {
+        id: 49,
+        question: "Under Section 43(2), a Minister who for any period of consecutive months is not a member of the Legislative Assembly shall cease to be a Minister at the expiration of:",
+        options: ["3 consecutive months", "6 consecutive months", "9 consecutive months", "12 consecutive months"],
+        correctIndex: 1,
+        explanation: "Section 43(2) states: 'A Minister who, for any period of six consecutive months, is not a member of the Legislative Assembly shall, at the expiration of that period, cease to be a Minister.'"
+      },
+      {
+        id: 50,
+        question: "Under Section 44(1), who makes rules for the allocation of business to Ministers and procedure for differences of opinion between LG and Ministers?",
+        options: ["The Lieutenant Governor", "The President", "The Chief Minister", "The Legislative Assembly"],
+        correctIndex: 1,
+        explanation: "Section 44(1) provides: 'The President shall make rules— (a) for the allocation of business to the Ministers... and (b) for the more convenient transaction of business...'"
+      },
+      {
+        id: 51,
+        question: "Under Section 44(2) proviso, inserted in 2021, before taking any executive action pursuant to a decision of the Council of Ministers, what must be obtained?",
+        options: ["A resolution passed by 2/3rd of Assembly", "The opinion of the Lieutenant Governor in terms of proviso to clause (4) of article 239AA", "Prior sanction of the Supreme Court", "Written approval from CAG"],
+        correctIndex: 1,
+        explanation: "Section 44(2) proviso mandates that 'the opinion of Lieutenant Governor in term of proviso to clause (4) of article 239AA of the Constitution shall be obtained on all such matters...'"
+      },
+      {
+        id: 52,
+        question: "Under Section 45, which of the following is a statutory duty of the Chief Minister regarding information to the Lieutenant Governor?",
+        options: ["Communicate all decisions of Council of Ministers relating to administration and proposals for legislation", "Furnish information called for by LG", "Submit for consideration of Council any matter decided by a Minister but not considered by Council, if required by LG", "All of the above"],
+        correctIndex: 3,
+        explanation: "Section 45 clauses (a), (b), and (c) detail all these duties of the Chief Minister towards the Lieutenant Governor."
+      },
+      {
+        id: 53,
+        question: "Under Part IV-A (inserted by Act 19 of 2023), Section 45A(a) defines 'All India Services' as services created under All India Services Act, 1951 EXCEPT:",
+        options: ["Indian Administrative Service (IAS)", "Indian Police Service (IPS)", "Indian Forest Service (IFS)", "DANICS"],
+        correctIndex: 1,
+        explanation: "Section 45A(a) defines 'All India Services' as any service created under the All India Services Act, 1951, 'except the Indian Police Service'."
+      },
+      {
+        id: 54,
+        question: "Under Section 45B(1) & (2), which bodies act as recruitment agencies for Group 'A'/'B' gazetted posts and Group 'B' non-gazetted/'C' posts in NCT of Delhi respectively?",
+        options: ["UPSC for all posts exclusively", "UPSC for Group 'A' & 'B' gazetted; DSSSB for Group 'B' non-gazetted & Group 'C'", "SSC for all Group B and C posts", "Delhi Public Service Commission"],
+        correctIndex: 1,
+        explanation: "Section 45B specifies UPSC for Group 'A' and Group 'B' gazetted posts, and DSSSB for Group 'B' non-gazetted and Group 'C' posts."
+      },
+      {
+        id: 55,
+        question: "Under Section 45E(1) & (2), what is the official name of the Authority established in 2023, and who is its ex officio Chairperson?",
+        options: ["Delhi Civil Service Board; Chief Secretary as Chairperson", "National Capital Civil Service Authority; Chief Minister of GNCTD as Chairperson", "State Public Service Commission; LG as Chairperson", "Delhi Administrative Council; Home Minister as Chairperson"],
+        correctIndex: 1,
+        explanation: "Section 45E establishes the 'National Capital Civil Service Authority' with the Chief Minister of GNCTD as its ex officio Chairperson."
+      },
+      {
+        id: 56,
+        question: "Who are the three ex officio Members constituting the National Capital Civil Service Authority under Section 45E(2)?",
+        options: ["Chief Minister, Lieutenant Governor, and Speaker", "Chief Minister (Chairperson), Chief Secretary (Member), and Principal Home Secretary (Member-Secretary)", "Chief Minister, Union Home Minister, and Law Minister", "Chief Secretary, Principal Home Secretary, and UPSC Chairman"],
+        correctIndex: 1,
+        explanation: "Section 45E(2) lists: (a) Chief Minister of GNCTD (Chairperson), (b) Chief Secretary of GNCTD (Member), and (c) Principal Home Secretary of GNCTD (Member-Secretary)."
+      },
+      {
+        id: 57,
+        question: "Under Section 45E(3), how are matters required to be decided by the National Capital Civil Service Authority determined?",
+        options: ["Unanimous consent of all 3 members", "By majority of votes of the Members present and voting", "Sole discretion of the Chief Minister", "By casting vote of Lieutenant Governor"],
+        correctIndex: 1,
+        explanation: "Section 45E(3) dictates: 'All matters required to be decided by the Authority shall be decided by majority of votes of the Members present and voting.'"
+      },
+      {
+        id: 58,
+        question: "Under Section 45F(3), what is the statutory quorum for a meeting of the National Capital Civil Service Authority?",
+        options: ["One Member", "Two Members", "Three Members", "Four Members"],
+        correctIndex: 1,
+        explanation: "Section 45F(3) explicitly states: 'The quorum for the meeting of the Authority shall be of two Members.'"
+      },
+      {
+        id: 59,
+        question: "Under Section 45H(1), the Authority recommends transfers and postings of which officers to the Lieutenant Governor?",
+        options: ["All Group 'C' employees of Delhi government", "All Group 'A' officers and officers of DANICS serving in GNCTD (excluding Entries 1, 2, 18 of List II)", "Judicial officers of Delhi District Courts", "All police officers of Delhi Police"],
+        correctIndex: 1,
+        explanation: "Section 45H(1) responsibility covers 'transfers and postings of all Group 'A' officers and officers of DANICS serving in the affairs of GNCTD (except those connected with Entries 1, 2, 18 of List II)'."
+      },
+      {
+        id: 60,
+        question: "Under Section 45H(3) third proviso, in case of a difference of opinion between the Lieutenant Governor and the Authority's recommendations, whose decision is final?",
+        options: ["Decision of the Chief Minister", "Decision of the Central Government", "Decision of the Lieutenant Governor shall be final", "Decision of the Supreme Court"],
+        correctIndex: 2,
+        explanation: "Section 45H(3) third proviso explicitly mandates: 'Provided also that in case of difference of opinion, the decision of the Lieutenant Governor shall be final.'"
+      },
+      {
+        id: 61,
+        question: "Under Section 45I(4), which of the following proposals MUST be submitted to the Lieutenant Governor for opinion through CM and Chief Secretary before issuing orders?",
+        options: ["Matters affecting peace and tranquility of NCT of Delhi", "Matters affecting relations with Central Govt, State Govts, Supreme Court or High Court", "Petitions for mercy from persons under sentence of death", "All of the above"],
+        correctIndex: 3,
+        explanation: "Section 45I(4) sub-clauses (i), (iii), and (vii) list all these critical proposals required to be submitted to LG for opinion."
+      },
+      {
+        id: 62,
+        question: "Under Section 45J(3), if the Secretary to the Council of Ministers is of opinion that a Council decision is not in accordance with law, what is his duty?",
+        options: ["Implement it unconditionally within 24 hours", "Bring it to the notice of the Lieutenant Governor for taking a decision thereon", "File a petition in High Court", "Resign from office immediately"],
+        correctIndex: 1,
+        explanation: "Section 45J(3) states: 'it shall be the duty of the Secretary to the Council of Ministers to bring it to the notice of the Lieutenant Governor for taking a decision thereon.'"
+      },
+      {
+        id: 63,
+        question: "Under Section 45J(5), if the Chief Secretary or Department Secretary considers there has been a material departure from the Act or rules, what must he do?",
+        options: ["Give immediate effect to the departure", "Personally bring it to the notice of the Minister in-charge, Chief Minister, and Lieutenant Governor immediately in writing", "Ignore the departure", "Report to the media"],
+        correctIndex: 1,
+        explanation: "Section 45J(5) mandates that instead of giving effect to such departure, 'he shall personally bring it to the notice of the Minister in-charge, the Chief Minister and the Lieutenant Governor immediately in writing.'"
+      },
+      {
+        id: 64,
+        question: "Under Section 46(1), all revenues received in the Capital, grants, and loans form one Consolidated Fund named:",
+        options: ["Consolidated Fund of India", "Consolidated Fund of the National Capital Territory of Delhi", "Public Corpus of Delhi Administration", "Delhi State Revenue Account"],
+        correctIndex: 1,
+        explanation: "Section 46(1) establishes 'the Consolidated Fund of the National Capital Territory of Delhi' (referred to as Consolidated Fund of the Capital)."
+      },
+      {
+        id: 65,
+        question: "Under Section 46A(1), inserted in 2001, all public moneys received by or on behalf of the Lieutenant Governor (other than Consolidated/Contingency Funds) are credited to:",
+        options: ["The Reserve Bank of India Treasury Account", "The Public Account of the Capital", "The Civil Contingency Reserve", "The Central Service Fund"],
+        correctIndex: 1,
+        explanation: "Section 46A(1) provides that all other public moneys shall be credited to a public account entitled 'the Public Account of the Capital'."
+      },
+      {
+        id: 66,
+        question: "Under Section 47(1), what is the nature and title of the Contingency Fund established for Delhi?",
+        options: ["Permanent overdraft account; Delhi Emergency Fund", "Fund in the nature of an imprest entitled 'the Contingency Fund of the National Capital Territory of Delhi'", "Sinking fund managed by SBI", "Discretionary grant corpus"],
+        correctIndex: 1,
+        explanation: "Section 47(1) establishes 'a Contingency Fund in the nature of an imprest to be entitled \"the Contingency Fund of the National Capital Territory of Delhi\"'."
+      },
+      {
+        id: 67,
+        question: "Under Section 47A(1), inserted in 2001, the executive power of the Union extends to borrowing upon the security of:",
+        options: ["Municipal property assets", "The Consolidated Fund of the Capital", "Delhi Development Authority land bank", "Personal guarantees of Ministers"],
+        correctIndex: 1,
+        explanation: "Section 47A(1) provides that the executive power of the Union extends to borrowing upon the security of the Consolidated Fund of the Capital."
+      },
+      {
+        id: 68,
+        question: "Under Section 48, to whom are audit reports of the Comptroller and Auditor-General of India relating to Delhi accounts submitted, and where are they laid?",
+        options: ["Submitted to President; laid before Parliament", "Submitted to Lieutenant Governor; laid before the Legislative Assembly", "Submitted to Chief Minister; kept in secretariat files", "Submitted to High Court"],
+        correctIndex: 1,
+        explanation: "Section 48 mandates: 'reports of the Comptroller and Auditor-General... shall be submitted to the Lieutenant Governor who shall cause them to be laid before the Legislative Assembly.'"
+      },
+      {
+        id: 69,
+        question: "Under Section 49, notwithstanding anything in the Act, the Lieutenant Governor and his Council of Ministers shall be under the general control of, and comply with directions given by:",
+        options: ["The Chief Justice of India", "The President", "The Union Home Minister directly", "The Supreme Court Bench"],
+        correctIndex: 1,
+        explanation: "Section 49 states: 'the Lieutenant Governor and his Council of Ministers shall be under the general control of, and comply with such particular directions, if any, as may from time to time be given by, the President.'"
+      },
+      {
+        id: 70,
+        question: "Under Section 50(1), an order made by the President under article 239AB (failure of constitutional machinery) expires at the end of what period from issue?",
+        options: ["Six months", "One year", "Two years", "Three years"],
+        correctIndex: 1,
+        explanation: "Section 50(1) states: 'Every order made by the President under article 239AB shall expire at the end of one year from the date of issue of the order...'"
+      },
+      {
+        id: 71,
+        question: "Under Section 50(2), what is the maximum extended period for an order under article 239AB beyond the initial one year, subject to Parliamentary approval?",
+        options: ["Further period not exceeding six months", "Further period not exceeding one year", "Further period not exceeding two years", "Further period not exceeding five years"],
+        correctIndex: 2,
+        explanation: "Section 50(2) allows extension 'for a further period not exceeding two years from the date of expiry of the order under sub-section (1) subject to... approval by resolutions of both Houses of Parliament.'"
+      },
+      {
+        id: 72,
+        question: "Under Section 51, when the Legislative Assembly is dissolved or suspended under article 239AB, who can authorize expenditure from Consolidated Fund when Lok Sabha is not in session?",
+        options: ["The Lieutenant Governor", "The President", "The Union Finance Minister", "The Chief Secretary"],
+        correctIndex: 1,
+        explanation: "Section 51 specifies: 'it shall be competent for the President to authorise when the House of the People is not in session expenditure from the Consolidated Fund of the Capital...'"
+      },
+      {
+        id: 73,
+        question: "Under Section 52, all contracts in connection with administration of the Capital are made in exercise of executive power of Union, and suits shall be instituted by or against:",
+        options: ["The Lieutenant Governor personally", "The Government of National Capital Territory of Delhi", "The Government of India", "The Chief Secretary of Delhi"],
+        correctIndex: 2,
+        explanation: "Section 52(b) declares that 'all suits and proceedings in connection with the administration of the Capital shall be instituted by or against the Government of India.'"
+      },
+      {
+        id: 74,
+        question: "Under Section 54, every rule made by the Lieutenant Governor under this Act shall be laid as soon as made before:",
+        options: ["Both Houses of Parliament", "The Legislative Assembly", "The Delhi High Court", "The Cabinet Secretariat"],
+        correctIndex: 1,
+        explanation: "Section 54 specifies: 'Every rule made by the Lieutenant Governor under this Act shall be laid, as soon as it is made, before the Legislative Assembly.'"
+      },
+      {
+        id: 75,
+        question: "Under Section 56 of the Act, which prior enactment was explicitly repealed upon the commencement of this Act?",
+        options: ["The Delhi Administration Act, 1966", "The Punjab Municipal Act, 1911", "The Delhi Municipal Corporation Act, 1957", "The Government of Part C States Act, 1951"],
+        correctIndex: 0,
+        explanation: "Section 56 explicitly states: 'The Delhi Administration Act, 1966 is hereby repealed.'"
+      }
+    ];
+
+    // State Variables
+    let shuffledQuestions = [];
+    let currentQuestionIndex = 0;
+    let userAnswers = {}; // { questionIndex: selectedOptionIndex }
+    let bookmarks = new Set();
+    let isSubmitted = false;
+    let activeFilter = 'all';
+
+    // Timer Variables
+    const TOTAL_TIME_SECONDS = 45 * 60; // 45 mins
+    let timeRemaining = TOTAL_TIME_SECONDS;
+    let timerInterval = null;
+
+    // DOM Elements
+    const questionIndexDisplay = document.getElementById('questionIndexDisplay');
+    const bookmarkToggleBtn = document.getElementById('bookmarkToggleBtn');
+    const questionTextDisplay = document.getElementById('questionTextDisplay');
+    const optionsContainer = document.getElementById('optionsContainer');
+    const explanationContainer = document.getElementById('explanationContainer');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const clearBtn = document.getElementById('clearBtn');
+    const submitBtn = document.getElementById('submitBtn');
+    const paletteGrid = document.getElementById('paletteGrid');
+    const timerDisplay = document.getElementById('timerDisplay');
+    const themeToggleBtn = document.getElementById('themeToggleBtn');
+    const restartBtn = document.getElementById('restartBtn');
+    const resultsModal = document.getElementById('resultsModal');
+
+    // Fisher-Yates Shuffle Algorithm
+    function fisherYatesShuffle(array) {
+      const arr = [...array];
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+      return arr;
+    }
+
+    // Initialize/Reset Quiz Data Engine
+    function initQuizData() {
+      // Deep copy and shuffle questions
+      shuffledQuestions = fisherYatesShuffle(rawQuestionsData).map(q => {
+        // Prepare options array with original indices tracked
+        const optionsObj = q.options.map((optText, index) => ({
+          text: optText,
+          originalIndex: index
+        }));
+        
+        // Shuffle options
+        const shuffledOptions = fisherYatesShuffle(optionsObj);
+        
+        // Find new correct index
+        const newCorrectIndex = shuffledOptions.findIndex(o => o.originalIndex === q.correctIndex);
+
+        return {
+          id: q.id,
+          question: q.question,
+          options: shuffledOptions,
+          correctIndex: newCorrectIndex,
+          explanation: q.explanation
+        };
+      });
+
+      // Reset runtime state
+      currentQuestionIndex = 0;
+      userAnswers = {};
+      bookmarks.clear();
+      isSubmitted = false;
+      activeFilter = 'all';
+
+      // Reset Timer
+      clearInterval(timerInterval);
+      timeRemaining = TOTAL_TIME_SECONDS;
+      updateTimerUI();
+      startTimer();
+
+      // Reset UI Controls
+      submitBtn.disabled = false;
+      clearBtn.disabled = false;
+      resultsModal.classList.remove('open');
+
+      renderFilterTabs();
+      renderCurrentQuestion();
+      renderPalette();
+    }
+
+    // Timer Logic
+    function startTimer() {
+      timerInterval = setInterval(() => {
+        timeRemaining--;
+        updateTimerUI();
+
+        if (timeRemaining <= 0) {
+          clearInterval(timerInterval);
+          autoSubmitQuiz();
+        }
+      }, 1000);
+    }
+
+    function updateTimerUI() {
+      const minutes = Math.floor(timeRemaining / 60);
+      const seconds = timeRemaining % 60;
+      const formatted = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+      timerDisplay.textContent = formatted;
+
+      if (timeRemaining < 300) { // < 5 mins
+        timerDisplay.classList.add('warning');
+      } else {
+        timerDisplay.classList.remove('warning');
+      }
+    }
+
+    // Render Question Card
+    function renderCurrentQuestion() {
+      const q = shuffledQuestions[currentQuestionIndex];
+      
+      questionIndexDisplay.textContent = `Question ${currentQuestionIndex + 1} of ${shuffledQuestions.length}`;
+      questionTextDisplay.textContent = q.question;
+
+      // Bookmark state
+      if (bookmarks.has(currentQuestionIndex)) {
+        bookmarkToggleBtn.classList.add('active');
+      } else {
+        bookmarkToggleBtn.classList.remove('active');
+      }
+
+      // Render Options
+      optionsContainer.innerHTML = '';
+      const selectedOption = userAnswers[currentQuestionIndex];
+
+      q.options.forEach((opt, idx) => {
+        const optionCard = document.createElement('div');
+        optionCard.className = 'option-card';
+
+        // Apply review styling if submitted
+        if (isSubmitted) {
+          if (idx === q.correctIndex) {
+            optionCard.classList.add('correct-review');
+          } else if (selectedOption === idx && selectedOption !== q.correctIndex) {
+            optionCard.classList.add('incorrect-review');
+          }
+        } else if (selectedOption === idx) {
+          optionCard.classList.add('selected');
+        }
+
+        optionCard.innerHTML = `
+          <div class="radio-custom"></div>
+          <div class="option-label">${opt.text}</div>
+        `;
+
+        if (!isSubmitted) {
+          optionCard.addEventListener('click', () => selectOption(idx));
+        }
+
+        optionsContainer.appendChild(optionCard);
+      });
+
+      // Render Explanation in Review Mode
+      explanationContainer.innerHTML = '';
+      if (isSubmitted) {
+        const expBox = document.createElement('div');
+        expBox.className = 'explanation-box';
+        expBox.innerHTML = `
+          <div class="explanation-title">Statutory Clause & Reference:</div>
+          <div>${q.explanation}</div>
+        `;
+        explanationContainer.appendChild(expBox);
+      }
+
+      // Update Navigation Buttons
+      prevBtn.disabled = currentQuestionIndex === 0;
+      nextBtn.disabled = currentQuestionIndex === shuffledQuestions.length - 1;
+
+      renderPalette();
+    }
+
+    // Select Option
+    function selectOption(optionIndex) {
+      if (isSubmitted) return;
+      userAnswers[currentQuestionIndex] = optionIndex;
+      renderCurrentQuestion();
+    }
+
+    // Clear Selection
+    clearBtn.addEventListener('click', () => {
+      if (isSubmitted) return;
+      delete userAnswers[currentQuestionIndex];
+      renderCurrentQuestion();
+    });
+
+    // Bookmark Toggle
+    bookmarkToggleBtn.addEventListener('click', () => {
+      if (bookmarks.has(currentQuestionIndex)) {
+        bookmarks.delete(currentQuestionIndex);
+      } else {
+        bookmarks.add(currentQuestionIndex);
+      }
+      renderCurrentQuestion();
+    });
+
+    // Navigation Events
+    prevBtn.addEventListener('click', () => {
+      if (currentQuestionIndex > 0) {
+        currentQuestionIndex--;
+        renderCurrentQuestion();
+      }
+    });
+
+    nextBtn.addEventListener('click', () => {
+      if (currentQuestionIndex < shuffledQuestions.length - 1) {
+        currentQuestionIndex++;
+        renderCurrentQuestion();
+      }
+    });
+
+    // Palette Rendering & Filter Logic
+    function renderPalette() {
+      paletteGrid.innerHTML = '';
+
+      shuffledQuestions.forEach((q, idx) => {
+        const isAnswered = userAnswers.hasOwnProperty(idx);
+        const isBookmarked = bookmarks.has(idx);
+
+        // Filter Evaluation
+        if (activeFilter === 'answered' && !isAnswered) return;
+        if (activeFilter === 'unanswered' && isAnswered) return;
+        if (activeFilter === 'bookmarked' && !isBookmarked) return;
+
+        const item = document.createElement('div');
+        item.className = 'palette-item';
+        item.textContent = idx + 1;
+
+        if (idx === currentQuestionIndex) {
+          item.classList.add('active-current');
+        }
+
+        if (isBookmarked) {
+          item.classList.add('bookmarked');
+        }
+
+        if (isSubmitted) {
+          const userAns = userAnswers[idx];
+          if (userAns === q.correctIndex) {
+            item.classList.add('correct-post');
+          } else if (userAns !== undefined) {
+            item.classList.add('incorrect-post');
+          }
+        } else if (isAnswered) {
+          item.classList.add('answered');
+        }
+
+        item.addEventListener('click', () => {
+          currentQuestionIndex = idx;
+          renderCurrentQuestion();
+        });
+
+        paletteGrid.appendChild(item);
+      });
+    }
+
+    // Filter Tab Buttons
+    function renderFilterTabs() {
+      const tabs = document.querySelectorAll('.tab-btn');
+      tabs.forEach(tab => {
+        tab.addEventListener('click', (e) => {
+          tabs.forEach(t => t.classList.remove('active'));
+          e.target.classList.add('active');
+          activeFilter = e.target.getAttribute('data-filter');
+          renderPalette();
+        });
+      });
+    }
+
+    // Submit Quiz & Show Results
+    function submitQuiz() {
+      if (isSubmitted) return;
+      isSubmitted = true;
+      clearInterval(timerInterval);
+
+      // Score Calculation
+      let correctCount = 0;
+      let incorrectCount = 0;
+      let answeredCount = 0;
+
+      shuffledQuestions.forEach((q, idx) => {
+        if (userAnswers.hasOwnProperty(idx)) {
+          answeredCount++;
+          if (userAnswers[idx] === q.correctIndex) {
+            correctCount++;
+          } else {
+            incorrectCount++;
+          }
+        }
+      });
+
+      const totalCount = shuffledQuestions.length;
+      const skippedCount = totalCount - answeredCount;
+      const percentage = Math.round((correctCount / totalCount) * 100);
+
+      // Modal Elements
+      document.getElementById('modalScoreDisplay').textContent = `${correctCount} / ${totalCount} (${percentage}%)`;
+      document.getElementById('summaryAnswered').textContent = answeredCount;
+      document.getElementById('summaryCorrect').textContent = correctCount;
+      document.getElementById('summaryIncorrect').textContent = incorrectCount;
+      document.getElementById('summarySkipped').textContent = skippedCount;
+
+      const badge = document.getElementById('modalBadge');
+      if (percentage >= 80) {
+        badge.textContent = "Excellent";
+        badge.className = "performance-badge badge-excellent";
+      } else if (percentage >= 50) {
+        badge.textContent = "Passed";
+        badge.className = "performance-badge badge-passed";
+      } else {
+        badge.textContent = "Failed";
+        badge.className = "performance-badge badge-failed";
+      }
+
+      resultsModal.classList.add('open');
+      renderCurrentQuestion();
+    }
+
+    function autoSubmitQuiz() {
+      alert("Time has expired! Automatically submitting your quiz.");
+      submitQuiz();
+    }
+
+    submitBtn.addEventListener('click', () => {
+      if (confirm("Are you sure you want to submit your quiz?")) {
+        submitQuiz();
+      }
+    });
+
+    // Review & Restart Handlers
+    document.getElementById('reviewModeBtn').addEventListener('click', () => {
+      resultsModal.classList.remove('open');
+    });
+
+    document.getElementById('modalRestartBtn').addEventListener('click', () => {
+      initQuizData();
+    });
+
+    restartBtn.addEventListener('click', () => {
+      if (confirm("Restarting will shuffle all questions and clear active progress. Proceed?")) {
+        initQuizData();
+      }
+    });
+
+    // Dark/Light Theme Switcher
+    themeToggleBtn.addEventListener('click', () => {
+      document.body.classList.toggle('dark-mode');
+      if (document.body.classList.contains('dark-mode')) {
+        themeToggleBtn.textContent = '☀️';
+      } else {
+        themeToggleBtn.textContent = '🌙';
+      }
+    });
+
+    // Initialize Engine On Load
+    window.addEventListener('DOMContentLoaded', () => {
+      initQuizData();
+    });
+  </script>
+</body>
+</html>
