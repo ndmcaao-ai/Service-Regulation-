@@ -1,0 +1,1499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Constitution of India - Part IXA, 12th Schedule & MHA Notification Quiz - 75 Questions</title>
+  <style>
+    :root {
+      --bg-primary: #f4f6f9;
+      --bg-card: #ffffff;
+      --text-main: #1f2937;
+      --text-muted: #6b7280;
+      --border-color: #e5e7eb;
+      --primary-color: #4f46e5;
+      --primary-hover: #4338ca;
+      --secondary-bg: #f3f4f6;
+      --success-color: #059669;
+      --success-bg: #d1fae5;
+      --danger-color: #dc2626;
+      --danger-bg: #fee2e2;
+      --warning-color: #d97706;
+      --warning-bg: #fef3c7;
+      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      --palette-unvisited: #e5e7eb;
+      --palette-unvisited-text: #374151;
+      --palette-answered: #4f46e5;
+      --palette-answered-text: #ffffff;
+    }
+
+    body.dark-mode {
+      --bg-primary: #0f172a;
+      --bg-card: #1e293b;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --border-color: #334155;
+      --primary-color: #6366f1;
+      --primary-hover: #818cf8;
+      --secondary-bg: #334155;
+      --success-color: #10b981;
+      --success-bg: #064e3b;
+      --danger-color: #f87171;
+      --danger-bg: #7f1d1d;
+      --warning-color: #fbbf24;
+      --warning-bg: #78350f;
+      --palette-unvisited: #334155;
+      --palette-unvisited-text: #cbd5e1;
+      --palette-answered: #6366f1;
+      --palette-answered-text: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    /* Sticky Header */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background-color: var(--bg-card);
+      border-bottom: 1px solid var(--border-color);
+      padding: 0.75rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .header-titles h1 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--primary-color);
+    }
+
+    .header-titles p {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .header-controls {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .timer-badge {
+      font-family: monospace;
+      font-size: 1.15rem;
+      font-weight: 700;
+      padding: 0.4rem 0.8rem;
+      border-radius: 6px;
+      background-color: var(--secondary-bg);
+      color: var(--text-main);
+      border: 1px solid var(--border-color);
+    }
+
+    .timer-badge.warning {
+      background-color: var(--danger-bg);
+      color: var(--danger-color);
+      border-color: var(--danger-color);
+      animation: pulse 1s infinite alternate;
+    }
+
+    @keyframes pulse {
+      from { opacity: 1; }
+      to { opacity: 0.7; }
+    }
+
+    .btn {
+      padding: 0.5rem 1rem;
+      font-size: 0.875rem;
+      font-weight: 600;
+      border-radius: 6px;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+    }
+
+    .btn-primary {
+      background-color: var(--primary-color);
+      color: #ffffff;
+    }
+
+    .btn-primary:hover {
+      background-color: var(--primary-hover);
+    }
+
+    .btn-secondary {
+      background-color: var(--secondary-bg);
+      color: var(--text-main);
+      border-color: var(--border-color);
+    }
+
+    .btn-secondary:hover {
+      filter: brightness(0.95);
+    }
+
+    .btn-danger {
+      background-color: var(--danger-color);
+      color: #ffffff;
+    }
+
+    .btn-danger:hover {
+      filter: brightness(0.9);
+    }
+
+    /* Main Container Grid */
+    .container {
+      max-width: 1280px;
+      width: 100%;
+      margin: 1.5rem auto;
+      padding: 0 1rem;
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: 1.5rem;
+      flex: 1;
+    }
+
+    @media (max-width: 900px) {
+      .container {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Question Card */
+    .card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 1.5rem;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .question-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .question-index {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+
+    .bookmark-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1.25rem;
+      color: var(--text-muted);
+      transition: color 0.2s;
+    }
+
+    .bookmark-btn.active {
+      color: var(--warning-color);
+    }
+
+    .question-text {
+      font-size: 1.1rem;
+      font-weight: 600;
+      line-height: 1.5;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Options List */
+    .options-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-bottom: 2rem;
+    }
+
+    .option-card {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 1rem;
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s;
+      background-color: var(--bg-card);
+    }
+
+    .option-card:hover {
+      border-color: var(--primary-color);
+      background-color: var(--secondary-bg);
+    }
+
+    .option-card.selected {
+      border-color: var(--primary-color);
+      background-color: var(--secondary-bg);
+      box-shadow: 0 0 0 1px var(--primary-color);
+    }
+
+    .option-card.correct-review {
+      border-color: var(--success-color);
+      background-color: var(--success-bg);
+      color: var(--text-main);
+    }
+
+    .option-card.incorrect-review {
+      border-color: var(--danger-color);
+      background-color: var(--danger-bg);
+      color: var(--text-main);
+    }
+
+    .radio-custom {
+      width: 18px;
+      height: 18px;
+      border: 2px solid var(--border-color);
+      border-radius: 50%;
+      margin-top: 2px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .option-card.selected .radio-custom {
+      border-color: var(--primary-color);
+    }
+
+    .option-card.selected .radio-custom::after {
+      content: "";
+      width: 10px;
+      height: 10px;
+      background-color: var(--primary-color);
+      border-radius: 50%;
+    }
+
+    .option-label {
+      font-size: 0.95rem;
+      line-height: 1.4;
+      flex: 1;
+    }
+
+    /* Bottom Action Bar */
+    .card-actions {
+      margin-top: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.5rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border-color);
+      flex-wrap: wrap;
+    }
+
+    .action-group {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    /* Explanation Box */
+    .explanation-box {
+      margin-top: 1.5rem;
+      padding: 1rem;
+      border-radius: 6px;
+      background-color: var(--secondary-bg);
+      border-left: 4px solid var(--primary-color);
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    .explanation-title {
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+      color: var(--primary-color);
+    }
+
+    /* Sidebar / Palette */
+    .sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .filter-tabs {
+      display: flex;
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      overflow: hidden;
+      background-color: var(--bg-card);
+    }
+
+    .tab-btn {
+      flex: 1;
+      padding: 0.5rem 0.2rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      border: none;
+      background: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      text-align: center;
+      transition: background-color 0.2s, color 0.2s;
+    }
+
+    .tab-btn.active {
+      background-color: var(--primary-color);
+      color: #ffffff;
+    }
+
+    .palette-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 0.5rem;
+      max-height: 400px;
+      overflow-y: auto;
+      padding: 0.25rem;
+    }
+
+    .palette-item {
+      aspect-ratio: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      font-weight: 700;
+      border-radius: 6px;
+      border: 1px solid var(--border-color);
+      cursor: pointer;
+      background-color: var(--palette-unvisited);
+      color: var(--palette-unvisited-text);
+      position: relative;
+      transition: all 0.2s;
+    }
+
+    .palette-item.active-current {
+      outline: 2px solid var(--primary-color);
+      outline-offset: 2px;
+    }
+
+    .palette-item.answered {
+      background-color: var(--palette-answered);
+      color: var(--palette-answered-text);
+      border-color: var(--palette-answered);
+    }
+
+    .palette-item.bookmarked::after {
+      content: "★";
+      position: absolute;
+      top: 1px;
+      right: 3px;
+      font-size: 0.65rem;
+      color: var(--warning-color);
+    }
+
+    .palette-item.correct-post {
+      background-color: var(--success-color);
+      color: #ffffff;
+      border-color: var(--success-color);
+    }
+
+    .palette-item.incorrect-post {
+      background-color: var(--danger-color);
+      color: #ffffff;
+      border-color: var(--danger-color);
+    }
+
+    .legend-box {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.5rem;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      padding: 0.75rem;
+      border-top: 1px solid var(--border-color);
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .legend-color {
+      width: 12px;
+      height: 12px;
+      border-radius: 3px;
+    }
+
+    /* Modal Overlay */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .modal-overlay.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-card {
+      background-color: var(--bg-card);
+      border-radius: 8px;
+      max-width: 500px;
+      width: 90%;
+      padding: 2rem;
+      box-shadow: var(--shadow-md);
+      text-align: center;
+    }
+
+    .modal-score {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--primary-color);
+      margin: 1rem 0;
+    }
+
+    .performance-badge {
+      display: inline-block;
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      font-weight: 700;
+      font-size: 0.85rem;
+      margin-bottom: 1.5rem;
+      text-transform: uppercase;
+    }
+
+    .badge-excellent { background-color: var(--success-bg); color: var(--success-color); }
+    .badge-passed { background-color: var(--warning-bg); color: var(--warning-color); }
+    .badge-failed { background-color: var(--danger-bg); color: var(--danger-color); }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+      text-align: left;
+      font-size: 0.9rem;
+    }
+
+    .summary-item {
+      padding: 0.5rem;
+      background-color: var(--secondary-bg);
+      border-radius: 4px;
+    }
+
+    .summary-item span {
+      font-weight: 700;
+      float: right;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sticky Header -->
+  <header>
+    <div class="header-titles">
+      <h1>Part IXA, 12th Schedule & MHA Notification (24th May 1994)</h1>
+      <p>Interactive Constitutional & Statutory Assessment - 75 Master Questions</p>
+    </div>
+    <div class="header-controls">
+      <div id="timerDisplay" class="timer-badge">45:00</div>
+      <button id="restartBtn" class="btn btn-secondary" title="Reshuffle & Restart">🔄 Restart</button>
+      <button id="themeToggleBtn" class="btn btn-secondary" title="Toggle Light/Dark Mode">🌙</button>
+    </div>
+  </header>
+
+  <!-- Main Content Layout -->
+  <div class="container">
+    <!-- Left Column: Active Question -->
+    <main class="card">
+      <div class="question-header">
+        <span id="questionIndexDisplay" class="question-index">Question 1 of 75</span>
+        <button id="bookmarkToggleBtn" class="bookmark-btn" title="Bookmark Question">★</button>
+      </div>
+      <div id="questionTextDisplay" class="question-text">Loading question...</div>
+      
+      <div id="optionsContainer" class="options-list"></div>
+
+      <div id="explanationContainer"></div>
+
+      <div class="card-actions">
+        <div class="action-group">
+          <button id="prevBtn" class="btn btn-secondary">Previous</button>
+          <button id="nextBtn" class="btn btn-secondary">Next</button>
+        </div>
+        <div class="action-group">
+          <button id="clearBtn" class="btn btn-secondary">Clear Selection</button>
+          <button id="submitBtn" class="btn btn-danger">Submit Quiz</button>
+        </div>
+      </div>
+    </main>
+
+    <!-- Right Column: Palette & Filters -->
+    <aside class="sidebar">
+      <div class="card">
+        <div class="filter-tabs">
+          <button class="tab-btn active" data-filter="all">All</button>
+          <button class="tab-btn" data-filter="answered">Answered</button>
+          <button class="tab-btn" data-filter="unanswered">Unanswered</button>
+          <button class="tab-btn" data-filter="bookmarked">Bookmarked</button>
+        </div>
+        <div id="paletteGrid" class="palette-grid" style="margin-top: 1rem;"></div>
+        <div class="legend-box">
+          <div class="legend-item"><div class="legend-color" style="background: var(--palette-unvisited);"></div> Unanswered</div>
+          <div class="legend-item"><div class="legend-color" style="background: var(--palette-answered);"></div> Answered</div>
+          <div class="legend-item"><div class="legend-color" style="background: var(--success-color);"></div> Correct</div>
+          <div class="legend-item"><div class="legend-color" style="background: var(--danger-color);"></div> Incorrect</div>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <!-- Results Modal -->
+  <div id="resultsModal" class="modal-overlay">
+    <div class="modal-card">
+      <h2>Assessment Complete</h2>
+      <div id="modalScoreDisplay" class="modal-score">0 / 75</div>
+      <div id="modalBadge" class="performance-badge">Passed</div>
+      
+      <div class="summary-grid">
+        <div class="summary-item">Total Answered <span id="summaryAnswered">0</span></div>
+        <div class="summary-item">Correct <span id="summaryCorrect">0</span></div>
+        <div class="summary-item">Incorrect <span id="summaryIncorrect">0</span></div>
+        <div class="summary-item">Skipped <span id="summarySkipped">0</span></div>
+      </div>
+
+      <div style="display: flex; gap: 0.5rem; justify-content: center;">
+        <button id="reviewModeBtn" class="btn btn-primary">Review Detailed Answers</button>
+        <button id="modalRestartBtn" class="btn btn-secondary">Restart Quiz</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // 75 High-Quality Questions on Constitution Part IXA, 12th Schedule & MHA Notification No. U-11013/5/93-UTL dated 24th May 1994
+    const rawQuestionsData = [
+      {
+        id: 1,
+        question: "Which Constitutional Amendment Act inserted Part IXA titled 'The Municipalities' into the Constitution of India?",
+        options: ["73rd Constitutional Amendment Act, 1992", "74th Constitutional Amendment Act, 1992", "69th Constitutional Amendment Act, 1991", "44th Constitutional Amendment Act, 1978"],
+        correctIndex: 1,
+        explanation: "The 74th Constitutional Amendment Act, 1992 inserted Part IXA ('The Municipalities') into the Constitution of India."
+      },
+      {
+        id: 2,
+        question: "What is the article range covered under Part IXA of the Constitution of India?",
+        options: ["Article 243 to Article 243O", "Article 243P to Article 243ZG", "Article 239 to Article 242", "Article 244 to Article 244A"],
+        correctIndex: 1,
+        explanation: "Part IXA covers Articles 243P through 243ZG."
+      },
+      {
+        id: 3,
+        question: "Under Article 243P(e), how is a 'Municipality' defined?",
+        options: ["An institution of local trade and commerce", "An institution of self-government constituted under Article 243Q", "A private corporate municipal development board", "A district court committee"],
+        correctIndex: 1,
+        explanation: "Article 243P(e) defines 'Municipality' as an institution of self-government constituted under Article 243Q."
+      },
+      {
+        id: 4,
+        question: "Under Article 243Q(1), what three types of Municipalities are required to be constituted in every State?",
+        options: ["Nagar Panchayat, Municipal Council, and Municipal Corporation", "Gram Panchayat, Panchayat Samiti, and Zilla Parishad", "Wards Committee, Zone Council, and Metropolitan Board", "Cantonment Board, Port Trust, and Notified Area Committee"],
+        correctIndex: 0,
+        explanation: "Article 243Q(1) mandates: (a) Nagar Panchayat for transitional areas, (b) Municipal Council for smaller urban areas, and (c) Municipal Corporation for larger urban areas."
+      },
+      {
+        id: 5,
+        question: "Under Article 243Q(1) proviso, a Municipality may NOT be constituted in an urban area or part thereof if:",
+        options: ["The Governor specifies by public notification that it is an industrial township", "The population is below 10,000", "The area has no elected MLA", "The Mayor requests dissolution"],
+        correctIndex: 0,
+        explanation: "The proviso to Article 243Q(1) specifies that a Municipality need not be constituted in an industrial township where municipal services are provided by an industrial establishment."
+      },
+      {
+        id: 6,
+        question: "Under Article 243R(1), how are all the seats in a Municipality required to be filled?",
+        options: ["By direct election from the territorial constituencies in the Municipal area", "By nomination by the Governor", "By selection by political parties", "By indirect election from trade unions"],
+        correctIndex: 0,
+        explanation: "Article 243R(1) states that all seats in a Municipality shall be filled by persons chosen by direct election from territorial constituencies (wards)."
+      },
+      {
+        id: 7,
+        question: "Under Article 243R(2)(a), the Legislature of a State may by law provide for the representation in a Municipality of persons having:",
+        options: ["Special knowledge or experience in Municipal administration (without voting rights in Municipality meetings)", "Maximum property holdings in the city", "Highest tax payment records", "Judicial background"],
+        correctIndex: 0,
+        explanation: "Article 243R(2)(a)(i) permits representation of persons with special knowledge/experience in municipal administration, provided they do not have voting rights."
+      },
+      {
+        id: 8,
+        question: "Under Article 243S(1), Wards Committees MUST be constituted within the territorial area of a Municipality having a population of:",
+        options: ["1 lakh or more", "3 lakhs or more", "5 lakhs or more", "10 lakhs or more"],
+        correctIndex: 1,
+        explanation: "Article 243S(1) mandates the constitution of Wards Committees in Municipalities having a population of three lakh rupees or more."
+      },
+      {
+        id: 9,
+        question: "Under Article 243T(1), seats are reserved in every Municipality for Scheduled Castes and Scheduled Tribes in proportion to:",
+        options: ["Their population in the Municipal area", "50% fixed reservation", "Their representation in Parliament", "Land ownership ratio"],
+        correctIndex: 0,
+        explanation: "Article 243T(1) specifies that SC/ST seat reservations shall bear the same proportion to total seats as their population bears to total population in the municipal area."
+      },
+      {
+        id: 10,
+        question: "Under Article 243T(3), what MINIMUM proportion of the total number of seats to be filled by direct election in every Municipality must be reserved for WOMEN?",
+        options: ["Not less than one-fourth", "Not less than one-third (including SC/ST women seats)", "Not less than one-half", "Exactly 20%"],
+        correctIndex: 1,
+        explanation: "Article 243T(3) mandates that not less than one-third of total seats filled by direct election shall be reserved for women."
+      },
+      {
+        id: 11,
+        question: "Under Article 243U(1), what is the normal duration of every Municipality from the date appointed for its first meeting?",
+        options: ["3 years", "5 years", "6 years", "4 years"],
+        correctIndex: 1,
+        explanation: "Article 243U(1) specifies that every Municipality shall continue for five years from the date appointed for its first meeting."
+      },
+      {
+        id: 12,
+        question: "Under Article 243U(3), when a Municipality is dissolved before the expiry of its duration, an election to constitute the Municipality must be completed within what period?",
+        options: ["Within 1 month", "Within 3 months", "Within 6 months from date of dissolution", "Within 1 year"],
+        correctIndex: 2,
+        explanation: "Article 243U(3)(a) mandates that election to constitute a dissolved Municipality shall be completed within six months of dissolution."
+      },
+      {
+        id: 13,
+        question: "Under Article 243V(1), what is the minimum age required for a person to be eligible to be chosen as a member of a Municipality?",
+        options: ["18 years", "21 years", "25 years", "30 years"],
+        correctIndex: 1,
+        explanation: "Article 243V(1)(a) provides that no person shall be disqualified on the ground of age if he has attained the age of twenty-one years."
+      },
+      {
+        id: 14,
+        question: "Under Article 243W, the Legislature of a State may by law endow Municipalities with powers and authority to perform functions listed in which Schedule?",
+        options: ["10th Schedule", "11th Schedule", "12th Schedule", "9th Schedule"],
+        correctIndex: 2,
+        explanation: "Article 243W deals with powers, authority, and responsibilities of Municipalities, referring directly to the Twelfth Schedule."
+      },
+      {
+        id: 15,
+        question: "How many functional items/matters are explicitly listed under the Twelfth Schedule of the Constitution?",
+        options: ["12 matters", "18 matters", "29 matters", "33 matters"],
+        correctIndex: 1,
+        explanation: "The Twelfth Schedule contains 18 functional items entrusted to Municipalities."
+      },
+      {
+        id: 16,
+        question: "Which of the following matters is explicitly included in the 12th Schedule of the Constitution?",
+        options: ["Urban planning including town planning", "Regulation of land-use and construction of buildings", "Roads and bridges", "All of the above"],
+        correctIndex: 3,
+        explanation: "The 12th Schedule includes urban planning, land-use regulation, building construction, roads, bridges, water supply, public health, etc."
+      },
+      {
+        id: 17,
+        question: "Which of the following welfare services is listed under Item 17 of the 12th Schedule?",
+        options: ["Public distribution system", "Slum improvement and upgradation", "Safeguarding interests of weaker sections, including the handicapped and mentally retarded", "Agricultural extension"],
+        correctIndex: 2,
+        explanation: "Item 17 of the 12th Schedule specifically covers 'Safeguarding interests of weaker sections, including the handicapped and mentally retarded'."
+      },
+      {
+        id: 18,
+        question: "Under Article 243X, the Legislature of a State may authorize a Municipality to levy, collect, and appropriate taxes, duties, tolls, and fees, and provide for making grants-in-aid from:",
+        options: ["The Consolidated Fund of India", "The Consolidated Fund of the State", "The Contingency Fund of the Governor", "The Municipal Reserve Reserve Bank"],
+        correctIndex: 1,
+        explanation: "Article 243X(c) provides for making grants-in-aid to Municipalities from the Consolidated Fund of the State."
+      },
+      {
+        id: 19,
+        question: "Under Article 243Y(1), which constitutional body reviews the financial position of Municipalities and recommends measures to augment state consolidated funds?",
+        options: ["The Finance Commission constituted under Article 243I (State Finance Commission)", "The Union Finance Commission under Article 280 exclusively", "The Comptroller and Auditor General", "The NITI Aayog"],
+        correctIndex: 0,
+        explanation: "Article 243Y mandates that the Finance Commission constituted under Article 243I shall review the financial position of Municipalities."
+      },
+      {
+        id: 20,
+        question: "Under Article 243Z, who is empowered to make provisions with respect to the maintenance of accounts and auditing of accounts by Municipalities?",
+        options: ["The Legislature of a State by law", "The Union Finance Ministry", "The Supreme Court Registrar", "The Comptroller and Auditor General directly"],
+        correctIndex: 0,
+        explanation: "Article 243Z leaves maintenance and auditing of accounts of Municipalities to State legislative enactment."
+      },
+      {
+        id: 21,
+        question: "Under Article 243ZA(1), the superintendence, direction, and control of the preparation of electoral rolls for, and the conduct of, all elections to Municipalities is vested in:",
+        options: ["The Election Commission of India", "The State Election Commission", "The District Magistrate", "The Municipal Commissioner"],
+        correctIndex: 1,
+        explanation: "Article 243ZA(1) vests election management for Municipalities in the State Election Commission."
+      },
+      {
+        id: 22,
+        question: "Under Article 243ZB, how do the provisions of Part IXA apply to Union Territories?",
+        options: ["Part IXA applies to Union Territories subject to exceptions and modifications directed by the President by public notification", "Part IXA does not apply to UTs at all", "Applies only with Parliament's 2/3rd majority", "Applies only to Puducherry"],
+        correctIndex: 0,
+        explanation: "Article 243ZB states that Part IXA applies to UTs, and the President may by notification direct applicable exceptions and modifications."
+      },
+      {
+        id: 23,
+        question: "Under Article 243ZC, does Part IXA apply to the Scheduled Areas referred to in Article 244(1) and Tribal Areas referred to in Article 244(2)?",
+        options: ["Yes, automatically applies", "No, nothing in Part IXA shall apply to Scheduled Areas and Tribal Areas", "Applies only in metro cities", "Applies to Nagaland only"],
+        correctIndex: 1,
+        explanation: "Article 243ZC(1) explicitly excludes Scheduled Areas and Tribal Areas referred to in Article 244 from Part IXA."
+      },
+      {
+        id: 24,
+        question: "Under Article 243ZD(1), every State shall constitute at the district level a committee to consolidate plans prepared by Panchayats and Municipalities, known as:",
+        options: ["District Planning Committee (DPC)", "Metropolitan Planning Committee", "District Development Tribunal", "Zilla Revenue Council"],
+        correctIndex: 0,
+        explanation: "Article 243ZD(1) mandates the constitution of a District Planning Committee (DPC) in every State at the district level."
+      },
+      {
+        id: 25,
+        question: "Under Article 243ZD(2)(a), what proportion of the total members of a District Planning Committee must be elected by and from amongst elected members of District Panchayat and Municipalities?",
+        options: ["Not less than one-half", "Not less than two-thirds", "Not less than four-fifths", "Exactly 100%"],
+        correctIndex: 2,
+        explanation: "Article 243ZD(2)(a) specifies that not less than four-fifths of DPC members shall be elected from amongst elected members of District Panchayat and Municipalities."
+      },
+      {
+        id: 26,
+        question: "Under Article 243ZE(1), a Metropolitan Planning Committee (MPC) is constituted in every Metropolitan area having a population of:",
+        options: ["5 lakhs or more", "10 lakhs (1 million) or more", "20 lakhs or more", "50 lakhs or more"],
+        correctIndex: 1,
+        explanation: "Article 243ZE(1) mandates a Metropolitan Planning Committee for every Metropolitan area (population of 10 lakhs/1 million or more)."
+      },
+      {
+        id: 27,
+        question: "Under Article 243ZE(2)(b), what proportion of members of a Metropolitan Planning Committee must be elected by elected members of Municipalities and Chairpersons of Panchayats in the area?",
+        options: ["Not less than one-third", "Not less than two-thirds", "Not less than three-fourths", "Not less than four-fifths"],
+        correctIndex: 1,
+        explanation: "Article 243ZE(2)(b) proviso specifies that not less than two-thirds of MPC members shall be elected by and from elected members of Municipalities and Panchayat Chairpersons."
+      },
+      {
+        id: 28,
+        question: "Under Article 243ZF, any provision of law relating to Municipalities in force in a State immediately before the commencement of the 74th Amendment inconsistent with Part IXA shall continue until amended/repealed or until the expiration of:",
+        options: ["6 months", "1 year from such commencement", "2 years", "5 years"],
+        correctIndex: 1,
+        explanation: "Article 243ZF provides a 1-year transition period for existing municipal laws to be aligned with Part IXA."
+      },
+      {
+        id: 29,
+        question: "Under Article 243ZG(a), courts are BARRED from interfering in municipal electoral matters regarding:",
+        options: ["Delimitation of constituencies or allotment of seats made under Article 243ZA", "Appointment of municipal commissioner", "Property tax recovery orders", "Sanctioning of building plans"],
+        correctIndex: 0,
+        explanation: "Article 243ZG(a) bars judicial interference in laws relating to delimitation of constituencies or allotment of seats."
+      },
+      {
+        id: 30,
+        question: "Under Article 243ZG(b), no election to any Municipality shall be called in question EXCEPT by:",
+        options: ["An election petition presented to such authority and in such manner as provided by State Legislature", "A writ petition under Article 226 directly", "A complaint to the Governor", "An appeal to the District Collector"],
+        correctIndex: 0,
+        explanation: "Article 243ZG(b) mandates that municipal elections can only be questioned via an election petition."
+      },
+      {
+        id: 31,
+        question: "Ministry of Home Affairs (MHA) Notification No. U-11013/5/93-UTL was issued on which date?",
+        options: ["1st January 1993", "24th May 1994", "1st November 1995", "26th January 1950"],
+        correctIndex: 1,
+        explanation: "MHA Notification No. U-11013/5/93-UTL was issued on 24th May 1994."
+      },
+      {
+        id: 32,
+        question: "Under which specific constitutional provision did the President issue MHA Notification No. U-11013/5/93-UTL dated 24th May 1994?",
+        options: ["Proviso to Article 243ZB of the Constitution", "Article 239AA", "Article 370", "Article 240"],
+        correctIndex: 0,
+        explanation: "The notification explicitly states it was issued by the President in exercise of powers conferred by the proviso to Article 243ZB of the Constitution."
+      },
+      {
+        id: 33,
+        question: "What is the specific subject matter of MHA Notification No. U-11013/5/93-UTL dated 24th May 1994?",
+        options: ["Application of Part IXA of the Constitution to the National Capital Territory of Delhi in relation to the New Delhi Municipal Council (NDMC)", "Extension of Panchayati Raj to Cantonments", "Creation of Delhi Police Service", "Delimitation of MCD wards"],
+        correctIndex: 0,
+        explanation: "The notification directs how Part IXA provisions apply to NCT of Delhi in relation to NDMC constituted under the NDMC Ordinance/Act, 1994."
+      },
+      {
+        id: 34,
+        question: "Under the modifications issued in Notification No. U-11013/5/93-UTL, how is Article 243R MODIFIED in its application to NDMC?",
+        options: ["Replaced to provide that NDMC shall consist of 10 nominated members, a Chairperson appointed by Central Govt, and the local MP as special invitee", "Direct elections for all 100 seats", "Members elected by Delhi Assembly only", "Headed by Chief Minister ex-officio"],
+        correctIndex: 0,
+        explanation: "The notification modified Article 243R(3) for NDMC to consist of 10 nominated members (including 3 MLAs), a Central Govt appointed Chairperson, and local MP as special invitee without voting rights."
+      },
+      {
+        id: 35,
+        question: "Under the modified Article 243R set out in Notification No. U-11013/5/93-UTL, how many members are nominated by the Central Government to NDMC from amongst MLAs of NCT Delhi representing constituencies in New Delhi area?",
+        options: ["1 member", "2 members", "3 members", "5 members"],
+        correctIndex: 2,
+        explanation: "Clause (a) of modified Article 243R specifies ten members nominated by Central Govt of whom three shall be MLAs of NCT Delhi."
+      },
+      {
+        id: 36,
+        question: "Under Notification No. U-11013/5/93-UTL, what is the role of the Member of Parliament (MP) representing the constituency comprising wholly or partly the New Delhi area?",
+        options: ["Special Invitee for meetings of the Council, but WITHOUT a right to vote", "Ex-officio Chairman with veto power", "Treasurer of NDMC", "Disciplinary Officer"],
+        correctIndex: 0,
+        explanation: "Clause (c) of modified Article 243R specifies that the MP shall be a special invitee for Council meetings but without a right to vote."
+      },
+      {
+        id: 37,
+        question: "Under the modified Article 243T set out in Notification No. U-11013/5/93-UTL for NDMC, out of the 11 nominated members, how many MUST be women?",
+        options: ["At least one member", "At least two members", "At least three members", "At least five members"],
+        correctIndex: 2,
+        explanation: "The notification substituted Article 243T to provide that out of 11 members, 'at least three members shall be women and one member shall be from the Scheduled Castes'."
+      },
+      {
+        id: 38,
+        question: "Under the modified Article 243T in Notification No. U-11013/5/93-UTL, how many members among the 11 NDMC members must belong to Scheduled Castes?",
+        options: ["At least one member", "At least two members", "At least three members", "None required"],
+        correctIndex: 0,
+        explanation: "The substituted Article 243T mandates that one member shall be from the Scheduled Castes."
+      },
+      {
+        id: 39,
+        question: "Under Notification No. U-11013/5/93-UTL, how is Article 243U modified regarding the reconstitution of NDMC upon dissolution?",
+        options: ["If dissolved before duration, reconstituted within 6 months; if dissolved after duration, reconstituted before such expiry", "Reconstituted within 1 year", "Replaced by a Administrator indefinitely", "Re-nominated every 10 years"],
+        correctIndex: 0,
+        explanation: "Modified Article 243U(3) requires reconstitution within 6 months if dissolved before duration, and before expiry if dissolved after duration."
+      },
+      {
+        id: 40,
+        question: "Under the modified Article 243V in Notification No. U-11013/5/93-UTL, what immunity regarding 'Office of Profit' is granted to NDMC nominees?",
+        options: ["No person (other than MLA) shall be disqualified for being nominated as NDMC member on ground of holding an office of profit for Assembly election purposes", "Complete immunity from criminal prosecution", "Immunity from income tax", "Immunity from property tax"],
+        correctIndex: 0,
+        explanation: "Substituted Article 243V provides that no person (other than MLA) shall be disqualified for nomination on the ground that he holds an office of profit."
+      },
+      {
+        id: 41,
+        question: "Who signed Notification No. U-11013/5/93-UTL dated 24th May 1994 as Special Secretary in the Ministry of Home Affairs?",
+        options: ["R. K. Ahooja", "T. N. Seshan", "K. C. Pant", "P. V. Narasimha Rao"],
+        correctIndex: 0,
+        explanation: "The notification was officially signed by R. K. Ahooja, Special Secretary, Ministry of Home Affairs."
+      },
+      {
+        id: 42,
+        question: "Which ordinance was explicitly referred to in Notification No. U-11013/5/93-UTL under which NDMC was to be constituted?",
+        options: ["New Delhi Municipal Council Ordinance, 1994", "Delhi Municipal Corporation Ordinance, 1993", "NCT Delhi Governance Ordinance, 1991", "Delhi Development Authority Ordinance, 1994"],
+        correctIndex: 0,
+        explanation: "The notification references the 'New Delhi Municipal Council Ordinance, 1994' (later NDMC Act, 1994)."
+      },
+      {
+        id: 43,
+        question: "Item 1 of the 12th Schedule relates to:",
+        options: ["Urban planning including town planning", "Fire services", "Public health", "Slum clearance"],
+        correctIndex: 0,
+        explanation: "Item 1 of the 12th Schedule is 'Urban planning including town planning'."
+      },
+      {
+        id: 44,
+        question: "Item 2 of the 12th Schedule covers:",
+        options: ["Regulation of land-use and construction of buildings", "Urban forestry", "Cattle ponds", "Street lighting"],
+        correctIndex: 0,
+        explanation: "Item 2 of the 12th Schedule is 'Regulation of land-use and construction of buildings'."
+      },
+      {
+        id: 45,
+        question: "Item 3 of the 12th Schedule covers:",
+        options: ["Planning for economic and social development", "Public amenities", "Water supply", "Burial grounds"],
+        correctIndex: 0,
+        explanation: "Item 3 of the 12th Schedule is 'Planning for economic and social development'."
+      },
+      {
+        id: 46,
+        question: "Item 4 of the 12th Schedule covers:",
+        options: ["Roads and bridges", "Slum improvement", "Urban poverty alleviation", "Fire services"],
+        correctIndex: 0,
+        explanation: "Item 4 of the 12th Schedule is 'Roads and bridges'."
+      },
+      {
+        id: 47,
+        question: "Item 5 of the 12th Schedule covers:",
+        options: ["Water supply for domestic, industrial and commercial purposes", "Public health", "Urban forestry", "Parks and gardens"],
+        correctIndex: 0,
+        explanation: "Item 5 of the 12th Schedule is 'Water supply for domestic, industrial and commercial purposes'."
+      },
+      {
+        id: 48,
+        question: "Item 6 of the 12th Schedule covers:",
+        options: ["Public health, sanitation conservancy and solid waste management", "Fire services", "Urban poverty alleviation", "Slum clearance"],
+        correctIndex: 0,
+        explanation: "Item 6 of the 12th Schedule is 'Public health, sanitation conservancy and solid waste management'."
+      },
+      {
+        id: 49,
+        question: "Item 7 of the 12th Schedule covers:",
+        options: ["Fire services", "Cattle ponds", "Vagrants prevention", "Cultural aspects"],
+        correctIndex: 0,
+        explanation: "Item 7 of the 12th Schedule is 'Fire services'."
+      },
+      {
+        id: 50,
+        question: "Item 8 of the 12th Schedule covers:",
+        options: ["Urban forestry, protection of the environment and promotion of ecological aspects", "Roads and bridges", "Building regulation", "Burial grounds"],
+        correctIndex: 0,
+        explanation: "Item 8 of the 12th Schedule is 'Urban forestry, protection of the environment and promotion of ecological aspects'."
+      },
+      {
+        id: 51,
+        question: "Item 9 of the 12th Schedule covers:",
+        options: ["Safeguarding the interests of weaker sections of society, including the handicapped and mentally retarded", "Public amenities", "Slum upgradation", "Vital statistics"],
+        correctIndex: 0,
+        explanation: "Item 9 of the 12th Schedule covers safeguarding the interests of weaker sections of society, including handicapped and mentally retarded."
+      },
+      {
+        id: 52,
+        question: "Item 10 of the 12th Schedule covers:",
+        options: ["Slum improvement and upgradation", "Cattle ponds", "Fire services", "Town planning"],
+        correctIndex: 0,
+        explanation: "Item 10 of the 12th Schedule is 'Slum improvement and upgradation'."
+      },
+      {
+        id: 53,
+        question: "Item 11 of the 12th Schedule covers:",
+        options: ["Urban poverty alleviation", "Public health", "Water supply", "Parks"],
+        correctIndex: 0,
+        explanation: "Item 11 of the 12th Schedule is 'Urban poverty alleviation'."
+      },
+      {
+        id: 54,
+        question: "Item 12 of the 12th Schedule covers:",
+        options: ["Provision of urban amenities and facilities such as parks, gardens, playgrounds", "Cattle pounds", "Vital statistics", "Roads"],
+        correctIndex: 0,
+        explanation: "Item 12 of the 12th Schedule is 'Provision of urban amenities and facilities such as parks, gardens, playgrounds'."
+      },
+      {
+        id: 55,
+        question: "Item 13 of the 12th Schedule covers:",
+        options: ["Promotion of cultural, educational and aesthetic aspects", "Slum clearance", "Public health", "Fire services"],
+        correctIndex: 0,
+        explanation: "Item 13 of the 12th Schedule is 'Promotion of cultural, educational and aesthetic aspects'."
+      },
+      {
+        id: 56,
+        question: "Item 14 of the 12th Schedule covers:",
+        options: ["Burials and burial grounds; cremations, cremation grounds and electric crematoria", "Cattle ponds", "Urban poverty", "Vital statistics"],
+        correctIndex: 0,
+        explanation: "Item 14 of the 12th Schedule covers 'Burials and burial grounds; cremations, cremation grounds and electric crematoria'."
+      },
+      {
+        id: 57,
+        question: "Item 15 of the 12th Schedule covers:",
+        options: ["Cattle pounds; prevention of cruelty to animals", "Urban forestry", "Town planning", "Public health"],
+        correctIndex: 0,
+        explanation: "Item 15 of the 12th Schedule is 'Cattle pounds; prevention of cruelty to animals'."
+      },
+      {
+        id: 58,
+        question: "Item 16 of the 12th Schedule covers:",
+        options: ["Vital statistics including registration of births and deaths", "Slum clearance", "Public amenities", "Building regulation"],
+        correctIndex: 0,
+        explanation: "Item 16 of the 12th Schedule is 'Vital statistics including registration of births and deaths'."
+      },
+      {
+        id: 59,
+        question: "Item 17 of the 12th Schedule covers:",
+        options: ["Public amenities including street lighting, parking lots, bus stops and public conveniences", "Cattle ponds", "Urban forestry", "Fire services"],
+        correctIndex: 0,
+        explanation: "Item 17 of the 12th Schedule covers 'Public amenities including street lighting, parking lots, bus stops and public conveniences'."
+      },
+      {
+        id: 60,
+        question: "Item 18 of the 12th Schedule covers:",
+        options: ["Regulation of slaughter houses and tanneries", "Vital statistics", "Burial grounds", "Urban planning"],
+        correctIndex: 0,
+        explanation: "Item 18 of the 12th Schedule is 'Regulation of slaughter houses and tanneries'."
+      },
+      {
+        id: 61,
+        question: "Under Article 243P(a), what does 'Committee' mean?",
+        options: ["A Committee constituted under Article 243S (Wards Committee)", "A District Committee", "A Parliamentary Committee", "A Finance Commission"],
+        correctIndex: 0,
+        explanation: "Article 243P(a) defines 'Committee' as a Committee constituted under Article 243S."
+      },
+      {
+        id: 62,
+        question: "Under Article 243P(c), 'Metropolitan area' means an area having a population of 10 lakhs or more, comprised in one or more districts and consisting of:",
+        options: ["Two or more Municipalities or Panchayats or other contiguous areas, specified by Governor by public notification", "Only one single Municipal Corporation", "A state capital region exclusively", "A union territory"],
+        correctIndex: 0,
+        explanation: "Article 243P(c) defines Metropolitan area as an area having 10 lakh+ population with two or more Municipalities/Panchayats specified by Governor."
+      },
+      {
+        id: 63,
+        question: "Under Article 243P(d), 'Municipal area' means:",
+        options: ["The territorial area of a Municipality as is notified by the Governor", "The entire state", "The judicial district limits", "The assembly constituency area"],
+        correctIndex: 0,
+        explanation: "Article 243P(d) defines 'Municipal area' as the territorial area of a Municipality notified by the Governor."
+      },
+      {
+        id: 64,
+        question: "Under Article 243Q(2), a 'transitional area', 'smaller urban area', or 'larger urban area' is specified by the Governor having regard to factors such as:",
+        options: ["Population, density of population, revenue generated, percentage of employment in non-agricultural activities, and economic importance", "Number of high-rise buildings", "Distance from national highway", "Political party majority"],
+        correctIndex: 0,
+        explanation: "Article 243Q(2) specifies population, density, revenue, non-agricultural employment %, and economic importance as criteria."
+      },
+      {
+        id: 65,
+        question: "Under Article 243T(4), the offices of Chairpersons in Municipalities shall be reserved for SCs, STs, and women in such manner as:",
+        options: ["The Legislature of a State may, by law, provide", "The Governor directly orders", "The Supreme Court decides", "The Mayor determines"],
+        correctIndex: 0,
+        explanation: "Article 243T(4) leaves reservation of offices of Chairpersons to State Legislative enactment."
+      },
+      {
+        id: 66,
+        question: "Under Article 243T(6), does Part IXA prevent the State Legislature from making reservations of seats or offices of Chairpersons for BACKWARD CLASSES?",
+        options: ["No, Nothing in Part IXA prevents State Legislature from reserving seats/offices for Backward Classes (OBCs)", "Yes, OBC reservation in Municipalities is strictly prohibited", "OBC reservation requires 100% Parliament vote", "Only applies to SC/ST"],
+        correctIndex: 0,
+        explanation: "Article 243T(6) explicitly enables State Legislatures to make provisions for reservation of seats/offices for backward class citizens."
+      },
+      {
+        id: 67,
+        question: "Under Article 243U(1) proviso, before dissolving a Municipality before its 5-year duration, what procedural mandate MUST be satisfied?",
+        options: ["The Municipality shall be given a reasonable opportunity of being heard", "Governor must issue a ordinance", "A referendum must be held", "The High Court Chief Justice must approve"],
+        correctIndex: 0,
+        explanation: "The proviso to Article 243U(1) mandates that a Municipality shall be given a reasonable opportunity of being heard before dissolution."
+      },
+      {
+        id: 68,
+        question: "Under Article 243U(4), a Municipality constituted upon the dissolution of a Municipality before the expiration of its duration shall continue:",
+        options: ["Only for the remainder of the period for which the dissolved Municipality would have continued", "For a full fresh term of 5 years", "For 2 years fixed", "Until next general state elections"],
+        correctIndex: 0,
+        explanation: "Article 243U(4) clarifies that a reconstituted Municipality serves only the remaining balance of the 5-year term."
+      },
+      {
+        id: 69,
+        question: "Under Article 243V(2), if any question arises as to whether a member of a Municipality has become subject to disqualification, who decides the question?",
+        options: ["An authority and in such manner as the Legislature of a State may by law provide", "The Speaker of Legislative Assembly", "The State Police Commissioner", "The Union Law Ministry"],
+        correctIndex: 0,
+        explanation: "Article 243V(2) leaves disqualification disputes to the authority provided by State legislative enactment."
+      },
+      {
+        id: 70,
+        question: "Under Article 243X(a) & (b), the State Legislature may authorize a Municipality to levy taxes, duties, tolls, and fees, or assign taxes collected by:",
+        options: ["The State Government", "The Central Government exclusively", "The United Nations", "Private corporate banks"],
+        correctIndex: 0,
+        explanation: "Article 243X(a) and (b) empower State Legislatures to authorize Municipalities to levy taxes or assign state-collected taxes to them."
+      },
+      {
+        id: 71,
+        question: "Under Notification No. U-11013/5/93-UTL, why was NDMC treated differently from other Municipalities in Delhi under Part IXA?",
+        options: ["Because New Delhi area houses the seat of Central Government, foreign embassies, Parliament, Supreme Court, and requires special administrative governance", "Because it has no residents", "Because it is situated in a forest area", "Because it is managed by the Military"],
+        correctIndex: 0,
+        explanation: "The NDMC area encompasses the capital seat of Union Government, Parliament, Supreme Court, and diplomatic missions, justifying special nominated structure under Article 243ZB proviso."
+      },
+      {
+        id: 72,
+        question: "Under Article 243ZD(3)(a), a District Planning Committee, in preparing the draft development plan, MUST have regard to:",
+        options: ["Matters of common interest between Panchayats and Municipalities, spatial planning, sharing of water/resources, integrated infrastructure, and available financial resources", "Global stock exchange rates", "Military defense deployments", "Foreign import tariffs"],
+        correctIndex: 0,
+        explanation: "Article 243ZD(3)(a) lists common spatial planning, resource sharing, integrated infrastructure, and available financial resources."
+      },
+      {
+        id: 73,
+        question: "Under Article 243ZE(3)(a)(i), a Metropolitan Planning Committee must have regard to plans prepared by:",
+        options: ["Municipalities and Panchayats in the Metropolitan area", "Foreign municipal councils", "The World Bank", "Private real estate developers"],
+        correctIndex: 0,
+        explanation: "Article 243ZE(3)(a)(i) requires MPCs to integrate plans prepared by Municipalities and Panchayats in the metropolitan region."
+      },
+      {
+        id: 74,
+        question: "Under Article 243ZE(4), the Chairperson of every Metropolitan Planning Committee shall forward the recommended development plan to:",
+        options: ["The Government of the State", "The President of India", "The Chief Justice of India", "The District Magistrate"],
+        correctIndex: 0,
+        explanation: "Article 243ZE(4) mandates that the MPC Chairperson shall forward the development plan to the State Government."
+      },
+      {
+        id: 75,
+        question: "What primary constitutional transformation was brought about by Part IXA, the 12th Schedule, and statutory notifications like MHA Notification dated 24th May 1994?",
+        options: ["Constitutionalizing urban local self-government, guaranteeing 5-year terms, direct democratic representation, reservations for women/SCs/STs, financial devolution, and tailor-made administrative governance for national capital territories like NDMC", "Abolishing local municipal taxation", "Centralizing all urban administration under Union Home Ministry", "Replacing municipal elections with judicial appointments"],
+        correctIndex: 0,
+        explanation: "Part IXA, 12th Schedule, and MHA notifications established urban local bodies as constitutional third-tier self-governments with structured representation, financial mechanisms, and special capital governance provisions."
+      }
+    ];
+
+    // State Variables
+    let shuffledQuestions = [];
+    let currentQuestionIndex = 0;
+    let userAnswers = {}; // { questionIndex: selectedOptionIndex }
+    let bookmarks = new Set();
+    let isSubmitted = false;
+    let activeFilter = 'all';
+
+    // Timer Variables
+    const TOTAL_TIME_SECONDS = 45 * 60; // 45 mins
+    let timeRemaining = TOTAL_TIME_SECONDS;
+    let timerInterval = null;
+
+    // DOM Elements
+    const questionIndexDisplay = document.getElementById('questionIndexDisplay');
+    const bookmarkToggleBtn = document.getElementById('bookmarkToggleBtn');
+    const questionTextDisplay = document.getElementById('questionTextDisplay');
+    const optionsContainer = document.getElementById('optionsContainer');
+    const explanationContainer = document.getElementById('explanationContainer');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const clearBtn = document.getElementById('clearBtn');
+    const submitBtn = document.getElementById('submitBtn');
+    const paletteGrid = document.getElementById('paletteGrid');
+    const timerDisplay = document.getElementById('timerDisplay');
+    const themeToggleBtn = document.getElementById('themeToggleBtn');
+    const restartBtn = document.getElementById('restartBtn');
+    const resultsModal = document.getElementById('resultsModal');
+
+    // Fisher-Yates Shuffle Algorithm
+    function fisherYatesShuffle(array) {
+      const arr = [...array];
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+      return arr;
+    }
+
+    // Initialize/Reset Quiz Data Engine
+    function initQuizData() {
+      // Deep copy and shuffle questions
+      shuffledQuestions = fisherYatesShuffle(rawQuestionsData).map(q => {
+        // Prepare options array with original indices tracked
+        const optionsObj = q.options.map((optText, index) => ({
+          text: optText,
+          originalIndex: index
+        }));
+        
+        // Shuffle options
+        const shuffledOptions = fisherYatesShuffle(optionsObj);
+        
+        // Find new correct index
+        const newCorrectIndex = shuffledOptions.findIndex(o => o.originalIndex === q.correctIndex);
+
+        return {
+          id: q.id,
+          question: q.question,
+          options: shuffledOptions,
+          correctIndex: newCorrectIndex,
+          explanation: q.explanation
+        };
+      });
+
+      // Reset runtime state
+      currentQuestionIndex = 0;
+      userAnswers = {};
+      bookmarks.clear();
+      isSubmitted = false;
+      activeFilter = 'all';
+
+      // Reset Timer
+      clearInterval(timerInterval);
+      timeRemaining = TOTAL_TIME_SECONDS;
+      updateTimerUI();
+      startTimer();
+
+      // Reset UI Controls
+      submitBtn.disabled = false;
+      clearBtn.disabled = false;
+      resultsModal.classList.remove('open');
+
+      renderFilterTabs();
+      renderCurrentQuestion();
+      renderPalette();
+    }
+
+    // Timer Logic
+    function startTimer() {
+      timerInterval = setInterval(() => {
+        timeRemaining--;
+        updateTimerUI();
+
+        if (timeRemaining <= 0) {
+          clearInterval(timerInterval);
+          autoSubmitQuiz();
+        }
+      }, 1000);
+    }
+
+    function updateTimerUI() {
+      const minutes = Math.floor(timeRemaining / 60);
+      const seconds = timeRemaining % 60;
+      const formatted = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+      timerDisplay.textContent = formatted;
+
+      if (timeRemaining < 300) { // < 5 mins
+        timerDisplay.classList.add('warning');
+      } else {
+        timerDisplay.classList.remove('warning');
+      }
+    }
+
+    // Render Question Card
+    function renderCurrentQuestion() {
+      const q = shuffledQuestions[currentQuestionIndex];
+      
+      questionIndexDisplay.textContent = `Question ${currentQuestionIndex + 1} of ${shuffledQuestions.length}`;
+      questionTextDisplay.textContent = q.question;
+
+      // Bookmark state
+      if (bookmarks.has(currentQuestionIndex)) {
+        bookmarkToggleBtn.classList.add('active');
+      } else {
+        bookmarkToggleBtn.classList.remove('active');
+      }
+
+      // Render Options
+      optionsContainer.innerHTML = '';
+      const selectedOption = userAnswers[currentQuestionIndex];
+
+      q.options.forEach((opt, idx) => {
+        const optionCard = document.createElement('div');
+        optionCard.className = 'option-card';
+
+        // Apply review styling if submitted
+        if (isSubmitted) {
+          if (idx === q.correctIndex) {
+            optionCard.classList.add('correct-review');
+          } else if (selectedOption === idx && selectedOption !== q.correctIndex) {
+            optionCard.classList.add('incorrect-review');
+          }
+        } else if (selectedOption === idx) {
+          optionCard.classList.add('selected');
+        }
+
+        optionCard.innerHTML = `
+          <div class="radio-custom"></div>
+          <div class="option-label">${opt.text}</div>
+        `;
+
+        if (!isSubmitted) {
+          optionCard.addEventListener('click', () => selectOption(idx));
+        }
+
+        optionsContainer.appendChild(optionCard);
+      });
+
+      // Render Explanation in Review Mode
+      explanationContainer.innerHTML = '';
+      if (isSubmitted) {
+        const expBox = document.createElement('div');
+        expBox.className = 'explanation-box';
+        expBox.innerHTML = `
+          <div class="explanation-title">Constitutional / Statutory Clause & Reference:</div>
+          <div>${q.explanation}</div>
+        `;
+        explanationContainer.appendChild(expBox);
+      }
+
+      // Update Navigation Buttons
+      prevBtn.disabled = currentQuestionIndex === 0;
+      nextBtn.disabled = currentQuestionIndex === shuffledQuestions.length - 1;
+
+      renderPalette();
+    }
+
+    // Select Option
+    function selectOption(optionIndex) {
+      if (isSubmitted) return;
+      userAnswers[currentQuestionIndex] = optionIndex;
+      renderCurrentQuestion();
+    }
+
+    // Clear Selection
+    clearBtn.addEventListener('click', () => {
+      if (isSubmitted) return;
+      delete userAnswers[currentQuestionIndex];
+      renderCurrentQuestion();
+    });
+
+    // Bookmark Toggle
+    bookmarkToggleBtn.addEventListener('click', () => {
+      if (bookmarks.has(currentQuestionIndex)) {
+        bookmarks.delete(currentQuestionIndex);
+      } else {
+        bookmarks.add(currentQuestionIndex);
+      }
+      renderCurrentQuestion();
+    });
+
+    // Navigation Events
+    prevBtn.addEventListener('click', () => {
+      if (currentQuestionIndex > 0) {
+        currentQuestionIndex--;
+        renderCurrentQuestion();
+      }
+    });
+
+    nextBtn.addEventListener('click', () => {
+      if (currentQuestionIndex < shuffledQuestions.length - 1) {
+        currentQuestionIndex++;
+        renderCurrentQuestion();
+      }
+    });
+
+    // Palette Rendering & Filter Logic
+    function renderPalette() {
+      paletteGrid.innerHTML = '';
+
+      shuffledQuestions.forEach((q, idx) => {
+        const isAnswered = userAnswers.hasOwnProperty(idx);
+        const isBookmarked = bookmarks.has(idx);
+
+        // Filter Evaluation
+        if (activeFilter === 'answered' && !isAnswered) return;
+        if (activeFilter === 'unanswered' && isAnswered) return;
+        if (activeFilter === 'bookmarked' && !isBookmarked) return;
+
+        const item = document.createElement('div');
+        item.className = 'palette-item';
+        item.textContent = idx + 1;
+
+        if (idx === currentQuestionIndex) {
+          item.classList.add('active-current');
+        }
+
+        if (isBookmarked) {
+          item.classList.add('bookmarked');
+        }
+
+        if (isSubmitted) {
+          const userAns = userAnswers[idx];
+          if (userAns === q.correctIndex) {
+            item.classList.add('correct-post');
+          } else if (userAns !== undefined) {
+            item.classList.add('incorrect-post');
+          }
+        } else if (isAnswered) {
+          item.classList.add('answered');
+        }
+
+        item.addEventListener('click', () => {
+          currentQuestionIndex = idx;
+          renderCurrentQuestion();
+        });
+
+        paletteGrid.appendChild(item);
+      });
+    }
+
+    // Filter Tab Buttons
+    function renderFilterTabs() {
+      const tabs = document.querySelectorAll('.tab-btn');
+      tabs.forEach(tab => {
+        tab.addEventListener('click', (e) => {
+          tabs.forEach(t => t.classList.remove('active'));
+          e.target.classList.add('active');
+          activeFilter = e.target.getAttribute('data-filter');
+          renderPalette();
+        });
+      });
+    }
+
+    // Submit Quiz & Show Results
+    function submitQuiz() {
+      if (isSubmitted) return;
+      isSubmitted = true;
+      clearInterval(timerInterval);
+
+      // Score Calculation
+      let correctCount = 0;
+      let incorrectCount = 0;
+      let answeredCount = 0;
+
+      shuffledQuestions.forEach((q, idx) => {
+        if (userAnswers.hasOwnProperty(idx)) {
+          answeredCount++;
+          if (userAnswers[idx] === q.correctIndex) {
+            correctCount++;
+          } else {
+            incorrectCount++;
+          }
+        }
+      });
+
+      const totalCount = shuffledQuestions.length;
+      const skippedCount = totalCount - answeredCount;
+      const percentage = Math.round((correctCount / totalCount) * 100);
+
+      // Modal Elements
+      document.getElementById('modalScoreDisplay').textContent = `${correctCount} / ${totalCount} (${percentage}%)`;
+      document.getElementById('summaryAnswered').textContent = answeredCount;
+      document.getElementById('summaryCorrect').textContent = correctCount;
+      document.getElementById('summaryIncorrect').textContent = incorrectCount;
+      document.getElementById('summarySkipped').textContent = skippedCount;
+
+      const badge = document.getElementById('modalBadge');
+      if (percentage >= 80) {
+        badge.textContent = "Excellent";
+        badge.className = "performance-badge badge-excellent";
+      } else if (percentage >= 50) {
+        badge.textContent = "Passed";
+        badge.className = "performance-badge badge-passed";
+      } else {
+        badge.textContent = "Failed";
+        badge.className = "performance-badge badge-failed";
+      }
+
+      resultsModal.classList.add('open');
+      renderCurrentQuestion();
+    }
+
+    function autoSubmitQuiz() {
+      alert("Time has expired! Automatically submitting your quiz.");
+      submitQuiz();
+    }
+
+    submitBtn.addEventListener('click', () => {
+      if (confirm("Are you sure you want to submit your quiz?")) {
+        submitQuiz();
+      }
+    });
+
+    // Review & Restart Handlers
+    document.getElementById('reviewModeBtn').addEventListener('click', () => {
+      resultsModal.classList.remove('open');
+    });
+
+    document.getElementById('modalRestartBtn').addEventListener('click', () => {
+      initQuizData();
+    });
+
+    restartBtn.addEventListener('click', () => {
+      if (confirm("Restarting will shuffle all questions and clear active progress. Proceed?")) {
+        initQuizData();
+      }
+    });
+
+    // Dark/Light Theme Switcher
+    themeToggleBtn.addEventListener('click', () => {
+      document.body.classList.toggle('dark-mode');
+      if (document.body.classList.contains('dark-mode')) {
+        themeToggleBtn.textContent = '☀️';
+      } else {
+        themeToggleBtn.textContent = '🌙';
+      }
+    });
+
+    // Initialize Engine On Load
+    window.addEventListener('DOMContentLoaded', () => {
+      initQuizData();
+    });
+  </script>
+</body>
+</html>
