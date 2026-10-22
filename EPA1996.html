@@ -1,0 +1,1499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Environment (Protection) Act, 1986 Master Quiz - 75 Questions</title>
+  <style>
+    :root {
+      --bg-primary: #f4f6f9;
+      --bg-card: #ffffff;
+      --text-main: #1f2937;
+      --text-muted: #6b7280;
+      --border-color: #e5e7eb;
+      --primary-color: #059669;
+      --primary-hover: #047857;
+      --secondary-bg: #f3f4f6;
+      --success-color: #059669;
+      --success-bg: #d1fae5;
+      --danger-color: #dc2626;
+      --danger-bg: #fee2e2;
+      --warning-color: #d97706;
+      --warning-bg: #fef3c7;
+      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      --palette-unvisited: #e5e7eb;
+      --palette-unvisited-text: #374151;
+      --palette-answered: #059669;
+      --palette-answered-text: #ffffff;
+    }
+
+    body.dark-mode {
+      --bg-primary: #0f172a;
+      --bg-card: #1e293b;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --border-color: #334155;
+      --primary-color: #10b981;
+      --primary-hover: #34d399;
+      --secondary-bg: #334155;
+      --success-color: #10b981;
+      --success-bg: #064e3b;
+      --danger-color: #f87171;
+      --danger-bg: #7f1d1d;
+      --warning-color: #fbbf24;
+      --warning-bg: #78350f;
+      --palette-unvisited: #334155;
+      --palette-unvisited-text: #cbd5e1;
+      --palette-answered: #10b981;
+      --palette-answered-text: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    /* Sticky Header */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background-color: var(--bg-card);
+      border-bottom: 1px solid var(--border-color);
+      padding: 0.75rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .header-titles h1 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--primary-color);
+    }
+
+    .header-titles p {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .header-controls {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .timer-badge {
+      font-family: monospace;
+      font-size: 1.15rem;
+      font-weight: 700;
+      padding: 0.4rem 0.8rem;
+      border-radius: 6px;
+      background-color: var(--secondary-bg);
+      color: var(--text-main);
+      border: 1px solid var(--border-color);
+    }
+
+    .timer-badge.warning {
+      background-color: var(--danger-bg);
+      color: var(--danger-color);
+      border-color: var(--danger-color);
+      animation: pulse 1s infinite alternate;
+    }
+
+    @keyframes pulse {
+      from { opacity: 1; }
+      to { opacity: 0.7; }
+    }
+
+    .btn {
+      padding: 0.5rem 1rem;
+      font-size: 0.875rem;
+      font-weight: 600;
+      border-radius: 6px;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+    }
+
+    .btn-primary {
+      background-color: var(--primary-color);
+      color: #ffffff;
+    }
+
+    .btn-primary:hover {
+      background-color: var(--primary-hover);
+    }
+
+    .btn-secondary {
+      background-color: var(--secondary-bg);
+      color: var(--text-main);
+      border-color: var(--border-color);
+    }
+
+    .btn-secondary:hover {
+      filter: brightness(0.95);
+    }
+
+    .btn-danger {
+      background-color: var(--danger-color);
+      color: #ffffff;
+    }
+
+    .btn-danger:hover {
+      filter: brightness(0.9);
+    }
+
+    /* Main Container Grid */
+    .container {
+      max-width: 1280px;
+      width: 100%;
+      margin: 1.5rem auto;
+      padding: 0 1rem;
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: 1.5rem;
+      flex: 1;
+    }
+
+    @media (max-width: 900px) {
+      .container {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Question Card */
+    .card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 1.5rem;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .question-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .question-index {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+
+    .bookmark-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1.25rem;
+      color: var(--text-muted);
+      transition: color 0.2s;
+    }
+
+    .bookmark-btn.active {
+      color: var(--warning-color);
+    }
+
+    .question-text {
+      font-size: 1.1rem;
+      font-weight: 600;
+      line-height: 1.5;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Options List */
+    .options-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-bottom: 2rem;
+    }
+
+    .option-card {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 1rem;
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s;
+      background-color: var(--bg-card);
+    }
+
+    .option-card:hover {
+      border-color: var(--primary-color);
+      background-color: var(--secondary-bg);
+    }
+
+    .option-card.selected {
+      border-color: var(--primary-color);
+      background-color: var(--secondary-bg);
+      box-shadow: 0 0 0 1px var(--primary-color);
+    }
+
+    .option-card.correct-review {
+      border-color: var(--success-color);
+      background-color: var(--success-bg);
+      color: var(--text-main);
+    }
+
+    .option-card.incorrect-review {
+      border-color: var(--danger-color);
+      background-color: var(--danger-bg);
+      color: var(--text-main);
+    }
+
+    .radio-custom {
+      width: 18px;
+      height: 18px;
+      border: 2px solid var(--border-color);
+      border-radius: 50%;
+      margin-top: 2px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .option-card.selected .radio-custom {
+      border-color: var(--primary-color);
+    }
+
+    .option-card.selected .radio-custom::after {
+      content: "";
+      width: 10px;
+      height: 10px;
+      background-color: var(--primary-color);
+      border-radius: 50%;
+    }
+
+    .option-label {
+      font-size: 0.95rem;
+      line-height: 1.4;
+      flex: 1;
+    }
+
+    /* Bottom Action Bar */
+    .card-actions {
+      margin-top: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.5rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border-color);
+      flex-wrap: wrap;
+    }
+
+    .action-group {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    /* Explanation Box */
+    .explanation-box {
+      margin-top: 1.5rem;
+      padding: 1rem;
+      border-radius: 6px;
+      background-color: var(--secondary-bg);
+      border-left: 4px solid var(--primary-color);
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    .explanation-title {
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+      color: var(--primary-color);
+    }
+
+    /* Sidebar / Palette */
+    .sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .filter-tabs {
+      display: flex;
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      overflow: hidden;
+      background-color: var(--bg-card);
+    }
+
+    .tab-btn {
+      flex: 1;
+      padding: 0.5rem 0.2rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      border: none;
+      background: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      text-align: center;
+      transition: background-color 0.2s, color 0.2s;
+    }
+
+    .tab-btn.active {
+      background-color: var(--primary-color);
+      color: #ffffff;
+    }
+
+    .palette-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 0.5rem;
+      max-height: 400px;
+      overflow-y: auto;
+      padding: 0.25rem;
+    }
+
+    .palette-item {
+      aspect-ratio: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      font-weight: 700;
+      border-radius: 6px;
+      border: 1px solid var(--border-color);
+      cursor: pointer;
+      background-color: var(--palette-unvisited);
+      color: var(--palette-unvisited-text);
+      position: relative;
+      transition: all 0.2s;
+    }
+
+    .palette-item.active-current {
+      outline: 2px solid var(--primary-color);
+      outline-offset: 2px;
+    }
+
+    .palette-item.answered {
+      background-color: var(--palette-answered);
+      color: var(--palette-answered-text);
+      border-color: var(--palette-answered);
+    }
+
+    .palette-item.bookmarked::after {
+      content: "★";
+      position: absolute;
+      top: 1px;
+      right: 3px;
+      font-size: 0.65rem;
+      color: var(--warning-color);
+    }
+
+    .palette-item.correct-post {
+      background-color: var(--success-color);
+      color: #ffffff;
+      border-color: var(--success-color);
+    }
+
+    .palette-item.incorrect-post {
+      background-color: var(--danger-color);
+      color: #ffffff;
+      border-color: var(--danger-color);
+    }
+
+    .legend-box {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.5rem;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      padding: 0.75rem;
+      border-top: 1px solid var(--border-color);
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .legend-color {
+      width: 12px;
+      height: 12px;
+      border-radius: 3px;
+    }
+
+    /* Modal Overlay */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .modal-overlay.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-card {
+      background-color: var(--bg-card);
+      border-radius: 8px;
+      max-width: 500px;
+      width: 90%;
+      padding: 2rem;
+      box-shadow: var(--shadow-md);
+      text-align: center;
+    }
+
+    .modal-score {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--primary-color);
+      margin: 1rem 0;
+    }
+
+    .performance-badge {
+      display: inline-block;
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      font-weight: 700;
+      font-size: 0.85rem;
+      margin-bottom: 1.5rem;
+      text-transform: uppercase;
+    }
+
+    .badge-excellent { background-color: var(--success-bg); color: var(--success-color); }
+    .badge-passed { background-color: var(--warning-bg); color: var(--warning-color); }
+    .badge-failed { background-color: var(--danger-bg); color: var(--danger-color); }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+      text-align: left;
+      font-size: 0.9rem;
+    }
+
+    .summary-item {
+      padding: 0.5rem;
+      background-color: var(--secondary-bg);
+      border-radius: 4px;
+    }
+
+    .summary-item span {
+      font-weight: 700;
+      float: right;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sticky Header -->
+  <header>
+    <div class="header-titles">
+      <h1>Environment (Protection) Act, 1986</h1>
+      <p>Interactive Statutory Assessment Engine - 75 Comprehensive Questions</p>
+    </div>
+    <div class="header-controls">
+      <div id="timerDisplay" class="timer-badge">45:00</div>
+      <button id="restartBtn" class="btn btn-secondary" title="Reshuffle & Restart">🔄 Restart</button>
+      <button id="themeToggleBtn" class="btn btn-secondary" title="Toggle Light/Dark Mode">🌙</button>
+    </div>
+  </header>
+
+  <!-- Main Content Layout -->
+  <div class="container">
+    <!-- Left Column: Active Question -->
+    <main class="card">
+      <div class="question-header">
+        <span id="questionIndexDisplay" class="question-index">Question 1 of 75</span>
+        <button id="bookmarkToggleBtn" class="bookmark-btn" title="Bookmark Question">★</button>
+      </div>
+      <div id="questionTextDisplay" class="question-text">Loading question...</div>
+      
+      <div id="optionsContainer" class="options-list"></div>
+
+      <div id="explanationContainer"></div>
+
+      <div class="card-actions">
+        <div class="action-group">
+          <button id="prevBtn" class="btn btn-secondary">Previous</button>
+          <button id="nextBtn" class="btn btn-secondary">Next</button>
+        </div>
+        <div class="action-group">
+          <button id="clearBtn" class="btn btn-secondary">Clear Selection</button>
+          <button id="submitBtn" class="btn btn-danger">Submit Quiz</button>
+        </div>
+      </div>
+    </main>
+
+    <!-- Right Column: Palette & Filters -->
+    <aside class="sidebar">
+      <div class="card">
+        <div class="filter-tabs">
+          <button class="tab-btn active" data-filter="all">All</button>
+          <button class="tab-btn" data-filter="answered">Answered</button>
+          <button class="tab-btn" data-filter="unanswered">Unanswered</button>
+          <button class="tab-btn" data-filter="bookmarked">Bookmarked</button>
+        </div>
+        <div id="paletteGrid" class="palette-grid" style="margin-top: 1rem;"></div>
+        <div class="legend-box">
+          <div class="legend-item"><div class="legend-color" style="background: var(--palette-unvisited);"></div> Unanswered</div>
+          <div class="legend-item"><div class="legend-color" style="background: var(--palette-unvisited);"></div> Answered</div>
+          <div class="legend-item"><div class="legend-color" style="background: var(--success-color);"></div> Correct</div>
+          <div class="legend-item"><div class="legend-color" style="background: var(--danger-color);"></div> Incorrect</div>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <!-- Results Modal -->
+  <div id="resultsModal" class="modal-overlay">
+    <div class="modal-card">
+      <h2>Assessment Complete</h2>
+      <div id="modalScoreDisplay" class="modal-score">0 / 75</div>
+      <div id="modalBadge" class="performance-badge">Passed</div>
+      
+      <div class="summary-grid">
+        <div class="summary-item">Total Answered <span id="summaryAnswered">0</span></div>
+        <div class="summary-item">Correct <span id="summaryCorrect">0</span></div>
+        <div class="summary-item">Incorrect <span id="summaryIncorrect">0</span></div>
+        <div class="summary-item">Skipped <span id="summarySkipped">0</span></div>
+      </div>
+
+      <div style="display: flex; gap: 0.5rem; justify-content: center;">
+        <button id="reviewModeBtn" class="btn btn-primary">Review Detailed Answers</button>
+        <button id="modalRestartBtn" class="btn btn-secondary">Restart Quiz</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // 75 High-Quality Questions on the Environment (Protection) Act, 1986
+    const rawQuestionsData = [
+      {
+        id: 1,
+        question: "When did the Environment (Protection) Act, 1986 come into force?",
+        options: ["23rd May 1986", "19th November 1986", "26th January 1987", "5th June 1986"],
+        correctIndex: 1,
+        explanation: "The Environment (Protection) Act, 1986 came into force on 19th November 1986 (enacted on 23rd May 1986)."
+      },
+      {
+        id: 2,
+        question: "What is the total number of sections and chapters contained in the Environment (Protection) Act, 1986?",
+        options: ["20 sections across 3 chapters", "26 sections across 4 chapters", "30 sections across 5 chapters", "15 sections across 2 chapters"],
+        correctIndex: 1,
+        explanation: "The Act contains 26 sections divided into 4 chapters."
+      },
+      {
+        id: 3,
+        question: "Under Section 2(a) of the Act, 'environment' includes which of the following elements?",
+        options: ["Water, air, and land", "Inter-relationship which exists among and between water, air and land, and human beings, other living creatures, plants, micro-organism and property", "Only physical surroundings of human habitats", "Atmospheric ozone layer exclusively"],
+        correctIndex: 1,
+        explanation: "Section 2(a) defines environment to include water, air and land and the inter-relationship which exists among and between them and human beings, other living creatures, plants, micro-organism and property."
+      },
+      {
+        id: 4,
+        question: "Under Section 2(b), how is 'environmental pollutant' defined?",
+        options: ["Any solid, liquid or gaseous substance present in such concentration as may be, or tend to be, injurious to environment", "Only hazardous nuclear waste products", "Smoke emitted exclusively by motor vehicles", "Synthetic chemical fertilizers"],
+        correctIndex: 0,
+        explanation: "Section 2(b) defines environmental pollutant as any solid, liquid or gaseous substance present in such concentration as may be, or tend to be, injurious to environment."
+      },
+      {
+        id: 5,
+        question: "Under Section 2(c), 'environmental pollution' means:",
+        options: ["Natural disaster events like earthquakes and floods", "The presence in the environment of any environmental pollutant", "Global temperature increase due to solar flares", "Reduction in forest cover density"],
+        correctIndex: 1,
+        explanation: "Section 2(c) defines environmental pollution as the presence in the environment of any environmental pollutant."
+      },
+      {
+        id: 6,
+        question: "Under Section 2(d), 'handling' in relation to any substance means:",
+        options: ["Only the retail sale of chemical products", "The manufacture, processing, treatment, package, storage, transportation, use, collection, destruction, conversion, offering for sale, transfer or the like of such substance", "Scientific laboratory testing only", "Disposal in municipal landfills without tracking"],
+        correctIndex: 1,
+        explanation: "Section 2(d) defines handling as the manufacture, processing, treatment, package, storage, transportation, use, collection, destruction, conversion, offering for sale, transfer or the like of such substance."
+      },
+      {
+        id: 7,
+        question: "Under Section 2(e), 'hazardous substance' means:",
+        options: ["Any substance or preparation which by reason of its chemical/physico-chemical properties or handling is liable to cause harm to human beings, other living creatures, plants, micro-organisms, property or the environment", "Only radioactive plutonium", "Inflammable domestic cooking gas cylinders", "Any household plastic item"],
+        correctIndex: 0,
+        explanation: "Section 2(e) defines hazardous substance as any substance or preparation which by reason of its chemical or physico-chemical properties or handling is liable to cause harm to human beings, living creatures, plants, micro-organisms, property or the environment."
+      },
+      {
+        id: 8,
+        question: "What is the primary objective of enacting the Environment (Protection) Act, 1986?",
+        options: ["To implement the decisions taken at the United Nations Conference on the Human Environment held at Stockholm in June 1972", "To create tax revenues for state pollution boards", "To regulate municipal solid waste collection fees", "To privatize forest management reserves"],
+        correctIndex: 0,
+        explanation: "The preamble/objectives note that the Act implements the decisions of the Stockholm Conference (1972) relating to the protection and improvement of the environment."
+      },
+      {
+        id: 9,
+        question: "Why is the Environment (Protection) Act, 1986 frequently referred to as an 'umbrella legislation'?",
+        options: ["Because it requires industries to install waterproof sheds", "Because it provides a framework for central coordination between various central and state authorities established under previous laws (like Water and Air Acts)", "Because it deals exclusively with monsoon flood control", "Because it covers outdoor weather forecasting standards"],
+        correctIndex: 1,
+        explanation: "It is called an 'umbrella act' because it bridges gaps in earlier environmental laws and provides an overarching coordination framework for central and state regulatory agencies."
+      },
+      {
+        id: 10,
+        question: "Under Section 3(1), who is empowered to take all such measures as it deems necessary or expedient for protecting and improving the quality of the environment?",
+        options: ["The Supreme Court of India", "The Central Government", "The State Pollution Control Boards", "The National Green Tribunal"],
+        correctIndex: 1,
+        explanation: "Section 3(1) vests power in the Central Government to take all such measures for protecting and improving environment quality."
+      },
+      {
+        id: 11,
+        question: "Which of the following powers is explicitly conferred upon the Central Government under Section 3(2)?",
+        options: ["Co-ordination of actions by State Governments and authorities", "Planning and execution of a nationwide program for prevention and control of pollution", "Laying down standards for the quality of environment", "All of the above"],
+        correctIndex: 3,
+        explanation: "Section 3(2) covers all these functions, including coordination, national programs, and setting environmental quality standards."
+      },
+      {
+        id: 12,
+        question: "Under Section 3(2)(v), the Central Government may lay down standards for:",
+        options: ["Emission or discharge of environmental pollutants from various sources whatsoever", "Corporate profit margins of green industries", "Minimum wages for sanitation workers", "Export quotas for recycled goods"],
+        correctIndex: 0,
+        explanation: "Section 3(2)(v) authorizes laying down standards for emission or discharge of environmental pollutants from various sources."
+      },
+      {
+        id: 13,
+        question: "Under Section 3(2)(vi), the Central Government is empowered to restrict areas in which:",
+        options: ["Any industries, operations, or processes shall not be carried out or shall be carried out subject to safeguards", "Public meetings can be held", "Residential housing can be built", "Agricultural farming is permitted"],
+        correctIndex: 0,
+        explanation: "Section 3(2)(vi) empowers the restriction of areas in which industries, operations, or processes shall not be carried out or shall be carried out subject to certain safeguards."
+      },
+      {
+        id: 14,
+        question: "Under Section 4, the Central Government is empowered to appoint officers for the purposes of the Act and vest them with:",
+        options: ["Judicial powers to sentence offenders to life imprisonment", "Powers and functions as the Central Government may deem necessary", "Exclusive tax collection authority", "Powers to dissolve municipal corporations"],
+        correctIndex: 1,
+        explanation: "Section 4 empowers the Central Government to appoint officers with such powers and functions as it may deem necessary for the purposes of the Act."
+      },
+      {
+        id: 15,
+        question: "Under Section 5, the Central Government has the power to issue directions in writing to any person, officer, or authority, which includes the power to direct:",
+        options: ["The closure, prohibition, or regulation of any industry, operation, or process", "The stoppage or regulation of electricity, water, or any other service", "Both A and B", "Only financial penalties up to Rs. 100"],
+        correctIndex: 2,
+        explanation: "Section 5 empowers the Central Government to issue directions, including orders for closure, prohibition, regulation, or stoppage of electricity/water supplies."
+      },
+      {
+        id: 16,
+        question: "Under Section 6, the Central Government may make rules to regulate environmental pollution, which include setting standards for:",
+        options: ["Quality of air, water, or soil for various areas and purposes", "Maximum allowable limits of concentration of various environmental pollutants (including noise)", "Procedures and safeguards for handling hazardous substances", "All of the above"],
+        correctIndex: 3,
+        explanation: "Section 6(2) empowers making rules for air/water/soil quality standards, pollutant concentration limits (including noise), and hazardous substance safeguards."
+      },
+      {
+        id: 17,
+        question: "Under Section 7, persons carrying on industry, operation, or process are prohibited from allowing:",
+        options: ["Any employee to work overtime without protective gear", "Emission or discharge of environmental pollutants in excess of prescribed standards", "Profits to exceed environmental expenditure", "Foreign technology imports without clearance"],
+        correctIndex: 1,
+        explanation: "Section 7 mandates that no person carrying on any industry, operation, or process shall discharge or emit any environmental pollutant in excess of prescribed standards."
+      },
+      {
+        id: 18,
+        question: "Under Section 8, any person who handles or is required to handle any hazardous substance must comply with:",
+        options: ["Voluntary corporate social responsibility guidelines", "Procedural safeguards prescribed under the Act", "Export licensing requirements of the Ministry of Commerce", "Local municipal sanitation fees"],
+        correctIndex: 1,
+        explanation: "Section 8 states that no person shall handle or cause to be handled any hazardous substance except in accordance with such procedure and after complying with such safeguards as may be prescribed."
+      },
+      {
+        id: 19,
+        question: "Under Section 9(1), when an accidental discharge or apprehension of discharge of any environmental pollutant occurs in excess of prescribed standards, the person responsible is duty-bound to:",
+        options: ["Keep it confidential to avoid public panic", "Intimate or cause to be intimated the fact of such occurrence to prescribed authorities or agencies", "Pay an immediate cash fine to local police", "Wait for annual audit inspection"],
+        correctIndex: 1,
+        explanation: "Section 9(1) requires the person responsible to immediately intimate the occurrence or apprehension of accidental discharge to prescribed authorities."
+      },
+      {
+        id: 20,
+        question: "Under Section 9(3), what financial liability is imposed on the person responsible for accidental pollutant discharges mentioned in Section 9(1)?",
+        options: ["Zero liability if the accident was caused by lightning", "Liability to pay any expenses incurred by authorities in mitigating or remedying the environmental damage", "A flat administrative fee of Rs. 500", "Obligation to plant 10 trees locally"],
+        correctIndex: 1,
+        explanation: "Section 9(3) provides that the person responsible shall be bound to bear the expenses incurred by authorities in taking remedial measures."
+      },
+      {
+        id: 21,
+        question: "Under Section 10(1), what powers of entry and inspection are granted to any person empowered by the Central Government?",
+        options: ["Right to enter any place at all reasonable times with necessary assistants to inspect equipment, manufacturing processes, or records", "Right to enter residential homes at midnight without notice for tax checks", "Right to seize private vehicles without cause", "Right to arrest citizens without warrant"],
+        correctIndex: 0,
+        explanation: "Section 10(1) grants empowered officers the right of entry and inspection at all reasonable times for examining premises, plant, machinery, registers, and records."
+      },
+      {
+        id: 22,
+        question: "Under Section 11(1), an empowered officer has the power to take samples of air, water, soil, or substance from any factory, premises, or vessel for the purpose of:",
+        options: ["Commercial chemical resale", "Analysis and testing in recognized environmental laboratories", "Display in municipal science museums", "Private collection"],
+        correctIndex: 1,
+        explanation: "Section 11(1) empowers officers to take samples of air, water, soil, or other substances from any factory or premises for analysis."
+      },
+      {
+        id: 23,
+        question: "What specific procedure must be followed by an officer taking a sample under Section 11(2) to ensure evidentiary validity in court?",
+        options: ["Serve notice on the occupier/agent, divide sample into parts, seal and mark them, and submit to recognized laboratories as prescribed", "Drink or test the sample on the spot", "Mail the sample to foreign research institutes", "Publish sample chemical formulas in daily newspapers"],
+        correctIndex: 0,
+        explanation: "Section 11(2) outlines the strict statutory procedure: serving notice, splitting into portions, sealing, signing, and sending for laboratory analysis."
+      },
+      {
+        id: 24,
+        question: "Under Section 12, the Central Government is empowered to establish or recognize:",
+        options: ["Environmental laboratories and institutes to carry out functions under the Act", "Eco-tourism amusement parks", "Municipal sports complexes", "State police training academies"],
+        correctIndex: 0,
+        explanation: "Section 12(1) empowers the Central Government to establish or recognize one or more environmental laboratories or institutes."
+      },
+      {
+        id: 25,
+        question: "Under Section 13, who is appointed or recognized to analyze samples taken under Section 11?",
+        options: ["Government Analysts", "Local municipal corporators", "Factory safety managers", "Customs clearance officers"],
+        correctIndex: 0,
+        explanation: "Section 13 allows the Central Government to appoint or recognize Government Analysts for analyzing environmental samples."
+      },
+      {
+        id: 26,
+        question: "What legal evidentiary value does a report signed by a Government Analyst appointed under Section 13 hold in any legal proceedings under the Act?",
+        options: ["It is treated as inadmissible hearsay evidence", "It may be used as evidence of the facts stated therein in any proceeding under the Act", "It is valid only if countersigned by the Prime Minister", "It requires oral corroboration by three witnesses"],
+        correctIndex: 1,
+        explanation: "Section 14 provides that any document purporting to be a report signed by a Government Analyst may be used as evidence of the facts stated therein in any proceeding."
+      },
+      {
+        id: 27,
+        question: "Under Section 15 (General Penalties), what punishment is prescribed for anyone who fails to comply with or contravenes provisions of the Act or rules/orders made thereunder?",
+        options: ["Imprisonment up to 5 years or fine up to Rs. 1 lakh, or both (with additional fines for continuing failures)", "A simple warning letter", "Community service for 10 hours", "Suspension of driving license"],
+        correctIndex: 0,
+        explanation: "Section 15 prescribes imprisonment for a term up to 5 years with fine up to 1 lakh rupees, or both, and additional daily fines for continuing violations."
+      },
+      {
+        id: 28,
+        question: "Under Section 16(1), when an offence under the Act is committed by a company, who shall be deemed to be guilty?",
+        options: ["Only the junior factory floor worker", "Every person who, at the time the offence was committed, was in charge of, and was responsible to, the company for the conduct of its business, as well as the company", "The external auditor of the company", "The landlord renting the factory premises"],
+        correctIndex: 1,
+        explanation: "Section 16(1) establishes that the company as well as every person in charge of and responsible to the company for conducting its business shall be deemed guilty."
+      },
+      {
+        id: 29,
+        question: "Under Section 16(2), an officer of a company is NOT deemed guilty of an offence if he proves that:",
+        options: ["He was on annual leave outside the country", "The offence was committed without his knowledge or that he exercised all due diligence to prevent its commission", "The company made a net profit that year", "He resigned two years prior"],
+        correctIndex: 1,
+        explanation: "Section 16(2) provides a statutory defense if the person proves that the offence was committed without his knowledge or that he exercised all due diligence to prevent it."
+      },
+      {
+        id: 30,
+        question: "Under Section 17, when an offence under the Act is committed by a Government Department, who is deemed guilty?",
+        options: ["The Prime Minister of India", "The Head of the Department", "The cleaning contractor", "No one, as government departments possess complete sovereign immunity"],
+        correctIndex: 1,
+        explanation: "Section 17 specifies that where an offence has been committed by any Department of Government, the Head of the Department shall be deemed guilty unless he proves due diligence."
+      },
+      {
+        id: 31,
+        question: "Under Section 18, what statutory protection is granted to the Central Government, officers, or employees for actions taken or intended to be taken in 'good faith'?",
+        options: ["No suit, prosecution, or other legal proceeding shall lie against them", "They are liable to pay double damages", "They must face mandatory departmental inquiry every year", "Their personal assets are attached"],
+        correctIndex: 0,
+        explanation: "Section 18 protects government officers from suits, prosecutions, or legal proceedings for anything done or intended to be done in good faith."
+      },
+      {
+        id: 32,
+        question: "Under Section 19(a), no court shall take cognizance of any offence under the Act except on a complaint made by:",
+        options: ["Any private citizen without notice", "The Central Government or any authority/officer authorized by it", "The local police constable", "Foreign environmental NGOs"],
+        correctIndex: 1,
+        explanation: "Section 19(a) restricts court cognizance to complaints made by the Central Government or authorized officers/authorities."
+      },
+      {
+        id: 33,
+        question: "Under Section 19(b), a private citizen can file a complaint in court regarding an offence under the Act only after giving notice of how many days to the Central Government/authorized authority?",
+        options: ["15 days", "30 days", "60 days", "90 days"],
+        correctIndex: 2,
+        explanation: "Section 19(b) allows a citizen complaint after giving notice of not less than sixty days of the alleged offence to the Central Government or authorized authority."
+      },
+      {
+        id: 34,
+        question: "Under Section 20, the Central Government has the power to call for:",
+        options: ["Reports, returns, statistics, accounts, and other information from any person, industry, or local authority", "Tax payment receipts from private citizens", "Personal medical history records", "Religious affiliation data"],
+        correctIndex: 0,
+        explanation: "Section 20 empowers the Central Government to require persons, officers, or authorities to furnish reports, returns, statistics, or other information."
+      },
+      {
+        id: 35,
+        question: "Under Section 21, all persons acting under Section 3 or empowered under the Act are deemed to be:",
+        options: ["Public servants within the meaning of Section 21 of the Indian Penal Code", "Private contractors", "Judicial magistrates", "Elected municipal councilors"],
+        correctIndex: 0,
+        explanation: "Section 21 explicitly declares that all persons acting under the Act shall be deemed to be public servants within the meaning of Section 21 of the IPC."
+      },
+      {
+        id: 36,
+        question: "What does Section 22 establish regarding the jurisdiction of civil courts?",
+        options: ["Civil courts have exclusive jurisdiction over pollution disputes", "No civil court shall have jurisdiction to entertain any suit or proceeding in respect of anything done, taken, or ordered by the Central Government or authorized officers under the Act", "Civil courts can override orders of the Central Government", "District judges act as appellate environmental authorities"],
+        correctIndex: 1,
+        explanation: "Section 22 bars civil court jurisdiction in respect of actions taken or orders issued by the Central Government or authorized officers under the Act."
+      },
+      {
+        id: 37,
+        question: "Under Section 23, the Central Government may delegate its powers and functions under the Act (except the power to make rules) to:",
+        options: ["Any officer, State Government, or other authority", "Private industrial associations only", "Foreign embassies", "United Nations bodies"],
+        correctIndex: 0,
+        explanation: "Section 23 permits the Central Government to delegate its powers and functions to any officer, State Government, or other authority."
+      },
+      {
+        id: 38,
+        question: "What does Section 24 state regarding the effect of the Environment (Protection) Act, 1986 on other existing laws?",
+        options: ["It repeals the Water and Air Acts completely", "The provisions of this Act shall be in addition to, and not in derogation of, the provisions of any other law for the time being in force", "It overrides all state laws but is subordinate to municipal bylaws", "It suspends criminal law proceedings"],
+        correctIndex: 1,
+        explanation: "Section 24(1) specifies that the Act's provisions are in addition to, and not in derogation of, other existing laws (though Section 24(2) gives overriding effect in case of inconsistency)."
+      },
+      {
+        id: 39,
+        question: "Under Section 25, who is vested with the power to make rules for carrying out the purposes of the Act?",
+        options: ["The Supreme Court of India", "The Central Government", "The State Legislative Assemblies", "The Central Pollution Control Board chairman"],
+        correctIndex: 1,
+        explanation: "Section 25 empowers the Central Government to make rules to carry out the purposes of the Act."
+      },
+      {
+        id: 40,
+        question: "Under Section 26, every rule made by the Central Government under the Act must be laid before:",
+        options: ["Each House of Parliament while it is in session for a total period of 30 days", "The Supreme Court registry", "The Niti Aayog governing council", "State cabinet secretariats"],
+        correctIndex: 0,
+        explanation: "Section 26 mandates that rules made under the Act must be laid before each House of Parliament for approval/modification."
+      },
+      {
+        id: 41,
+        question: "When was Chapter IIIA (establishing the Environmental Protection Fund) and related penalty sections inserted into the Environment (Protection) Act, 1986?",
+        options: ["By the 1991 Amendment Act", "By the 2003 Amendment Act", "By the Jan Vishwas (Amendment of Provisions) Act, 2023 (Act No. 18 of 2023)", "By Supreme Court directive in 2015"],
+        correctIndex: 2,
+        explanation: "Chapter IIIA and revised penalty/fund provisions were introduced via the Jan Vishwas (Amendment of Provisions) Act, 2023."
+      },
+      {
+        id: 42,
+        question: "Under Section 15E (inserted by the 2023 Amendment), where must penalties and additional penalties imposed under the Act be credited?",
+        options: ["To the Consolidated Fund of India exclusively", "To the Environmental Protection Fund established under Chapter IIIA", "To corporate social responsibility accounts of polluting companies", "To local municipal ward treasuries"],
+        correctIndex: 1,
+        explanation: "Section 15E specifies that penalty amounts imposed under the Act shall be credited to the Environmental Protection Fund."
+      },
+      {
+        id: 43,
+        question: "What are the designated purposes of the Environmental Protection Fund established under Chapter IIIA?",
+        options: ["Promotion of awareness, education, and research for environmental protection", "Covering expenses for achieving objects of the Air Act and EPA", "Both A and B", "Paying salaries of central pollution board judges"],
+        correctIndex: 2,
+        explanation: "Chapter IIIA designates the fund for promotion of awareness, education, research, and expenses under the Air Act and EPA."
+      },
+      {
+        id: 44,
+        question: "Under Section 5A (inserted in the Act), provision is made for appeals against certain orders to which specialized tribunal?",
+        options: ["The National Green Tribunal (NGT) established under the National Green Tribunal Act, 2010", "The Income Tax Appellate Tribunal", "The Central Administrative Tribunal", "The Railway Claims Tribunal"],
+        correctIndex: 0,
+        explanation: "Section 5A provides for appeals to the National Green Tribunal (NGT) established under the NGT Act, 2010."
+      },
+      {
+        id: 45,
+        question: "Which landmark rules were promulgated by the Central Government under the Environment (Protection) Act, 1986 on 19th November 1986?",
+        options: ["The Environment (Protection) Rules, 1986", "The Hazardous Wastes Rules", "The Coastal Zone Regulations", "The Noise Pollution Rules"],
+        correctIndex: 0,
+        explanation: "The Environment (Protection) Rules, 1986 were notified on 19th November 1986 as the principal operational rules."
+      },
+      {
+        id: 46,
+        question: "Under Rule 4 of the Environment (Protection) Rules, 1986, directions issued under Section 5 must be in:",
+        options: ["Oral form given over telephone", "Writing, specifying the nature of action and time for compliance", "Classified gazette advertisements without notice", "Sign language briefings"],
+        correctIndex: 1,
+        explanation: "Rule 4(1) requires that any direction issued under Section 5 shall be in writing and specify the action required and compliance timeline."
+      },
+      {
+        id: 47,
+        question: "Which major rules for the management of hazardous chemicals and genetically modified organisms were framed under the EPA in 1989?",
+        options: ["Hazardous Wastes (Management and Handling) Rules, 1989", "Rules for Manufacture, Use, Import, Export and Storage of Hazardous Micro-organisms Genetically Engineered Organisms or Cells, 1989", "Both A and B", "Plastic Waste Management Rules, 1989"],
+        correctIndex: 2,
+        explanation: "Both sets of rules were promulgated in 1989 under the EPA framework."
+      },
+      {
+        id: 48,
+        question: "The Environmental Impact Assessment (EIA) notification, widely used for major developmental projects, derives its statutory backing primarily from which section of the EPA, 1986?",
+        options: ["Section 3 and Section 6", "Section 15", "Section 20", "Section 24"],
+        correctIndex: 0,
+        explanation: "EIA notifications are issued by the Central Government utilizing its powers under Sections 3 and 6 of the EPA to restrict industrial locations and processes."
+      },
+      {
+        id: 49,
+        question: "In which landmark Supreme Court case (1996) concerning tanneries polluting groundwater in Tamil Nadu did the Court extensively apply the EPA, 1986, along with the 'Polluter Pays' and 'Precautionary' principles?",
+        options: ["Vellore Citizens' Welfare Forum v. Union of India", "M.C. Mehta v. Union of India (Ganga Pollution Case)", "Rural Litigation and Entitlement Kendra v. State of UP", "Olga Tellis v. Bombay Municipal Corporation"],
+        correctIndex: 0,
+        explanation: "Vellore Citizens' Welfare Forum v. Union of India (1996) is the landmark judgment applying EPA provisions alongside polluter pays and precautionary principles."
+      },
+      {
+        id: 50,
+        question: "In M.C. Mehta v. Union of India (Ganga Pollution Case, 1988), under which statute were directions primarily issued by the Supreme Court to clean the river and shut down polluting tanneries?",
+        options: ["The Water Act, 1974 and the Environment (Protection) Act, 1986", "The Indian Penal Code", "The Factories Act, 1948", "The Wild Life Protection Act"],
+        correctIndex: 0,
+        explanation: "The Supreme Court utilized the Water Act and the Environment (Protection) Act, 1986 in the Ganga Pollution case."
+      },
+      {
+        id: 51,
+        question: "Can an industry discharging effluents in violation of standards set under Section 7 be ordered to close down under Section 5 without prior court trial?",
+        options: ["No, a court conviction is mandatory before closure", "Yes, Section 5 empowers the Central Government to issue direct closure or stoppage orders", "Only if approved by the local municipal corporation", "Only during monsoon months"],
+        correctIndex: 1,
+        explanation: "Section 5 grants administrative power to issue closure or stoppage directions without awaiting judicial trial outcomes."
+      },
+      {
+        id: 52,
+        question: "Under the EPA, 1986, what is the role of Central Pollution Control Board (CPCB) and State Pollution Control Boards (SPCBs)?",
+        options: ["They act as executing and technical arms delegated with specific enforcement and monitoring powers under the Act", "They have no legal standing under EPA", "They function solely as tax collection agencies", "They operate independent of central government control"],
+        correctIndex: 0,
+        explanation: "CPCB and SPCBs assist in implementing and enforcing standards under delegated powers pursuant to Section 23 of the Act."
+      },
+      {
+        id: 53,
+        question: "What happens if a person fails to pay a penalty imposed under the amended EPA provisions within ninety days (Section 15F)?",
+        options: ["The penalty is automatically written off", "He shall be liable for imprisonment extending up to a specified period", "The factory license is renewed for free", "A warning notice is sent"],
+        correctIndex: 1,
+        explanation: "Section 15F mandates that failure to pay penalties within ninety days attracts liability for imprisonment."
+      },
+      {
+        id: 54,
+        question: "Are noise pollutants covered under the regulatory scope of the Environment (Protection) Act, 1986?",
+        options: ["No, noise is regulated solely by police acts", "Yes, Section 6(2)(b) explicitly includes noise within environmental pollutant concentration limits", "Only industrial workplace noise is covered", "Noise is excluded from all central legislation"],
+        correctIndex: 1,
+        explanation: "Section 6(2)(b) specifically mentions noise as an environmental pollutant whose concentration limits can be regulated."
+      },
+      {
+        id: 55,
+        question: "Under Section 11, if an occupier refuses to allow an empowered officer to take samples or inspect premises, what offence is committed?",
+        options: ["No offence, inspection is voluntary", "Obstruction of a public servant / contravention of Section 10/11, punishable under Section 15", "A minor civil tort settled with Rs. 50 fine", "Tax evasion"],
+        correctIndex: 1,
+        explanation: "Obstructing an officer exercising powers under Section 10 or 11 attracts penal consequences under Section 15 for non-compliance."
+      },
+      {
+        id: 56,
+        question: "Which ministry at the Union level is primarily responsible for administering the Environment (Protection) Act, 1986?",
+        options: ["Ministry of Home Affairs", "Ministry of Environment, Forest and Climate Change (MoEFCC)", "Ministry of Science and Technology", "Ministry of Heavy Industries"],
+        correctIndex: 1,
+        explanation: "The MoEFCC is the nodal central ministry administering the EPA, 1986."
+      },
+      {
+        id: 57,
+        question: "What is the status of international environmental treaties and declarations in relation to the enactment of the EPA, 1986?",
+        options: ["The Act was enacted pursuant to India's sovereign commitments under international environmental declarations (like Stockholm 1972)", "International treaties have no bearing on Indian domestic law", "The Act explicitly prohibits ratification of treaties", "Treaties supersede the Constitution of India"],
+        correctIndex: 0,
+        explanation: "The Act was enacted to give domestic legislative effect to international environmental commitments undertaken at Stockholm."
+      },
+      {
+        id: 58,
+        question: "Under Section 3(2)(xi), the Central Government may establish or recognize environmental laboratories to analyze samples. Who prescribes the exact functions and procedures for these labs?",
+        options: ["The Central Government through rules made under Section 25", "The United Nations Environment Programme", "Local municipal health officers", "Private chemical guilds"],
+        correctIndex: 0,
+        explanation: "The Central Government frames rules under Section 25 specifying laboratory procedures and functions."
+      },
+      {
+        id: 59,
+        question: "If an industry operates in an eco-sensitive zone notified by the Central Government under Section 3(2)(vi), what legal restriction applies?",
+        options: ["The industry may be totally prohibited or subjected to stringent operational safeguards", "No restrictions apply if taxes are paid", "Only foreign-owned industries are restricted", "Operations are permitted 24 hours a day"],
+        correctIndex: 0,
+        explanation: "Section 3(2)(vi) empowers the restriction or absolute prohibition of industries in fragile or eco-sensitive areas."
+      },
+      {
+        id: 60,
+        question: "Under Section 19(b), what is the statutory purpose of requiring a 60-day notice to the Central Government before a citizen files a complaint in court?",
+        options: ["To give the government adequate time to investigate and initiate statutory action itself if warranted, avoiding frivolous litigation", "To allow the offender time to flee", "To collect court filing fees", "To organize public protests"],
+        correctIndex: 0,
+        explanation: "The 60-day notice provision enables statutory authorities to examine grievances and take necessary enforcement action."
+      },
+      {
+        id: 61,
+        question: "Can the Central Government delegate its power of issuing directions under Section 5?",
+        options: ["Yes, under Section 23, powers and functions (except rule-making) can be delegated to designated officers or authorities", "No, directions can only be issued personally by the Prime Minister", "Delegation is strictly prohibited for all sections", "Only state governors can exercise Section 5 powers"],
+        correctIndex: 0,
+        explanation: "Section 23 allows delegation of powers including Section 5 directions to specified officers or State Governments."
+      },
+      {
+        id: 62,
+        question: "What evidentiary requirement is needed for a court to accept a Government Analyst's report under Section 14?",
+        options: ["The report must be signed by the recognized Analyst; no formal formal proof of signature is initially required unless challenged", "The Analyst must personally reside in the courtroom permanently", "The report must be notarized in a foreign embassy", "The sample must be re-tested by the judge"],
+        correctIndex: 0,
+        explanation: "Section 14 allows Analyst reports to be used as evidence directly upon being signed and issued according to statutory procedure."
+      },
+      {
+        id: 63,
+        question: "Under Section 15, what is the maximum imprisonment term prescribed for general contraventions of the Act?",
+        options: ["Two years", "Three years", "Five years", "Seven years"],
+        correctIndex: 2,
+        explanation: "Section 15 prescribes imprisonment extending up to five years."
+      },
+      {
+        id: 64,
+        question: "Under Section 16, if a company commits an offence with the consent or connivance of any director, manager, secretary, or other officer, how is that officer treated?",
+        options: ["That officer is also deemed to be guilty of that offence and liable to be proceeded against", "Only the company pays a fine; officers are immune", "The officer receives a written reprimand only", "The officer's salary is attached"],
+        correctIndex: 0,
+        explanation: "Section 16(1) establishes that officers consenting or conniving in the corporate offence are deemed equally guilty."
+      },
+      {
+        id: 65,
+        question: "How does the Environment (Protection) Act, 1986 address ecological disasters and chemical accidents?",
+        options: ["By empowering the Centre to lay down procedural safeguards for accident prevention (Section 3(2)(vi)) and mandating immediate intimation of accidental discharges (Section 9)", "By establishing fire brigade stations in every ward", "By offering free health insurance to citizens", "By banning all chemical manufacturing nationwide"],
+        correctIndex: 0,
+        explanation: "Sections 3(2)(vi) and 9 specifically target accident prevention safeguards and mandatory reporting of accidental pollutant releases."
+      },
+      {
+        id: 66,
+        question: "What is the legal status of notifications issued under Section 3(1) designating coastal regulation zones (CRZ)?",
+        options: ["They have statutory force of law, binding all commercial and construction activities in notified coastal stretches", "They are merely advisory guidelines", "They apply only to naval vessels", "They require municipal council ratification"],
+        correctIndex: 0,
+        explanation: "CRZ notifications issued under EPA powers possess full statutory force of law."
+      },
+      {
+        id: 67,
+        question: "Under Section 7, who is legally accountable if a leased industrial plant exceeds emission standards—the landlord/lessor or the occupier/lessee carrying on operations?",
+        options: ["The person carrying on the industry, operation, or process (the occupier/lessee)", "The bank financing the mortgage", "The architect who designed the building", "The electricity supply vendor"],
+        correctIndex: 0,
+        explanation: "Section 7 places the obligation squarely on 'any person carrying on an industry, operation, or process'."
+      },
+      {
+        id: 68,
+        question: "Under Section 2(e), which of the following characteristics qualifies a substance as a 'hazardous substance'?",
+        options: ["Chemical or physico-chemical properties liable to cause harm to living creatures, plants, micro-organisms, property, or environment", "High commercial market value", "Bright coloration and packaging", "Heavy physical weight"],
+        correctIndex: 0,
+        explanation: "Section 2(e) defines hazardous substances based on harmful chemical/physicochemical properties."
+      },
+      {
+        id: 69,
+        question: "What is the significance of Section 24(2) regarding inconsistency with other laws?",
+        options: ["In case of any inconsistency between provisions of this Act and provisions of any other law, the provisions of this Act shall prevail", "State laws always override central environmental laws", "Municipal bylaws supersede the EPA", "All laws are treated as equal with no precedence"],
+        correctIndex: 0,
+        explanation: "Section 24(2) ensures that EPA provisions override inconsistent provisions in other preceding laws."
+      },
+      {
+        id: 70,
+        question: "Under Section 12(2), the Central Government may specify by notification the functions of environmental laboratories and:",
+        options: ["The procedure for sample submission, analysis fees, and report issuance", "The retirement age of laboratory technicians", "The architectural design of laboratory buildings", "The stock market shares of testing companies"],
+        correctIndex: 0,
+        explanation: "Section 12(2) empowers the Central Government to make rules regulating laboratory functions, testing procedures, and fees."
+      },
+      {
+        id: 71,
+        question: "Under Section 3(3), the Central Government is authorized to constitute an authority for exercising powers under the Act. What is a prominent example of such an authority constituted under EPA?",
+        options: ["The Central Ground Water Authority (CGWA) or various Coastal Zone Management Authorities", "The Reserve Bank of India", "The Telecom Regulatory Authority", "The Central Board of Direct Taxes"],
+        correctIndex: 0,
+        explanation: "Authorities like CGWA and coastal management bodies are routinely established under Section 3(3)."
+      },
+      {
+        id: 72,
+        question: "Under Section 10(3), provisions of which general criminal procedure code apply to searches and seizures carried out under the EPA?",
+        options: ["The Code of Criminal Procedure, 1973", "The Code of Civil Procedure, 1908", "The Indian Evidence Act, 1872", "The Transfer of Property Act"],
+        correctIndex: 0,
+        explanation: "Section 10(3) mandates that searches and seizures under the EPA shall be carried out in accordance with the Code of Criminal Procedure, 1973."
+      },
+      {
+        id: 73,
+        question: "Under Section 15, if a contravention or failure continues after conviction, what additional daily fine can be imposed?",
+        options: ["Up to five thousand rupees for every day during which such failure or contravention continues", "A flat fine of Rs. 100", "No additional fine is permitted", "Mandatory community service"],
+        correctIndex: 0,
+        explanation: "Section 15 prescribes additional daily fines up to five thousand rupees for continuing offences."
+      },
+      {
+        id: 74,
+        question: "Under Section 5, directions issued by the Central Government can include orders directing the extraction of remedial costs from:",
+        options: ["The polluter / person responsible for environmental degradation", "The local municipality tax pool", "Foreign aid grants", "Charitable religious trusts"],
+        correctIndex: 0,
+        explanation: "Remedial and clean-up costs are recoverable from the polluter under the statutory framework."
+      },
+      {
+        id: 75,
+        question: "How does the Environment (Protection) Act, 1986 contribute to sustainable development in India?",
+        options: ["By balancing industrial growth with mandatory environmental standards, impact assessments, pollution controls, and severe penalties for ecological harm", "By banning all industrial activity permanently", "By taxing rainwater harvesting", "By restricting scientific research"],
+        correctIndex: 0,
+        explanation: "The EPA serves as India's premier legislative instrument balancing development and environmental protection through standards, impact assessments, and enforcement."
+      }
+    ];
+
+    // State Variables
+    let shuffledQuestions = [];
+    let currentQuestionIndex = 0;
+    let userAnswers = {}; // { questionIndex: selectedOptionIndex }
+    let bookmarks = new Set();
+    let isSubmitted = false;
+    let activeFilter = 'all';
+
+    // Timer Variables
+    const TOTAL_TIME_SECONDS = 45 * 60; // 45 mins
+    let timeRemaining = TOTAL_TIME_SECONDS;
+    let timerInterval = null;
+
+    // DOM Elements
+    const questionIndexDisplay = document.getElementById('questionIndexDisplay');
+    const bookmarkToggleBtn = document.getElementById('bookmarkToggleBtn');
+    const questionTextDisplay = document.getElementById('questionTextDisplay');
+    const optionsContainer = document.getElementById('optionsContainer');
+    const explanationContainer = document.getElementById('explanationContainer');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const clearBtn = document.getElementById('clearBtn');
+    const submitBtn = document.getElementById('submitBtn');
+    const paletteGrid = document.getElementById('paletteGrid');
+    const timerDisplay = document.getElementById('timerDisplay');
+    const themeToggleBtn = document.getElementById('themeToggleBtn');
+    const restartBtn = document.getElementById('restartBtn');
+    const resultsModal = document.getElementById('resultsModal');
+
+    // Fisher-Yates Shuffle Algorithm
+    function fisherYatesShuffle(array) {
+      const arr = [...array];
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+      return arr;
+    }
+
+    // Initialize/Reset Quiz Data Engine
+    function initQuizData() {
+      // Deep copy and shuffle questions
+      shuffledQuestions = fisherYatesShuffle(rawQuestionsData).map(q => {
+        // Prepare options array with original indices tracked
+        const optionsObj = q.options.map((optText, index) => ({
+          text: optText,
+          originalIndex: index
+        }));
+        
+        // Shuffle options
+        const shuffledOptions = fisherYatesShuffle(optionsObj);
+        
+        // Find new correct index
+        const newCorrectIndex = shuffledOptions.findIndex(o => o.originalIndex === q.correctIndex);
+
+        return {
+          id: q.id,
+          question: q.question,
+          options: shuffledOptions,
+          correctIndex: newCorrectIndex,
+          explanation: q.explanation
+        };
+      });
+
+      // Reset runtime state
+      currentQuestionIndex = 0;
+      userAnswers = {};
+      bookmarks.clear();
+      isSubmitted = false;
+      activeFilter = 'all';
+
+      // Reset Timer
+      clearInterval(timerInterval);
+      timeRemaining = TOTAL_TIME_SECONDS;
+      updateTimerUI();
+      startTimer();
+
+      // Reset UI Controls
+      submitBtn.disabled = false;
+      clearBtn.disabled = false;
+      resultsModal.classList.remove('open');
+
+      renderFilterTabs();
+      renderCurrentQuestion();
+      renderPalette();
+    }
+
+    // Timer Logic
+    function startTimer() {
+      timerInterval = setInterval(() => {
+        timeRemaining--;
+        updateTimerUI();
+
+        if (timeRemaining <= 0) {
+          clearInterval(timerInterval);
+          autoSubmitQuiz();
+        }
+      }, 1000);
+    }
+
+    function updateTimerUI() {
+      const minutes = Math.floor(timeRemaining / 60);
+      const seconds = timeRemaining % 60;
+      const formatted = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+      timerDisplay.textContent = formatted;
+
+      if (timeRemaining < 300) { // < 5 mins
+        timerDisplay.classList.add('warning');
+      } else {
+        timerDisplay.classList.remove('warning');
+      }
+    }
+
+    // Render Question Card
+    function renderCurrentQuestion() {
+      const q = shuffledQuestions[currentQuestionIndex];
+      
+      questionIndexDisplay.textContent = `Question ${currentQuestionIndex + 1} of ${shuffledQuestions.length}`;
+      questionTextDisplay.textContent = q.question;
+
+      // Bookmark state
+      if (bookmarks.has(currentQuestionIndex)) {
+        bookmarkToggleBtn.classList.add('active');
+      } else {
+        bookmarkToggleBtn.classList.remove('active');
+      }
+
+      // Render Options
+      optionsContainer.innerHTML = '';
+      const selectedOption = userAnswers[currentQuestionIndex];
+
+      q.options.forEach((opt, idx) => {
+        const optionCard = document.createElement('div');
+        optionCard.className = 'option-card';
+
+        // Apply review styling if submitted
+        if (isSubmitted) {
+          if (idx === q.correctIndex) {
+            optionCard.classList.add('correct-review');
+          } else if (selectedOption === idx && selectedOption !== q.correctIndex) {
+            optionCard.classList.add('incorrect-review');
+          }
+        } else if (selectedOption === idx) {
+          optionCard.classList.add('selected');
+        }
+
+        optionCard.innerHTML = `
+          <div class="radio-custom"></div>
+          <div class="option-label">${opt.text}</div>
+        `;
+
+        if (!isSubmitted) {
+          optionCard.addEventListener('click', () => selectOption(idx));
+        }
+
+        optionsContainer.appendChild(optionCard);
+      });
+
+      // Render Explanation in Review Mode
+      explanationContainer.innerHTML = '';
+      if (isSubmitted) {
+        const expBox = document.createElement('div');
+        expBox.className = 'explanation-box';
+        expBox.innerHTML = `
+          <div class="explanation-title">Statutory Clause & Reference:</div>
+          <div>${q.explanation}</div>
+        `;
+        explanationContainer.appendChild(expBox);
+      }
+
+      // Update Navigation Buttons
+      prevBtn.disabled = currentQuestionIndex === 0;
+      nextBtn.disabled = currentQuestionIndex === shuffledQuestions.length - 1;
+
+      renderPalette();
+    }
+
+    // Select Option
+    function selectOption(optionIndex) {
+      if (isSubmitted) return;
+      userAnswers[currentQuestionIndex] = optionIndex;
+      renderCurrentQuestion();
+    }
+
+    // Clear Selection
+    clearBtn.addEventListener('click', () => {
+      if (isSubmitted) return;
+      delete userAnswers[currentQuestionIndex];
+      renderCurrentQuestion();
+    });
+
+    // Bookmark Toggle
+    bookmarkToggleBtn.addEventListener('click', () => {
+      if (bookmarks.has(currentQuestionIndex)) {
+        bookmarks.delete(currentQuestionIndex);
+      } else {
+        bookmarks.add(currentQuestionIndex);
+      }
+      renderCurrentQuestion();
+    });
+
+    // Navigation Events
+    prevBtn.addEventListener('click', () => {
+      if (currentQuestionIndex > 0) {
+        currentQuestionIndex--;
+        renderCurrentQuestion();
+      }
+    });
+
+    nextBtn.addEventListener('click', () => {
+      if (currentQuestionIndex < shuffledQuestions.length - 1) {
+        currentQuestionIndex++;
+        renderCurrentQuestion();
+      }
+    });
+
+    // Palette Rendering & Filter Logic
+    function renderPalette() {
+      paletteGrid.innerHTML = '';
+
+      shuffledQuestions.forEach((q, idx) => {
+        const isAnswered = userAnswers.hasOwnProperty(idx);
+        const isBookmarked = bookmarks.has(idx);
+
+        // Filter Evaluation
+        if (activeFilter === 'answered' && !isAnswered) return;
+        if (activeFilter === 'unanswered' && isAnswered) return;
+        if (activeFilter === 'bookmarked' && !isBookmarked) return;
+
+        const item = document.createElement('div');
+        item.className = 'palette-item';
+        item.textContent = idx + 1;
+
+        if (idx === currentQuestionIndex) {
+          item.classList.add('active-current');
+        }
+
+        if (isBookmarked) {
+          item.classList.add('bookmarked');
+        }
+
+        if (isSubmitted) {
+          const userAns = userAnswers[idx];
+          if (userAns === q.correctIndex) {
+            item.classList.add('correct-post');
+          } else if (userAns !== undefined) {
+            item.classList.add('incorrect-post');
+          }
+        } else if (isAnswered) {
+          item.classList.add('answered');
+        }
+
+        item.addEventListener('click', () => {
+          currentQuestionIndex = idx;
+          renderCurrentQuestion();
+        });
+
+        paletteGrid.appendChild(item);
+      });
+    }
+
+    // Filter Tab Buttons
+    function renderFilterTabs() {
+      const tabs = document.querySelectorAll('.tab-btn');
+      tabs.forEach(tab => {
+        tab.addEventListener('click', (e) => {
+          tabs.forEach(t => t.classList.remove('active'));
+          e.target.classList.add('active');
+          activeFilter = e.target.getAttribute('data-filter');
+          renderPalette();
+        });
+      });
+    }
+
+    // Submit Quiz & Show Results
+    function submitQuiz() {
+      if (isSubmitted) return;
+      isSubmitted = true;
+      clearInterval(timerInterval);
+
+      // Score Calculation
+      let correctCount = 0;
+      let incorrectCount = 0;
+      let answeredCount = 0;
+
+      shuffledQuestions.forEach((q, idx) => {
+        if (userAnswers.hasOwnProperty(idx)) {
+          answeredCount++;
+          if (userAnswers[idx] === q.correctIndex) {
+            correctCount++;
+          } else {
+            incorrectCount++;
+          }
+        }
+      });
+
+      const totalCount = shuffledQuestions.length;
+      const skippedCount = totalCount - answeredCount;
+      const percentage = Math.round((correctCount / totalCount) * 100);
+
+      // Modal Elements
+      document.getElementById('modalScoreDisplay').textContent = `${correctCount} / ${totalCount} (${percentage}%)`;
+      document.getElementById('summaryAnswered').textContent = answeredCount;
+      document.getElementById('summaryCorrect').textContent = correctCount;
+      document.getElementById('summaryIncorrect').textContent = incorrectCount;
+      document.getElementById('summarySkipped').textContent = skippedCount;
+
+      const badge = document.getElementById('modalBadge');
+      if (percentage >= 80) {
+        badge.textContent = "Excellent";
+        badge.className = "performance-badge badge-excellent";
+      } else if (percentage >= 50) {
+        badge.textContent = "Passed";
+        badge.className = "performance-badge badge-passed";
+      } else {
+        badge.textContent = "Failed";
+        badge.className = "performance-badge badge-failed";
+      }
+
+      resultsModal.classList.add('open');
+      renderCurrentQuestion();
+    }
+
+    function autoSubmitQuiz() {
+      alert("Time has expired! Automatically submitting your quiz.");
+      submitQuiz();
+    }
+
+    submitBtn.addEventListener('click', () => {
+      if (confirm("Are you sure you want to submit your quiz?")) {
+        submitQuiz();
+      }
+    });
+
+    // Review & Restart Handlers
+    document.getElementById('reviewModeBtn').addEventListener('click', () => {
+      resultsModal.classList.remove('open');
+    });
+
+    document.getElementById('modalRestartBtn').addEventListener('click', () => {
+      initQuizData();
+    });
+
+    restartBtn.addEventListener('click', () => {
+      if (confirm("Restarting will shuffle all questions and clear active progress. Proceed?")) {
+        initQuizData();
+      }
+    });
+
+    // Dark/Light Theme Switcher
+    themeToggleBtn.addEventListener('click', () => {
+      document.body.classList.toggle('dark-mode');
+      if (document.body.classList.contains('dark-mode')) {
+        themeToggleBtn.textContent = '☀️';
+      } else {
+        themeToggleBtn.textContent = '🌙';
+      }
+    });
+
+    // Initialize Engine On Load
+    window.addEventListener('DOMContentLoaded', () => {
+      initQuizData();
+    });
+  </script>
+</body>
+</html>
