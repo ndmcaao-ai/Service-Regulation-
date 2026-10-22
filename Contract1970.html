@@ -1,0 +1,1499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contract Labour (Regulation & Abolition) Act, 1970 Master Quiz - 75 Questions</title>
+  <style>
+    :root {
+      --bg-primary: #f4f6f9;
+      --bg-card: #ffffff;
+      --text-main: #1f2937;
+      --text-muted: #6b7280;
+      --border-color: #e5e7eb;
+      --primary-color: #d97706;
+      --primary-hover: #b45309;
+      --secondary-bg: #f3f4f6;
+      --success-color: #059669;
+      --success-bg: #d1fae5;
+      --danger-color: #dc2626;
+      --danger-bg: #fee2e2;
+      --warning-color: #d97706;
+      --warning-bg: #fef3c7;
+      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      --palette-unvisited: #e5e7eb;
+      --palette-unvisited-text: #374151;
+      --palette-answered: #d97706;
+      --palette-answered-text: #ffffff;
+    }
+
+    body.dark-mode {
+      --bg-primary: #0f172a;
+      --bg-card: #1e293b;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --border-color: #334155;
+      --primary-color: #f59e0b;
+      --primary-hover: #fbbf24;
+      --secondary-bg: #334155;
+      --success-color: #10b981;
+      --success-bg: #064e3b;
+      --danger-color: #f87171;
+      --danger-bg: #7f1d1d;
+      --warning-color: #fbbf24;
+      --warning-bg: #78350f;
+      --palette-unvisited: #334155;
+      --palette-unvisited-text: #cbd5e1;
+      --palette-answered: #f59e0b;
+      --palette-answered-text: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    /* Sticky Header */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background-color: var(--bg-card);
+      border-bottom: 1px solid var(--border-color);
+      padding: 0.75rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .header-titles h1 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--primary-color);
+    }
+
+    .header-titles p {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .header-controls {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .timer-badge {
+      font-family: monospace;
+      font-size: 1.15rem;
+      font-weight: 700;
+      padding: 0.4rem 0.8rem;
+      border-radius: 6px;
+      background-color: var(--secondary-bg);
+      color: var(--text-main);
+      border: 1px solid var(--border-color);
+    }
+
+    .timer-badge.warning {
+      background-color: var(--danger-bg);
+      color: var(--danger-color);
+      border-color: var(--danger-color);
+      animation: pulse 1s infinite alternate;
+    }
+
+    @keyframes pulse {
+      from { opacity: 1; }
+      to { opacity: 0.7; }
+    }
+
+    .btn {
+      padding: 0.5rem 1rem;
+      font-size: 0.875rem;
+      font-weight: 600;
+      border-radius: 6px;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+    }
+
+    .btn-primary {
+      background-color: var(--primary-color);
+      color: #ffffff;
+    }
+
+    .btn-primary:hover {
+      background-color: var(--primary-hover);
+    }
+
+    .btn-secondary {
+      background-color: var(--secondary-bg);
+      color: var(--text-main);
+      border-color: var(--border-color);
+    }
+
+    .btn-secondary:hover {
+      filter: brightness(0.95);
+    }
+
+    .btn-danger {
+      background-color: var(--danger-color);
+      color: #ffffff;
+    }
+
+    .btn-danger:hover {
+      filter: brightness(0.9);
+    }
+
+    /* Main Container Grid */
+    .container {
+      max-width: 1280px;
+      width: 100%;
+      margin: 1.5rem auto;
+      padding: 0 1rem;
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: 1.5rem;
+      flex: 1;
+    }
+
+    @media (max-width: 900px) {
+      .container {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Question Card */
+    .card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 1.5rem;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .question-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .question-index {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+
+    .bookmark-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1.25rem;
+      color: var(--text-muted);
+      transition: color 0.2s;
+    }
+
+    .bookmark-btn.active {
+      color: var(--warning-color);
+    }
+
+    .question-text {
+      font-size: 1.1rem;
+      font-weight: 600;
+      line-height: 1.5;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Options List */
+    .options-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-bottom: 2rem;
+    }
+
+    .option-card {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 1rem;
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s;
+      background-color: var(--bg-card);
+    }
+
+    .option-card:hover {
+      border-color: var(--primary-color);
+      background-color: var(--secondary-bg);
+    }
+
+    .option-card.selected {
+      border-color: var(--primary-color);
+      background-color: var(--secondary-bg);
+      box-shadow: 0 0 0 1px var(--primary-color);
+    }
+
+    .option-card.correct-review {
+      border-color: var(--success-color);
+      background-color: var(--success-bg);
+      color: var(--text-main);
+    }
+
+    .option-card.incorrect-review {
+      border-color: var(--danger-color);
+      background-color: var(--danger-bg);
+      color: var(--text-main);
+    }
+
+    .radio-custom {
+      width: 18px;
+      height: 18px;
+      border: 2px solid var(--border-color);
+      border-radius: 50%;
+      margin-top: 2px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .option-card.selected .radio-custom {
+      border-color: var(--primary-color);
+    }
+
+    .option-card.selected .radio-custom::after {
+      content: "";
+      width: 10px;
+      height: 10px;
+      background-color: var(--primary-color);
+      border-radius: 50%;
+    }
+
+    .option-label {
+      font-size: 0.95rem;
+      line-height: 1.4;
+      flex: 1;
+    }
+
+    /* Bottom Action Bar */
+    .card-actions {
+      margin-top: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.5rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border-color);
+      flex-wrap: wrap;
+    }
+
+    .action-group {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    /* Explanation Box */
+    .explanation-box {
+      margin-top: 1.5rem;
+      padding: 1rem;
+      border-radius: 6px;
+      background-color: var(--secondary-bg);
+      border-left: 4px solid var(--primary-color);
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    .explanation-title {
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+      color: var(--primary-color);
+    }
+
+    /* Sidebar / Palette */
+    .sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .filter-tabs {
+      display: flex;
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      overflow: hidden;
+      background-color: var(--bg-card);
+    }
+
+    .tab-btn {
+      flex: 1;
+      padding: 0.5rem 0.2rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      border: none;
+      background: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      text-align: center;
+      transition: background-color 0.2s, color 0.2s;
+    }
+
+    .tab-btn.active {
+      background-color: var(--primary-color);
+      color: #ffffff;
+    }
+
+    .palette-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 0.5rem;
+      max-height: 400px;
+      overflow-y: auto;
+      padding: 0.25rem;
+    }
+
+    .palette-item {
+      aspect-ratio: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      font-weight: 700;
+      border-radius: 6px;
+      border: 1px solid var(--border-color);
+      cursor: pointer;
+      background-color: var(--palette-unvisited);
+      color: var(--palette-unvisited-text);
+      position: relative;
+      transition: all 0.2s;
+    }
+
+    .palette-item.active-current {
+      outline: 2px solid var(--primary-color);
+      outline-offset: 2px;
+    }
+
+    .palette-item.answered {
+      background-color: var(--palette-answered);
+      color: var(--palette-answered-text);
+      border-color: var(--palette-answered);
+    }
+
+    .palette-item.bookmarked::after {
+      content: "★";
+      position: absolute;
+      top: 1px;
+      right: 3px;
+      font-size: 0.65rem;
+      color: var(--warning-color);
+    }
+
+    .palette-item.correct-post {
+      background-color: var(--success-color);
+      color: #ffffff;
+      border-color: var(--success-color);
+    }
+
+    .palette-item.incorrect-post {
+      background-color: var(--danger-color);
+      color: #ffffff;
+      border-color: var(--danger-color);
+    }
+
+    .legend-box {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.5rem;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      padding: 0.75rem;
+      border-top: 1px solid var(--border-color);
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .legend-color {
+      width: 12px;
+      height: 12px;
+      border-radius: 3px;
+    }
+
+    /* Modal Overlay */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .modal-overlay.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-card {
+      background-color: var(--bg-card);
+      border-radius: 8px;
+      max-width: 500px;
+      width: 90%;
+      padding: 2rem;
+      box-shadow: var(--shadow-md);
+      text-align: center;
+    }
+
+    .modal-score {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--primary-color);
+      margin: 1rem 0;
+    }
+
+    .performance-badge {
+      display: inline-block;
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      font-weight: 700;
+      font-size: 0.85rem;
+      margin-bottom: 1.5rem;
+      text-transform: uppercase;
+    }
+
+    .badge-excellent { background-color: var(--success-bg); color: var(--success-color); }
+    .badge-passed { background-color: var(--warning-bg); color: var(--warning-color); }
+    .badge-failed { background-color: var(--danger-bg); color: var(--danger-color); }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+      text-align: left;
+      font-size: 0.9rem;
+    }
+
+    .summary-item {
+      padding: 0.5rem;
+      background-color: var(--secondary-bg);
+      border-radius: 4px;
+    }
+
+    .summary-item span {
+      font-weight: 700;
+      float: right;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sticky Header -->
+  <header>
+    <div class="header-titles">
+      <h1>Contract Labour (Regulation & Abolition) Act, 1970</h1>
+      <p>Interactive Statutory Assessment Engine - 75 Comprehensive Questions</p>
+    </div>
+    <div class="header-controls">
+      <div id="timerDisplay" class="timer-badge">45:00</div>
+      <button id="restartBtn" class="btn btn-secondary" title="Reshuffle & Restart">🔄 Restart</button>
+      <button id="themeToggleBtn" class="btn btn-secondary" title="Toggle Light/Dark Mode">🌙</button>
+    </div>
+  </header>
+
+  <!-- Main Content Layout -->
+  <div class="container">
+    <!-- Left Column: Active Question -->
+    <main class="card">
+      <div class="question-header">
+        <span id="questionIndexDisplay" class="question-index">Question 1 of 75</span>
+        <button id="bookmarkToggleBtn" class="bookmark-btn" title="Bookmark Question">★</button>
+      </div>
+      <div id="questionTextDisplay" class="question-text">Loading question...</div>
+      
+      <div id="optionsContainer" class="options-list"></div>
+
+      <div id="explanationContainer"></div>
+
+      <div class="card-actions">
+        <div class="action-group">
+          <button id="prevBtn" class="btn btn-secondary">Previous</button>
+          <button id="nextBtn" class="btn btn-secondary">Next</button>
+        </div>
+        <div class="action-group">
+          <button id="clearBtn" class="btn btn-secondary">Clear Selection</button>
+          <button id="submitBtn" class="btn btn-danger">Submit Quiz</button>
+        </div>
+      </div>
+    </main>
+
+    <!-- Right Column: Palette & Filters -->
+    <aside class="sidebar">
+      <div class="card">
+        <div class="filter-tabs">
+          <button class="tab-btn active" data-filter="all">All</button>
+          <button class="tab-btn" data-filter="answered">Answered</button>
+          <button class="tab-btn" data-filter="unanswered">Unanswered</button>
+          <button class="tab-btn" data-filter="bookmarked">Bookmarked</button>
+        </div>
+        <div id="paletteGrid" class="palette-grid" style="margin-top: 1rem;"></div>
+        <div class="legend-box">
+          <div class="legend-item"><div class="legend-color" style="background: var(--palette-unvisited);"></div> Unanswered</div>
+          <div class="legend-item"><div class="legend-color" style="background: var(--palette-answered);"></div> Answered</div>
+          <div class="legend-item"><div class="legend-color" style="background: var(--success-color);"></div> Correct</div>
+          <div class="legend-item"><div class="legend-color" style="background: var(--danger-color);"></div> Incorrect</div>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <!-- Results Modal -->
+  <div id="resultsModal" class="modal-overlay">
+    <div class="modal-card">
+      <h2>Assessment Complete</h2>
+      <div id="modalScoreDisplay" class="modal-score">0 / 75</div>
+      <div id="modalBadge" class="performance-badge">Passed</div>
+      
+      <div class="summary-grid">
+        <div class="summary-item">Total Answered <span id="summaryAnswered">0</span></div>
+        <div class="summary-item">Correct <span id="summaryCorrect">0</span></div>
+        <div class="summary-item">Incorrect <span id="summaryIncorrect">0</span></div>
+        <div class="summary-item">Skipped <span id="summarySkipped">0</span></div>
+      </div>
+
+      <div style="display: flex; gap: 0.5rem; justify-content: center;">
+        <button id="reviewModeBtn" class="btn btn-primary">Review Detailed Answers</button>
+        <button id="modalRestartBtn" class="btn btn-secondary">Restart Quiz</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // 75 High-Quality Questions on Contract Labour (Regulation & Abolition) Act, 1970
+    const rawQuestionsData = [
+      {
+        id: 1,
+        question: "When did the Contract Labour (Regulation and Abolition) Act, 1970 receive Presidential assent and come into force?",
+        options: ["Assent on 5th September 1970; Enforced on 10th February 1971", "Assent on 26th January 1970; Enforced on 1st May 1970", "Assent on 15th August 1971; Enforced on 2nd October 1971", "Assent on 31st December 1970; Enforced on 1st April 1972"],
+        correctIndex: 0,
+        explanation: "The Act received the assent of the President on 5th September 1970 and came into force on 10th February 1971."
+      },
+      {
+        id: 2,
+        question: "Under Section 1(4)(a), the Act applies to every establishment in which how many workmen are employed or were employed on any day of the preceding twelve months as contract labour?",
+        options: ["10 or more workmen", "20 or more workmen (or higher as notified by State)", "50 or more workmen", "100 or more workmen"],
+        correctIndex: 1,
+        explanation: "Section 1(4)(a) applies to every establishment in which twenty or more workmen are employed or were employed on any day of the preceding twelve months as contract labour."
+      },
+      {
+        id: 3,
+        question: "Under Section 1(4)(b), the Act applies to every contractor who employs or employed how many workmen on any day of the preceding twelve months?",
+        options: ["5 or more", "10 or more", "20 or more workmen (or threshold modified by appropriate Govt)", "50 or more"],
+        correctIndex: 2,
+        explanation: "Section 1(4)(b) applies to every contractor who employs or who employed on any day of the preceding twelve months twenty or more workmen."
+      },
+      {
+        id: 4,
+        question: "Under Section 1(5), the Act does NOT apply to establishments in which work is performed of what nature?",
+        options: ["Permanent manufacturing work", "Intermittent or casual nature", "Hazardous nature", "Export-oriented work"],
+        correctIndex: 1,
+        explanation: "Section 1(5)(a) specifies that the Act shall not apply to establishments in which work only of an intermittent or casual nature is performed."
+      },
+      {
+        id: 5,
+        question: "Under Section 1(5) Explanation, work performed in an establishment shall NOT be deemed intermittent if it is performed for more than how many days in preceding 12 months?",
+        options: ["60 days", "90 days", "120 days", "180 days"],
+        correctIndex: 2,
+        explanation: "Under Section 1(5) Explanation (a), work shall not be deemed intermittent if performed for more than 120 days in the preceding twelve months."
+      },
+      {
+        id: 6,
+        question: "Under Section 1(5) Explanation (b), work of a seasonal character performed in an establishment shall NOT be deemed intermittent if performed for more than how many days per year?",
+        options: ["30 days", "45 days", "60 days", "90 days"],
+        correctIndex: 2,
+        explanation: "Section 1(5) Explanation (b) states work of seasonal character is not deemed intermittent if performed for more than sixty days in a year."
+      },
+      {
+        id: 7,
+        question: "Under Section 2(1)(a), if any question arises whether work performed in an establishment is of an intermittent or casual nature, who decides the question?",
+        options: ["The High Court of the State", "The Appropriate Government after consultation with the Central/State Board", "The District Magistrate", "The Chief Labour Commissioner"],
+        correctIndex: 1,
+        explanation: "Section 1(5) proviso mandates that if a question arises whether work is of an intermittent or casual nature, the appropriate Government shall decide after consulting the Board."
+      },
+      {
+        id: 8,
+        question: "Under Section 2(1)(a), what is the 'Appropriate Government' in relation to any establishment carried on by or under the authority of the Central Government, Railways, Mines, Oilfields, or Major Ports?",
+        options: ["The State Government where situated", "The Central Government", "The Municipal Corporation", "The High Court"],
+        correctIndex: 1,
+        explanation: "Section 2(1)(a)(i) specifies that Central Government is the appropriate Government for establishments under Central Govt, railways, mines, oilfields, major ports, controlled corporations, etc."
+      },
+      {
+        id: 9,
+        question: "Under Section 2(1)(b), a workman is deemed to be employed as 'contract labour' when he is hired in or in connection with such work by or through:",
+        options: ["A direct employment exchange", "A contractor, with or without the knowledge of the principal employer", "A trade union leader", "A government sub-registrar"],
+        correctIndex: 1,
+        explanation: "Section 2(1)(b) states a workman shall be deemed to be employed as contract labour when he is hired by or through a contractor, with or without the knowledge of the principal employer."
+      },
+      {
+        id: 10,
+        question: "Under Section 2(1)(c), who is defined as a 'contractor'?",
+        options: ["A person who undertakes to produce a given result for the establishment (other than mere supply of goods/articles) or who supplies contract labour", "Any person supplying raw materials to a factory", "A manager appointed directly by the board of directors", "An independent sub-agent selling finished goods"],
+        correctIndex: 0,
+        explanation: "Section 2(1)(c) defines 'contractor' as a person who undertakes to produce a given result for the establishment through contract labour, or who supplies contract labour."
+      },
+      {
+        id: 11,
+        question: "Under Section 2(1)(c), does a contractor include a sub-contractor?",
+        options: ["No, sub-contractors are excluded from the Act", "Yes, contractor explicitly includes a sub-contractor", "Only if registered separately with the Police", "Only in public sector undertakings"],
+        correctIndex: 1,
+        explanation: "Section 2(1)(c) explicitly states that the term 'contractor' includes a sub-contractor."
+      },
+      {
+        id: 12,
+        question: "Under Section 2(1)(e), in relation to a factory, who is the 'principal employer'?",
+        options: ["The Chief Inspector of Factories", "The owner or occupier of the factory, including a manager named under the Factories Act, 1948", "The contractor supplying maximum labour", "The local Labour Commissioner"],
+        correctIndex: 1,
+        explanation: "Section 2(1)(e)(i) defines principal employer in a factory as the owner or occupier, including a person named as manager under Section 7(1)(f) of the Factories Act, 1948."
+      },
+      {
+        id: 13,
+        question: "Under Section 2(1)(e)(ii), in a mine, who is the 'principal employer'?",
+        options: ["The Director General of Mines Safety", "The owner or agent of the mine and the manager of the mine", "The contractor holding a mining lease", "The district collector"],
+        correctIndex: 1,
+        explanation: "In a mine, principal employer means the owner or agent of the mine and the manager of the mine."
+      },
+      {
+        id: 14,
+        question: "Under Section 2(1)(e)(iii), in any other establishment, who is the 'principal employer'?",
+        options: ["Any person responsible for the supervision and control of the establishment", "The head clerk of accounts", "The security agency chief", "The trade union president"],
+        correctIndex: 0,
+        explanation: "Section 2(1)(e)(iii) defines principal employer in any other establishment as any person responsible for the supervision and control of the establishment."
+      },
+      {
+        id: 15,
+        question: "Under Section 2(1)(i), which of the following is EXCLUDED from the definition of 'workman' under the Act?",
+        options: ["Unskilled manual workers", "Persons employed mainly in a managerial or administrative capacity", "Skilled technical staff doing manual operation", "Clerical staff"],
+        correctIndex: 1,
+        explanation: "Section 2(1)(i)(A) excludes persons who are employed mainly in a managerial or administrative capacity from the definition of workman."
+      },
+      {
+        id: 16,
+        question: "Under Section 2(1)(i)(B), a person employed in a supervisory capacity is EXCLUDED from 'workman' if his wages exceed per mensem or his functions are managerial:",
+        options: ["Rs. 500 per month (as originally enacted/prescribed)", "Rs. 10,000 per month", "Rs. 15,000 per month", "Rs. 21,000 per month"],
+        correctIndex: 0,
+        explanation: "Section 2(1)(i)(B) excludes a person employed in a supervisory capacity drawing wages exceeding five hundred rupees per mensem (or as amended/prescribed) or exercising managerial functions."
+      },
+      {
+        id: 17,
+        question: "Under Section 3(1), who constitutes the Central Advisory Contract Labour Board?",
+        options: ["The Supreme Court of India", "The Central Government", "The Chief Labour Commissioner (Central)", "The NITI Aayog"],
+        correctIndex: 1,
+        explanation: "Section 3(1) mandates that the Central Government shall, as soon as may be, constitute a board to be called the Central Advisory Contract Labour Board."
+      },
+      {
+        id: 18,
+        question: "Under Section 3(2)(a), who acts as the Chairman of the Central Advisory Board?",
+        options: ["The Union Minister of Labour ex officio", "A person to be appointed by the Central Government", "The Chief Justice of Delhi High Court", "The Secretary, Ministry of Home Affairs"],
+        correctIndex: 1,
+        explanation: "Section 3(2)(a) specifies that the Central Board shall consist of a Chairman to be appointed by the Central Government."
+      },
+      {
+        id: 19,
+        question: "Under Section 3(2)(b), who is the ex officio member of the Central Advisory Board?",
+        options: ["The Chief Labour Commissioner (Central)", "The Comptroller and Auditor General", "The Director General of Employment & Training", "The Chairman of UPSC"],
+        correctIndex: 0,
+        explanation: "Section 3(2)(b) names the Chief Labour Commissioner (Central), ex officio, as a member of the Central Board."
+      },
+      {
+        id: 20,
+        question: "Under Section 3(2)(c), what is the statutory number of members nominated to represent Government, Railways, Coal Industry, Mining, Contractors, Workmen, and other interests on the Central Board?",
+        options: ["5 to 9 members", "11 to 17 members", "20 to 25 members", "30 to 40 members"],
+        correctIndex: 1,
+        explanation: "Section 3(2)(c) specifies that the number of nominated members shall not be less than eleven but not exceed seventeen."
+      },
+      {
+        id: 21,
+        question: "Under Section 3(3), the number of members nominated to represent workmen on the Central Board shall NOT be less than the number of members nominated to represent:",
+        options: ["The Central Government", "The principal employers and contractors", "The State Governments", "Public sector undertakings"],
+        correctIndex: 1,
+        explanation: "Section 3(3) provides that the number of members nominated to represent workmen shall not be less than the number nominated to represent principal employers and contractors."
+      },
+      {
+        id: 22,
+        question: "Under Section 4(1), who constitutes the State Advisory Contract Labour Board for a State?",
+        options: ["The Governor of the State directly", "The State Government", "The High Court of the State", "The State Public Service Commission"],
+        correctIndex: 1,
+        explanation: "Section 4(1) provides that the State Government may constitute a board to be called the State Advisory Contract Labour Board."
+      },
+      {
+        id: 23,
+        question: "Under Section 4(2)(c), what is the statutory limit on the number of nominated members on a State Advisory Board?",
+        options: ["Not less than 3 and not exceeding 7", "Not less than 9 and not exceeding 11", "Not less than 15 and not exceeding 20", "Fixed at exactly 25"],
+        correctIndex: 1,
+        explanation: "Section 4(2)(c) states that the number of members nominated on a State Board shall not be less than nine but not exceed eleven."
+      },
+      {
+        id: 24,
+        question: "Under Section 5, the Central Board or State Board may constitute such number of committees as it thinks fit for purposes of the Act. Must a committee consist solely of Board members?",
+        options: ["Yes, outsiders are strictly prohibited", "No, a committee may consist of Board members and other persons co-opted as deemed fit", "Only government officers can be members", "Only trade union leaders"],
+        correctIndex: 1,
+        explanation: "Section 5(2) provides that a committee formed by the Board may consist of members of the Board and such other persons as the committee/board thinks fit."
+      },
+      {
+        id: 25,
+        question: "Under Section 6, who appoints Registering Officers for the purposes of Chapter III of the Act?",
+        options: ["The Central Board", "The Appropriate Government by notification in Official Gazette", "The District Judge", "The Chief Inspector of Factories"],
+        correctIndex: 1,
+        explanation: "Section 6 empowers the appropriate Government to appoint gazetted officers as Registering Officers by notification in the Official Gazette."
+      },
+      {
+        id: 26,
+        question: "Under Section 7(1), every principal employer of an establishment to which the Act applies must make an application to the Registering Officer for registration within what period?",
+        options: ["15 days from commencement", "Within such period as the appropriate Government may by notification fix", "Within 3 years", "No time limit is prescribed"],
+        correctIndex: 1,
+        explanation: "Section 7(1) requires the principal employer to apply for registration within such period as the appropriate Government may, by notification, fix."
+      },
+      {
+        id: 27,
+        question: "Under Section 7(2), if an application for registration is complete, the Registering Officer shall register the establishment and issue to the principal employer:",
+        options: ["A trade licence", "A certificate of registration", "A safety clearance audit pass", "An exemption order"],
+        correctIndex: 1,
+        explanation: "Section 7(2) provides that the Registering Officer shall register the establishment and issue a certificate of registration."
+      },
+      {
+        id: 28,
+        question: "Under Section 8, under what circumstances can the Registering Officer REVOKE the registration of an establishment?",
+        options: ["If registration was obtained by misrepresentation or suppression of any material fact", "If the establishment fails to pay corporate income tax", "If the contractor changes his business address", "If workmen go on strike"],
+        correctIndex: 0,
+        explanation: "Section 8 allows revocation if the Registering Officer is satisfied that registration was obtained by misrepresentation or suppression of material facts, or if registration has become ineffective."
+      },
+      {
+        id: 29,
+        question: "Under Section 9, what is the legal consequence if a principal employer fails to register his establishment under Section 7 or if registration is revoked under Section 8?",
+        options: ["No contract labour can be employed in the establishment", "Contract labour can be employed with double wages", "The contractor assumes full legal title of the establishment", "The establishment is permanently sealed"],
+        correctIndex: 0,
+        explanation: "Section 9 mandates that no principal employer of an unregistered establishment (or where registration is revoked) shall employ contract labour."
+      },
+      {
+        id: 30,
+        question: "Under Section 10(1), who is empowered to PROHIBIT employment of contract labour in any process, operation, or other work in any establishment?",
+        options: ["The Chief Labour Commissioner on his own motion", "The Appropriate Government, after consultation with the Central or State Board", "The Trade Union President", "The Supreme Court Registrar"],
+        correctIndex: 1,
+        explanation: "Section 10(1) empowers the appropriate Government, after consultation with the Central or State Board, to prohibit by notification employment of contract labour."
+      },
+      {
+        id: 31,
+        question: "Which of the following conditions MUST the appropriate Government consider under Section 10(2) before issuing a notification prohibiting contract labour?",
+        options: ["Whether the work is incidental to or necessary for the industry/trade/business", "Whether the work is of perennial nature (sufficient duration)", "Whether the work is done ordinarily through regular workmen in that establishment or similar establishments", "All of the above"],
+        correctIndex: 3,
+        explanation: "Section 10(2) lists all these statutory factors (incidental/necessary nature, perennial duration, regular worker practice, full-time employment capability)."
+      },
+      {
+        id: 32,
+        question: "In the landmark Supreme Court judgment of STEEL AUTHORITY OF INDIA LTD. (SAIL) v. NATIONAL UNION WATERFRONT WORKERS (2001), what was held regarding automatic absorption of contract labour upon prohibition under Section 10?",
+        options: ["Prohibition under Section 10 does NOT lead to automatic absorption of contract labour by the principal employer", "Prohibition results in immediate automatic permanent absorption", "Contract workers must be terminated without compensation", "Contractors must pay lifetime pensions"],
+        correctIndex: 0,
+        explanation: "The Constitution Bench in SAIL (2001) overruled Air India (1997) and held that Section 10 prohibition does not automatically result in absorption of contract workers by principal employer."
+      },
+      {
+        id: 33,
+        question: "Under Section 11, who appoints Licensing Officers for the purpose of Licensing Contractors under Chapter IV?",
+        options: ["The Central Advisory Board", "The Appropriate Government by notification in Official Gazette", "The High Court", "The District Magistrate"],
+        correctIndex: 1,
+        explanation: "Section 11 empowers the appropriate Government to appoint gazetted officers as Licensing Officers by notification."
+      },
+      {
+        id: 34,
+        question: "Under Section 12(1), no contractor to whom the Act applies shall undertake or execute any work through contract labour EXCEPT under and in accordance with:",
+        options: ["A verbal agreement with the trade union", "A licence issued by the Licensing Officer", "A power of attorney from the principal employer", "A municipal shop clearance"],
+        correctIndex: 1,
+        explanation: "Section 12(1) mandates that no contractor shall execute work through contract labour except under and in accordance with a licence issued by the Licensing Officer."
+      },
+      {
+        id: 35,
+        question: "Under Section 12(2), a licence issued to a contractor may contain conditions regarding which matters?",
+        options: ["Hours of work, fixation of wages, and essential amenities required to be provided", "Mandatory export targets", "Political affiliation of workers", "Corporate dividend distribution"],
+        correctIndex: 0,
+        explanation: "Section 12(2) provides that a licence may contain conditions including hours of work, fixation of wages, and essential amenities."
+      },
+      {
+        id: 36,
+        question: "Under Section 13(1), every application for the grant of a licence under Section 12 must be submitted in the prescribed form along with:",
+        options: ["A bank guarantee for 10 years", "A certificate from the principal employer that the applicant is employed as a contractor by him", "A recommendation letter from local MP", "An affidavit of property valuation"],
+        correctIndex: 1,
+        explanation: "Section 13(1) requires the application to be accompanied by a certificate from the principal employer in the prescribed form."
+      },
+      {
+        id: 37,
+        question: "Under Section 14(1), the Licensing Officer may REVOKE or SUSPEND a licence if satisfied that:",
+        options: ["The licence was obtained by misrepresentation or suppression of material facts", "The holder of the licence has failed to comply with the conditions subject to which licence was granted", "The holder has contravened any provision of the Act or rules", "All of the above"],
+        correctIndex: 3,
+        explanation: "Section 14(1) lists misrepresentation, failure to comply with licence conditions, and contravention of the Act/rules as grounds for revocation/suspension/forfeiture of deposit."
+      },
+      {
+        id: 38,
+        question: "Under Section 14(1) proviso, before revoking or suspending a licence, what procedural requirement must the Licensing Officer fulfill?",
+        options: ["Obtain approval of the State Cabinet", "Give the contractor a reasonable opportunity of showing cause", "Publish a notice in three national newspapers", "Inform the Interpol"],
+        correctIndex: 1,
+        explanation: "Section 14(1) proviso mandates giving the contractor a reasonable opportunity of showing cause before revoking/suspending the licence."
+      },
+      {
+        id: 39,
+        question: "Under Section 15(1), any person aggrieved by an order made under Section 7 (Registration), Section 8 (Revocation), Section 12 (Licensing), or Section 14 (Revocation of Licence) may prefer an appeal within how many days?",
+        options: ["15 days", "30 days from date of communication of order", "60 days", "90 days"],
+        correctIndex: 1,
+        explanation: "Section 15(1) provides that an appeal must be preferred within thirty days from the date on which the order is communicated."
+      },
+      {
+        id: 40,
+        question: "Under Section 15(1) proviso, can the Appellate Authority entertain an appeal after the expiry of 30 days?",
+        options: ["No, 30 days is an absolute statutory bar", "Yes, if satisfied that appellant was prevented by sufficient cause from filing in time", "Yes, but only upon payment of Rs. 1 lakh penalty", "Only if directed by the High Court"],
+        correctIndex: 1,
+        explanation: "Section 15(1) proviso allows the appellate authority to entertain an appeal after 30 days if satisfied of sufficient cause."
+      },
+      {
+        id: 41,
+        question: "Under Section 16(1), in every establishment where contract labour is ordinarily employed and work is likely to continue for such period as prescribed, the contractor MUST provide:",
+        options: ["Canteens if employing 100 or more contract labour", "Free residential quarters for all workers", "Automobile transport allowances", "Life insurance policies"],
+        correctIndex: 0,
+        explanation: "Section 16(1) obligates the contractor to provide and maintain canteens where 100 or more contract labourers are ordinarily employed."
+      },
+      {
+        id: 42,
+        question: "Under Section 17(1), in every place where contract labour is required to halt at night in connection with the work of an establishment, the contractor MUST provide:",
+        options: ["Rest-rooms or other suitable alternative accommodation", "Air-conditioned hotel rooms", "Free recreational clubs", "Subsidized internet facilities"],
+        correctIndex: 0,
+        explanation: "Section 17(1) requires the contractor to provide rest-rooms or other suitable alternative accommodation for night halts."
+      },
+      {
+        id: 43,
+        question: "Under Section 18, it is the statutory duty of every contractor employing contract labour to provide and maintain:",
+        options: ["Sufficient supply of wholesome drinking water at convenient places", "Sufficient number of latrines and urinals of prescribed types", "Washing facilities", "All of the above"],
+        correctIndex: 3,
+        explanation: "Section 18 lists drinking water, latrines/urinals, and washing facilities as mandatory amenities to be provided by the contractor."
+      },
+      {
+        id: 44,
+        question: "Under Section 19, a contractor MUST maintain a First-Aid box equipped with prescribed contents at every place where contract labour is employed. The box must be readily accessible during:",
+        options: ["Working hours", "Night time only", "Inspection days only", "Weekly holidays"],
+        correctIndex: 0,
+        explanation: "Section 19 mandates that a first-aid box equipped with prescribed contents shall be provided and maintained readily accessible during all working hours."
+      },
+      {
+        id: 45,
+        question: "Under Section 20(1), if any amenity required under Section 16, 17, 18, or 19 is NOT provided by the contractor within the prescribed time, who is legally obligated to provide it?",
+        options: ["The local Municipal Authority", "The Principal Employer", "The Labour Inspector personally", "The Trade Union"],
+        correctIndex: 1,
+        explanation: "Section 20(1) specifies that if amenities are not provided by contractor within prescribed time, such amenity shall be provided by the principal employer."
+      },
+      {
+        id: 46,
+        question: "Under Section 20(2), if the Principal Employer provides statutory amenities on failure of the contractor under Section 20(1), how can he recover the expenses?",
+        options: ["Expenses may be recovered from contractor by deduction from amounts payable or as a debt due", "Expenses are reimbursed by Central Govt", "Cannot be recovered from contractor", "Recovered by seizing contractor's residential home"],
+        correctIndex: 0,
+        explanation: "Section 20(2) provides that expenses incurred by principal employer in providing amenities may be recovered from contractor by deduction from bills or as a debt."
+      },
+      {
+        id: 47,
+        question: "Under Section 21(1), who is responsible for the payment of wages to each worker employed by him as contract labour?",
+        options: ["The Principal Employer directly", "The Contractor", "The Licensing Officer", "The Bank Manager"],
+        correctIndex: 1,
+        explanation: "Section 21(1) explicitly enacts that a contractor shall be responsible for the payment of wages to each worker employed by him as contract labour."
+      },
+      {
+        id: 48,
+        question: "Under Section 21(2), every Principal Employer must nominate a representative duly authorized by him to be present at the time of:",
+        options: ["Disbursement of wages by the contractor", "Daily attendance marking at gate", "Union election voting", "Medical examination of workers"],
+        correctIndex: 0,
+        explanation: "Section 21(2) requires the principal employer to nominate a representative to be present at the time of disbursement of wages by the contractor."
+      },
+      {
+        id: 49,
+        question: "Under Section 21(3), it is the duty of the contractor to ensure disbursement of wages in the presence of:",
+        options: ["The District Magistrate", "The authorized representative of the Principal Employer", "A Police Sub-Inspector", "The local Panchayat head"],
+        correctIndex: 1,
+        explanation: "Section 21(3) requires contractor to ensure disbursement of wages in the presence of the authorized representative of the principal employer."
+      },
+      {
+        id: 50,
+        question: "Under Section 21(4), if the contractor FAILS to pay wages within the prescribed period or makes short payment, who is liable to pay wages in full?",
+        options: ["The State Treasury", "The Principal Employer", "The Chief Labour Commissioner", "The Trade Union corpus"],
+        correctIndex: 1,
+        explanation: "Section 21(4) mandates that if contractor fails to pay wages within prescribed period or makes short payment, the principal employer shall be liable to pay wages in full."
+      },
+      {
+        id: 51,
+        question: "When the Principal Employer pays wages to contract labour under Section 21(4) upon default of the contractor, how does he recover the amount?",
+        options: ["He can recover the amount from the contractor by deduction from contract bills or as a debt", "He must write off the loss completely", "He claims tax deduction from Income Tax Dept", "He recovers it from workers' future overtime"],
+        correctIndex: 0,
+        explanation: "Section 21(4) allows the principal employer to recover the wage amount so paid from the contractor by deducting from contract bills or as a debt."
+      },
+      {
+        id: 52,
+        question: "Under Section 22(1), who obstructs an Inspector in the discharge of his duties or refuses to afford reasonable facilities for inspection is punishable with:",
+        options: ["Imprisonment up to 3 months or fine up to Rs. 500, or both", "Imprisonment up to 2 years", "Fine up to Rs. 10,000", "Life sentence"],
+        correctIndex: 0,
+        explanation: "Section 22(1) prescribes imprisonment for a term which may extend to three months, or fine up to five hundred rupees, or both for obstructing an Inspector."
+      },
+      {
+        id: 53,
+        question: "Under Section 22(2), willful refusal to produce registers or documents demanded by an Inspector is punishable with:",
+        options: ["Imprisonment up to 3 months or fine up to Rs. 500, or both", "Capital punishment", "Forfeiture of all property", "Community service for 1 year"],
+        correctIndex: 0,
+        explanation: "Section 22(2) prescribes imprisonment up to three months, or fine up to five hundred rupees, or both for willful refusal to produce documents to an Inspector."
+      },
+      {
+        id: 54,
+        question: "Under Section 23, contravention of any provision regarding employment of contract labour (like employing without registration/licence) is punishable with imprisonment up to 3 months or fine up to:",
+        options: ["One hundred rupees", "Five hundred rupees", "One thousand rupees", "Five thousand rupees"],
+        correctIndex: 2,
+        explanation: "Section 23 prescribes imprisonment up to 3 months or fine which may extend to one thousand rupees (or as modified/amended), or both."
+      },
+      {
+        id: 55,
+        question: "Under Section 23, if a contravention continues after conviction, an additional fine may be imposed extending up to how much for every day during which contravention continues?",
+        options: ["Rs. 20 per day", "Rs. 100 per day", "Rs. 500 per day", "Rs. 1,000 per day"],
+        correctIndex: 1,
+        explanation: "Section 23 provides an additional fine which may extend to one hundred rupees for every day during which such contravention continues after conviction."
+      },
+      {
+        id: 56,
+        question: "Under Section 24, if any person contravenes any provision of the Act or rules for which NO OTHER penalty is elsewhere provided, he shall be punishable with fine up to:",
+        options: ["Rs. 250", "Rs. 500", "Rs. 1,000", "Rs. 5,000"],
+        correctIndex: 2,
+        explanation: "Section 24 (General Provision for punishment of offences) prescribes fine extending up to one thousand rupees."
+      },
+      {
+        id: 57,
+        question: "Under Section 25(1), when an offence under this Act has been committed by a Company, who shall be deemed to be guilty of the offence?",
+        options: ["The company as well as every person who at the time offence was committed was in charge of and responsible to the company for conduct of business", "Only the factory gate security officer", "Only shareholders holding more than 50% shares", "The trade union executive committee"],
+        correctIndex: 0,
+        explanation: "Section 25(1) specifies that the company as well as every person in charge of and responsible to the company for conducting business shall be deemed guilty."
+      },
+      {
+        id: 58,
+        question: "Under Section 25(1) proviso, a person in charge of a company is NOT liable to punishment if he proves that:",
+        options: ["The company suffered financial losses", "The offence was committed without his knowledge or that he exercised all due diligence to prevent its commission", "The contract workers were hired for less than 1 month", "The contractor was a relative"],
+        correctIndex: 1,
+        explanation: "Section 25(1) proviso provides immunity if the person proves offence was committed without knowledge or that due diligence was exercised."
+      },
+      {
+        id: 59,
+        question: "Under Section 25(2), where an offence by a company is proved to have been committed with the consent, connivance, or neglect of any Director, Manager, Secretary, such officer shall:",
+        options: ["Be deemed to be guilty and liable to be proceeded against", "Be exempt from criminal proceedings", "Pay a nominal fine of Rs. 10", "Be demoted by 1 grade"],
+        correctIndex: 0,
+        explanation: "Section 25(2) establishes that directors, managers, or secretaries consenting, conniving, or neglecting are deemed guilty."
+      },
+      {
+        id: 60,
+        question: "Under Section 26, NO court shall take cognizance of any offence under this Act EXCEPT on a complaint made by, or with the previous sanction in writing of:",
+        options: ["An Inspector appointed under the Act", "The High Court Registrar", "The District Police Superintendent", "The local trade union secretary without authorization"],
+        correctIndex: 0,
+        explanation: "Section 26 mandates that no court shall take cognizance except on a complaint made by, or with previous sanction in writing of, an Inspector."
+      },
+      {
+        id: 61,
+        question: "Under Section 26, which court is the MINIMUM level court competent to try an offence under the Contract Labour Act?",
+        options: ["Executive Magistrate", "Presiding Officer of Labour Court", "Presiding Officer of Industrial Tribunal", "Metropolitan Magistrate or Judicial Magistrate of the First Class"],
+        correctIndex: 3,
+        explanation: "Section 26 provides that no court inferior to that of a Presidency Magistrate or a Magistrate of the first class shall try any offence under the Act."
+      },
+      {
+        id: 62,
+        question: "Under Section 27, what is the limitation period for filing a complaint for an offence under the Act?",
+        options: ["Within 1 month of alleged offence", "Within 3 months from the date on which the alleged commission of the offence came to the knowledge of an Inspector", "Within 1 year from offence date", "Within 3 years"],
+        correctIndex: 1,
+        explanation: "Section 27 states no court shall take cognizance unless complaint is made within three months from the date on which the alleged commission of offence came to the knowledge of an Inspector."
+      },
+      {
+        id: 63,
+        question: "Under Section 27 proviso, if the offence consists of disobeying a written order made by an Inspector, complaint may be made within how many months?",
+        options: ["3 months", "6 months from the date on which offence was committed", "9 months", "12 months"],
+        correctIndex: 1,
+        explanation: "Section 27 proviso allows a complaint to be made within six months if the offence consists of disobeying a written order made by an Inspector."
+      },
+      {
+        id: 64,
+        question: "Under Section 28(1), who appoints Inspectors for the purposes of the Act by notification in Official Gazette?",
+        options: ["The Central Advisory Board", "The Appropriate Government", "The High Court", "The District Collector"],
+        correctIndex: 1,
+        explanation: "Section 28(1) empowers the appropriate Government to appoint Inspectors and define the local limits of their jurisdiction."
+      },
+      {
+        id: 65,
+        question: "Which of the following powers is explicitly granted to an Inspector under Section 28(2)?",
+        options: ["Power to enter at all reasonable times any premises/place where contract labour is employed", "Power to examine registers, records, or notices required to be kept under Act", "Power to examine any person found in premises to ascertain if contract labour provisions are complied with", "All of the above"],
+        correctIndex: 3,
+        explanation: "Section 28(2) confers powers of entry, examination of registers/records, taking testimony, and seizing relevant records."
+      },
+      {
+        id: 66,
+        question: "Under Section 28(3), any person required to produce any document or give information to an Inspector shall be legally bound to do so within the meaning of which sections of IPC?",
+        options: ["Sections 175 and 176 of the Indian Penal Code", "Sections 302 and 307 of IPC", "Sections 420 and 468 of IPC", "Sections 120B and 121 of IPC"],
+        correctIndex: 0,
+        explanation: "Section 28(3) explicitly declares persons legally bound to produce documents/information within the meaning of Sections 175 and 176 of IPC."
+      },
+      {
+        id: 67,
+        question: "Under Section 29(1), every Principal Employer and every Contractor MUST maintain such registers and records giving such particulars of:",
+        options: ["Contract labour employed, nature of work performed, rates of wages paid, and other prescribed details", "Personal assets of shareholders", "Export orders fulfilled", "Political donations"],
+        correctIndex: 0,
+        explanation: "Section 29(1) obligates principal employers and contractors to maintain registers/records showing contract labour employed, work nature, wage rates, etc."
+      },
+      {
+        id: 68,
+        question: "Under Section 29(2), every Principal Employer and Contractor must keep displayed within the premises of the establishment notices in the prescribed form containing instructions regarding:",
+        options: ["Hours of work, nature of duty, wage rates, and wage disbursement dates", "Stock market ticker prices", "Company profit share percentages", "Holiday tour packages"],
+        correctIndex: 0,
+        explanation: "Section 29(2) mandates displaying notices regarding hours of work, wage rates, payment dates, and wage period details."
+      },
+      {
+        id: 69,
+        question: "Under Section 30(1), statutory protection against legal proceedings is provided for actions taken in good faith to:",
+        options: ["The Central/State Government, Board members, Registering/Licensing Officers, or Inspectors", "The contractor exclusively", "The trade union leaders", "Private security staff"],
+        correctIndex: 0,
+        explanation: "Section 30(1) grants indemnity/protection for actions done in good faith to Government officers, board members, inspectors, etc."
+      },
+      {
+        id: 70,
+        question: "Under Section 31, who has the statutory power to give directions to any State Government for executing provisions of the Act?",
+        options: ["The High Court", "The Central Government", "The Supreme Court Registrar", "The Comptroller and Auditor General"],
+        correctIndex: 1,
+        explanation: "Section 31 empowers the Central Government to give directions to a State Government as to the carrying into execution in the State of any provisions of the Act."
+      },
+      {
+        id: 71,
+        question: "Under Section 32, if the Appropriate Government is satisfied that in case of an emergency or unforeseen circumstances it is necessary, it may by notification exempt any establishment or contractor from all or any provisions of the Act, subject to conditions for a specified period. What is this power?",
+        options: ["Power to exempt in special cases", "Power to dissolve trade unions", "Power to ban strikes", "Power to declare martial law"],
+        correctIndex: 0,
+        explanation: "Section 32 confers power to exempt any establishment or contractor or class of contractors from the Act in special cases/emergencies."
+      },
+      {
+        id: 72,
+        question: "Under Section 33, if any difficulty arises in giving effect to the provisions of the Act, who may make provisions not inconsistent with the Act to remove the difficulty?",
+        options: ["The Central Government by order published in Official Gazette", "The High Court Bench", "The District Collector", "The Chief Labour Commissioner"],
+        correctIndex: 0,
+        explanation: "Section 33 empowers the Central Government to issue orders in the Official Gazette for removing any difficulty in implementing the Act."
+      },
+      {
+        id: 73,
+        question: "Under Section 35(1), who is empowered to make rules for carrying out the purposes of the Act?",
+        options: ["The Appropriate Government (Central Govt for central sphere, State Govts for state sphere) subject to previous publication", "The Supreme Court of India", "The Central Advisory Board chairman alone", "The Employers Federation"],
+        correctIndex: 0,
+        explanation: "Section 35(1) empowers the appropriate Government to make rules for carrying out the purposes of the Act, subject to previous publication."
+      },
+      {
+        id: 74,
+        question: "Under Central Rules framed under Section 35, what is the maximum wage period fixed for contract labour?",
+        options: ["Must not exceed 7 days", "Must not exceed 10 days", "Must not exceed 1 month (30 days)", "Must not exceed 2 months"],
+        correctIndex: 2,
+        explanation: "Under the Contract Labour (Regulation and Abolition) Central Rules, 1971 (Rule 65), wage periods shall be fixed by the contractor, but no wage period shall exceed one month."
+      },
+      {
+        id: 75,
+        question: "Under Central Rules (Rule 66), in an establishment where less than 1,000 contract workers are employed, wages MUST be paid before the expiry of which day after the last day of the wage period?",
+        options: ["7th day", "10th day", "15th day", "30th day"],
+        correctIndex: 0,
+        explanation: "Under Rule 66(a), where contract labour employed is less than 1,000, wages must be paid before the expiry of the 7th day after the last day of the wage period (and before 10th day if 1,000 or more)."
+      }
+    ];
+
+    // State Variables
+    let shuffledQuestions = [];
+    let currentQuestionIndex = 0;
+    let userAnswers = {}; // { questionIndex: selectedOptionIndex }
+    let bookmarks = new Set();
+    let isSubmitted = false;
+    let activeFilter = 'all';
+
+    // Timer Variables
+    const TOTAL_TIME_SECONDS = 45 * 60; // 45 mins
+    let timeRemaining = TOTAL_TIME_SECONDS;
+    let timerInterval = null;
+
+    // DOM Elements
+    const questionIndexDisplay = document.getElementById('questionIndexDisplay');
+    const bookmarkToggleBtn = document.getElementById('bookmarkToggleBtn');
+    const questionTextDisplay = document.getElementById('questionTextDisplay');
+    const optionsContainer = document.getElementById('optionsContainer');
+    const explanationContainer = document.getElementById('explanationContainer');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const clearBtn = document.getElementById('clearBtn');
+    const submitBtn = document.getElementById('submitBtn');
+    const paletteGrid = document.getElementById('paletteGrid');
+    const timerDisplay = document.getElementById('timerDisplay');
+    const themeToggleBtn = document.getElementById('themeToggleBtn');
+    const restartBtn = document.getElementById('restartBtn');
+    const resultsModal = document.getElementById('resultsModal');
+
+    // Fisher-Yates Shuffle Algorithm
+    function fisherYatesShuffle(array) {
+      const arr = [...array];
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+      return arr;
+    }
+
+    // Initialize/Reset Quiz Data Engine
+    function initQuizData() {
+      // Deep copy and shuffle questions
+      shuffledQuestions = fisherYatesShuffle(rawQuestionsData).map(q => {
+        // Prepare options array with original indices tracked
+        const optionsObj = q.options.map((optText, index) => ({
+          text: optText,
+          originalIndex: index
+        }));
+        
+        // Shuffle options
+        const shuffledOptions = fisherYatesShuffle(optionsObj);
+        
+        // Find new correct index
+        const newCorrectIndex = shuffledOptions.findIndex(o => o.originalIndex === q.correctIndex);
+
+        return {
+          id: q.id,
+          question: q.question,
+          options: shuffledOptions,
+          correctIndex: newCorrectIndex,
+          explanation: q.explanation
+        };
+      });
+
+      // Reset runtime state
+      currentQuestionIndex = 0;
+      userAnswers = {};
+      bookmarks.clear();
+      isSubmitted = false;
+      activeFilter = 'all';
+
+      // Reset Timer
+      clearInterval(timerInterval);
+      timeRemaining = TOTAL_TIME_SECONDS;
+      updateTimerUI();
+      startTimer();
+
+      // Reset UI Controls
+      submitBtn.disabled = false;
+      clearBtn.disabled = false;
+      resultsModal.classList.remove('open');
+
+      renderFilterTabs();
+      renderCurrentQuestion();
+      renderPalette();
+    }
+
+    // Timer Logic
+    function startTimer() {
+      timerInterval = setInterval(() => {
+        timeRemaining--;
+        updateTimerUI();
+
+        if (timeRemaining <= 0) {
+          clearInterval(timerInterval);
+          autoSubmitQuiz();
+        }
+      }, 1000);
+    }
+
+    function updateTimerUI() {
+      const minutes = Math.floor(timeRemaining / 60);
+      const seconds = timeRemaining % 60;
+      const formatted = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+      timerDisplay.textContent = formatted;
+
+      if (timeRemaining < 300) { // < 5 mins
+        timerDisplay.classList.add('warning');
+      } else {
+        timerDisplay.classList.remove('warning');
+      }
+    }
+
+    // Render Question Card
+    function renderCurrentQuestion() {
+      const q = shuffledQuestions[currentQuestionIndex];
+      
+      questionIndexDisplay.textContent = `Question ${currentQuestionIndex + 1} of ${shuffledQuestions.length}`;
+      questionTextDisplay.textContent = q.question;
+
+      // Bookmark state
+      if (bookmarks.has(currentQuestionIndex)) {
+        bookmarkToggleBtn.classList.add('active');
+      } else {
+        bookmarkToggleBtn.classList.remove('active');
+      }
+
+      // Render Options
+      optionsContainer.innerHTML = '';
+      const selectedOption = userAnswers[currentQuestionIndex];
+
+      q.options.forEach((opt, idx) => {
+        const optionCard = document.createElement('div');
+        optionCard.className = 'option-card';
+
+        // Apply review styling if submitted
+        if (isSubmitted) {
+          if (idx === q.correctIndex) {
+            optionCard.classList.add('correct-review');
+          } else if (selectedOption === idx && selectedOption !== q.correctIndex) {
+            optionCard.classList.add('incorrect-review');
+          }
+        } else if (selectedOption === idx) {
+          optionCard.classList.add('selected');
+        }
+
+        optionCard.innerHTML = `
+          <div class="radio-custom"></div>
+          <div class="option-label">${opt.text}</div>
+        `;
+
+        if (!isSubmitted) {
+          optionCard.addEventListener('click', () => selectOption(idx));
+        }
+
+        optionsContainer.appendChild(optionCard);
+      });
+
+      // Render Explanation in Review Mode
+      explanationContainer.innerHTML = '';
+      if (isSubmitted) {
+        const expBox = document.createElement('div');
+        expBox.className = 'explanation-box';
+        expBox.innerHTML = `
+          <div class="explanation-title">Statutory Clause & Reference:</div>
+          <div>${q.explanation}</div>
+        `;
+        explanationContainer.appendChild(expBox);
+      }
+
+      // Update Navigation Buttons
+      prevBtn.disabled = currentQuestionIndex === 0;
+      nextBtn.disabled = currentQuestionIndex === shuffledQuestions.length - 1;
+
+      renderPalette();
+    }
+
+    // Select Option
+    function selectOption(optionIndex) {
+      if (isSubmitted) return;
+      userAnswers[currentQuestionIndex] = optionIndex;
+      renderCurrentQuestion();
+    }
+
+    // Clear Selection
+    clearBtn.addEventListener('click', () => {
+      if (isSubmitted) return;
+      delete userAnswers[currentQuestionIndex];
+      renderCurrentQuestion();
+    });
+
+    // Bookmark Toggle
+    bookmarkToggleBtn.addEventListener('click', () => {
+      if (bookmarks.has(currentQuestionIndex)) {
+        bookmarks.delete(currentQuestionIndex);
+      } else {
+        bookmarks.add(currentQuestionIndex);
+      }
+      renderCurrentQuestion();
+    });
+
+    // Navigation Events
+    prevBtn.addEventListener('click', () => {
+      if (currentQuestionIndex > 0) {
+        currentQuestionIndex--;
+        renderCurrentQuestion();
+      }
+    });
+
+    nextBtn.addEventListener('click', () => {
+      if (currentQuestionIndex < shuffledQuestions.length - 1) {
+        currentQuestionIndex++;
+        renderCurrentQuestion();
+      }
+    });
+
+    // Palette Rendering & Filter Logic
+    function renderPalette() {
+      paletteGrid.innerHTML = '';
+
+      shuffledQuestions.forEach((q, idx) => {
+        const isAnswered = userAnswers.hasOwnProperty(idx);
+        const isBookmarked = bookmarks.has(idx);
+
+        // Filter Evaluation
+        if (activeFilter === 'answered' && !isAnswered) return;
+        if (activeFilter === 'unanswered' && isAnswered) return;
+        if (activeFilter === 'bookmarked' && !isBookmarked) return;
+
+        const item = document.createElement('div');
+        item.className = 'palette-item';
+        item.textContent = idx + 1;
+
+        if (idx === currentQuestionIndex) {
+          item.classList.add('active-current');
+        }
+
+        if (isBookmarked) {
+          item.classList.add('bookmarked');
+        }
+
+        if (isSubmitted) {
+          const userAns = userAnswers[idx];
+          if (userAns === q.correctIndex) {
+            item.classList.add('correct-post');
+          } else if (userAns !== undefined) {
+            item.classList.add('incorrect-post');
+          }
+        } else if (isAnswered) {
+          item.classList.add('answered');
+        }
+
+        item.addEventListener('click', () => {
+          currentQuestionIndex = idx;
+          renderCurrentQuestion();
+        });
+
+        paletteGrid.appendChild(item);
+      });
+    }
+
+    // Filter Tab Buttons
+    function renderFilterTabs() {
+      const tabs = document.querySelectorAll('.tab-btn');
+      tabs.forEach(tab => {
+        tab.addEventListener('click', (e) => {
+          tabs.forEach(t => t.classList.remove('active'));
+          e.target.classList.add('active');
+          activeFilter = e.target.getAttribute('data-filter');
+          renderPalette();
+        });
+      });
+    }
+
+    // Submit Quiz & Show Results
+    function submitQuiz() {
+      if (isSubmitted) return;
+      isSubmitted = true;
+      clearInterval(timerInterval);
+
+      // Score Calculation
+      let correctCount = 0;
+      let incorrectCount = 0;
+      let answeredCount = 0;
+
+      shuffledQuestions.forEach((q, idx) => {
+        if (userAnswers.hasOwnProperty(idx)) {
+          answeredCount++;
+          if (userAnswers[idx] === q.correctIndex) {
+            correctCount++;
+          } else {
+            incorrectCount++;
+          }
+        }
+      });
+
+      const totalCount = shuffledQuestions.length;
+      const skippedCount = totalCount - answeredCount;
+      const percentage = Math.round((correctCount / totalCount) * 100);
+
+      // Modal Elements
+      document.getElementById('modalScoreDisplay').textContent = `${correctCount} / ${totalCount} (${percentage}%)`;
+      document.getElementById('summaryAnswered').textContent = answeredCount;
+      document.getElementById('summaryCorrect').textContent = correctCount;
+      document.getElementById('summaryIncorrect').textContent = incorrectCount;
+      document.getElementById('summarySkipped').textContent = skippedCount;
+
+      const badge = document.getElementById('modalBadge');
+      if (percentage >= 80) {
+        badge.textContent = "Excellent";
+        badge.className = "performance-badge badge-excellent";
+      } else if (percentage >= 50) {
+        badge.textContent = "Passed";
+        badge.className = "performance-badge badge-passed";
+      } else {
+        badge.textContent = "Failed";
+        badge.className = "performance-badge badge-failed";
+      }
+
+      resultsModal.classList.add('open');
+      renderCurrentQuestion();
+    }
+
+    function autoSubmitQuiz() {
+      alert("Time has expired! Automatically submitting your quiz.");
+      submitQuiz();
+    }
+
+    submitBtn.addEventListener('click', () => {
+      if (confirm("Are you sure you want to submit your quiz?")) {
+        submitQuiz();
+      }
+    });
+
+    // Review & Restart Handlers
+    document.getElementById('reviewModeBtn').addEventListener('click', () => {
+      resultsModal.classList.remove('open');
+    });
+
+    document.getElementById('modalRestartBtn').addEventListener('click', () => {
+      initQuizData();
+    });
+
+    restartBtn.addEventListener('click', () => {
+      if (confirm("Restarting will shuffle all questions and clear active progress. Proceed?")) {
+        initQuizData();
+      }
+    });
+
+    // Dark/Light Theme Switcher
+    themeToggleBtn.addEventListener('click', () => {
+      document.body.classList.toggle('dark-mode');
+      if (document.body.classList.contains('dark-mode')) {
+        themeToggleBtn.textContent = '☀️';
+      } else {
+        themeToggleBtn.textContent = '🌙';
+      }
+    });
+
+    // Initialize Engine On Load
+    window.addEventListener('DOMContentLoaded', () => {
+      initQuizData();
+    });
+  </script>
+</body>
+</html>
