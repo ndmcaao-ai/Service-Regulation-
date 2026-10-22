@@ -1,0 +1,1499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Mediation Act, 2023 Master Quiz - 75 Questions</title>
+  <style>
+    :root {
+      --bg-primary: #f4f6f9;
+      --bg-card: #ffffff;
+      --text-main: #1f2937;
+      --text-muted: #6b7280;
+      --border-color: #e5e7eb;
+      --primary-color: #7c3aed;
+      --primary-hover: #6d28d9;
+      --secondary-bg: #f3f4f6;
+      --success-color: #059669;
+      --success-bg: #d1fae5;
+      --danger-color: #dc2626;
+      --danger-bg: #fee2e2;
+      --warning-color: #d97706;
+      --warning-bg: #fef3c7;
+      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      --palette-unvisited: #e5e7eb;
+      --palette-unvisited-text: #374151;
+      --palette-answered: #7c3aed;
+      --palette-answered-text: #ffffff;
+    }
+
+    body.dark-mode {
+      --bg-primary: #0f172a;
+      --bg-card: #1e293b;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --border-color: #334155;
+      --primary-color: #8b5cf6;
+      --primary-hover: #a78bfa;
+      --secondary-bg: #334155;
+      --success-color: #10b981;
+      --success-bg: #064e3b;
+      --danger-color: #f87171;
+      --danger-bg: #7f1d1d;
+      --warning-color: #fbbf24;
+      --warning-bg: #78350f;
+      --palette-unvisited: #334155;
+      --palette-unvisited-text: #cbd5e1;
+      --palette-answered: #8b5cf6;
+      --palette-answered-text: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    /* Sticky Header */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background-color: var(--bg-card);
+      border-bottom: 1px solid var(--border-color);
+      padding: 0.75rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .header-titles h1 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--primary-color);
+    }
+
+    .header-titles p {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .header-controls {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .timer-badge {
+      font-family: monospace;
+      font-size: 1.15rem;
+      font-weight: 700;
+      padding: 0.4rem 0.8rem;
+      border-radius: 6px;
+      background-color: var(--secondary-bg);
+      color: var(--text-main);
+      border: 1px solid var(--border-color);
+    }
+
+    .timer-badge.warning {
+      background-color: var(--danger-bg);
+      color: var(--danger-color);
+      border-color: var(--danger-color);
+      animation: pulse 1s infinite alternate;
+    }
+
+    @keyframes pulse {
+      from { opacity: 1; }
+      to { opacity: 0.7; }
+    }
+
+    .btn {
+      padding: 0.5rem 1rem;
+      font-size: 0.875rem;
+      font-weight: 600;
+      border-radius: 6px;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+    }
+
+    .btn-primary {
+      background-color: var(--primary-color);
+      color: #ffffff;
+    }
+
+    .btn-primary:hover {
+      background-color: var(--primary-hover);
+    }
+
+    .btn-secondary {
+      background-color: var(--secondary-bg);
+      color: var(--text-main);
+      border-color: var(--border-color);
+    }
+
+    .btn-secondary:hover {
+      filter: brightness(0.95);
+    }
+
+    .btn-danger {
+      background-color: var(--danger-color);
+      color: #ffffff;
+    }
+
+    .btn-danger:hover {
+      filter: brightness(0.9);
+    }
+
+    /* Main Container Grid */
+    .container {
+      max-width: 1280px;
+      width: 100%;
+      margin: 1.5rem auto;
+      padding: 0 1rem;
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: 1.5rem;
+      flex: 1;
+    }
+
+    @media (max-width: 900px) {
+      .container {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Question Card */
+    .card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 1.5rem;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .question-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .question-index {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+
+    .bookmark-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1.25rem;
+      color: var(--text-muted);
+      transition: color 0.2s;
+    }
+
+    .bookmark-btn.active {
+      color: var(--warning-color);
+    }
+
+    .question-text {
+      font-size: 1.1rem;
+      font-weight: 600;
+      line-height: 1.5;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Options List */
+    .options-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-bottom: 2rem;
+    }
+
+    .option-card {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 1rem;
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s;
+      background-color: var(--bg-card);
+    }
+
+    .option-card:hover {
+      border-color: var(--primary-color);
+      background-color: var(--secondary-bg);
+    }
+
+    .option-card.selected {
+      border-color: var(--primary-color);
+      background-color: var(--secondary-bg);
+      box-shadow: 0 0 0 1px var(--primary-color);
+    }
+
+    .option-card.correct-review {
+      border-color: var(--success-color);
+      background-color: var(--success-bg);
+      color: var(--text-main);
+    }
+
+    .option-card.incorrect-review {
+      border-color: var(--danger-color);
+      background-color: var(--danger-bg);
+      color: var(--text-main);
+    }
+
+    .radio-custom {
+      width: 18px;
+      height: 18px;
+      border: 2px solid var(--border-color);
+      border-radius: 50%;
+      margin-top: 2px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .option-card.selected .radio-custom {
+      border-color: var(--primary-color);
+    }
+
+    .option-card.selected .radio-custom::after {
+      content: "";
+      width: 10px;
+      height: 10px;
+      background-color: var(--primary-color);
+      border-radius: 50%;
+    }
+
+    .option-label {
+      font-size: 0.95rem;
+      line-height: 1.4;
+      flex: 1;
+    }
+
+    /* Bottom Action Bar */
+    .card-actions {
+      margin-top: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.5rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border-color);
+      flex-wrap: wrap;
+    }
+
+    .action-group {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    /* Explanation Box */
+    .explanation-box {
+      margin-top: 1.5rem;
+      padding: 1rem;
+      border-radius: 6px;
+      background-color: var(--secondary-bg);
+      border-left: 4px solid var(--primary-color);
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    .explanation-title {
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+      color: var(--primary-color);
+    }
+
+    /* Sidebar / Palette */
+    .sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .filter-tabs {
+      display: flex;
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      overflow: hidden;
+      background-color: var(--bg-card);
+    }
+
+    .tab-btn {
+      flex: 1;
+      padding: 0.5rem 0.2rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      border: none;
+      background: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      text-align: center;
+      transition: background-color 0.2s, color 0.2s;
+    }
+
+    .tab-btn.active {
+      background-color: var(--primary-color);
+      color: #ffffff;
+    }
+
+    .palette-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 0.5rem;
+      max-height: 400px;
+      overflow-y: auto;
+      padding: 0.25rem;
+    }
+
+    .palette-item {
+      aspect-ratio: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      font-weight: 700;
+      border-radius: 6px;
+      border: 1px solid var(--border-color);
+      cursor: pointer;
+      background-color: var(--palette-unvisited);
+      color: var(--palette-unvisited-text);
+      position: relative;
+      transition: all 0.2s;
+    }
+
+    .palette-item.active-current {
+      outline: 2px solid var(--primary-color);
+      outline-offset: 2px;
+    }
+
+    .palette-item.answered {
+      background-color: var(--palette-answered);
+      color: var(--palette-answered-text);
+      border-color: var(--palette-answered);
+    }
+
+    .palette-item.bookmarked::after {
+      content: "★";
+      position: absolute;
+      top: 1px;
+      right: 3px;
+      font-size: 0.65rem;
+      color: var(--warning-color);
+    }
+
+    .palette-item.correct-post {
+      background-color: var(--success-color);
+      color: #ffffff;
+      border-color: var(--success-color);
+    }
+
+    .palette-item.incorrect-post {
+      background-color: var(--danger-color);
+      color: #ffffff;
+      border-color: var(--danger-color);
+    }
+
+    .legend-box {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.5rem;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      padding: 0.75rem;
+      border-top: 1px solid var(--border-color);
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .legend-color {
+      width: 12px;
+      height: 12px;
+      border-radius: 3px;
+    }
+
+    /* Modal Overlay */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .modal-overlay.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-card {
+      background-color: var(--bg-card);
+      border-radius: 8px;
+      max-width: 500px;
+      width: 90%;
+      padding: 2rem;
+      box-shadow: var(--shadow-md);
+      text-align: center;
+    }
+
+    .modal-score {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--primary-color);
+      margin: 1rem 0;
+    }
+
+    .performance-badge {
+      display: inline-block;
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      font-weight: 700;
+      font-size: 0.85rem;
+      margin-bottom: 1.5rem;
+      text-transform: uppercase;
+    }
+
+    .badge-excellent { background-color: var(--success-bg); color: var(--success-color); }
+    .badge-passed { background-color: var(--warning-bg); color: var(--warning-color); }
+    .badge-failed { background-color: var(--danger-bg); color: var(--danger-color); }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+      text-align: left;
+      font-size: 0.9rem;
+    }
+
+    .summary-item {
+      padding: 0.5rem;
+      background-color: var(--secondary-bg);
+      border-radius: 4px;
+    }
+
+    .summary-item span {
+      font-weight: 700;
+      float: right;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sticky Header -->
+  <header>
+    <div class="header-titles">
+      <h1>The Mediation Act, 2023 (Act No. 32 of 2023)</h1>
+      <p>Interactive Statutory Assessment Engine - 75 Comprehensive Questions</p>
+    </div>
+    <div class="header-controls">
+      <div id="timerDisplay" class="timer-badge">45:00</div>
+      <button id="restartBtn" class="btn btn-secondary" title="Reshuffle & Restart">🔄 Restart</button>
+      <button id="themeToggleBtn" class="btn btn-secondary" title="Toggle Light/Dark Mode">🌙</button>
+    </div>
+  </header>
+
+  <!-- Main Content Layout -->
+  <div class="container">
+    <!-- Left Column: Active Question -->
+    <main class="card">
+      <div class="question-header">
+        <span id="questionIndexDisplay" class="question-index">Question 1 of 75</span>
+        <button id="bookmarkToggleBtn" class="bookmark-btn" title="Bookmark Question">★</button>
+      </div>
+      <div id="questionTextDisplay" class="question-text">Loading question...</div>
+      
+      <div id="optionsContainer" class="options-list"></div>
+
+      <div id="explanationContainer"></div>
+
+      <div class="card-actions">
+        <div class="action-group">
+          <button id="prevBtn" class="btn btn-secondary">Previous</button>
+          <button id="nextBtn" class="btn btn-secondary">Next</button>
+        </div>
+        <div class="action-group">
+          <button id="clearBtn" class="btn btn-secondary">Clear Selection</button>
+          <button id="submitBtn" class="btn btn-danger">Submit Quiz</button>
+        </div>
+      </div>
+    </main>
+
+    <!-- Right Column: Palette & Filters -->
+    <aside class="sidebar">
+      <div class="card">
+        <div class="filter-tabs">
+          <button class="tab-btn active" data-filter="all">All</button>
+          <button class="tab-btn" data-filter="answered">Answered</button>
+          <button class="tab-btn" data-filter="unanswered">Unanswered</button>
+          <button class="tab-btn" data-filter="bookmarked">Bookmarked</button>
+        </div>
+        <div id="paletteGrid" class="palette-grid" style="margin-top: 1rem;"></div>
+        <div class="legend-box">
+          <div class="legend-item"><div class="legend-color" style="background: var(--palette-unvisited);"></div> Unanswered</div>
+          <div class="legend-item"><div class="legend-color" style="background: var(--palette-answered);"></div> Answered</div>
+          <div class="legend-item"><div class="legend-color" style="background: var(--success-color);"></div> Correct</div>
+          <div class="legend-item"><div class="legend-color" style="background: var(--danger-color);"></div> Incorrect</div>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <!-- Results Modal -->
+  <div id="resultsModal" class="modal-overlay">
+    <div class="modal-card">
+      <h2>Assessment Complete</h2>
+      <div id="modalScoreDisplay" class="modal-score">0 / 75</div>
+      <div id="modalBadge" class="performance-badge">Passed</div>
+      
+      <div class="summary-grid">
+        <div class="summary-item">Total Answered <span id="summaryAnswered">0</span></div>
+        <div class="summary-item">Correct <span id="summaryCorrect">0</span></div>
+        <div class="summary-item">Incorrect <span id="summaryIncorrect">0</span></div>
+        <div class="summary-item">Skipped <span id="summarySkipped">0</span></div>
+      </div>
+
+      <div style="display: flex; gap: 0.5rem; justify-content: center;">
+        <button id="reviewModeBtn" class="btn btn-primary">Review Detailed Answers</button>
+        <button id="modalRestartBtn" class="btn btn-secondary">Restart Quiz</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // 75 High-Quality Questions on The Mediation Act, 2023 (Act No. 32 of 2023)
+    const rawQuestionsData = [
+      {
+        id: 1,
+        question: "What is the official Act number and year of enactment of The Mediation Act in India?",
+        options: ["Act No. 32 of 2023", "Act No. 26 of 1996", "Act No. 12 of 2015", "Act No. 18 of 2019"],
+        correctIndex: 0,
+        explanation: "The preamble states: 'THE MEDIATION ACT, 2023 (ACT NO. 32 OF 2023)'."
+      },
+      {
+        id: 2,
+        question: "Under Section 1(2), what is the territorial extent of The Mediation Act, 2023?",
+        options: ["Whole of India except Jammu and Kashmir", "Whole of India", "Union Territories only", "Commercial courts in metro cities only"],
+        correctIndex: 1,
+        explanation: "Section 1(2) explicitly provides: 'It shall extend to the whole of India.'"
+      },
+      {
+        id: 3,
+        question: "Under Section 2, the Mediation Act, 2023 applies where mediation is conducted in India AND:",
+        options: ["Parties habitually reside in, are incorporated in, or have place of business in India", "The mediation agreement provides for resolution under this Act", "There is an international mediation", "All of the above"],
+        correctIndex: 3,
+        explanation: "Section 2 lists all these conditions where mediation is conducted in India."
+      },
+      {
+        id: 4,
+        question: "Under Section 2(iv), when does the Act apply if one of the parties to the dispute is the Central Government or a State Government?",
+        options: ["Only in criminal matters", "Where the dispute relates to a commercial dispute or as notified by the Government", "In all civil non-commercial matters automatically", "It never applies to the Government"],
+        correctIndex: 1,
+        explanation: "Section 2(iv) applies where a party is the Central/State Government, or its agency, public body, or entity, and the dispute relates to a commercial dispute or as notified."
+      },
+      {
+        id: 5,
+        question: "Under Section 3(h), 'mediation' is defined as a process whereby parties attempt to reach an amicable settlement with the assistance of a mediator, and includes:",
+        options: ["Pre-litigation mediation", "Online mediation and community mediation", "Conciliation or similar expression", "All of the above"],
+        correctIndex: 3,
+        explanation: "Section 3(h) defines mediation broadly to include pre-litigation, online, community mediation, conciliation, or any similar expression."
+      },
+      {
+        id: 6,
+        question: "Under Section 3(a), 'commercial dispute' under the Mediation Act has the same meaning as assigned to it in which statute?",
+        options: ["The Companies Act, 2013", "The Commercial Courts Act, 2015 [Section 2(1)(c)]", "The Indian Contract Act, 1872", "The Arbitration and Conciliation Act, 1996"],
+        correctIndex: 1,
+        explanation: "Section 3(a) defines 'commercial dispute' as defined in clause (c) of sub-section (1) of section 2 of the Commercial Courts Act, 2015."
+      },
+      {
+        id: 7,
+        question: "Under Section 3(m), 'mediated settlement agreement' means a written agreement between the parties settling some or all of the disputes, reached in a mediation, and:",
+        options: ["Oral agreement recorded on tape", "Authenticated by the mediator and signed by the parties", "Unilateral statement by the claimant", "Affidavit submitted to police"],
+        correctIndex: 1,
+        explanation: "Section 3(m) specifies that a mediated settlement agreement must be in writing, signed by the parties, and authenticated by the mediator."
+      },
+      {
+        id: 8,
+        question: "Under Section 3(u), 'institutional mediation' means mediation conducted under the aegis of:",
+        options: ["Any private unregistered law firm", "A Mediation Service Provider", "A High Court Judge in chamber", "A local trade union office"],
+        correctIndex: 1,
+        explanation: "Section 3(u) defines 'institutional mediation' as mediation conducted under the aegis of a Mediation Service Provider."
+      },
+      {
+        id: 9,
+        question: "Under Section 4(1), a 'mediation agreement' must be in:",
+        options: ["Writing", "Oral form in presence of two witnesses", "Video recorded statement", "Implied conduct only"],
+        correctIndex: 0,
+        explanation: "Section 4(1) mandates that a mediation agreement shall be in writing."
+      },
+      {
+        id: 10,
+        question: "Under Section 4(2), a mediation agreement is deemed to be in writing if it is contained in:",
+        options: ["A document signed by the parties", "An exchange of letters, telex, telegrams, or other means of telecommunication (including electronic communications)", "Exchange of statements of claim and defense where agreement is alleged by one and not denied by other", "All of the above"],
+        correctIndex: 3,
+        explanation: "Section 4(2) lists all these forms through which a mediation agreement is deemed in writing."
+      },
+      {
+        id: 11,
+        question: "Under Section 5(1), a party may, before filing any suit or proceeding of a civil or commercial nature, voluntarily take steps to settle the dispute by:",
+        options: ["Arbitration", "Pre-litigation mediation", "Direct criminal complaint", "Ex-parte injunction"],
+        correctIndex: 1,
+        explanation: "Section 5(1) provides for pre-litigation mediation prior to filing civil or commercial suits or proceedings."
+      },
+      {
+        id: 12,
+        question: "Under Section 5(1), pre-litigation mediation in civil or commercial disputes is:",
+        options: ["Mandatory in all cases without exception", "Voluntary and subject to mutual consent of parties (unless otherwise provided under statutory provisions like Commercial Courts Act)", "Strictly prohibited", "Binding only on public sector companies"],
+        correctIndex: 1,
+        explanation: "Section 5(1) creates a voluntary, consent-based pre-litigation mediation regime (while special regimes like Section 12A of the Commercial Courts Act remain)."
+      },
+      {
+        id: 13,
+        question: "Under Section 6, disputes or matters specified in which Schedule are ordinarily NOT fit for mediation?",
+        options: ["First Schedule", "Second Schedule", "Fifth Schedule", "Tenth Schedule"],
+        correctIndex: 0,
+        explanation: "Section 6 explicitly references the First Schedule for matters/disputes not fit for mediation."
+      },
+      {
+        id: 14,
+        question: "Which of the following matters is listed in the First Schedule as NOT fit for mediation under Section 6?",
+        options: ["Disputes involving prosecution for criminal offences", "Disputes relating to levy, collection, or refund of taxes or duties", "Proceedings relating to serious allegations of fraud, fabrication, or impersonation", "All of the above"],
+        correctIndex: 3,
+        explanation: "The First Schedule includes criminal prosecutions, tax disputes, serious fraud allegations, matters of public interest, third-party rights, etc."
+      },
+      {
+        id: 15,
+        question: "Under Section 7(1), can a court or tribunal refer parties to mediation at any stage of proceedings?",
+        options: ["No, only before filing written statement", "Yes, a court or tribunal may refer parties to mediation at any stage, whether or not there is a pre-existing mediation agreement", "Only after framing of issues", "Only with Supreme Court sanction"],
+        correctIndex: 1,
+        explanation: "Section 7(1) empowers a court or tribunal to refer parties to mediation at any stage of proceedings."
+      },
+      {
+        id: 16,
+        question: "Under Section 7(2), while referring a dispute to mediation, can the court or tribunal pass interim orders to protect the subject matter?",
+        options: ["No, interim orders are completely barred during mediation", "Yes, the court or tribunal may pass such interim order as it deems appropriate to protect the interest of any party", "Only with consent of mediator", "Only in land disputes"],
+        correctIndex: 1,
+        explanation: "Section 7(2) allows the court or tribunal to pass interim orders for protecting the interest of parties during mediation."
+      },
+      {
+        id: 17,
+        question: "Under Section 8(1), who may be appointed as a mediator?",
+        options: ["A person of any nationality possessing requisite qualifications, experience, and accreditation", "Only Indian citizens above 60 years", "Only retired High Court judges", "Only government officers"],
+        correctIndex: 0,
+        explanation: "Section 8(1) permits appointment of a person of any nationality (foreign nationals possessing specified accreditation/qualifications)."
+      },
+      {
+        id: 18,
+        question: "Under Section 8(2), who is free to agree upon the name of the mediator and procedure for appointment?",
+        options: ["The District Magistrate", "The parties themselves", "The Police Commissioner", "The Bar Council"],
+        correctIndex: 1,
+        explanation: "Section 8(2) states: 'The parties shall be free to agree upon the name of mediator and the procedure for their appointment.'"
+      },
+      {
+        id: 19,
+        question: "Under Section 10(1), before commencing mediation, what MANDATORY written disclosure must a prospective mediator make to the parties?",
+        options: ["His annual personal income tax returns", "Any financial, personal, or other interest or conflict of interest likely to raise justifiable doubts as to independence or impartiality", "His political voting preferences", "His residential property valuation"],
+        correctIndex: 1,
+        explanation: "Section 10(1) mandates disclosure of any potential conflict of interest that might affect independence or impartiality."
+      },
+      {
+        id: 20,
+        question: "Under Section 10(4), if a mediator discloses a conflict of interest, when can he continue with the mediation?",
+        options: ["Never, he is permanently barred", "If all parties give their consent in writing to his continuation", "If authorized by the District Judge", "If he pays a penalty fee"],
+        correctIndex: 1,
+        explanation: "Section 10(4) allows continuation if all parties express written consent after full disclosure."
+      },
+      {
+        id: 21,
+        question: "Under Section 11, a Mediation Service Provider may terminate the mandate of a mediator on which ground?",
+        options: ["Application by a party for termination", "On receipt of information about conflict of interest or misconduct", "If the mediator becomes incapable of acting or fails to act without undue delay", "All of the above"],
+        correctIndex: 3,
+        explanation: "Section 11 sets out grounds for termination of mediator mandate by a Mediation Service Provider."
+      },
+      {
+        id: 22,
+        question: "Under Section 12, when the mandate of a mediator is terminated, within what time frame must another mediator be appointed?",
+        options: ["Within 7 days", "Within 15 days", "Within 30 days", "Within 60 days"],
+        correctIndex: 0,
+        explanation: "Section 12 specifies that replacement mediator shall be appointed within seven days from termination."
+      },
+      {
+        id: 23,
+        question: "Under Section 13, territorial jurisdiction for undertaking mediation shall be determined by the court of competent jurisdiction within whose local limits:",
+        options: ["The mediator resides", "A suit or proceeding could be filed according to law", "The Mediation Council head office is located", "The claimant's bank branch is located"],
+        correctIndex: 1,
+        explanation: "Section 13 dictates that territorial jurisdiction is where a suit or proceeding relating to the dispute could be instituted."
+      },
+      {
+        id: 24,
+        question: "Under Section 14, when is mediation deemed to COMMENCE?",
+        options: ["When a verbal grievance is made", "Date of receipt of notice/application for mediation, or date of appointment of mediator in court referral, or date of agreement", "When final agreement is signed", "When court passes final decree"],
+        correctIndex: 1,
+        explanation: "Section 14 specifies the commencement date based on notice/application receipt, appointment date, or agreement."
+      },
+      {
+        id: 25,
+        question: "Under Section 15(1), how must the mediator conduct the mediation proceedings?",
+        options: ["Strictly adhering to Code of Civil Procedure, 1908", "In an independent, neutral, and impartial manner, facilitating voluntary resolution", "By issuing binding judicial orders", "By imposing criminal fines"],
+        correctIndex: 1,
+        explanation: "Section 15(1) requires the mediator to act independently, neutrally, and impartially to facilitate amicable resolution."
+      },
+      {
+        id: 26,
+        question: "Is the mediator bound by the provisions of the Code of Civil Procedure, 1908 or the Indian Evidence Act, 1872 during mediation under Section 15(2)?",
+        options: ["Yes, strictly bound by both", "No, the mediator is NOT bound by the Code of Civil Procedure, 1908 or the Indian Evidence Act, 1872", "Bound by Evidence Act only", "Bound by CPC only"],
+        correctIndex: 1,
+        explanation: "Section 15(2) explicitly states that the mediator shall not be bound by CPC or Evidence Act."
+      },
+      {
+        id: 27,
+        question: "Under Section 16, what is the core role of a mediator?",
+        options: ["To adjudicate and decide the dispute on merits", "To facilitate voluntariness, communication, and settlement between parties without imposing a settlement", "To act as prosecutor against defaulting party", "To act as legal advocate for claimant"],
+        correctIndex: 1,
+        explanation: "Section 16 defines the mediator's role as a facilitator of communication and agreement without imposing decisions."
+      },
+      {
+        id: 28,
+        question: "Under Section 17, can a mediator act as an arbitrator or counsel in subsequent proceedings regarding the same dispute?",
+        options: ["Yes, without restrictions", "No, the mediator shall NOT act as arbitrator, counsel, or representative, nor be presented as a witness", "Only with police permission", "Only in international cases"],
+        correctIndex: 1,
+        explanation: "Section 17 prohibits the mediator from acting as arbitrator, counsel, or witness in subsequent arbitral or judicial proceedings."
+      },
+      {
+        id: 29,
+        question: "Under Section 18(1), what is the statutory TIME LIMIT for completion of a mediation under the Act?",
+        options: ["60 days", "120 days from the date fixed for first appearance before mediator", "180 days", "1 year"],
+        correctIndex: 1,
+        explanation: "Section 18(1) sets a time limit of 120 days from the date fixed for first appearance before the mediator."
+      },
+      {
+        id: 30,
+        question: "Under Section 18(2), by how many additional days can the 120-day mediation timeline be extended with mutual consent of parties?",
+        options: ["Up to 30 additional days", "Up to 60 additional days", "Up to 90 additional days", "Indefinitely"],
+        correctIndex: 1,
+        explanation: "Section 18(2) permits an extension for a further period not exceeding sixty days with mutual consent."
+      },
+      {
+        id: 31,
+        question: "Under Section 19(1), a mediated settlement agreement must be in writing, signed by the parties, and authenticated by:",
+        options: ["The District Magistrate", "The Mediator", "The High Court Registrar", "The Notary Public"],
+        correctIndex: 1,
+        explanation: "Section 19(1) requires authentication by the mediator."
+      },
+      {
+        id: 32,
+        question: "Under Section 20(1), registration of a mediated settlement agreement (other than court-referred or Lok Adalat awards) with the designated authority is:",
+        options: ["Mandatory within 24 hours", "Voluntary, by parties or mediation service provider within 180 days", "Strictly illegal", "Subject to police verification"],
+        correctIndex: 1,
+        explanation: "Section 20(1) allows voluntary registration of mediated settlement agreements within 180 days."
+      },
+      {
+        id: 33,
+        question: "Under Section 21, if no agreement is reached or if the mediator believes settlement is unlikely, the mediator shall submit a:",
+        options: ["Contempt petition", "Non-settlement report in writing to the parties / service provider / court", "Binding monetary award", "Penalty charge sheet"],
+        correctIndex: 1,
+        explanation: "Section 21 mandates submitting a non-settlement report if no settlement is arrived at."
+      },
+      {
+        id: 34,
+        question: "Under Section 22(1), confidentiality in mediation applies to:",
+        options: ["Acknowledge of receipt of notices", "Statements made, views expressed, admissions, proposals, and documents prepared exclusively for mediation", "Public gazette notifications", "Commercial registration certificates"],
+        correctIndex: 1,
+        explanation: "Section 22(1) covers statements, admissions, proposals, and mediation-specific documents under strict confidentiality."
+      },
+      {
+        id: 35,
+        question: "Which of the following is EXEMPTED from confidentiality under Section 22 proviso?",
+        options: ["Threat or plan to commit an offence", "Information relating to domestic violence or child abuse", "Statements showing significant imminent threat to public health or safety", "All of the above"],
+        correctIndex: 3,
+        explanation: "Section 22 proviso lists crime threats, child abuse/domestic violence info, and public health/safety threats as exceptions to confidentiality."
+      },
+      {
+        id: 36,
+        question: "Under Section 23, are mediation communications admissible as evidence in court or arbitral proceedings?",
+        options: ["Yes, fully admissible without exception", "No, mediation communications are privileged and inadmissible in court or arbitral proceedings", "Admissible only in traffic court", "Admissible if published in newspaper"],
+        correctIndex: 1,
+        explanation: "Section 23 protects mediation communications with privilege and inadmissibility in other legal proceedings."
+      },
+      {
+        id: 37,
+        question: "Under Section 24, mediation proceedings shall TERMINATE on:",
+        options: ["Execution and signing of mediated settlement agreement", "Submission of non-settlement report under Section 21", "Communication of written opt-out by a party after attending first two sessions", "All of the above"],
+        correctIndex: 3,
+        explanation: "Section 24 specifies termination upon agreement execution, non-settlement report, or party opt-out."
+      },
+      {
+        id: 38,
+        question: "Under Section 25, unless otherwise agreed by the parties, how are the costs of mediation (including mediator fees and service provider charges) borne?",
+        options: ["Borne entirely by the claimant", "Borne equally by the parties", "Paid by the Central Government", "Paid by the losing party in court"],
+        correctIndex: 1,
+        explanation: "Section 25(2) mandates that mediation costs shall be borne equally by the parties unless otherwise agreed."
+      },
+      {
+        id: 39,
+        question: "Under Section 27(1), a mediated settlement agreement resulting from mediation under this Act shall be enforced in accordance with CPC as if it were a:",
+        options: ["Judgment or decree of a civil court", "Non-binding recommendations paper", "Police FIR", "Interim show-cause notice"],
+        correctIndex: 0,
+        explanation: "Section 27(1) provides that a mediated settlement agreement shall be enforced like a decree of a court."
+      },
+      {
+        id: 40,
+        question: "Under Section 28(2), a mediated settlement agreement can be CHALLENGED in court ONLY on grounds of:",
+        options: ["Fraud, corruption, impersonation, or where dispute was not fit for mediation under Section 6", "Minor clerical errors in spellings", "Party changing its mind after signing", "Re-evaluation of evidence by a new lawyer"],
+        correctIndex: 0,
+        explanation: "Section 28(2) restricts challenge grounds strictly to fraud, corruption, impersonation, or non-mediable subject matter under Section 6."
+      },
+      {
+        id: 41,
+        question: "Under Section 28(3), what is the limitation period for filing an application to challenge a mediated settlement agreement?",
+        options: ["Within 30 days", "Within 90 days from the date on which copy of agreement is received", "Within 1 year", "Within 3 years"],
+        correctIndex: 1,
+        explanation: "Section 28(3) provides a 90-day limitation period for challenging a mediated settlement agreement."
+      },
+      {
+        id: 42,
+        question: "Under Section 28(3) proviso, by how many additional days can the court extend the 90-day challenge window if sufficient cause is shown?",
+        options: ["Up to 30 days", "Up to 90 additional days", "Up to 180 days", "No extension allowed"],
+        correctIndex: 1,
+        explanation: "Section 28(3) proviso allows extension for a further period not exceeding ninety days upon sufficient cause."
+      },
+      {
+        id: 43,
+        question: "Under Section 29, in computing the period of limitation for any suit or proceeding in respect of a dispute undertaken for mediation, the period spent in mediation is:",
+        options: ["Included in calculation", "Excluded from calculation (from commencement under Section 14 to report/termination)", "Doubled as penalty", "Ignored completely"],
+        correctIndex: 1,
+        explanation: "Section 29 grants exclusion of the period spent in mediation for limitation purposes."
+      },
+      {
+        id: 44,
+        question: "Under Section 30(1), 'Online Mediation' including conduct through encrypted communication tools may be opted for by parties at:",
+        options: ["Any stage of mediation with written consent of parties", "Only during national lockdowns", "Only in IT sector disputes", "Never, online mediation is prohibited"],
+        correctIndex: 0,
+        explanation: "Section 30(1) allows Online Mediation at any stage with written consent of parties."
+      },
+      {
+        id: 45,
+        question: "Under Section 31(1), who is authorized to establish the 'Mediation Council of India' by notification?",
+        options: ["The Supreme Court of India", "The Central Government", "The Bar Council of India", "The NITI Aayog"],
+        correctIndex: 1,
+        explanation: "Section 31(1) empowers the Central Government to establish the Mediation Council of India."
+      },
+      {
+        id: 46,
+        question: "Where is the head office of the Mediation Council of India located under Section 31(3)?",
+        options: ["Mumbai", "Delhi / New Delhi", "Bengaluru", "Kolkata"],
+        correctIndex: 1,
+        explanation: "Section 31(3) specifies that the head office of the Council shall be at Delhi or such other place as notified."
+      },
+      {
+        id: 47,
+        question: "Under Section 32(1), who appoints the Chairperson of the Mediation Council of India?",
+        options: ["The Chief Justice of India", "The Central Government", "An election among registered mediators", "The Union Law Secretary ex officio"],
+        correctIndex: 1,
+        explanation: "Section 32(1)(a) provides that the Chairperson of the Council is appointed by the Central Government."
+      },
+      {
+        id: 48,
+        question: "Which ex officio members are included in the Mediation Council of India under Section 32(1)(d) & (e)?",
+        options: ["Secretary to Govt of India, Dept of Legal Affairs, and Secretary, Dept of Expenditure (or nominees)", "Chief Election Commissioner and CAG", "RBI Governor and SEBI Chairman", "UPSC Chairman and Solicitor General"],
+        correctIndex: 0,
+        explanation: "Section 32(1) includes the Legal Affairs Secretary and Expenditure Secretary (or their nominees) as ex officio members."
+      },
+      {
+        id: 49,
+        question: "What is the term of office for the Chairperson and full-time members of the Mediation Council of India under Section 32(3)?",
+        options: ["3 years or until age of 65 years, whichever is earlier", "4 years or until age of 70 years", "5 years without age limit", "2 years renewable once"],
+        correctIndex: 0,
+        explanation: "Section 32(3) sets a term of 3 years or age 65 years (or as specified in Act), whichever is earlier."
+      },
+      {
+        id: 50,
+        question: "Under Section 38, what are the primary duties and functions of the Mediation Council of India?",
+        options: ["Promote domestic and international mediation in India", "Recognize Mediation Service Providers and Mediation Institutes", "Specify qualifications, accreditation, and continuous education for mediators", "All of the above"],
+        correctIndex: 3,
+        explanation: "Section 38 lists all these regulatory, promotional, accreditation, and standards-setting functions of the Council."
+      },
+      {
+        id: 51,
+        question: "Under Section 40, which entities can be recognized as 'Mediation Service Providers' by the Council?",
+        options: ["Bodies annexed to courts or tribunals", "Authority constituted under Legal Services Authorities Act, 1987", "Mediation institutes recognized by the Council", "All of the above"],
+        correctIndex: 3,
+        explanation: "Section 40 includes court-annexed centers, Legal Services Authorities, and recognized mediation institutes."
+      },
+      {
+        id: 52,
+        question: "Under Section 41, what is a key function of a Mediation Service Provider?",
+        options: ["Maintain a panel of accredited mediators", "Provide secretarial assistance and infrastructure for mediation", "Facilitate registration of settlement agreements", "All of the above"],
+        correctIndex: 3,
+        explanation: "Section 41 outlines panel maintenance, administrative/infrastructural support, and procedural facilitation as MSP functions."
+      },
+      {
+        id: 53,
+        question: "Under Section 42, 'Mediation Institutes' are recognized by the Council primarily for:",
+        options: ["Training, education, and accreditation of mediators", "Filing criminal FIRs", "Issuing land titles", "Collecting import tariffs"],
+        correctIndex: 0,
+        explanation: "Section 42 governs Mediation Institutes dedicated to training, education, and accreditation of mediators."
+      },
+      {
+        id: 54,
+        question: "Under Section 43(1), 'Community Mediation' may be conducted for resolution of disputes likely to affect peace, harmony, and tranquility amongst residents or families of any locality, upon application to:",
+        options: ["The District Magistrate or Sub-Divisional Magistrate", "The Supreme Court", "The Foreign Ministry", "The Income Tax Commissioner"],
+        correctIndex: 0,
+        explanation: "Section 43(1) governs community mediation initiated through District Magistrate/SDM or authority."
+      },
+      {
+        id: 55,
+        question: "Under Section 43(2), a panel of Community Mediators constituted by the DM/SDM shall consist of:",
+        options: ["Persons of standing in the community / local area", "Respected local citizens, women representatives, or social workers", "Retired officers or legal experts", "All of the above"],
+        correctIndex: 3,
+        explanation: "Section 43(2) lists community representatives, respected local citizens, social workers, and experts for community panels."
+      },
+      {
+        id: 56,
+        question: "Under Section 44(4), is a settlement agreement arrived at in Community Mediation directly enforceable as a court decree under Section 27?",
+        options: ["Yes, directly enforceable as a civil court decree", "No, it is non-enforceable as a decree (unless registered/conducted under statutory authority as provided)", "Yes, attracts immediate police arrest", "No, it is strictly illegal"],
+        correctIndex: 1,
+        explanation: "Section 44(4) specifies that community mediation settlements are non-binding/non-enforceable as court decrees (unlike Section 27 MSAs)."
+      },
+      {
+        id: 57,
+        question: "Under Section 45, what fund is constituted by the Mediation Council of India?",
+        options: ["The Mediation Fund", "The National Green Corpus", "The Judicial Infrastructure Reserve", "The Consolidated Fund of India"],
+        correctIndex: 0,
+        explanation: "Section 45(1) establishes 'The Mediation Fund' to meet Council expenses, promotional activities, and training grants."
+      },
+      {
+        id: 58,
+        question: "Under Section 46, who audits the accounts of the Mediation Council of India?",
+        options: ["A private chartered accountant chosen by Council", "The Comptroller and Auditor-General of India (CAG)", "The High Court Registrar", "The Finance Ministry Under Secretary"],
+        correctIndex: 1,
+        explanation: "Section 46(2) mandates audit of the Council's accounts by the Comptroller and Auditor-General of India."
+      },
+      {
+        id: 59,
+        question: "Under Section 47, who has the power to issue binding directions on policy matters to the Mediation Council of India?",
+        options: ["The Central Government", "The International Court of Justice", "The Bar Council of India", "State Bar Associations"],
+        correctIndex: 0,
+        explanation: "Section 47 empowers the Central Government to issue binding directions on policy matters to the Council."
+      },
+      {
+        id: 60,
+        question: "Under Section 49, when the Central Government or State Government (or its agency) is a party to a mediated settlement agreement, when is the agreement signed?",
+        options: ["Only after obtaining prior written approval/consent of the competent government authority", "Immediately on verbal agreement", "After 3 years", "Without any departmental clearance"],
+        correctIndex: 0,
+        explanation: "Section 49 requires prior written approval/consent of the competent government authority before signing."
+      },
+      {
+        id: 61,
+        question: "Under Section 50, statutory protection against suits and legal proceedings for actions done in 'good faith' under the Act is granted to:",
+        options: ["Central Government, State Government, Council, Chairperson, Members, officers, and Mediators", "Private corporate defendants only", "Defaulting debtors", "Unregistered commercial vendors"],
+        correctIndex: 0,
+        explanation: "Section 50 provides immunity for actions taken in good faith to Government, Council, Members, officers, and Mediators."
+      },
+      {
+        id: 62,
+        question: "Under Section 51, who has the power to make RULES for carrying out the provisions of the Act?",
+        options: ["The Central Government", "The State Governments exclusively", "The High Courts", "The Bar Council"],
+        correctIndex: 0,
+        explanation: "Section 51 vests rulemaking powers under the Act in the Central Government."
+      },
+      {
+        id: 63,
+        question: "Under Section 52, who has the power to make REGULATIONS consistent with the Act and rules?",
+        options: ["The Mediation Council of India", "The District Courts", "The Police Department", "The Law Commission"],
+        correctIndex: 0,
+        explanation: "Section 52 empowers the Mediation Council of India to make regulations by notification."
+      },
+      {
+        id: 64,
+        question: "Under Section 53, every rule and regulation made under the Act must be laid before Parliament for a total period of:",
+        options: ["15 days", "30 days while in session", "60 days", "90 days"],
+        correctIndex: 1,
+        explanation: "Section 53 mandates laying rules and regulations before each House of Parliament for 30 days."
+      },
+      {
+        id: 65,
+        question: "Under Section 55, what is the effect of the provisions of The Mediation Act, 2023 on other laws?",
+        options: ["Provisions of this Act shall have OVERRIDING effect notwithstanding anything inconsistent contained in any other law for the time being in force", "Subordinate to all state statutes", "Subordinate to municipal bylaws", "No effect"],
+        correctIndex: 0,
+        explanation: "Section 55 gives overriding effect to the Mediation Act over inconsistent provisions in other laws."
+      },
+      {
+        id: 66,
+        question: "Under Section 56, does The Mediation Act, 2023 apply to mediation or conciliation proceedings commenced BEFORE the coming into force of the Act?",
+        options: ["Yes, applies retroactively to all pending cases", "No, the Act shall NOT apply to any mediation or conciliation commenced before the coming into force of the Act", "Applies only if fine is paid", "Applies to criminal cases only"],
+        correctIndex: 1,
+        explanation: "Section 56 explicitly excludes pending mediation or conciliation proceedings commenced prior to the Act."
+      },
+      {
+        id: 67,
+        question: "Which section of the Code of Civil Procedure, 1908 (CPC) was amended by Section 59 of The Mediation Act, 2023?",
+        options: ["Section 9", "Section 89 (Settlement of disputes outside the Court)", "Section 100", "Section 148A"],
+        correctIndex: 1,
+        explanation: "Section 59 amends Section 89 of CPC to align ADR court references with The Mediation Act, 2023."
+      },
+      {
+        id: 68,
+        question: "Which major ADR statute had its conciliation provisions amended/repealed by Section 61 of The Mediation Act, 2023?",
+        options: ["The Arbitration and Conciliation Act, 1996 (Part III Conciliation)", "The Legal Services Authorities Act, 1987", "The Commercial Courts Act, 2015", "The Consumer Protection Act, 2019"],
+        correctIndex: 0,
+        explanation: "Section 61 amends the Arbitration and Conciliation Act, 1996, replacing/modifying Part III conciliation provisions with the Mediation Act framework."
+      },
+      {
+        id: 69,
+        question: "Which statutory provision under the Commercial Courts Act, 2015 dealing with Pre-Institution Mediation and Settlement was amended by Section 64 of the Act?",
+        options: ["Section 3", "Section 12A", "Section 15", "Section 21"],
+        correctIndex: 1,
+        explanation: "Section 64 amends Section 12A of the Commercial Courts Act, 2015."
+      },
+      {
+        id: 70,
+        question: "Under Section 26, does anything in The Mediation Act, 2023 affect the proceedings or awards of Lok Adalats or Permanent Lok Adalats under Legal Services Authorities Act, 1987?",
+        options: ["No, proceedings/awards of Lok Adalat or Permanent Lok Adalat are NOT affected", "Yes, Lok Adalats are completely abolished", "Lok Adalat awards require fresh mediator authentication", "Lok Adalats are transferred to Mediation Council"],
+        correctIndex: 0,
+        explanation: "Section 26 clarifies that Lok Adalat and Permanent Lok Adalat proceedings under the Legal Services Authorities Act remain unaffected."
+      },
+      {
+        id: 71,
+        question: "Can a mediator be called as a witness in judicial proceedings under Section 17(b)?",
+        options: ["Yes, upon subpoena by any lawyer", "No, the mediator shall NOT be presented by parties as a witness in any arbitral or judicial proceeding", "Yes, if paid double witness fees", "Only in civil suits below Rs. 10,000"],
+        correctIndex: 1,
+        explanation: "Section 17(b) expressly prohibits presenting the mediator as a witness in judicial or arbitral proceedings."
+      },
+      {
+        id: 72,
+        question: "Under Section 20(2), registration of a mediated settlement agreement provides what procedural advantage?",
+        options: ["Definitive proof of execution and authenticity for record purposes", "Exemption from income tax", "Free police escort", "Automatic grant of patent rights"],
+        correctIndex: 0,
+        explanation: "Section 20 registration serves as official record proof of execution and authenticity."
+      },
+      {
+        id: 73,
+        question: "Under Section 54, within what maximum period from commencement of the Act can the Central Government issue orders to remove implementation difficulties?",
+        options: ["1 year", "2 years from commencement of the Act", "5 years", "10 years"],
+        correctIndex: 1,
+        explanation: "Section 54 proviso limits the power to issue difficulty removal orders to two years from commencement."
+      },
+      {
+        id: 74,
+        question: "Which Schedule of the Mediation Act, 2023 contains amendments to the Consumer Protection Act, 2019?",
+        options: ["First Schedule", "Third Schedule", "Eighth Schedule", "Tenth Schedule (or relevant Schedule in amending provisions Section 65)"],
+        correctIndex: 3,
+        explanation: "Section 65 / Tenth Schedule amends the Consumer Protection Act, 2019 to integrate Mediation Act standards."
+      },
+      {
+        id: 75,
+        question: "What primary reform does The Mediation Act, 2023 introduce to India's legal ecosystem?",
+        options: ["A standalone central statutory framework for pre-litigation, court-referred, institutional, community, and online mediation with direct enforceability of settlement agreements like court decrees", "Mandatory criminal imprisonment for contract defaults", "Abolition of civil courts", "Creation of private commercial police units"],
+        correctIndex: 0,
+        explanation: "The Mediation Act, 2023 establishes India's first unified statutory regime for all forms of mediation with direct decree-like enforceability for settlement agreements."
+      }
+    ];
+
+    // State Variables
+    let shuffledQuestions = [];
+    let currentQuestionIndex = 0;
+    let userAnswers = {}; // { questionIndex: selectedOptionIndex }
+    let bookmarks = new Set();
+    let isSubmitted = false;
+    let activeFilter = 'all';
+
+    // Timer Variables
+    const TOTAL_TIME_SECONDS = 45 * 60; // 45 mins
+    let timeRemaining = TOTAL_TIME_SECONDS;
+    let timerInterval = null;
+
+    // DOM Elements
+    const questionIndexDisplay = document.getElementById('questionIndexDisplay');
+    const bookmarkToggleBtn = document.getElementById('bookmarkToggleBtn');
+    const questionTextDisplay = document.getElementById('questionTextDisplay');
+    const optionsContainer = document.getElementById('optionsContainer');
+    const explanationContainer = document.getElementById('explanationContainer');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const clearBtn = document.getElementById('clearBtn');
+    const submitBtn = document.getElementById('submitBtn');
+    const paletteGrid = document.getElementById('paletteGrid');
+    const timerDisplay = document.getElementById('timerDisplay');
+    const themeToggleBtn = document.getElementById('themeToggleBtn');
+    const restartBtn = document.getElementById('restartBtn');
+    const resultsModal = document.getElementById('resultsModal');
+
+    // Fisher-Yates Shuffle Algorithm
+    function fisherYatesShuffle(array) {
+      const arr = [...array];
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+      return arr;
+    }
+
+    // Initialize/Reset Quiz Data Engine
+    function initQuizData() {
+      // Deep copy and shuffle questions
+      shuffledQuestions = fisherYatesShuffle(rawQuestionsData).map(q => {
+        // Prepare options array with original indices tracked
+        const optionsObj = q.options.map((optText, index) => ({
+          text: optText,
+          originalIndex: index
+        }));
+        
+        // Shuffle options
+        const shuffledOptions = fisherYatesShuffle(optionsObj);
+        
+        // Find new correct index
+        const newCorrectIndex = shuffledOptions.findIndex(o => o.originalIndex === q.correctIndex);
+
+        return {
+          id: q.id,
+          question: q.question,
+          options: shuffledOptions,
+          correctIndex: newCorrectIndex,
+          explanation: q.explanation
+        };
+      });
+
+      // Reset runtime state
+      currentQuestionIndex = 0;
+      userAnswers = {};
+      bookmarks.clear();
+      isSubmitted = false;
+      activeFilter = 'all';
+
+      // Reset Timer
+      clearInterval(timerInterval);
+      timeRemaining = TOTAL_TIME_SECONDS;
+      updateTimerUI();
+      startTimer();
+
+      // Reset UI Controls
+      submitBtn.disabled = false;
+      clearBtn.disabled = false;
+      resultsModal.classList.remove('open');
+
+      renderFilterTabs();
+      renderCurrentQuestion();
+      renderPalette();
+    }
+
+    // Timer Logic
+    function startTimer() {
+      timerInterval = setInterval(() => {
+        timeRemaining--;
+        updateTimerUI();
+
+        if (timeRemaining <= 0) {
+          clearInterval(timerInterval);
+          autoSubmitQuiz();
+        }
+      }, 1000);
+    }
+
+    function updateTimerUI() {
+      const minutes = Math.floor(timeRemaining / 60);
+      const seconds = timeRemaining % 60;
+      const formatted = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+      timerDisplay.textContent = formatted;
+
+      if (timeRemaining < 300) { // < 5 mins
+        timerDisplay.classList.add('warning');
+      } else {
+        timerDisplay.classList.remove('warning');
+      }
+    }
+
+    // Render Question Card
+    function renderCurrentQuestion() {
+      const q = shuffledQuestions[currentQuestionIndex];
+      
+      questionIndexDisplay.textContent = `Question ${currentQuestionIndex + 1} of ${shuffledQuestions.length}`;
+      questionTextDisplay.textContent = q.question;
+
+      // Bookmark state
+      if (bookmarks.has(currentQuestionIndex)) {
+        bookmarkToggleBtn.classList.add('active');
+      } else {
+        bookmarkToggleBtn.classList.remove('active');
+      }
+
+      // Render Options
+      optionsContainer.innerHTML = '';
+      const selectedOption = userAnswers[currentQuestionIndex];
+
+      q.options.forEach((opt, idx) => {
+        const optionCard = document.createElement('div');
+        optionCard.className = 'option-card';
+
+        // Apply review styling if submitted
+        if (isSubmitted) {
+          if (idx === q.correctIndex) {
+            optionCard.classList.add('correct-review');
+          } else if (selectedOption === idx && selectedOption !== q.correctIndex) {
+            optionCard.classList.add('incorrect-review');
+          }
+        } else if (selectedOption === idx) {
+          optionCard.classList.add('selected');
+        }
+
+        optionCard.innerHTML = `
+          <div class="radio-custom"></div>
+          <div class="option-label">${opt.text}</div>
+        `;
+
+        if (!isSubmitted) {
+          optionCard.addEventListener('click', () => selectOption(idx));
+        }
+
+        optionsContainer.appendChild(optionCard);
+      });
+
+      // Render Explanation in Review Mode
+      explanationContainer.innerHTML = '';
+      if (isSubmitted) {
+        const expBox = document.createElement('div');
+        expBox.className = 'explanation-box';
+        expBox.innerHTML = `
+          <div class="explanation-title">Statutory Clause & Reference:</div>
+          <div>${q.explanation}</div>
+        `;
+        explanationContainer.appendChild(expBox);
+      }
+
+      // Update Navigation Buttons
+      prevBtn.disabled = currentQuestionIndex === 0;
+      nextBtn.disabled = currentQuestionIndex === shuffledQuestions.length - 1;
+
+      renderPalette();
+    }
+
+    // Select Option
+    function selectOption(optionIndex) {
+      if (isSubmitted) return;
+      userAnswers[currentQuestionIndex] = optionIndex;
+      renderCurrentQuestion();
+    }
+
+    // Clear Selection
+    clearBtn.addEventListener('click', () => {
+      if (isSubmitted) return;
+      delete userAnswers[currentQuestionIndex];
+      renderCurrentQuestion();
+    });
+
+    // Bookmark Toggle
+    bookmarkToggleBtn.addEventListener('click', () => {
+      if (bookmarks.has(currentQuestionIndex)) {
+        bookmarks.delete(currentQuestionIndex);
+      } else {
+        bookmarks.add(currentQuestionIndex);
+      }
+      renderCurrentQuestion();
+    });
+
+    // Navigation Events
+    prevBtn.addEventListener('click', () => {
+      if (currentQuestionIndex > 0) {
+        currentQuestionIndex--;
+        renderCurrentQuestion();
+      }
+    });
+
+    nextBtn.addEventListener('click', () => {
+      if (currentQuestionIndex < shuffledQuestions.length - 1) {
+        currentQuestionIndex++;
+        renderCurrentQuestion();
+      }
+    });
+
+    // Palette Rendering & Filter Logic
+    function renderPalette() {
+      paletteGrid.innerHTML = '';
+
+      shuffledQuestions.forEach((q, idx) => {
+        const isAnswered = userAnswers.hasOwnProperty(idx);
+        const isBookmarked = bookmarks.has(idx);
+
+        // Filter Evaluation
+        if (activeFilter === 'answered' && !isAnswered) return;
+        if (activeFilter === 'unanswered' && isAnswered) return;
+        if (activeFilter === 'bookmarked' && !isBookmarked) return;
+
+        const item = document.createElement('div');
+        item.className = 'palette-item';
+        item.textContent = idx + 1;
+
+        if (idx === currentQuestionIndex) {
+          item.classList.add('active-current');
+        }
+
+        if (isBookmarked) {
+          item.classList.add('bookmarked');
+        }
+
+        if (isSubmitted) {
+          const userAns = userAnswers[idx];
+          if (userAns === q.correctIndex) {
+            item.classList.add('correct-post');
+          } else if (userAns !== undefined) {
+            item.classList.add('incorrect-post');
+          }
+        } else if (isAnswered) {
+          item.classList.add('answered');
+        }
+
+        item.addEventListener('click', () => {
+          currentQuestionIndex = idx;
+          renderCurrentQuestion();
+        });
+
+        paletteGrid.appendChild(item);
+      });
+    }
+
+    // Filter Tab Buttons
+    function renderFilterTabs() {
+      const tabs = document.querySelectorAll('.tab-btn');
+      tabs.forEach(tab => {
+        tab.addEventListener('click', (e) => {
+          tabs.forEach(t => t.classList.remove('active'));
+          e.target.classList.add('active');
+          activeFilter = e.target.getAttribute('data-filter');
+          renderPalette();
+        });
+      });
+    }
+
+    // Submit Quiz & Show Results
+    function submitQuiz() {
+      if (isSubmitted) return;
+      isSubmitted = true;
+      clearInterval(timerInterval);
+
+      // Score Calculation
+      let correctCount = 0;
+      let incorrectCount = 0;
+      let answeredCount = 0;
+
+      shuffledQuestions.forEach((q, idx) => {
+        if (userAnswers.hasOwnProperty(idx)) {
+          answeredCount++;
+          if (userAnswers[idx] === q.correctIndex) {
+            correctCount++;
+          } else {
+            incorrectCount++;
+          }
+        }
+      });
+
+      const totalCount = shuffledQuestions.length;
+      const skippedCount = totalCount - answeredCount;
+      const percentage = Math.round((correctCount / totalCount) * 100);
+
+      // Modal Elements
+      document.getElementById('modalScoreDisplay').textContent = `${correctCount} / ${totalCount} (${percentage}%)`;
+      document.getElementById('summaryAnswered').textContent = answeredCount;
+      document.getElementById('summaryCorrect').textContent = correctCount;
+      document.getElementById('summaryIncorrect').textContent = incorrectCount;
+      document.getElementById('summarySkipped').textContent = skippedCount;
+
+      const badge = document.getElementById('modalBadge');
+      if (percentage >= 80) {
+        badge.textContent = "Excellent";
+        badge.className = "performance-badge badge-excellent";
+      } else if (percentage >= 50) {
+        badge.textContent = "Passed";
+        badge.className = "performance-badge badge-passed";
+      } else {
+        badge.textContent = "Failed";
+        badge.className = "performance-badge badge-failed";
+      }
+
+      resultsModal.classList.add('open');
+      renderCurrentQuestion();
+    }
+
+    function autoSubmitQuiz() {
+      alert("Time has expired! Automatically submitting your quiz.");
+      submitQuiz();
+    }
+
+    submitBtn.addEventListener('click', () => {
+      if (confirm("Are you sure you want to submit your quiz?")) {
+        submitQuiz();
+      }
+    });
+
+    // Review & Restart Handlers
+    document.getElementById('reviewModeBtn').addEventListener('click', () => {
+      resultsModal.classList.remove('open');
+    });
+
+    document.getElementById('modalRestartBtn').addEventListener('click', () => {
+      initQuizData();
+    });
+
+    restartBtn.addEventListener('click', () => {
+      if (confirm("Restarting will shuffle all questions and clear active progress. Proceed?")) {
+        initQuizData();
+      }
+    });
+
+    // Dark/Light Theme Switcher
+    themeToggleBtn.addEventListener('click', () => {
+      document.body.classList.toggle('dark-mode');
+      if (document.body.classList.contains('dark-mode')) {
+        themeToggleBtn.textContent = '☀️';
+      } else {
+        themeToggleBtn.textContent = '🌙';
+      }
+    });
+
+    // Initialize Engine On Load
+    window.addEventListener('DOMContentLoaded', () => {
+      initQuizData();
+    });
+  </script>
+</body>
+</html>
