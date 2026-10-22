@@ -1,0 +1,1324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NDMC Act, 1994 & Regulations Master Quiz - Set 4</title>
+  <style>
+    :root {
+      --bg-primary: #f4f6f9;
+      --bg-card: #ffffff;
+      --text-main: #1f2937;
+      --text-muted: #6b7280;
+      --border-color: #e5e7eb;
+      --primary-color: #2563eb;
+      --primary-hover: #1d4ed8;
+      --secondary-bg: #f3f4f6;
+      --success-color: #059669;
+      --success-bg: #d1fae5;
+      --danger-color: #dc2626;
+      --danger-bg: #fee2e2;
+      --warning-color: #d97706;
+      --warning-bg: #fef3c7;
+      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      --palette-unvisited: #e5e7eb;
+      --palette-unvisited-text: #374151;
+      --palette-answered: #2563eb;
+      --palette-answered-text: #ffffff;
+    }
+
+    body.dark-mode {
+      --bg-primary: #0f172a;
+      --bg-card: #1e293b;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --border-color: #334155;
+      --primary-color: #3b82f6;
+      --primary-hover: #60a5fa;
+      --secondary-bg: #334155;
+      --success-color: #10b981;
+      --success-bg: #064e3b;
+      --danger-color: #f87171;
+      --danger-bg: #7f1d1d;
+      --warning-color: #fbbf24;
+      --warning-bg: #78350f;
+      --palette-unvisited: #334155;
+      --palette-unvisited-text: #cbd5e1;
+      --palette-answered: #3b82f6;
+      --palette-answered-text: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    /* Sticky Header */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background-color: var(--bg-card);
+      border-bottom: 1px solid var(--border-color);
+      padding: 0.75rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .header-titles h1 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--primary-color);
+    }
+
+    .header-titles p {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .header-controls {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .timer-badge {
+      font-family: monospace;
+      font-size: 1.15rem;
+      font-weight: 700;
+      padding: 0.4rem 0.8rem;
+      border-radius: 6px;
+      background-color: var(--secondary-bg);
+      color: var(--text-main);
+      border: 1px solid var(--border-color);
+    }
+
+    .timer-badge.warning {
+      background-color: var(--danger-bg);
+      color: var(--danger-color);
+      border-color: var(--danger-color);
+      animation: pulse 1s infinite alternate;
+    }
+
+    @keyframes pulse {
+      from { opacity: 1; }
+      to { opacity: 0.7; }
+    }
+
+    .btn {
+      padding: 0.5rem 1rem;
+      font-size: 0.875rem;
+      font-weight: 600;
+      border-radius: 6px;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+    }
+
+    .btn-primary {
+      background-color: var(--primary-color);
+      color: #ffffff;
+    }
+
+    .btn-primary:hover {
+      background-color: var(--primary-hover);
+    }
+
+    .btn-secondary {
+      background-color: var(--secondary-bg);
+      color: var(--text-main);
+      border-color: var(--border-color);
+    }
+
+    .btn-secondary:hover {
+      filter: brightness(0.95);
+    }
+
+    .btn-danger {
+      background-color: var(--danger-color);
+      color: #ffffff;
+    }
+
+    .btn-danger:hover {
+      filter: brightness(0.9);
+    }
+
+    /* Main Container Grid */
+    .container {
+      max-width: 1280px;
+      width: 100%;
+      margin: 1.5rem auto;
+      padding: 0 1rem;
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: 1.5rem;
+      flex: 1;
+    }
+
+    @media (max-width: 900px) {
+      .container {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Question Card */
+    .card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 1.5rem;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .question-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .question-index {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+
+    .bookmark-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1.25rem;
+      color: var(--text-muted);
+      transition: color 0.2s;
+    }
+
+    .bookmark-btn.active {
+      color: var(--warning-color);
+    }
+
+    .question-text {
+      font-size: 1.1rem;
+      font-weight: 600;
+      line-height: 1.5;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Options List */
+    .options-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-bottom: 2rem;
+    }
+
+    .option-card {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 1rem;
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s;
+      background-color: var(--bg-card);
+    }
+
+    .option-card:hover {
+      border-color: var(--primary-color);
+      background-color: var(--secondary-bg);
+    }
+
+    .option-card.selected {
+      border-color: var(--primary-color);
+      background-color: var(--secondary-bg);
+      box-shadow: 0 0 0 1px var(--primary-color);
+    }
+
+    .option-card.correct-review {
+      border-color: var(--success-color);
+      background-color: var(--success-bg);
+      color: var(--text-main);
+    }
+
+    .option-card.incorrect-review {
+      border-color: var(--danger-color);
+      background-color: var(--danger-bg);
+      color: var(--text-main);
+    }
+
+    .radio-custom {
+      width: 18px;
+      height: 18px;
+      border: 2px solid var(--border-color);
+      border-radius: 50%;
+      margin-top: 2px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .option-card.selected .radio-custom {
+      border-color: var(--primary-color);
+    }
+
+    .option-card.selected .radio-custom::after {
+      content: "";
+      width: 10px;
+      height: 10px;
+      background-color: var(--primary-color);
+      border-radius: 50%;
+    }
+
+    .option-label {
+      font-size: 0.95rem;
+      line-height: 1.4;
+      flex: 1;
+    }
+
+    /* Bottom Action Bar */
+    .card-actions {
+      margin-top: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.5rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border-color);
+      flex-wrap: wrap;
+    }
+
+    .action-group {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    /* Explanation Box */
+    .explanation-box {
+      margin-top: 1.5rem;
+      padding: 1rem;
+      border-radius: 6px;
+      background-color: var(--secondary-bg);
+      border-left: 4px solid var(--primary-color);
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    .explanation-title {
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+      color: var(--primary-color);
+    }
+
+    /* Sidebar / Palette */
+    .sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .filter-tabs {
+      display: flex;
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      overflow: hidden;
+      background-color: var(--bg-card);
+    }
+
+    .tab-btn {
+      flex: 1;
+      padding: 0.5rem 0.2rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      border: none;
+      background: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      text-align: center;
+      transition: background-color 0.2s, color 0.2s;
+    }
+
+    .tab-btn.active {
+      background-color: var(--primary-color);
+      color: #ffffff;
+    }
+
+    .palette-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 0.5rem;
+      max-height: 400px;
+      overflow-y: auto;
+      padding: 0.25rem;
+    }
+
+    .palette-item {
+      aspect-ratio: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      font-weight: 700;
+      border-radius: 6px;
+      border: 1px solid var(--border-color);
+      cursor: pointer;
+      background-color: var(--palette-unvisited);
+      color: var(--palette-unvisited-text);
+      position: relative;
+      transition: all 0.2s;
+    }
+
+    .palette-item.active-current {
+      outline: 2px solid var(--primary-color);
+      outline-offset: 2px;
+    }
+
+    .palette-item.answered {
+      background-color: var(--palette-answered);
+      color: var(--palette-answered-text);
+      border-color: var(--palette-answered);
+    }
+
+    .palette-item.bookmarked::after {
+      content: "★";
+      position: absolute;
+      top: 1px;
+      right: 3px;
+      font-size: 0.65rem;
+      color: var(--warning-color);
+    }
+
+    .palette-item.correct-post {
+      background-color: var(--success-color);
+      color: #ffffff;
+      border-color: var(--success-color);
+    }
+
+    .palette-item.incorrect-post {
+      background-color: var(--danger-color);
+      color: #ffffff;
+      border-color: var(--danger-color);
+    }
+
+    .legend-box {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.5rem;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      padding: 0.75rem;
+      border-top: 1px solid var(--border-color);
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .legend-color {
+      width: 12px;
+      height: 12px;
+      border-radius: 3px;
+    }
+
+    /* Modal Overlay */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .modal-overlay.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-card {
+      background-color: var(--bg-card);
+      border-radius: 8px;
+      max-width: 500px;
+      width: 90%;
+      padding: 2rem;
+      box-shadow: var(--shadow-md);
+      text-align: center;
+    }
+
+    .modal-score {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--primary-color);
+      margin: 1rem 0;
+    }
+
+    .performance-badge {
+      display: inline-block;
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      font-weight: 700;
+      font-size: 0.85rem;
+      margin-bottom: 1.5rem;
+      text-transform: uppercase;
+    }
+
+    .badge-excellent { background-color: var(--success-bg); color: var(--success-color); }
+    .badge-passed { background-color: var(--warning-bg); color: var(--warning-color); }
+    .badge-failed { background-color: var(--danger-bg); color: var(--danger-color); }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+      text-align: left;
+      font-size: 0.9rem;
+    }
+
+    .summary-item {
+      padding: 0.5rem;
+      background-color: var(--secondary-bg);
+      border-radius: 4px;
+    }
+
+    .summary-item span {
+      font-weight: 700;
+      float: right;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sticky Header -->
+  <header>
+    <div class="header-titles">
+      <h1>NDMC Act, 1994 & Regulations</h1>
+      <p>Interactive Statutory Assessment Engine - Set 4 (Mastery Level)</p>
+    </div>
+    <div class="header-controls">
+      <div id="timerDisplay" class="timer-badge">30:00</div>
+      <button id="restartBtn" class="btn btn-secondary" title="Reshuffle & Restart">🔄 Restart</button>
+      <button id="themeToggleBtn" class="btn btn-secondary" title="Toggle Light/Dark Mode">🌙</button>
+    </div>
+  </header>
+
+  <!-- Main Content Layout -->
+  <div class="container">
+    <!-- Left Column: Active Question -->
+    <main class="card">
+      <div class="question-header">
+        <span id="questionIndexDisplay" class="question-index">Question 1 of 50</span>
+        <button id="bookmarkToggleBtn" class="bookmark-btn" title="Bookmark Question">★</button>
+      </div>
+      <div id="questionTextDisplay" class="question-text">Loading question...</div>
+      
+      <div id="optionsContainer" class="options-list"></div>
+
+      <div id="explanationContainer"></div>
+
+      <div class="card-actions">
+        <div class="action-group">
+          <button id="prevBtn" class="btn btn-secondary">Previous</button>
+          <button id="nextBtn" class="btn btn-secondary">Next</button>
+        </div>
+        <div class="action-group">
+          <button id="clearBtn" class="btn btn-secondary">Clear Selection</button>
+          <button id="submitBtn" class="btn btn-danger">Submit Quiz</button>
+        </div>
+      </div>
+    </main>
+
+    <!-- Right Column: Palette & Filters -->
+    <aside class="sidebar">
+      <div class="card">
+        <div class="filter-tabs">
+          <button class="tab-btn active" data-filter="all">All</button>
+          <button class="tab-btn" data-filter="answered">Answered</button>
+          <button class="tab-btn" data-filter="unanswered">Unanswered</button>
+          <button class="tab-btn" data-filter="bookmarked">Bookmarked</button>
+        </div>
+        <div id="paletteGrid" class="palette-grid" style="margin-top: 1rem;"></div>
+        <div class="legend-box">
+          <div class="legend-item"><div class="legend-color" style="background: var(--palette-unvisited);"></div> Unanswered</div>
+          <div class="legend-item"><div class="legend-color" style="background: var(--palette-answered);"></div> Answered</div>
+          <div class="legend-item"><div class="legend-color" style="background: var(--success-color);"></div> Correct</div>
+          <div class="legend-item"><div class="legend-color" style="background: var(--danger-color);"></div> Incorrect</div>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <!-- Results Modal -->
+  <div id="resultsModal" class="modal-overlay">
+    <div class="modal-card">
+      <h2>Assessment Complete</h2>
+      <div id="modalScoreDisplay" class="modal-score">0 / 50</div>
+      <div id="modalBadge" class="performance-badge">Passed</div>
+      
+      <div class="summary-grid">
+        <div class="summary-item">Total Answered <span id="summaryAnswered">0</span></div>
+        <div class="summary-item">Correct <span id="summaryCorrect">0</span></div>
+        <div class="summary-item">Incorrect <span id="summaryIncorrect">0</span></div>
+        <div class="summary-item">Skipped <span id="summarySkipped">0</span></div>
+      </div>
+
+      <div style="display: flex; gap: 0.5rem; justify-content: center;">
+        <button id="reviewModeBtn" class="btn btn-primary">Review Detailed Answers</button>
+        <button id="modalRestartBtn" class="btn btn-secondary">Restart Quiz</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // 50 BRAND NEW, DISTINCT Questions on NDMC Act, 1994 & Regulations (Set 4)
+    const rawQuestionsData = [
+      {
+        id: 1,
+        question: "Under Section 2(31) of the NDMC Act, 1994, which of the following is defined as 'occupier'?",
+        options: ["Only the owner residing in the premises", "An owner in occupation, or a person paying rent, or a rent-free tenant, licensee, or squatter", "Only a person holding a registered lease for more than 99 years", "Any officer of the Ministry of Urban Development"],
+        correctIndex: 1,
+        explanation: "Section 2(31) defines 'occupier' broadly to include an owner in occupation, a person paying rent, a rent-free tenant, a licensee, or a squatter."
+      },
+      {
+        id: 2,
+        question: "According to Section 2(42), 'premises' includes which of the following?",
+        options: ["Only constructed concrete buildings", "Messuages, buildings, lands and hereditaments of any tenure", "Public parks and municipal roads exclusively", "Vehicles parked inside municipal lots"],
+        correctIndex: 1,
+        explanation: "Section 2(42) defines 'premises' as messuages, buildings, lands and hereditaments of any tenure."
+      },
+      {
+        id: 3,
+        question: "Under Section 4(1)(d), how many members are nominated by the Central Government in consultation with the Chief Minister of Delhi from amongst prominent residents?",
+        options: ["Two members", "Three members", "Four members", "Five members"],
+        correctIndex: 2,
+        explanation: "Section 4(1)(d) provides for four members to be nominated by the Central Government in consultation with the Chief Minister of Delhi."
+      },
+      {
+        id: 4,
+        question: "Under Section 6(1)(e), a person is disqualified for being chosen as a member if they are in arrears of any tax due to the Council for more than:",
+        options: ["One month after notice of demand", "Three months after notice of demand", "Six months after notice of demand", "One year after notice of demand"],
+        correctIndex: 2,
+        explanation: "Section 6(1)(e) disqualifies any person who has failed to pay arrears of any tax due to the Council for more than six months after notice of demand."
+      },
+      {
+        id: 5,
+        question: "Under Section 10(1), who has the right to attend meetings of the Council and take part in discussions, but cannot vote unless they are a member?",
+        options: ["The Chief Auditor", "The Chairperson", "The High Court Registrar", "The Secretary of Urban Development"],
+        correctIndex: 1,
+        explanation: "Section 10(1) states that the Chairperson shall have the right to attend meetings of the Council and participate in discussions without a vote unless he is a member."
+      },
+      {
+        id: 6,
+        question: "Under Section 14, the Vice-Chairperson holds office for what period?",
+        options: ["1 year from appointment", "5 years or remaining term as a member", "At the pleasure of the Chief Minister", "3 years strictly"],
+        correctIndex: 1,
+        explanation: "Section 14 provides that the Vice-Chairperson shall hold office for five years or for the remainder of his term as a member."
+      },
+      {
+        id: 7,
+        question: "Under Section 17, who is responsible for the custody of all records and documents of the Council?",
+        options: ["The Vice-Chairperson", "The Chairperson", "The Chief Auditor", "The Finance Officer"],
+        correctIndex: 1,
+        explanation: "Section 17 assigns the custody of all municipal records, reports, and documents to the Chairperson."
+      },
+      {
+        id: 8,
+        question: "Under Section 24(1), what is the statutory quorum required to transact business at a meeting of the Council?",
+        options: ["Three members", "Five members", "One-third of total members", "Half of total members"],
+        correctIndex: 1,
+        explanation: "Section 24(1) prescribes that five members shall form a quorum for transacting business at a meeting of the Council."
+      },
+      {
+        id: 9,
+        question: "Under Section 29, the Chairperson must furnish to the Administrator copies of all resolutions passed by the Council within how many days?",
+        options: ["Within 3 days", "Within 7 days", "Within 10 days", "Within 15 days"],
+        correctIndex: 1,
+        explanation: "Section 29 requires the Chairperson to forward a copy of every resolution passed by the Council to the Administrator within seven days."
+      },
+      {
+        id: 10,
+        question: "Under Section 35(1), who determines the nomenclature, grading, and pay scales of Category 'A', 'B', 'C', and 'D' posts in NDMC?",
+        options: ["The High Court of Delhi", "The Council with the approval of the Central Government", "The Chief Minister of Delhi", "The Union Public Service Commission"],
+        correctIndex: 1,
+        explanation: "Section 35(1) states that the Council shall, with the approval of the Central Government, determine the designation, grades, and pay scales of municipal posts."
+      },
+      {
+        id: 11,
+        question: "Under Section 42, an employee aggrieved by an order of punishment passed under Section 39 may prefer an appeal within how many days?",
+        options: ["15 days", "30 days", "45 days", "60 days"],
+        correctIndex: 1,
+        explanation: "Section 42 specifies that an appeal against a disciplinary order must be filed within thirty days from the date of communication of the order."
+      },
+      {
+        id: 12,
+        question: "Under Section 44(1), all moneys received by or on behalf of the Council are credited to a single fund known as:",
+        options: ["The Consolidated Fund of Delhi", "The New Delhi Municipal Fund", "The NDMC Revenue & Treasury Reserve", "The Central Municipal Corpus"],
+        correctIndex: 1,
+        explanation: "Section 44(1) establishes that all moneys received by or on behalf of the Council shall form one fund called 'The New Delhi Municipal Fund'."
+      },
+      {
+        id: 13,
+        question: "Under Section 48, who is empowered to write off irrecoverable sums due to the Council up to amounts specified in bye-laws?",
+        options: ["The Chief Auditor", "The Chairperson", "The Finance Adviser", "The Secretary"],
+        correctIndex: 1,
+        explanation: "Section 48 empowers the Chairperson to write off any sum due to the Council if in his opinion such sum is irrecoverable, subject to limits fixed by bye-laws."
+      },
+      {
+        id: 14,
+        question: "Under Section 50(1), the annual accounts of the Council prepared by the Chairperson must be laid before the Chief Auditor on or before:",
+        options: ["30th day of April", "31st day of May", "30th day of June", "31st day of July"],
+        correctIndex: 3,
+        explanation: "Section 50(1) mandates that the Chairperson shall prepare and submit annual accounts to the Chief Auditor on or before the 31st day of July each year."
+      },
+      {
+        id: 15,
+        question: "Under Section 58, the Chief Auditor must submit his annual audit report on the accounts of the Council to:",
+        options: ["The Union Home Ministry", "The Council", "The High Court", "The Ministry of Finance"],
+        correctIndex: 1,
+        explanation: "Section 58 requires the Chief Auditor to submit a report on the accounts of the Council to the Council."
+      },
+      {
+        id: 16,
+        question: "Under Section 65(1), property tax on government lands and buildings is payable by:",
+        options: ["The Central Government or State Government concerned", "The individual government officer in occupation", "The local Resident Welfare Association", "No one, as govt properties are totally free from service charges"],
+        correctIndex: 0,
+        explanation: "Section 65(1) specifies that property tax on government properties is payable by the Central Government or State Government, as the case may be."
+      },
+      {
+        id: 17,
+        question: "Under Section 71(1), written objections to rateable values entered in the draft assessment list must be submitted to the Chairperson within how many days of public notice?",
+        options: ["15 days", "21 days", "30 days", "60 days"],
+        correctIndex: 2,
+        explanation: "Section 71(1) provides that any objection must be made in writing before the expiration of thirty days from the date of publication of notice."
+      },
+      {
+        id: 18,
+        question: "Under Section 76, when a building is demolished or destroyed, tax liability ceases from what date, provided written notice is given?",
+        options: ["From the beginning of the financial year", "From the exact date of demolition/destruction", "30 days after demolition", "From the date the site is inspected"],
+        correctIndex: 1,
+        explanation: "Section 76 states that when a building is demolished or destroyed, property tax liability shall cease from the date of such demolition or destruction."
+      },
+      {
+        id: 19,
+        question: "Under Section 80(1), who is empowered to inspect lands and buildings for the purpose of fixing rateable value?",
+        options: ["The Chairperson or any officer authorized by him", "The Police Sub-Inspector", "The Station House Officer", "The Municipal Auditor"],
+        correctIndex: 0,
+        explanation: "Section 80(1) authorizes the Chairperson or any municipal officer empowered by him to enter and inspect property for assessment purposes."
+      },
+      {
+        id: 20,
+        question: "Under Section 84(1), every person keeping a vehicle or animal liable to tax must fill and return a declaration form within how many days of notice?",
+        options: ["7 days", "15 days", "30 days", "60 days"],
+        correctIndex: 0,
+        explanation: "Section 84(1) mandates that the owner/keeper shall return the signed declaration within seven days from service of notice."
+      },
+      {
+        id: 21,
+        question: "Under Section 91, if an advertisement is displayed in contravention of Section 89, who may remove or cause to be removed such advertisement?",
+        options: ["The Chairperson or any authorized officer", "The High Court Registrar", "The Traffic Police Inspector", "The local Resident Welfare Association"],
+        correctIndex: 0,
+        explanation: "Section 91 empowers the Chairperson to remove or dismantle any unauthorized advertisement displayed without permission."
+      },
+      {
+        id: 22,
+        question: "Under Section 98, every tax bill presented by the Council must contain which essential details?",
+        options: ["Only the total sum demanded", "The period for which tax is claimed, property description, and time limit to file appeal/pay", "The names of all Council members", "A copy of the annual budget grant"],
+        correctIndex: 1,
+        explanation: "Section 98 specifies that every bill shall state the period, description of property/occupation, and notice of the time/manner of appeal."
+      },
+      {
+        id: 23,
+        question: "Under Section 105(1), if distrained property is perishable or if the expense of keeping it will equal its value, the Chairperson may sell it:",
+        options: ["Forthwith (immediately)", "After 7 days", "After 15 days", "After 30 days"],
+        correctIndex: 0,
+        explanation: "Section 105(1) permits immediate sale (forthwith) if the property seized is subject to speedy decay or keeping expenses exceed value."
+      },
+      {
+        id: 24,
+        question: "Under Section 111(1), no claim for tax refund or remission on account of vacancy shall be entertained unless notice of vacancy was given to the Chairperson within how many days of vacating?",
+        options: ["7 days", "15 days", "30 days", "60 days"],
+        correctIndex: 0,
+        explanation: "Section 111(1) requires written notice of vacancy to be delivered within seven days from the date on which the premises became vacant."
+      },
+      {
+        id: 25,
+        question: "Under Section 117(1), no appeal against tax assessment shall be heard by the District Judge unless the tax disputed has been:",
+        options: ["Waived by the Chairperson", "Deposited with the Council", "Guaranteed by a bank guarantee of 10%", "Postponed by Council resolution"],
+        correctIndex: 1,
+        explanation: "Section 117(1) mandates pre-deposit of the disputed tax amount with the Council before the appeal can be heard."
+      },
+      {
+        id: 26,
+        question: "Under Section 126, the Council may raise loans for municipal purposes with the previous sanction of:",
+        options: ["The High Court of Delhi", "The Central Government", "The Reserve Bank of India", "The Legislative Assembly of Delhi"],
+        correctIndex: 1,
+        explanation: "Section 126 permits borrowing money for construction, land acquisition, or debt discharge only with the previous sanction of the Central Government."
+      },
+      {
+        id: 27,
+        question: "Under Section 136, every contract made on behalf of the Council must be executed by:",
+        options: ["The Vice-Chairperson", "The Chairperson or an officer empowered by him", "The Secretary exclusively", "The Chief Engineer"],
+        correctIndex: 1,
+        explanation: "Section 136 requires all municipal contracts to be executed by the Chairperson or by an officer empowered by him."
+      },
+      {
+        id: 28,
+        question: "Under Section 145(1), who has the right to inspect municipal public water supply works at all reasonable times?",
+        options: ["Any ratepayer of New Delhi", "The Chairperson or authorized municipal officers", "Only Central Government auditors", "Members of Parliament only"],
+        correctIndex: 1,
+        explanation: "Section 145(1) empowers the Chairperson or any authorized officer to inspect water works, fittings, and apparatus."
+      },
+      {
+        id: 29,
+        question: "Under Section 151, if any person willfully or negligently injures or causes injury to any municipal water pipe or fitting, they are punishable with fine up to:",
+        options: ["One hundred rupees", "Five hundred rupees", "One thousand rupees", "Five thousand rupees"],
+        correctIndex: 2,
+        explanation: "Section 151 prescribes a fine up to one thousand rupees for willfully or negligently damaging municipal water works or fittings."
+      },
+      {
+        id: 30,
+        question: "Under Section 160, the Chairperson may cut off water supply to premises if the occupier fails to pay water charges within how many days after notice of demand?",
+        options: ["7 days", "15 days", "30 days", "45 days"],
+        correctIndex: 1,
+        explanation: "Section 160 authorizes disconnection of water supply if water rates/charges remain unpaid for fifteen days after presentation of bill/demand."
+      },
+      {
+        id: 31,
+        question: "Under Section 176(1), no person shall discharge trade effluent into a municipal drain without written permission of:",
+        options: ["The Central Pollution Control Board", "The Chairperson", "The Factory Inspector", "The Medical Officer"],
+        correctIndex: 1,
+        explanation: "Section 176(1) requires written consent of the Chairperson before any owner or occupier can discharge trade effluent into municipal drains."
+      },
+      {
+        id: 32,
+        question: "Under Section 188, who is responsible for keeping gullies, drains, and sewers clean within private premises?",
+        options: ["The Council scavenging squad", "The owner or occupier of the premises", "The local Resident Welfare Association", "The Central Public Works Department"],
+        correctIndex: 1,
+        explanation: "Section 188 places the responsibility of maintaining and cleaning internal private drains, gullies, and latrines on the owner/occupier."
+      },
+      {
+        id: 33,
+        question: "Under Section 199(1), if an electricity consumer alters or tampers with a meter, the Council may disconnect electricity supply after giving notice of:",
+        options: ["24 hours", "48 hours", "7 days", "15 days"],
+        correctIndex: 0,
+        explanation: "Section 199(1) allows disconnection upon giving twenty-four hours' written notice if electrical apparatus/meter is tampered with."
+      },
+      {
+        id: 34,
+        question: "Under Section 202, all public streets in New Delhi, including pavement, stones, and materials, vest in:",
+        options: ["The Delhi Development Authority", "The Council", "The Ministry of Urban Development", "The Archaeological Survey of India"],
+        correctIndex: 1,
+        explanation: "Section 202 mandates that all public streets situated in New Delhi vest in and belong to the Council."
+      },
+      {
+        id: 35,
+        question: "Under Section 211, the Chairperson may prohibit vehicular traffic in any street or part of a street for the purpose of:",
+        options: ["Carrying out street repair, drainage work, or public safety", "Promoting commercial street fairs", "Reserving parking for municipal officers", "Conducting VIP political rallies"],
+        correctIndex: 0,
+        explanation: "Section 211 empowers the Chairperson to close public streets to traffic temporarily for repairs, drainage works, or public safety."
+      },
+      {
+        id: 36,
+        question: "Under Section 226, hanging projections, verandahs, or balconies over public streets without written permission of the Chairperson is:",
+        options: ["Permitted up to 1 meter depth", "Prohibited and punishable under the Act", "Allowed on payment of a flat annual fine", "Exempt for commercial heritage buildings"],
+        correctIndex: 1,
+        explanation: "Section 226 prohibits constructing projections, verandahs, or balconies over public streets without prior written permission."
+      },
+      {
+        id: 37,
+        question: "Under Section 236, a person giving notice to erect a building must submit detailed plans certified by a recognized:",
+        options: ["Civil contractor", "Licensed Architect or Engineer", "Land valuer", "Notary public"],
+        correctIndex: 1,
+        explanation: "Section 236 requires building plans accompanying notice to be prepared and signed by a licensed architect or qualified engineer."
+      },
+      {
+        id: 38,
+        question: "Under Section 247(2), if a person fails to execute demolition ordered under Section 247(1), the Chairperson may execute demolition and recover costs as:",
+        options: ["Arrears of tax under the Act", "A civil decree in High Court", "An administrative fine of Rs. 10,000", "A criminal forfeiture of land"],
+        correctIndex: 0,
+        explanation: "Section 247(2) provides that expenses incurred by the Chairperson in carrying out demolition shall be recoverable as arrears of tax."
+      },
+      {
+        id: 39,
+        question: "Under Section 262, the Chairperson must provide dustbins, rubbish depots, and places for temporary deposit of filth at convenient locations in:",
+        options: ["Commercial areas only", "Public streets and places in New Delhi", "Government bungalows exclusively", "Slum tenements"],
+        correctIndex: 1,
+        explanation: "Section 262 obligates the Chairperson to provide dustbins and receptacles in public streets and places for collection of rubbish and filth."
+      },
+      {
+        id: 40,
+        question: "Under Section 276, keeping animals so as to be a nuisance or dangerous to health in any premises is:",
+        options: ["Permitted if animals are vaccinated", "Strictly prohibited", "Allowed in agricultural zones only", "Subject to a nominal monthly tax"],
+        correctIndex: 1,
+        explanation: "Section 276 prohibits keeping animals in any premises in a manner that causes a nuisance or creates risk to public health."
+      },
+      {
+        id: 41,
+        question: "Under Section 285, the Chairperson may order the closure of any infected water source (well, tank, stream) if he believes its water is likely to cause:",
+        options: ["Soil erosion", "Spread of dangerous disease", "Loss of water revenue", "Algal bloom in decorative fountains"],
+        correctIndex: 1,
+        explanation: "Section 285 authorizes closing or restricting use of any water source likely to cause or spread dangerous disease."
+      },
+      {
+        id: 42,
+        question: "Under Section 302, who maintains register books for recording births and deaths in each registration district?",
+        options: ["The District Magistrate", "The Registrar appointed by the Chief Registrar", "The Sub-Registrar of Assurances", "The Station House Officer"],
+        correctIndex: 1,
+        explanation: "Section 302 mandates that Registrars appointed for each district shall maintain register books of births and deaths."
+      },
+      {
+        id: 43,
+        question: "Under Section 314, municipal slaughter houses maintained by the Council are managed in accordance with regulations framed by:",
+        options: ["The Council", "The Veterinary Council of India", "The Animal Welfare Board", "The High Court"],
+        correctIndex: 0,
+        explanation: "Section 314 dictates that slaughter houses shall be managed, controlled, and regulated by regulations made by the Council."
+      },
+      {
+        id: 44,
+        question: "Under Section 325(1), using any premises for hazardous, offensive, or dangerous trades specified in the Schedule without a licence from the Chairperson is:",
+        options: ["Allowed during day hours", "Prohibited", "Permitted for registered MSME units", "Allowed with police NOC only"],
+        correctIndex: 1,
+        explanation: "Section 325(1) specifies that no person shall use premises for trades listed in the relevant Schedule without a valid licence."
+      },
+      {
+        id: 45,
+        question: "Under Section 347, every notice, order, or requisition issued under the Act must be signed by:",
+        options: ["The Vice-Chairperson", "The Chairperson or an authorized officer", "The High Court Registrar", "The Local MLA"],
+        correctIndex: 1,
+        explanation: "Section 347 mandates that every notice, bill, or order shall bear the signature of the Chairperson or an authorized officer."
+      },
+      {
+        id: 46,
+        question: "Under Section 352, service of any notice or document upon a individual person may be effected by delivering or tendering it to:",
+        options: ["The person concerned, or an adult male member or servant of his family", "Any neighbor residing in the locality", "The local Resident Welfare Association president", "The postal carrier"],
+        correctIndex: 0,
+        explanation: "Section 352 provides that service may be made by delivering the notice to the person or an adult family member/servant residing with him."
+      },
+      {
+        id: 47,
+        question: "Under Section 367, if a person obstructs any municipal officer or worker in the performance of their duty, they are punishable with fine up to:",
+        options: ["One hundred rupees", "Five hundred rupees", "One thousand rupees", "Two thousand rupees"],
+        correctIndex: 2,
+        explanation: "Section 367 prescribes a fine up to one thousand rupees for obstructing any person acting under the authority of the Act."
+      },
+      {
+        id: 48,
+        question: "Under Section 385, no suit shall be instituted against the Council or any municipal officer for anything done in good faith until the expiration of how many months after written notice?",
+        options: ["15 days", "One month", "Two months", "Three months"],
+        correctIndex: 2,
+        explanation: "Section 385 provides a statutory notice period of two months before instituting a suit against the Council or its officers."
+      },
+      {
+        id: 49,
+        question: "Under Section 394, the Central Government may, by notification, declare that any function or duty of the Council shall be exercised subject to control and supervision of:",
+        options: ["The Administrator", "The High Court of Delhi", "The Supreme Court", "The Comptroller and Auditor General"],
+        correctIndex: 0,
+        explanation: "Section 394 empowers the Central Government to subject municipal functions to the control and direction of the Administrator."
+      },
+      {
+        id: 50,
+        question: "Under Section 413, if any difficulty arises in giving effect to the provisions of the Act, who may make orders to remove the difficulty?",
+        options: ["The High Court of Delhi", "The Central Government", "The Council by 2/3rd majority", "The Chief Minister of Delhi"],
+        correctIndex: 1,
+        explanation: "Section 413 empowers the Central Government to issue orders in the Official Gazette for removing any difficulty in implementing the Act."
+      }
+    ];
+
+    // State Variables
+    let shuffledQuestions = [];
+    let currentQuestionIndex = 0;
+    let userAnswers = {}; // { questionIndex: selectedOptionIndex }
+    let bookmarks = new Set();
+    let isSubmitted = false;
+    let activeFilter = 'all';
+
+    // Timer Variables
+    const TOTAL_TIME_SECONDS = 30 * 60; // 30 mins
+    let timeRemaining = TOTAL_TIME_SECONDS;
+    let timerInterval = null;
+
+    // DOM Elements
+    const questionIndexDisplay = document.getElementById('questionIndexDisplay');
+    const bookmarkToggleBtn = document.getElementById('bookmarkToggleBtn');
+    const questionTextDisplay = document.getElementById('questionTextDisplay');
+    const optionsContainer = document.getElementById('optionsContainer');
+    const explanationContainer = document.getElementById('explanationContainer');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const clearBtn = document.getElementById('clearBtn');
+    const submitBtn = document.getElementById('submitBtn');
+    const paletteGrid = document.getElementById('paletteGrid');
+    const timerDisplay = document.getElementById('timerDisplay');
+    const themeToggleBtn = document.getElementById('themeToggleBtn');
+    const restartBtn = document.getElementById('restartBtn');
+    const resultsModal = document.getElementById('resultsModal');
+
+    // Fisher-Yates Shuffle Algorithm
+    function fisherYatesShuffle(array) {
+      const arr = [...array];
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+      return arr;
+    }
+
+    // Initialize/Reset Quiz Data Engine
+    function initQuizData() {
+      // Deep copy and shuffle questions
+      shuffledQuestions = fisherYatesShuffle(rawQuestionsData).map(q => {
+        // Prepare options array with original indices tracked
+        const optionsObj = q.options.map((optText, index) => ({
+          text: optText,
+          originalIndex: index
+        }));
+        
+        // Shuffle options
+        const shuffledOptions = fisherYatesShuffle(optionsObj);
+        
+        // Find new correct index
+        const newCorrectIndex = shuffledOptions.findIndex(o => o.originalIndex === q.correctIndex);
+
+        return {
+          id: q.id,
+          question: q.question,
+          options: shuffledOptions,
+          correctIndex: newCorrectIndex,
+          explanation: q.explanation
+        };
+      });
+
+      // Reset runtime state
+      currentQuestionIndex = 0;
+      userAnswers = {};
+      bookmarks.clear();
+      isSubmitted = false;
+      activeFilter = 'all';
+
+      // Reset Timer
+      clearInterval(timerInterval);
+      timeRemaining = TOTAL_TIME_SECONDS;
+      updateTimerUI();
+      startTimer();
+
+      // Reset UI Controls
+      submitBtn.disabled = false;
+      clearBtn.disabled = false;
+      resultsModal.classList.remove('open');
+
+      renderFilterTabs();
+      renderCurrentQuestion();
+      renderPalette();
+    }
+
+    // Timer Logic
+    function startTimer() {
+      timerInterval = setInterval(() => {
+        timeRemaining--;
+        updateTimerUI();
+
+        if (timeRemaining <= 0) {
+          clearInterval(timerInterval);
+          autoSubmitQuiz();
+        }
+      }, 1000);
+    }
+
+    function updateTimerUI() {
+      const minutes = Math.floor(timeRemaining / 60);
+      const seconds = timeRemaining % 60;
+      const formatted = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+      timerDisplay.textContent = formatted;
+
+      if (timeRemaining < 300) { // < 5 mins
+        timerDisplay.classList.add('warning');
+      } else {
+        timerDisplay.classList.remove('warning');
+      }
+    }
+
+    // Render Question Card
+    function renderCurrentQuestion() {
+      const q = shuffledQuestions[currentQuestionIndex];
+      
+      questionIndexDisplay.textContent = `Question ${currentQuestionIndex + 1} of ${shuffledQuestions.length}`;
+      questionTextDisplay.textContent = q.question;
+
+      // Bookmark state
+      if (bookmarks.has(currentQuestionIndex)) {
+        bookmarkToggleBtn.classList.add('active');
+      } else {
+        bookmarkToggleBtn.classList.remove('active');
+      }
+
+      // Render Options
+      optionsContainer.innerHTML = '';
+      const selectedOption = userAnswers[currentQuestionIndex];
+
+      q.options.forEach((opt, idx) => {
+        const optionCard = document.createElement('div');
+        optionCard.className = 'option-card';
+
+        // Apply review styling if submitted
+        if (isSubmitted) {
+          if (idx === q.correctIndex) {
+            optionCard.classList.add('correct-review');
+          } else if (selectedOption === idx && selectedOption !== q.correctIndex) {
+            optionCard.classList.add('incorrect-review');
+          }
+        } else if (selectedOption === idx) {
+          optionCard.classList.add('selected');
+        }
+
+        optionCard.innerHTML = `
+          <div class="radio-custom"></div>
+          <div class="option-label">${opt.text}</div>
+        `;
+
+        if (!isSubmitted) {
+          optionCard.addEventListener('click', () => selectOption(idx));
+        }
+
+        optionsContainer.appendChild(optionCard);
+      });
+
+      // Render Explanation in Review Mode
+      explanationContainer.innerHTML = '';
+      if (isSubmitted) {
+        const expBox = document.createElement('div');
+        expBox.className = 'explanation-box';
+        expBox.innerHTML = `
+          <div class="explanation-title">Statutory Clause & Reference:</div>
+          <div>${q.explanation}</div>
+        `;
+        explanationContainer.appendChild(expBox);
+      }
+
+      // Update Navigation Buttons
+      prevBtn.disabled = currentQuestionIndex === 0;
+      nextBtn.disabled = currentQuestionIndex === shuffledQuestions.length - 1;
+
+      renderPalette();
+    }
+
+    // Select Option
+    function selectOption(optionIndex) {
+      if (isSubmitted) return;
+      userAnswers[currentQuestionIndex] = optionIndex;
+      renderCurrentQuestion();
+    }
+
+    // Clear Selection
+    clearBtn.addEventListener('click', () => {
+      if (isSubmitted) return;
+      delete userAnswers[currentQuestionIndex];
+      renderCurrentQuestion();
+    });
+
+    // Bookmark Toggle
+    bookmarkToggleBtn.addEventListener('click', () => {
+      if (bookmarks.has(currentQuestionIndex)) {
+        bookmarks.delete(currentQuestionIndex);
+      } else {
+        bookmarks.add(currentQuestionIndex);
+      }
+      renderCurrentQuestion();
+    });
+
+    // Navigation Events
+    prevBtn.addEventListener('click', () => {
+      if (currentQuestionIndex > 0) {
+        currentQuestionIndex--;
+        renderCurrentQuestion();
+      }
+    });
+
+    nextBtn.addEventListener('click', () => {
+      if (currentQuestionIndex < shuffledQuestions.length - 1) {
+        currentQuestionIndex++;
+        renderCurrentQuestion();
+      }
+    });
+
+    // Palette Rendering & Filter Logic
+    function renderPalette() {
+      paletteGrid.innerHTML = '';
+
+      shuffledQuestions.forEach((q, idx) => {
+        const isAnswered = userAnswers.hasOwnProperty(idx);
+        const isBookmarked = bookmarks.has(idx);
+
+        // Filter Evaluation
+        if (activeFilter === 'answered' && !isAnswered) return;
+        if (activeFilter === 'unanswered' && isAnswered) return;
+        if (activeFilter === 'bookmarked' && !isBookmarked) return;
+
+        const item = document.createElement('div');
+        item.className = 'palette-item';
+        item.textContent = idx + 1;
+
+        if (idx === currentQuestionIndex) {
+          item.classList.add('active-current');
+        }
+
+        if (isBookmarked) {
+          item.classList.add('bookmarked');
+        }
+
+        if (isSubmitted) {
+          const userAns = userAnswers[idx];
+          if (userAns === q.correctIndex) {
+            item.classList.add('correct-post');
+          } else if (userAns !== undefined) {
+            item.classList.add('incorrect-post');
+          }
+        } else if (isAnswered) {
+          item.classList.add('answered');
+        }
+
+        item.addEventListener('click', () => {
+          currentQuestionIndex = idx;
+          renderCurrentQuestion();
+        });
+
+        paletteGrid.appendChild(item);
+      });
+    }
+
+    // Filter Tab Buttons
+    function renderFilterTabs() {
+      const tabs = document.querySelectorAll('.tab-btn');
+      tabs.forEach(tab => {
+        tab.addEventListener('click', (e) => {
+          tabs.forEach(t => t.classList.remove('active'));
+          e.target.classList.add('active');
+          activeFilter = e.target.getAttribute('data-filter');
+          renderPalette();
+        });
+      });
+    }
+
+    // Submit Quiz & Show Results
+    function submitQuiz() {
+      if (isSubmitted) return;
+      isSubmitted = true;
+      clearInterval(timerInterval);
+
+      // Score Calculation
+      let correctCount = 0;
+      let incorrectCount = 0;
+      let answeredCount = 0;
+
+      shuffledQuestions.forEach((q, idx) => {
+        if (userAnswers.hasOwnProperty(idx)) {
+          answeredCount++;
+          if (userAnswers[idx] === q.correctIndex) {
+            correctCount++;
+          } else {
+            incorrectCount++;
+          }
+        }
+      });
+
+      const totalCount = shuffledQuestions.length;
+      const skippedCount = totalCount - answeredCount;
+      const percentage = Math.round((correctCount / totalCount) * 100);
+
+      // Modal Elements
+      document.getElementById('modalScoreDisplay').textContent = `${correctCount} / ${totalCount} (${percentage}%)`;
+      document.getElementById('summaryAnswered').textContent = answeredCount;
+      document.getElementById('summaryCorrect').textContent = correctCount;
+      document.getElementById('summaryIncorrect').textContent = incorrectCount;
+      document.getElementById('summarySkipped').textContent = skippedCount;
+
+      const badge = document.getElementById('modalBadge');
+      if (percentage >= 80) {
+        badge.textContent = "Excellent";
+        badge.className = "performance-badge badge-excellent";
+      } else if (percentage >= 50) {
+        badge.textContent = "Passed";
+        badge.className = "performance-badge badge-passed";
+      } else {
+        badge.textContent = "Failed";
+        badge.className = "performance-badge badge-failed";
+      }
+
+      resultsModal.classList.add('open');
+      renderCurrentQuestion();
+    }
+
+    function autoSubmitQuiz() {
+      alert("Time has expired! Automatically submitting your quiz.");
+      submitQuiz();
+    }
+
+    submitBtn.addEventListener('click', () => {
+      if (confirm("Are you sure you want to submit your quiz?")) {
+        submitQuiz();
+      }
+    });
+
+    // Review & Restart Handlers
+    document.getElementById('reviewModeBtn').addEventListener('click', () => {
+      resultsModal.classList.remove('open');
+    });
+
+    document.getElementById('modalRestartBtn').addEventListener('click', () => {
+      initQuizData();
+    });
+
+    restartBtn.addEventListener('click', () => {
+      if (confirm("Restarting will shuffle all questions and clear active progress. Proceed?")) {
+        initQuizData();
+      }
+    });
+
+    // Dark/Light Theme Switcher
+    themeToggleBtn.addEventListener('click', () => {
+      document.body.classList.toggle('dark-mode');
+      if (document.body.classList.contains('dark-mode')) {
+        themeToggleBtn.textContent = '☀️';
+      } else {
+        themeToggleBtn.textContent = '🌙';
+      }
+    });
+
+    // Initialize Engine On Load
+    window.addEventListener('DOMContentLoaded', () => {
+      initQuizData();
+    });
+  </script>
+</body>
+</html>
